@@ -1,5 +1,7 @@
 <template>
-  <RatioGraph :chartData="chartItems" :options="chartOptions"/>
+  <div class="sizing">
+    <RatioGraph :chartData="chartItems" :options="options" />
+  </div>
 </template>
 
 <script lang="ts">
@@ -10,33 +12,27 @@ export default Vue.extend({
   data() {
     return {
       chartItems: {
-        labels: [
-          "12月",
-          "1月",
-          "2月",
-          "3月",
-          "4月",
-          "5月",
-          "6月",
-          "7月",
-          "8月",
-          "9月",
-          "10月",
-          "11月",
-        ],
+        labels: ["Yes", "No"],
         datasets: [
           {
-            label: "月ごとの点数",
-            data: [95, 70, 80, 65, 69, 80, 100, 100, 72, 81, 45, 70],
-            backgroundColor: "lightblue",
+            label: "ratio",
+            data: [30, 70],
+            backgroundColor: ["#E57373", "#64B5F6"],
           },
         ],
       },
-      // 後程オプションを記述
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+      },
     };
   },
 });
 </script>
 
-<style>
+<style scoped>
+.sizing {
+  max-width: 400px;
+  max-height: 400px;
+}
 </style>
