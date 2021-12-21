@@ -30,14 +30,15 @@
       <Yes />
       <No />
     </v-row>
+
+    <!-- ratio -->
+    <v-row>
+      <Ratio />
+    </v-row>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import Yes from "~/components/shared/Yes.vue";
-import No from "~/components/shared/No.vue";
-export default Vue.extend({
-  components: { Yes, No },
-});
+export default Vue.extend({});
 </script>
