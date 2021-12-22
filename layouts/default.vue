@@ -17,16 +17,36 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn icon>
-        <v-icon>mdi-bell</v-icon>
-      </v-btn>
+      <!-- notification -->
+      <v-menu
+        v-model="menu"
+        :close-on-content-click="false"
+        :nudge-width="200"
+        offset-y
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn icon v-bind="attrs" v-on="on">
+            <v-icon>mdi-bell</v-icon>
+          </v-btn>
+        </template>
+
+        <v-card>
+          <v-list>
+            <v-list-item>
+              <v-list-item-content class="text-center">
+                <v-list-item-title>no notifications.</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </v-card>
+      </v-menu>
     </v-app-bar>
 
     <!-- drawer -->
     <v-navigation-drawer v-model="drawer" fixed temporary>
       <v-list class="pa-0">
-        <v-list-item>
-          <v-list-item-avatar size="60">
+        <v-list-item nuxt to="/users/1">
+          <v-list-item-avatar class="pointer" size="60">
             <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
           </v-list-item-avatar>
           <v-list-item-content>
@@ -52,7 +72,7 @@
             </v-list-item-icon>
             <v-list-item-title>questions</v-list-item-title>
           </v-list-item>
-          <v-list-item>
+          <v-list-item nuxt to="/users/1">
             <v-list-item-icon>
               <v-icon>mdi-account</v-icon>
             </v-list-item-icon>
@@ -86,6 +106,7 @@ export default Vue.extend({
   data() {
     return {
       drawer: null,
+      menu: null,
       loading: true,
     };
   },

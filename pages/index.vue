@@ -70,7 +70,9 @@ export default Vue.extend({
     };
   },
   methods: {
-    async next(): Promise<void> {},
+    next(): void{
+      this.answer = null
+    },
     questions(): void {},
   },
 });
