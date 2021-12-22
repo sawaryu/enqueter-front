@@ -2,12 +2,11 @@
   <v-app id="inspire">
     <!-- start loading -->
     <v-overlay :value="loading" color="#F8F9FA" opacity="1" z-index="9999">
-      <v-progress-circular
-        color="black"
-        size="100"
-        width="10"
-        indeterminate
-      ></v-progress-circular>
+      <vue-loading
+        type="bars"
+        color="#333"
+        :size="{ width: '80px', height: '80px' }"
+      ></vue-loading>
     </v-overlay>
 
     <!-- header -->
@@ -45,8 +44,8 @@
     <!-- drawer -->
     <v-navigation-drawer v-model="drawer" fixed temporary>
       <v-list class="pa-0">
-        <v-list-item nuxt to="/users/1">
-          <v-list-item-avatar class="pointer" size="60">
+        <v-list-item class="pointer" @click="$router.push('/users/1')">
+          <v-list-item-avatar size="60">
             <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
           </v-list-item-avatar>
           <v-list-item-content>
@@ -78,6 +77,12 @@
             </v-list-item-icon>
             <v-list-item-title>profile</v-list-item-title>
           </v-list-item>
+          <v-list-item nuxt to="/setting">
+            <v-list-item-icon>
+              <v-icon>mdi-cog</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>setting</v-list-item-title>
+          </v-list-item>
           <v-divider class="my-4"></v-divider>
           <v-list-item>
             <v-list-item-icon>
@@ -101,8 +106,10 @@
 </template>
 
 <script lang="ts">
+import { VueLoading } from "vue-loading-template";
 import Vue from "vue";
 export default Vue.extend({
+  components: { VueLoading },
   data() {
     return {
       drawer: null,

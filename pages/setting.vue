@@ -1,0 +1,73 @@
+<template>
+  <v-container>
+    <v-row>
+      <v-col cols="12" sm="3">
+        <v-card class="mx-auto">
+          <v-list>
+            <v-subheader><v-icon>mdi-cog</v-icon>setting</v-subheader>
+            <v-list-item-group>
+              <v-list-item
+                v-for="(item, i) in items"
+                :key="i"
+                :to="item.to"
+                nuxt
+                exact
+              >
+                <v-list-item-icon>
+                  <v-icon v-text="item.icon"></v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title v-text="item.title"></v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list-item-group>
+          </v-list>
+        </v-card>
+      </v-col>
+
+      <v-col cols="12" sm="9">
+        <v-card elevation="2">
+          <v-toolbar color="grey lighten-4" elevation="2">
+            <v-toolbar-title
+              ><v-icon class="mr-2" large>{{ current.icon }}</v-icon
+              >{{ current.title }}</v-toolbar-title
+            >
+          </v-toolbar>
+
+          <v-sheet class="d-flex justify-center align-center" height="75vh">
+            <v-card-text class="text-center" style="max-width: 400px">
+              <NuxtChild keep-alive />
+            </v-card-text>
+          </v-sheet>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
+
+<script>
+export default {
+  data: () => ({
+    items: [
+      { title: "basic", icon: "mdi-account", to: "/setting" },
+      { title: "avatar", icon: "mdi-emoticon", to: "/setting/avatar" },
+      {
+        title: "password",
+        icon: "mdi-key-variant",
+        to: "/setting/password",
+      },
+      {
+        title: "unsubscribe",
+        icon: "mdi-account-off",
+        to: "/setting/unsubscribe",
+      },
+    ],
+  }),
+  computed: {
+    current() {
+      const index = this.items.findIndex((e) => e.to === this.$route.path);
+      return this.items[index];
+    },
+  },
+};
+</script>

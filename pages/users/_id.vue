@@ -2,10 +2,11 @@
   <v-row justify="center">
     <!-- profile -->
     <v-col cols="12" sm="4">
-      <v-card>
-        <div class="d-flex pa-3 pb-0 justify-center">
+      <!-- main -->
+      <v-card class="pa-2">
+        <div class="d-flex justify-center">
           <div>
-            <v-avatar class="pointer" size="60">
+            <v-avatar size="60">
               <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
             </v-avatar>
           </div>
@@ -50,7 +51,25 @@
     <!-- user`s questions and so on. -->
     <v-col cols="12" sm="8">
       <v-card height="85vh">
+        <v-bottom-navigation shift grow>
+          <v-btn>
+            <span>My</span>
 
+            <v-icon>mdi-file-question</v-icon>
+          </v-btn>
+
+          <v-btn>
+            <span>Right</span>
+
+            <v-icon>mdi-circle-outline</v-icon>
+          </v-btn>
+
+          <v-btn>
+            <span>Wrong</span>
+
+            <v-icon>mdi-check-bold</v-icon>
+          </v-btn>
+        </v-bottom-navigation>
       </v-card>
     </v-col>
   </v-row>
@@ -58,7 +77,12 @@
 
 <script lang="ts">
 import Vue from "vue";
-export default Vue.extend({});
+export default Vue.extend({
+  data() {
+    return {
+    };
+  },
+});
 </script>
 
 <style>

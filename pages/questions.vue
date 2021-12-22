@@ -1,6 +1,6 @@
 <template>
   <v-row>
-    <v-col v-for="n in 24" :key="n" cols="4">
+    <v-col v-for="n in 24" :key="n" cols="12" sm="6" md="4">
       <!-- a question. -->
       <v-card>
         <v-card-title class="font-weight-bold">
@@ -13,7 +13,8 @@
         </v-card-title>
         <v-card-title class="pt-0"
           >Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates,
-          voluptate ducimus rerum rerum?</v-card-title>
+          voluptate ducimus rerum rerum?</v-card-title
+        >
         <v-card-actions>
           <v-avatar size="40">
             <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img
@@ -26,8 +27,21 @@
           </div>
         </v-card-actions>
       </v-card>
-
     </v-col>
+
+    <!-- flota btn for creating th question. -->
+    <v-btn
+      fixed
+      right
+      bottom
+      class="mb-8 mr-2"
+      fab
+      dark
+      large
+      color="grey darken-3"
+    >
+      <v-icon dark>mdi-file-question</v-icon>
+    </v-btn>
   </v-row>
 </template>
 
