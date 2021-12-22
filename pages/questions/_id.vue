@@ -25,8 +25,7 @@
           </div>
         </v-card-title>
         <v-card-title class="pt-0"
-          >Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates,
-          voluptate ducimus rerum rerum?</v-card-title
+          >{{question.title}}?</v-card-title
         >
       </v-card>
     </v-row>
@@ -69,8 +68,16 @@
 </template>
 
 <script lang="ts">
+import axios from "axios";
 import Vue from "vue";
 export default Vue.extend({
+  async asyncData(context) {
+    return axios
+      .get(`https://jsonplaceholder.typicode.com/posts/${context.params.id}`)
+      .then((res) => {
+        return { question: res.data };
+      });
+  },
   data() {
     return {
       isAnsweredOrMine: false,

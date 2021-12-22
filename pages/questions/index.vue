@@ -1,8 +1,8 @@
 <template>
   <v-row>
-    <v-col v-for="n in 24" :key="n" cols="12" sm="6" md="4">
+    <v-col v-for="q, n in questions" :key="n" cols="12" sm="6" md="4">
       <!-- a question. -->
-      <Question />
+      <Question :question="q"  />
     </v-col>
 
     <!-- flota btn for creating th question. -->
@@ -22,8 +22,17 @@
 </template>
 
 <script lang="ts">
+import axios from "axios";
 import Vue from "vue";
-export default Vue.extend({});
+export default Vue.extend({
+  async asyncData(context) {
+    return axios
+      .get(`https://jsonplaceholder.typicode.com/posts`)
+      .then((res) => {
+        return { questions: res.data };
+      });
+  },
+});
 </script>
 
 <style>

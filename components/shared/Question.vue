@@ -8,10 +8,13 @@
         <v-icon>mdi-dots-vertical</v-icon>
       </v-btn>
     </v-card-title>
-    <v-card-title class="pt-0 pointer" @click="$router.push('/questions/1')"
+    <v-card-title class="pt-0 pointer" @click="$router.push(`/questions/${question.id}`)"
+      >{{question.title}}?</v-card-title
+    >
+    <!-- <v-card-title class="pt-0 pointer" @click="$router.push('/questions/1')"
       >Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates,
       voluptate ducimus rerum rerum?</v-card-title
-    >
+    > -->
     <v-card-actions>
       <v-avatar size="40">
         <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img
@@ -32,7 +35,11 @@
 
 <script lang="ts">
 import Vue from "vue";
-export default Vue.extend({});
+export default Vue.extend({
+  props: {
+    question: {type: Object, default: null}
+  }
+});
 </script>
 
 <style>

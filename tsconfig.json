@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "ES2018",
     "module": "ESNext",
+    // 相対パスとしてimportしない場合にnode_modulesを見に行くようになる。
     "moduleResolution": "Node",
     "lib": [
       "ESNext",

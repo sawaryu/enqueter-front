@@ -15,7 +15,9 @@
       <v-toolbar-title>Enqueter</v-toolbar-title>
 
       <v-spacer></v-spacer>
-
+      <div class="mr-5">
+        321pt
+      </div>
       <!-- notification -->
       <v-menu
         v-model="menu"

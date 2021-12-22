@@ -43,6 +43,7 @@
               Lorem ipsum, dolor sissumenda sed quia nostrum ab sunt, quaerat
               quidem dolorum nihil earum.
             </div>
+            <v-btn>follow</v-btn>
           </v-card>
         </div>
       </v-card>
@@ -52,33 +53,17 @@
     <v-col cols="12" sm="8">
       <!-- navigation -->
       <v-bottom-navigation background-color="grey lighten-4" shift grow>
-        <v-btn>
+        <v-btn exact to="/users/1">
           <span>My questions</span>
           <v-icon>mdi-file-question</v-icon>
         </v-btn>
-        <v-btn>
+        <v-btn exact to="/users/1/answerd">
           <span>Answerd</span>
           <v-icon>mdi-checkbox-marked-circle-outline</v-icon>
         </v-btn>
       </v-bottom-navigation>
 
-      <v-select
-        color="black"
-        dense
-        value="new"
-        class="mt-2 ml-2"
-        item-color="black"
-        :items="items"
-        outlined
-        style="width: 150px; height: 50px"
-      ></v-select>
-      <!-- questions -->
-      <v-row class="pa-3">
-        <v-col class="pt-0" v-for="n in 24" :key="n" cols="12" sm="6">
-          <!-- a question. -->
-          <Question />
-        </v-col>
-      </v-row>
+      <nuxt-child></nuxt-child>
     </v-col>
   </v-row>
 </template>
@@ -87,7 +72,7 @@
 import Vue from "vue";
 export default Vue.extend({
   data() {
-    return { items: ["new", "popular", "old"] };
+    return {};
   },
 });
 </script>
