@@ -23,6 +23,9 @@ export default Vue.extend({
         ],
       },
       options: {
+        legend: {
+          display: false,
+        },
         responsive: true,
         maintainAspectRatio: false,
         tooltips: {

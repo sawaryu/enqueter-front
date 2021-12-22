@@ -1,6 +1,6 @@
 <template>
   <!-- mine -->
-  <div v-if="isMine">
+  <div v-if="isAnsweredOrMine">
     <v-card>
       <v-card-title>my questions.</v-card-title>
     </v-card>
@@ -73,7 +73,7 @@ import Vue from "vue";
 export default Vue.extend({
   data() {
     return {
-      isMine: false,
+      isAnsweredOrMine: false,
       answer: null as boolean | null,
     };
   },

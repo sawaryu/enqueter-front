@@ -65,6 +65,7 @@
       <v-select
         color="black"
         dense
+        value="new"
         class="mt-2 ml-2"
         item-color="black"
         :items="items"
@@ -75,35 +76,7 @@
       <v-row class="pa-3">
         <v-col class="pt-0" v-for="n in 24" :key="n" cols="12" sm="6">
           <!-- a question. -->
-          <v-card>
-            <v-card-title class="font-weight-bold">
-              <v-icon color="black" size="40">mdi-file-question</v-icon>
-              Question.
-              <v-spacer></v-spacer>
-              <v-btn icon>
-                <v-icon>mdi-dots-vertical</v-icon>
-              </v-btn>
-            </v-card-title>
-            <v-card-title class="pt-0"
-              >Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Voluptates, voluptate ducimus rerum rerum?</v-card-title
-            >
-            <v-card-actions>
-              <v-avatar size="40">
-                <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img
-              ></v-avatar>
-              <div class="pl-1">
-                <div class="text-caption">
-                  <span class="font-weight-medium"> sample123 </span>
-                  <span>• few seconds ago</span>
-                </div>
-              </div>
-              <v-spacer></v-spacer>
-              <div class="text-caption">
-                12 <v-icon>mdi-message-reply-outline</v-icon>
-              </div>
-            </v-card-actions>
-          </v-card>
+          <Question />
         </v-col>
       </v-row>
     </v-col>
