@@ -11,26 +11,34 @@
             </v-avatar>
           </div>
           <div class="pt-2">
-            <v-btn plain :ripple="false">
+            <v-btn plain text :ripple="false" disabled>
               <v-sheet>
-                <div class="text-subtitle-1 font-weight-black">11</div>
-                <small>sample</small>
+                <div class="text-subtitle-1 font-weight-black">31</div>
+                <small>question</small>
               </v-sheet>
             </v-btn>
           </div>
           <div class="pt-2">
-            <v-btn plain :ripple="false" @click="$accessor.dialog.setFollowingDialog(true)">
+            <v-btn
+              plain
+              :ripple="false"
+              @click="$accessor.dialog.setFollowingDialog(true)"
+            >
               <v-sheet>
                 <div class="text-subtitle-1 font-weight-black">11</div>
-                <small>sample</small>
+                <small>following</small>
               </v-sheet>
             </v-btn>
           </div>
           <div class="pt-2">
-            <v-btn plain :ripple="false" @click="$accessor.dialog.setFollowerDialog(true)">
+            <v-btn
+              plain
+              :ripple="false"
+              @click="$accessor.dialog.setFollowerDialog(true)"
+            >
               <v-sheet>
                 <div class="text-subtitle-1 font-weight-black">11</div>
-                <small>sample</small>
+                <small>follower</small>
               </v-sheet>
             </v-btn>
           </div>
@@ -43,7 +51,11 @@
               Lorem ipsum, dolor sissumenda sed quia nostrum ab sunt, quaerat
               quidem dolorum nihil earum.
             </div>
-            <v-btn>follow</v-btn>
+            <v-btn
+              :outlined="relationshipBtn.outlined"
+              @click="isFollowing = !isFollowing"
+              >{{relationshipBtn.text}}</v-btn
+            >
           </v-card>
         </div>
       </v-card>
@@ -67,7 +79,7 @@
         </v-btn>
       </v-bottom-navigation>
 
-      <nuxt-child></nuxt-child>
+      <NuxtChild keep-alive />
     </v-col>
     <Following />
     <Follower />
@@ -78,7 +90,24 @@
 import Vue from "vue";
 export default Vue.extend({
   data() {
-    return {};
+    return {
+      isFollowing: false,
+    };
+  },
+  computed: {
+    relationshipBtn() {
+      if (this.isFollowing) {
+        return {
+          outlined: true as boolean,
+          text: "following" as string,
+        };
+      } else {
+        return {
+          outlined: false as boolean,
+          text: "follow" as string,
+        };
+      }
+    },
   },
 });
 </script>

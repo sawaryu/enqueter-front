@@ -23,45 +23,39 @@
             </div>
           </div>
         </v-card-title>
-        <v-card-title class="pt-0"
-          >{{question.title}}?</v-card-title
-        >
+        <v-card-title class="pt-0">{{ question.title }}?</v-card-title>
       </v-card>
     </v-row>
     <!-- choice -->
     <v-row class="justify-center">
       <!-- yes or no -->
-      <template v-if="answer === null">
-        <v-card
-          class="d-flex justify-center align-center ma-6"
-          width="300"
-          height="300"
-          link
-          @click="answer = true"
-        >
-          <v-icon color="red" size="100">mdi-circle-outline</v-icon>
-        </v-card>
-        <v-card
-          class="d-flex justify-center align-center ma-6"
-          width="300"
-          height="300"
-          link
-          @click="answer = false"
-        >
-          <v-icon color="blue" size="100">mdi-check-bold</v-icon>
-        </v-card>
-      </template>
-      <!-- result -->
-      <template v-else>
-        <v-row class="mt-5 justify-center">
-          <Ratio />
+      <v-card
+        class="d-flex justify-center align-center ma-6"
+        width="300"
+        height="300"
+        link
+      >
+        <!-- <v-icon color="red" size="100">mdi-circle-outline</v-icon> -->
+        <div class="text-h1 red--text">72%</div>
+        <div><v-icon>mdi-account</v-icon>72</div>
+      </v-card>
+      <v-card
+        class="d-flex justify-center align-center ma-6"
+        width="300"
+        height="300"
+        link
+      >
+        <!-- <v-icon color="blue" size="100">mdi-check-bold</v-icon> -->
+        <div class="text-h1 blue--text">28%</div>
+        <div><v-icon>mdi-account</v-icon>28</div>
+      </v-card>
+    </v-row>
 
-          <v-col class="text-center" cols="12">
-            <v-btn class="mr-3" @click="next">next</v-btn>
-            <v-btn @click="questions"> questions </v-btn>
-          </v-col>
-        </v-row>
-      </template>
+    <!-- result information -->
+    <v-row class="justify-center">
+      <v-col class="text-center" cols="12">
+        <v-icon>mdi-account</v-icon>100
+      </v-col>
     </v-row>
   </div>
 </template>
@@ -80,13 +74,10 @@ export default Vue.extend({
   data() {
     return {
       isAnsweredOrMine: false,
-      answer: null as boolean | null,
     };
   },
   methods: {
-    next(): void {
-      this.answer = null;
-    },
+    next(): void {},
     questions(): void {},
   },
 });

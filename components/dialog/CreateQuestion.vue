@@ -6,7 +6,7 @@
   >
     <v-card>
       <v-card-title>
-        <v-icon size="35">mdi-file-question</v-icon>Create Question.
+        <v-icon size="30">mdi-file-question</v-icon>Create Question.
         <v-spacer></v-spacer>
         <v-btn icon @click="$accessor.dialog.setQuestionDialog(false)">
           <v-icon>mdi-close</v-icon>
