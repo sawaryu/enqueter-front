@@ -1,23 +1,43 @@
 <template>
   <v-app id="inspire">
-    <!-- start loading -->
-    <v-overlay :value="loading" color="#F8F9FA" opacity="1" z-index="9999">
-      <vue-loading
-        type="bars"
-        color="#333"
-        :size="{ width: '80px', height: '80px' }"
-      ></vue-loading>
-    </v-overlay>
-
-    <!-- header -->
-    <v-app-bar app>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>Enqueter</v-toolbar-title>
+    <!-- header welcome -->
+    <v-app-bar
+      v-if="$route.path.includes('/welcome')"
+      color="rgb(0, 0, 0, 0)"
+      app
+      flat
+    >
+      <v-toolbar-title class="font-weight-bold"
+        >Enqueter
+      </v-toolbar-title>
 
       <v-spacer></v-spacer>
-      <div class="mr-5">
-        321pt
-      </div>
+      <v-btn
+        :large="isLarge"
+        class="mr-3"
+        color="grey darken-2"
+        outlined
+        @click="$accessor.dialog.setLoginDialog(true)"
+        >Login</v-btn
+      >
+      <v-btn
+        :large="isLarge"
+        color="grey darken-2"
+        dark
+        @click="$accessor.dialog.setSignupDialog(true)"
+        >SignUp</v-btn
+      >
+      <Login />
+      <Signup />
+    </v-app-bar>
+
+    <!-- header -->
+    <v-app-bar v-else app>
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title class="font-weight-bold">Enqueter</v-toolbar-title>
+
+      <v-spacer></v-spacer>
+      <div class="mr-5">321pt</div>
       <!-- notification -->
       <v-menu
         v-model="menu"
@@ -86,7 +106,7 @@
             <v-list-item-title>setting</v-list-item-title>
           </v-list-item>
           <v-divider class="my-4"></v-divider>
-          <v-list-item>
+          <v-list-item @click="$router.push('/welcome')">
             <v-list-item-icon>
               <v-icon>mdi-logout</v-icon>
             </v-list-item-icon>
@@ -108,21 +128,29 @@
 </template>
 
 <script lang="ts">
-import { VueLoading } from "vue-loading-template";
 import Vue from "vue";
 export default Vue.extend({
-  components: { VueLoading },
   data() {
     return {
-      drawer: null,
-      menu: null,
-      loading: true,
+      drawer: null as null | boolean,
+      menu: null as null | boolean,
     };
   },
-  mounted() {
-    setTimeout(() => {
-      this.loading = false;
-    }, 500);
+  computed: {
+    isLarge() {
+      switch (this.$vuetify.breakpoint.name) {
+        case "xs":
+          return false;
+        case "sm":
+          return false;
+        case "md":
+          return true;
+        case "lg":
+          return true;
+        case "xl":
+          return true;
+      }
+    },
   },
 });
 </script>

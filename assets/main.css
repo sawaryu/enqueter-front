@@ -14,3 +14,8 @@
 .pointer {
   cursor: pointer;
 }
+
+/* add underline to text */
+.underline:hover {
+  text-decoration: underline;
+}

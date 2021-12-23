@@ -62,5 +62,13 @@ export default {
     ],
     extend(config, ctx) {
     }
+  },
+
+  // first loading (only SPA?)
+  loadingIndicator: {
+    name: 'three-bounce',
+    color: '#000000',
+    background: 'white'
   }
+
 }

@@ -26,3 +26,14 @@ $ yarn add @nuxtjs/vuetify -D
 # vuexのtypescript化
 （参考）
 > https://tech.smartshopping.co.jp/nuxt-typed-vuex
+
+# build
+```
+$ yarn run generate
+```
+
+# deploy
+netlify
+```
+drag dist deir on your netlify
+```

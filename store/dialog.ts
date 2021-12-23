@@ -1,15 +1,19 @@
-import { getterTree, mutationTree, actionTree } from 'typed-vuex'
+import { getterTree, mutationTree } from 'typed-vuex'
 
 export const state = () => ({
   questionDialog: false as Boolean,
   followerDialog: false as Boolean,
-  followingDialog: false as Boolean
+  followingDialog: false as Boolean,
+  loginDialog: false as Boolean,
+  signupDialog: false as Boolean
 })
 
 export const getters = getterTree(state, {
   getQuestionDialog: (state) => state.questionDialog,
   getFollowerDialog: (state) => state.followerDialog,
-  getFollowingDialog: (state) => state.followingDialog
+  getFollowingDialog: (state) => state.followingDialog,
+  getLoginDialog: (state) => state.loginDialog,
+  getSignupDialog: (state) => state.signupDialog
 })
 
 export const mutations = mutationTree(state, {
@@ -21,5 +25,11 @@ export const mutations = mutationTree(state, {
   },
   setFollowingDialog(state, value: boolean) {
     state.followingDialog = value
+  },
+  setLoginDialog(state, value: boolean) {
+    state.loginDialog = value
+  },
+  setSignupDialog(state, value: boolean) {
+    state.signupDialog = value
   },
 })

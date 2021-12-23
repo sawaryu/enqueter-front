@@ -30,15 +30,15 @@
     <v-card-title
       class="pt-0 pointer"
       @click="$router.push(`/questions/${question.id}`)"
-      >{{ question.title }}?</v-card-title
+      ><span class="question-title">{{ question.title }}?</span></v-card-title
     >
     <v-card-actions>
-      <v-avatar size="40">
+      <v-avatar class="pointer" size="40">
         <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img
       ></v-avatar>
       <div class="pl-1">
         <div class="text-caption">
-          <span class="font-weight-medium"> sample123 </span>
+          <span class="font-weight-medium underline pointer"> sample123 </span>
           <span>• few seconds ago</span>
         </div>
       </div>
@@ -77,5 +77,27 @@ export default Vue.extend({
 });
 </script>
 
-<style>
+<style scoped>
+.question-title {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+}
+.question-title::after {
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  content: "";
+  width: 100%;
+  height: 2px;
+  background: #333;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.2s;
+}
+.question-title:hover::after {
+  bottom: -4px;
+  opacity: 1;
+  visibility: visible;
+}
 </style>
