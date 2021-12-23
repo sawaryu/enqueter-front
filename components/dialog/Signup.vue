@@ -48,6 +48,7 @@
 
           <v-text-field
             tabindex="1"
+            type="password"
             v-model="signupModel.password"
             label="password"
             color="grey darken-3"
@@ -56,6 +57,7 @@
 
           <v-text-field
             tabindex="1"
+            type="password"
             v-model="signupModel.password_confirmation"
             label="password (confirmation)"
             color="grey darken-3"

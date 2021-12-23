@@ -34,7 +34,7 @@
     <!-- header -->
     <v-app-bar v-else app>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title class="font-weight-bold">Enqueter</v-toolbar-title>
+      <v-toolbar-title @click="$router.push('/')" class="font-weight-bold pointer">Enqueter</v-toolbar-title>
 
       <v-spacer></v-spacer>
       <div class="mr-5">321pt</div>
@@ -117,7 +117,7 @@
     </v-navigation-drawer>
 
     <!-- main -->
-    <v-main class="grey lighten-2">
+    <v-main class="grey lighten-3">
       <v-container>
         <Nuxt />
       </v-container>

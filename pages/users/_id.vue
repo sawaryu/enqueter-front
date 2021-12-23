@@ -69,8 +69,8 @@
           <span>My questions</span>
           <v-icon>mdi-file-question</v-icon>
         </v-btn>
-        <v-btn exact to="/users/1/answerd">
-          <span>Answerd</span>
+        <v-btn exact to="/users/1/answered">
+          <span>Answered</span>
           <v-icon>mdi-checkbox-marked-circle-outline</v-icon>
         </v-btn>
         <v-btn exact to="/users/1/bookmark">

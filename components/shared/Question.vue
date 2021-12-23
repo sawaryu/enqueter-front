@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card max-width="500px">
     <v-card-title class="font-weight-bold">
       <v-icon color="black" size="40">mdi-file-question</v-icon>
       Question.
