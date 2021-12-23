@@ -11,8 +11,7 @@
     <v-row class="justify-center">
       <v-card class="mt-4" width="600">
         <v-card-title class="pb-1 font-weight-bold">
-          <v-icon color="black" size="40">mdi-file-question</v-icon>
-          Question.
+          Choice majority.
           <v-spacer></v-spacer>
           <v-avatar size="30">
             <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img

@@ -19,7 +19,7 @@
             </v-btn>
           </div>
           <div class="pt-2">
-            <v-btn plain :ripple="false">
+            <v-btn plain :ripple="false" @click="$accessor.dialog.setFollowingDialog(true)">
               <v-sheet>
                 <div class="text-subtitle-1 font-weight-black">11</div>
                 <small>sample</small>
@@ -27,7 +27,7 @@
             </v-btn>
           </div>
           <div class="pt-2">
-            <v-btn plain :ripple="false">
+            <v-btn plain :ripple="false" @click="$accessor.dialog.setFollowerDialog(true)">
               <v-sheet>
                 <div class="text-subtitle-1 font-weight-black">11</div>
                 <small>sample</small>
@@ -61,10 +61,16 @@
           <span>Answerd</span>
           <v-icon>mdi-checkbox-marked-circle-outline</v-icon>
         </v-btn>
+        <v-btn exact to="/users/1/bookmark">
+          <span>Bookmark</span>
+          <v-icon>mdi-bookmark</v-icon>
+        </v-btn>
       </v-bottom-navigation>
 
       <nuxt-child></nuxt-child>
     </v-col>
+    <Following />
+    <Follower />
   </v-row>
 </template>
 

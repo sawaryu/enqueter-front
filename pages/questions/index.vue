@@ -6,25 +6,17 @@
     </v-col>
 
     <!-- flota btn for creating th question. -->
-    <v-btn
-      fixed
-      right
-      bottom
-      class="mb-8 mr-2"
-      fab
-      dark
-      large
-      color="grey darken-3"
-    >
-      <v-icon dark>mdi-file-question</v-icon>
-    </v-btn>
+    <Float />
+    <CreateQuestion />
   </v-row>
 </template>
 
 <script lang="ts">
 import axios from "axios";
 import Vue from "vue";
+import CreateQuestion from "~/components/dialog/CreateQuestion.vue";
 export default Vue.extend({
+  components: { CreateQuestion },
   async asyncData(context) {
     return axios
       .get(`https://jsonplaceholder.typicode.com/posts`)

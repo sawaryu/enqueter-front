@@ -4,17 +4,34 @@
       <v-icon color="black" size="40">mdi-file-question</v-icon>
       Question.
       <v-spacer></v-spacer>
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
+      <v-btn icon @click="isBookmark = !isBookmark">
+        <v-icon>{{ bookmarkIcon }}</v-icon>
       </v-btn>
+      <v-menu offset-y>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn icon v-bind="attrs" v-on="on">
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item>
+            <v-list-item-title
+              ><v-icon>mdi-flag</v-icon> report</v-list-item-title
+            >
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-title
+              ><v-icon>mdi-delete</v-icon> delete</v-list-item-title
+            >
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </v-card-title>
-    <v-card-title class="pt-0 pointer" @click="$router.push(`/questions/${question.id}`)"
-      >{{question.title}}?</v-card-title
+    <v-card-title
+      class="pt-0 pointer"
+      @click="$router.push(`/questions/${question.id}`)"
+      >{{ question.title }}?</v-card-title
     >
-    <!-- <v-card-title class="pt-0 pointer" @click="$router.push('/questions/1')"
-      >Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates,
-      voluptate ducimus rerum rerum?</v-card-title
-    > -->
     <v-card-actions>
       <v-avatar size="40">
         <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img
@@ -34,11 +51,29 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue, { PropOptions } from "vue";
+interface Question {
+  id: number;
+  title: string;
+}
 export default Vue.extend({
   props: {
-    question: {type: Object, default: null}
-  }
+    question: { type: Object, default: null } as PropOptions<Question>,
+  },
+  data() {
+    return {
+      isBookmark: false,
+    };
+  },
+  computed: {
+    bookmarkIcon() {
+      if (this.isBookmark) {
+        return "mdi-bookmark";
+      } else {
+        return "mdi-bookmark-outline";
+      }
+    },
+  },
 });
 </script>
 

@@ -30,7 +30,12 @@
       "@nuxtjs/axios",
       "@types/node",
       "@nuxtjs/vuetify"
-    ]
+    ],
+    // importtant!! (make to be able to use vuex type modules)
+    "typeRoots": [
+      "types",
+      "node_modules/@types"
+    ],
   },
   "exclude": [
     "node_modules",
