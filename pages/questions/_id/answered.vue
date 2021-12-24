@@ -16,7 +16,9 @@
             </v-badge>
           </v-col>
           <v-col cols="12">
-            <div class="text-h5 red--text">(32 people)</div>
+            <div class="text-h5 red--text">
+              (<span> <NumberDrumRoll :count="32" /></span> people)
+            </div>
           </v-col>
         </v-row>
       </v-card>
@@ -34,7 +36,9 @@
             </div>
           </v-col>
           <v-col cols="12">
-            <div class="text-h5 blue--text">(6 people)</div>
+            <div class="text-h5 blue--text">
+              (<span> <NumberDrumRoll :count="16" /></span> people)
+            </div>
           </v-col>
         </v-row>
       </v-card>

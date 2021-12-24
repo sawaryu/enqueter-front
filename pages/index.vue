@@ -1,6 +1,9 @@
 <template>
   <v-card>
     <v-card-title> <v-icon>mdi-home</v-icon> Home </v-card-title>
+    <v-card-text>
+      <NumberDrumRoll :count="700" />
+    </v-card-text>
   </v-card>
 </template>
 
