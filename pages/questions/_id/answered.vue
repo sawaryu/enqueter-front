@@ -10,13 +10,13 @@
         <v-row class="text-center">
           <v-col cols="12">
             <v-badge color="amber accent-4" icon="mdi-crown" overlap>
-              <div class="text-h1 red--text">
+              <div class="text-h1 red--text font-weigth-bold">
                 <NumberDrumRoll :count="72" />%
               </div>
             </v-badge>
           </v-col>
           <v-col cols="12">
-            <div class="text-h5 red--text">
+            <div class="text-h5 red--text font-weigth-bold">
               (<span> <NumberDrumRoll :count="32" /></span> people)
             </div>
           </v-col>

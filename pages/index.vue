@@ -1,10 +1,25 @@
 <template>
-  <v-card>
-    <v-card-title> <v-icon>mdi-home</v-icon> Home </v-card-title>
-    <v-card-text>
-      <NumberDrumRoll :count="700" />
-    </v-card-text>
-  </v-card>
+  <v-row>
+    <v-col cols="12" sm="5">
+      <v-card height="200" class="d-flex justify-space-around align-center">
+        <div class="font-weight-bold text-center text-h4">
+          <div><NumberDrumRoll :count="78" /></div>
+          <div>users</div>
+        </div>
+        <div class="font-weight-bold text-center text-h4">
+          <div><NumberDrumRoll :count="78" /></div>
+          <div>questions</div>
+        </div>
+        <div class="font-weight-bold text-center text-h4">
+          <div><NumberDrumRoll :count="78" /></div>
+          <div>answeres</div>
+        </div>
+      </v-card>
+    </v-col>
+    <v-col cols="12" sm="7">
+      <v-card> </v-card>
+    </v-col>
+  </v-row>
 </template>
 
 <script lang="ts">

@@ -6,6 +6,7 @@
 import Vue from "vue";
 export default Vue.extend({
   props: {
+    // target number from parent.
     count: {
       type: Number,
       required: true
@@ -13,7 +14,9 @@ export default Vue.extend({
   },
   data: function () {
     return {
+      // start and result number.
       startCount: 0 as number,
+      // ?.
       intervalId: 0 as number,
     };
   },

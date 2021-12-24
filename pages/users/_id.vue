@@ -47,15 +47,12 @@
           <v-card width="340" elevation="0">
             <div class="pa-0 text-subtitle-2">sample123</div>
             <div class="pa-0 text-caption">sample</div>
+            <div class="pa-0 text-caption text--secondary">correct ratio: 32% / total answered: 131</div>
             <div class="pt-1 pb-0 mb-3">
               Lorem ipsum, dolor sissumenda sed quia nostrum ab sunt, quaerat
               quidem dolorum nihil earum.
             </div>
-            <v-btn
-              :outlined="relationshipBtn.outlined"
-              @click="isFollowing = !isFollowing"
-              >{{relationshipBtn.text}}</v-btn
-            >
+            <FollowButton />
           </v-card>
         </div>
       </v-card>
@@ -89,26 +86,6 @@
 <script lang="ts">
 import Vue from "vue";
 export default Vue.extend({
-  data() {
-    return {
-      isFollowing: false,
-    };
-  },
-  computed: {
-    relationshipBtn() {
-      if (this.isFollowing) {
-        return {
-          outlined: true as boolean,
-          text: "following" as string,
-        };
-      } else {
-        return {
-          outlined: false as boolean,
-          text: "follow" as string,
-        };
-      }
-    },
-  },
 });
 </script>
 
