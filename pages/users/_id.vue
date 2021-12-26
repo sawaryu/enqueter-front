@@ -3,9 +3,9 @@
     <!-- profile -->
     <v-col cols="12" sm="4">
       <!-- main -->
-      <v-card class="pa-2" style="position: sticky; top: 76px">
+      <v-card class="pa-4" style="position: sticky; top: 76px">
         <div class="d-flex justify-center">
-          <div>
+          <div class="ml-4">
             <v-avatar size="60">
               <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
             </v-avatar>

@@ -4,8 +4,8 @@
       <!-- NO -->
       <v-card
         class="d-flex justify-center align-center ma-6"
-        width="300"
-        height="300"
+        :width="size"
+        :height="size"
         link
         @click="$router.push(`/questions/${$route.params.id}/answered`)"
       >
@@ -15,8 +15,8 @@
       <!-- YES -->
       <v-card
         class="d-flex justify-center align-center ma-6"
-        width="300"
-        height="300"
+        :width="size"
+        :height="size"
         link
         @click="$router.push(`/questions/${$route.params.id}/answered`)"
       >
@@ -28,7 +28,18 @@
 
 <script lang="ts">
 import Vue from "vue";
-export default Vue.extend({});
+export default Vue.extend({
+  computed: {
+    size() {
+      const breakpointName = this.$vuetify.breakpoint.name;
+      if (breakpointName == "xs") {
+        return 130;
+      } else {
+        return 300;
+      }
+    },
+  },
+});
 </script>
 
 <style>

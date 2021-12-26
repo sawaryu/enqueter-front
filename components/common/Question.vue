@@ -2,7 +2,11 @@
   <v-card max-width="500px">
     <v-card-title class="font-weight-bold">
       <v-icon color="black" size="40">mdi-file-question</v-icon>
-      Question.
+      Question
+      <!-- <span class="text-caption ml-2 success--text"
+        ><v-icon color="success">mdi-check</v-icon>open</span
+      > -->
+      <span class="text-caption text--secondary ml-2"><v-icon>mdi-close-octagon-outline</v-icon>closed</span>
       <v-spacer></v-spacer>
       <v-btn icon @click="isBookmark = !isBookmark">
         <v-icon>{{ bookmarkIcon }}</v-icon>
@@ -39,12 +43,12 @@
       <div class="pl-1">
         <div class="text-caption">
           <span class="font-weight-medium underline pointer"> sample123 </span>
-          <span>• few seconds ago</span>
         </div>
+        <div class="text-caption text--secondary">aiueo</div>
       </div>
       <v-spacer></v-spacer>
       <div class="text-caption">
-        12 <v-icon>mdi-message-reply-outline</v-icon>
+        <v-icon>mdi-clipboard-text-clock</v-icon>6 days to close.
       </div>
     </v-card-actions>
   </v-card>
