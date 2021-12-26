@@ -32,7 +32,7 @@
     </v-app-bar>
 
     <!-- header -->
-    <v-app-bar v-else app>
+    <v-app-bar v-else app color="grey darken-3" dark>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title @click="$router.push('/')" class="font-weight-bold pointer">Enqueter</v-toolbar-title>
 
@@ -55,7 +55,7 @@
           <v-list>
             <v-list-item>
               <v-list-item-content class="text-center">
-                <v-list-item-title>no notifications.</v-list-item-title>
+                <v-list-item-title>No notifications.</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </v-list>
@@ -85,32 +85,32 @@
             <v-list-item-icon>
               <v-icon>mdi-home</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>home</v-list-item-title>
+            <v-list-item-title>Home</v-list-item-title>
           </v-list-item>
           <v-list-item nuxt to="/questions">
             <v-list-item-icon>
               <v-icon>mdi-file-question</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>questions</v-list-item-title>
+            <v-list-item-title>Questions</v-list-item-title>
           </v-list-item>
           <v-list-item nuxt to="/users/1">
             <v-list-item-icon>
               <v-icon>mdi-account</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>profile</v-list-item-title>
+            <v-list-item-title>Profile</v-list-item-title>
           </v-list-item>
           <v-list-item nuxt to="/setting">
             <v-list-item-icon>
               <v-icon>mdi-cog</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>setting</v-list-item-title>
+            <v-list-item-title>Setting</v-list-item-title>
           </v-list-item>
           <v-divider class="my-4"></v-divider>
           <v-list-item @click="$router.push('/welcome')">
             <v-list-item-icon>
               <v-icon>mdi-logout</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>logout</v-list-item-title>
+            <v-list-item-title>Logout</v-list-item-title>
           </v-list-item>
         </v-list-item-group>
       </v-list>

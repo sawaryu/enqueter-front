@@ -6,6 +6,8 @@
       label="user id"
       maxlength="15"
       counter="15"
+      hint="Please type using half-width characters."
+      persistent-hint
     ></v-text-field>
 
     <v-text-field

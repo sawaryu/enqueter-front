@@ -47,13 +47,16 @@
     <!-- RESULT -->
     <v-row class="justify-center">
       <v-col class="text-center" cols="12">
-        <div class="success--text text-h4">Great!</div>
-        <!-- <div class="red--text text-h4">Wrong!</div>
-        <div class="warning--text text-h4">You are first!</div> -->
+        <!-- <div class="success--text text-h4">Great! (+3pt)</div> -->
+        <div class="black--text text-h4">Wrong! (-1pt)</div>
+        <!-- <div class="warning--text text-h4">You are first! (+1pt)</div> -->
       </v-col>
       <v-col class="text-center" cols="12">
-        <v-btn>next</v-btn>
-        <v-btn>back</v-btn>
+        <v-btn small>next timeline</v-btn>
+        <v-btn small>next all</v-btn>
+        <span class="mx-3">|</span>
+        <v-btn small>back timeline</v-btn>
+        <v-btn small>back all</v-btn>
       </v-col>
     </v-row>
   </div>

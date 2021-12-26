@@ -1,18 +1,7 @@
 <template>
   <div>
-    <v-select
-      color="black"
-      dense
-      solo
-      value="new"
-      class="mt-2 ml-2"
-      item-color="black"
-      :items="items"
-      outlined
-      style="width: 150px; height: 50px"
-    ></v-select>
     <!-- questions -->
-    <v-row class="pa-3">
+    <v-row class="pa-3 mt-2">
       <v-col class="pt-0" v-for="q in questions" :key="q.id" cols="12" sm="6">
         <!-- a question. -->
         <Question :question="q" />
@@ -31,9 +20,6 @@ export default Vue.extend({
       .then((res) => {
         return { questions: res.data };
       });
-  },
-  data() {
-    return { items: ["new", "popular", "old"] };
   },
 });
 </script>

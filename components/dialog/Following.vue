@@ -12,6 +12,7 @@
           <v-icon>mdi-close</v-icon>
         </v-btn>
       </v-card-title>
+      <v-divider></v-divider>
 
       <!-- content -->
       <v-list class="overflow-y-auto" style="max-height: 320px">

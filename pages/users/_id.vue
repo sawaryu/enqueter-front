@@ -46,7 +46,7 @@
         <div class="d-flex justify-center">
           <v-card width="340" elevation="0">
             <div class="pa-0 text-subtitle-2">sample123</div>
-            <div class="pa-0 text-caption">sample</div>
+            <div class="pa-0 text-caption text--secondary">sample</div>
             <div class="pa-0 text-caption text--secondary">correct ratio: 32% / total answered: 131</div>
             <div class="pt-1 pb-0 mb-3">
               Lorem ipsum, dolor sissumenda sed quia nostrum ab sunt, quaerat

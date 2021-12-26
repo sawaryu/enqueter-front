@@ -40,9 +40,9 @@
       <v-avatar class="pointer" size="40">
         <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img
       ></v-avatar>
-      <div class="pl-1">
+      <div class="pl-1 underline pointer">
         <div class="text-caption">
-          <span class="font-weight-medium underline pointer"> sample123 </span>
+          <span class="font-weight-medium"> sample123 </span>
         </div>
         <div class="text-caption text--secondary">aiueo</div>
       </div>
