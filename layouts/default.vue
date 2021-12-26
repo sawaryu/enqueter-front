@@ -7,9 +7,7 @@
       app
       flat
     >
-      <v-toolbar-title class="font-weight-bold"
-        >Enqueter
-      </v-toolbar-title>
+      <v-toolbar-title class="font-weight-bold">Enqueter </v-toolbar-title>
 
       <v-spacer></v-spacer>
       <v-btn
@@ -34,11 +32,28 @@
     <!-- header -->
     <v-app-bar v-else app color="grey darken-3" dark>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title @click="$router.push('/')" class="font-weight-bold pointer">Enqueter</v-toolbar-title>
+      <v-toolbar-title
+        @click="$router.push('/')"
+        class="font-weight-bold pointer text-body-2 text-sm-h6 pl-2"
+        >Enqueter</v-toolbar-title
+      >
 
       <v-spacer></v-spacer>
-      <div class="mr-5">321pt</div>
-      <!-- notification -->
+      <!-- Search -->
+      <span class="mr-1" style="width:180px">
+        <v-text-field
+          dark
+          placeholder="search"
+          outlined
+          rounded
+          dense
+          clearable
+          style="height: 40px"
+          prepend-inner-icon="mdi-magnify"
+        ></v-text-field>
+      </span>
+
+      <!-- Notification -->
       <v-menu
         v-model="menu"
         :close-on-content-click="false"
@@ -119,6 +134,7 @@
     <!-- main -->
     <v-main class="grey lighten-3">
       <v-container>
+        <Flash />
         <Nuxt />
       </v-container>
     </v-main>

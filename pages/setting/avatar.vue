@@ -1,5 +1,5 @@
 <template>
-  <v-form class="mb-15" ref="form" v-model="valid" lazy-validation>
+  <v-form class="mb-15" ref="form" lazy-validation>
     <!-- avatar -->
     <v-avatar size="110">
       <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>

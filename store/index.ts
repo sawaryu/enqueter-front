@@ -2,6 +2,7 @@ import { getAccessorType } from 'typed-vuex'
 import * as sample from '~/store/sample'
 import * as dialog from '~/store/dialog'
 import * as ranking from '~/store/ranking'
+import * as flash from '~/store/flash'
 
 export const state = () => {
   return {}
@@ -17,6 +18,7 @@ export const accessorType = getAccessorType({
   modules: {
     sample,
     dialog,
-    ranking
+    ranking,
+    flash
   },
 })

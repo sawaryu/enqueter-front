@@ -44,7 +44,9 @@
             color="grey darken-3"
           ></v-text-field>
 
-          <v-btn @click="$router.push('/')" tabindex="1" color="grey darken-3" dark> login </v-btn>
+          <v-btn @click="login" tabindex="1" color="grey darken-3" dark>
+            login
+          </v-btn>
           <v-divider class="my-5"></v-divider>
           <div class="text-primary mb-1">
             In case of not having the account.
@@ -72,8 +74,8 @@ export default {
     valid: true,
     loginModel: {
       public_id: "",
-      password: ""
-    }
+      password: "",
+    },
   }),
   methods: {
     closeOpen() {
@@ -81,6 +83,18 @@ export default {
       setTimeout(() => {
         this.$accessor.dialog.setSignupDialog(true);
       }, 300);
+    },
+    login() {
+      this.$router.push("/");
+      this.$accessor.dialog.setLoginDialog(false)
+      this.$accessor.flash.showMessage(
+        {
+          message: `hello, john!!`,
+          type: "success",
+          status: true,
+        },
+        { root: true }
+      );
     },
   },
 };

@@ -54,7 +54,9 @@
       <v-col class="text-center" cols="12">
         <v-btn small>next (timeline)</v-btn>
         <v-btn small>next (all)</v-btn>
-        <span class="mx-3">|</span>
+      </v-col>
+      <v-divider></v-divider>
+      <v-col class="text-center" cols="12">
         <v-btn small>back (timeline)</v-btn>
         <v-btn small>back (all)</v-btn>
       </v-col>
@@ -71,7 +73,7 @@ export default Vue.extend({
       if (breakpointName == "xs") {
         return 130;
       } else {
-        return 300;
+        return 250;
       }
     },
   },

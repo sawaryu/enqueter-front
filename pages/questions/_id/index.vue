@@ -35,7 +35,7 @@ export default Vue.extend({
       if (breakpointName == "xs") {
         return 130;
       } else {
-        return 300;
+        return 250;
       }
     },
   },
