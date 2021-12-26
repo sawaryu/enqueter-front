@@ -1,6 +1,7 @@
 import { getAccessorType } from 'typed-vuex'
-import * as submodule from '~/store/submodule'
+import * as sample from '~/store/sample'
 import * as dialog from '~/store/dialog'
+import * as ranking from '~/store/ranking'
 
 export const state = () => {
   return {}
@@ -14,7 +15,8 @@ export const accessorType = getAccessorType({
   mutations,
   actions,
   modules: {
-    submodule,
-    dialog
+    sample,
+    dialog,
+    ranking
   },
 })

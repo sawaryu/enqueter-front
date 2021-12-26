@@ -2,9 +2,8 @@
   <v-row>
     <v-col cols="12" md="4">
       <div style="position: sticky; top: 76px">
-        <v-card height="15.5vh">
-          <v-card-title><v-icon>mdi-clock</v-icon>Timeline</v-card-title>
-          <v-card-text>timeline page.</v-card-text>
+        <v-card>
+          <v-card-title><v-icon>mdi-home</v-icon>Home</v-card-title>
         </v-card>
 
         <v-card class="mt-3">
@@ -18,13 +17,14 @@
                 dark
                 :key="period.id"
                 v-text="period.text"
-                :text="period.id != currentPeriod"
-                @click="currentPeriod = period.id"
+                :text="period.id != $accessor.ranking.getCurrentPeriod"
+                @click="$accessor.ranking.setCurrentPeriod(period.id)"
                 x-small
               ></v-btn>
             </div>
           </v-card-title>
-          <v-list dense height="60vh" class="overflow-y-auto">
+          <v-divider></v-divider>
+          <v-list dense height="69vh" class="overflow-y-auto">
             <v-list-item v-for="(n, index) in 10" :key="n">
               <v-badge
                 :value="[0, 1, 2].includes(index)"
@@ -79,7 +79,6 @@ export default Vue.extend({
   },
   data() {
     return {
-      currentPeriod: "week",
       periods: [
         { id: "week", text: "week" },
         { id: "month", text: "month" },

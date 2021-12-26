@@ -47,14 +47,39 @@
           <v-card width="340" elevation="0">
             <div class="pa-0 text-subtitle-2">sample123</div>
             <div class="pa-0 text-caption text--secondary">sample</div>
-            <div class="pa-0 text-caption text--secondary">correct ratio: 32% / total answered: 131</div>
+            <div class="pa-0 text-caption text--secondary">
+              point: 321pt / correct ratio: 32% / total answered: 131
+            </div>
             <div class="pt-1 pb-0 mb-3">
               Lorem ipsum, dolor sissumenda sed quia nostrum ab sunt, quaerat
               quidem dolorum nihil earum.
             </div>
-            <FollowButton />
           </v-card>
         </div>
+
+        <v-card-actions>
+          <FollowButton />
+          <v-spacer></v-spacer>
+          <v-menu offset-y>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn icon v-bind="attrs" v-on="on">
+                <v-icon>mdi-dots-vertical</v-icon>
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-item>
+                <v-list-item-title
+                  ><v-icon>mdi-flag</v-icon> report</v-list-item-title
+                >
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-title
+                  ><v-icon>mdi-delete</v-icon> delete</v-list-item-title
+                >
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </v-card-actions>
       </v-card>
     </v-col>
 
@@ -85,8 +110,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-export default Vue.extend({
-});
+export default Vue.extend({});
 </script>
 
 <style>
