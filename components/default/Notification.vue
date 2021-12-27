@@ -6,9 +6,18 @@
     offset-y
   >
     <template v-slot:activator="{ on, attrs }">
-      <v-btn icon v-bind="attrs" v-on="on">
-        <v-icon>mdi-bell</v-icon>
-      </v-btn>
+      <v-badge
+        overlap
+        color="warning"
+        :value="11"
+        :content="11"
+        offset-x="23"
+        offset-y="22"
+      >
+        <v-btn icon v-bind="attrs" v-on="on">
+          <v-icon>mdi-bell</v-icon>
+        </v-btn>
+      </v-badge>
     </template>
 
     <v-card>
@@ -24,14 +33,14 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue from "vue";
 export default Vue.extend({
-  data(){
+  data() {
     return {
       menu: null as null | boolean,
-    }
-  }
-})
+    };
+  },
+});
 </script>
 
 <style>

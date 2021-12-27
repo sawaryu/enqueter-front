@@ -121,7 +121,7 @@ export default Vue.extend({
     };
   },
   methods: {
-    logout() {
+    logout(): void {
       this.$router.push("/welcome");
       this.$accessor.flash.showMessage(
         {

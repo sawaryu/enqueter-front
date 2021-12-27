@@ -4,20 +4,20 @@
       <div style="position: sticky; top: 76px">
         <v-card height="18vh">
           <v-card-title
-            ><v-icon>mdi-information</v-icon>Information</v-card-title
+            ><v-icon>mdi-home</v-icon>Home</v-card-title
           >
           <v-card-text class="d-flex justify-space-around align-center">
             <div class="text-subtitle-1 black--text">
-              <div><v-icon>mdi-file-question</v-icon> questions</div>
-              <div class="ml-10"><NumberDrumRoll :count="821" /></div>
+              <v-icon>mdi-file-question</v-icon>
+              <div><NumberDrumRoll :count="321" /></div>
             </div>
             <div class="text-subtitle-1 black--text">
-              <div><v-icon>mdi-message-reply-outline</v-icon>answeres</div>
-              <div class="ml-10"><NumberDrumRoll :count="821" /></div>
+              <v-icon>mdi-message-reply-outline</v-icon>
+              <div><NumberDrumRoll :count="821" /></div>
             </div>
             <div class="text-subtitle-1 black--text">
-              <div><v-icon>mdi-account</v-icon> users</div>
-              <div class="ml-6"><NumberDrumRoll :count="821" /></div>
+              <v-icon>mdi-account</v-icon>
+              <div><NumberDrumRoll :count="121" /></div>
             </div>
           </v-card-text>
         </v-card>
@@ -26,21 +26,27 @@
           <v-card-title
             ><v-icon>mdi-crown</v-icon>Ranking
             <v-spacer></v-spacer>
-            <div>
-              <v-btn
-                v-for="period in periods"
-                color="grey darken-2"
-                dark
-                :key="period.id"
-                v-text="period.text"
-                :text="period.id != $accessor.ranking.getCurrentPeriod"
-                @click="$accessor.ranking.setCurrentPeriod(period.id)"
-                x-small
-              ></v-btn>
-            </div>
+            <v-btn icon @click="changeCategory()">
+              <v-icon size="38">{{$accessor.ranking.getCurrentCategory}}</v-icon>
+            </v-btn>
           </v-card-title>
           <v-divider></v-divider>
           <v-list dense height="57vh" class="overflow-y-auto">
+            <v-list-item>
+              <v-spacer></v-spacer>
+              <div>
+                <v-btn
+                  v-for="period in periods"
+                  color="grey darken-2"
+                  dark
+                  :key="period.id"
+                  v-text="period.text"
+                  :text="period.id != $accessor.ranking.getCurrentPeriod"
+                  @click="$accessor.ranking.setCurrentPeriod(period.id)"
+                  x-small
+                ></v-btn>
+              </div>
+            </v-list-item>
             <v-list-item v-for="(n, index) in 10" :key="n">
               <v-badge
                 :value="[0, 1, 2].includes(index)"
@@ -66,7 +72,8 @@
                 <v-list-item-subtitle>sample</v-list-item-subtitle>
               </v-list-item-content>
               <v-list-item-action>
-                <div>125pt</div>
+                <!-- <div>125<v-icon>mdi-alpha-p-circle-outline</v-icon></div> -->
+                <div>125<v-icon>mdi-file-question</v-icon></div>
               </v-list-item-action>
             </v-list-item>
           </v-list>
@@ -102,7 +109,7 @@ export default Vue.extend({
         { id: "week", text: "week" },
         { id: "month", text: "month" },
         { id: "all", text: "all" },
-      ],
+      ] as Array<object>,
     };
   },
   methods: {
@@ -117,10 +124,12 @@ export default Vue.extend({
         return { size: 33, color: null };
       }
     },
-  },
-  watch: {
-    currentBtn() {
-      // some methods get from api
+    changeCategory() {
+      if (this.$accessor.ranking.getCurrentCategory === "mdi-alpha-p-circle-outline") {
+        this.$accessor.ranking.setCurrentCategory("mdi-file-question");
+      } else {
+        this.$accessor.ranking.setCurrentCategory("mdi-alpha-p-circle-outline");
+      }
     },
   },
 });

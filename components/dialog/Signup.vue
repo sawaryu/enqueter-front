@@ -35,6 +35,8 @@
             color="grey darken-3"
             counter="15"
             maxlength="15"
+            hint="Please type using half-width characters."
+            persistent-hint
           ></v-text-field>
 
           <v-text-field
