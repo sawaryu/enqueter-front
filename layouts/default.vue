@@ -39,43 +39,12 @@
       >
 
       <v-spacer></v-spacer>
+
       <!-- Search -->
-      <span class="mr-1" style="width:180px">
-        <v-text-field
-          dark
-          placeholder="search"
-          outlined
-          rounded
-          dense
-          clearable
-          style="height: 40px"
-          prepend-inner-icon="mdi-magnify"
-        ></v-text-field>
-      </span>
+      <Search />
 
       <!-- Notification -->
-      <v-menu
-        v-model="menu"
-        :close-on-content-click="false"
-        :nudge-width="200"
-        offset-y
-      >
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn icon v-bind="attrs" v-on="on">
-            <v-icon>mdi-bell</v-icon>
-          </v-btn>
-        </template>
-
-        <v-card>
-          <v-list>
-            <v-list-item>
-              <v-list-item-content class="text-center">
-                <v-list-item-title>No notifications.</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
-        </v-card>
-      </v-menu>
+      <Notification />
     </v-app-bar>
 
     <!-- drawer -->
@@ -121,7 +90,7 @@
             <v-list-item-title>Setting</v-list-item-title>
           </v-list-item>
           <v-divider class="my-4"></v-divider>
-          <v-list-item @click="$router.push('/welcome')">
+          <v-list-item @click="logout">
             <v-list-item-icon>
               <v-icon>mdi-logout</v-icon>
             </v-list-item-icon>
@@ -149,8 +118,20 @@ export default Vue.extend({
   data() {
     return {
       drawer: null as null | boolean,
-      menu: null as null | boolean,
     };
+  },
+  methods: {
+    logout() {
+      this.$router.push("/welcome");
+      this.$accessor.flash.showMessage(
+        {
+          message: `you had logouted.`,
+          type: "info",
+          status: true,
+        },
+        { root: true }
+      );
+    },
   },
   computed: {
     isLarge() {

@@ -38,6 +38,7 @@
 
           <v-text-field
             tabindex="1"
+            type="password"
             v-model="loginModel.password"
             label="password"
             required
@@ -82,7 +83,7 @@ export default {
       this.$accessor.dialog.setLoginDialog(false);
       setTimeout(() => {
         this.$accessor.dialog.setSignupDialog(true);
-      }, 300);
+      }, 200);
     },
     login() {
       this.$router.push("/");

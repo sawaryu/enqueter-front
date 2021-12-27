@@ -105,7 +105,7 @@ export default {
       this.$accessor.dialog.setSignupDialog(false);
       setTimeout(() => {
         this.$accessor.dialog.setLoginDialog(true);
-      }, 300);
+      }, 200);
     },
   },
 };
