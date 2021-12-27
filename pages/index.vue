@@ -2,11 +2,27 @@
   <v-row>
     <v-col cols="12" md="4">
       <div style="position: sticky; top: 76px">
-        <v-card>
-          <v-card-title><v-icon>mdi-home</v-icon>Home</v-card-title>
+        <v-card height="18vh">
+          <v-card-title
+            ><v-icon>mdi-information</v-icon>Information</v-card-title
+          >
+          <v-card-text class="d-flex justify-space-around align-center">
+            <div class="text-subtitle-1 black--text">
+              <div><v-icon>mdi-file-question</v-icon> questions</div>
+              <div class="ml-10"><NumberDrumRoll :count="821" /></div>
+            </div>
+            <div class="text-subtitle-1 black--text">
+              <div><v-icon>mdi-message-reply-outline</v-icon>answeres</div>
+              <div class="ml-10"><NumberDrumRoll :count="821" /></div>
+            </div>
+            <div class="text-subtitle-1 black--text">
+              <div><v-icon>mdi-account</v-icon> users</div>
+              <div class="ml-6"><NumberDrumRoll :count="821" /></div>
+            </div>
+          </v-card-text>
         </v-card>
 
-        <v-card class="mt-3">
+        <v-card class="mt-5">
           <v-card-title
             ><v-icon>mdi-crown</v-icon>Ranking
             <v-spacer></v-spacer>
@@ -24,7 +40,7 @@
             </div>
           </v-card-title>
           <v-divider></v-divider>
-          <v-list dense height="69vh" class="overflow-y-auto">
+          <v-list dense height="57vh" class="overflow-y-auto">
             <v-list-item v-for="(n, index) in 10" :key="n">
               <v-badge
                 :value="[0, 1, 2].includes(index)"
@@ -34,7 +50,10 @@
                 offset-y="23"
                 overlap
               >
-                <v-list-item-avatar class="pointer" :size="sizeAndColorByRank(index).size">
+                <v-list-item-avatar
+                  class="pointer"
+                  :size="sizeAndColorByRank(index).size"
+                >
                   <v-img
                     src="https://cdn.vuetifyjs.com/images/john.jpg"
                   ></v-img>

@@ -125,7 +125,7 @@ export default Vue.extend({
       this.$router.push("/welcome");
       this.$accessor.flash.showMessage(
         {
-          message: `you had logouted.`,
+          message: `logouted completly.`,
           type: "info",
           status: true,
         },

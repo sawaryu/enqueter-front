@@ -22,16 +22,31 @@ export const mutations = mutationTree(state, {
 export const actions = actionTree(
   { state, getters, mutations },
   {
-    showMessage({ commit }, { message, type, status }) {
-      commit("setMessage", message)
-      commit("setType", type)
-      commit("setStatus", status)
-      setTimeout(() => {
+    showMessage({ commit, getters }, { message, type, status }) {
+
+      // if the status is now 'true', make it 'false' promptly, and do other.
+      if (getters.status) {
+        commit("setStatus", false)
+        clearTimeout(flashTimer)
+        setTimeout(() => {
+          commit("setMessage", message)
+          commit("setType", type)
+          commit("setStatus", status)
+        }, 400);
+      } else {
+        commit("setMessage", message)
+        commit("setType", type)
+        commit("setStatus", status)
+      }
+
+      flashTimer = setTimeout(() => {
         commit("setStatus", !status)
       }, 3000)
     },
   }
 )
+
+let flashTimer: any;
 
 // Ex of call.(* normal store mode)
 // this.$store.dispatch(
