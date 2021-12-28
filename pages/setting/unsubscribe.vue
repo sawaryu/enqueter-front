@@ -26,7 +26,7 @@ export default Vue.extend({
       this.$router.push("/welcome");
       this.$accessor.flash.showMessage(
         {
-          message: `unsubscribe completly.`,
+          message: `unsubscribed completly.`,
           type: "info",
           status: true,
         },
