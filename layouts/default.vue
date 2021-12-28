@@ -48,7 +48,7 @@
     </v-app-bar>
 
     <!-- drawer -->
-    <v-navigation-drawer v-model="drawer" fixed temporary>
+    <v-navigation-drawer v-model="drawer" fixed temporary dark color="grey darken-3">
       <v-list class="pa-0">
         <v-list-item class="pointer" @click="$router.push('/users/1')">
           <v-list-item-avatar size="60">
@@ -64,7 +64,7 @@
       </v-list>
       <v-divider></v-divider>
       <v-list nav dense>
-        <v-list-item-group active-class="black--text">
+        <v-list-item-group>
           <v-list-item nuxt to="/">
             <v-list-item-icon>
               <v-icon>mdi-home</v-icon>
