@@ -29,7 +29,9 @@
       "@nuxt/types",
       "@nuxtjs/axios",
       "@types/node",
-      "@nuxtjs/vuetify"
+      "@nuxtjs/vuetify",
+      "@nuxtjs/auth-next",
+      "@types/nuxtjs__auth"
     ],
     // importtant!! (make to be able to use vuex type modules)
     "typeRoots": [

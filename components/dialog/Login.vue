@@ -45,7 +45,7 @@
             color="grey darken-3"
           ></v-text-field>
 
-          <v-btn @click="login" tabindex="1" color="grey darken-3" dark>
+          <v-btn @click="loginWithAuthModule" tabindex="1" color="grey darken-3" dark>
             login
           </v-btn>
           <v-divider class="my-5"></v-divider>
@@ -69,8 +69,9 @@
   </v-dialog>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from "vue";
+export default Vue.extend({
   data: () => ({
     valid: true,
     loginModel: {
@@ -79,24 +80,30 @@ export default {
     },
   }),
   methods: {
+    async loginWithAuthModule() {
+      try {
+        const res = await this.$auth.loginWith("local", {
+          data: this.loginModel,
+        });
+        this.$accessor.dialog.setLoginDialog(false);
+        this.$accessor.flash.showMessage(
+          {
+            message: `hello, ${this.$auth.user.name}!!`,
+            type: "success",
+            status: true,
+          },
+          { root: true }
+        );
+      } catch (e) {
+        console.log(e);
+      }
+    },
     closeOpen() {
       this.$accessor.dialog.setLoginDialog(false);
       setTimeout(() => {
         this.$accessor.dialog.setSignupDialog(true);
       }, 200);
     },
-    login() {
-      this.$router.push("/");
-      this.$accessor.dialog.setLoginDialog(false)
-      this.$accessor.flash.showMessage(
-        {
-          message: `hello, john!!`,
-          type: "success",
-          status: true,
-        },
-        { root: true }
-      );
-    },
   },
-};
+});
 </script>

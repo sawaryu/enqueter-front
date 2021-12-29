@@ -50,15 +50,14 @@
     <!-- drawer -->
     <v-navigation-drawer v-model="drawer" fixed temporary dark color="grey darken-3">
       <v-list class="pa-0">
-        <v-list-item class="pointer" @click="$router.push('/users/1')">
+        <v-list-item class="pointer" @click="$router.push(`/users/${$auth.user.id}`)">
           <v-list-item-avatar size="60">
             <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
           </v-list-item-avatar>
           <v-list-item-content>
-            <v-list-item-title class="font-weight-bold">
-              sample123
+            <v-list-item-title class="font-weight-bold" v-text="user.public_id">
             </v-list-item-title>
-            <v-list-item-subtitle>sample</v-list-item-subtitle>
+            <v-list-item-subtitle v-text="user.name"></v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -77,7 +76,7 @@
             </v-list-item-icon>
             <v-list-item-title>Questions</v-list-item-title>
           </v-list-item>
-          <v-list-item nuxt to="/users/1">
+          <v-list-item nuxt :to="`/users/${$auth.user.id}`">
             <v-list-item-icon>
               <v-icon>mdi-account</v-icon>
             </v-list-item-icon>

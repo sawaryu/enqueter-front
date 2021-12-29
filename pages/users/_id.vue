@@ -45,15 +45,15 @@
         </div>
         <div class="d-flex justify-center">
           <v-card width="340" elevation="0">
-            <div class="pa-0 text-subtitle-2">sample123</div>
-            <div class="pa-0 text-caption text--secondary">sample</div>
+            <div class="pa-0 text-subtitle-2" v-text="user.public_id"></div>
+            <div
+              class="pa-0 text-caption text--secondary"
+              v-text="user.name"
+            ></div>
             <div class="pa-0 text-caption text--secondary">
               point: 321pt / correct ratio: 32% / total answered: 131
             </div>
-            <div class="pt-1 pb-0 mb-3">
-              Lorem ipsum, dolor sissumenda sed quia nostrum ab sunt, quaerat
-              quidem dolorum nihil earum.
-            </div>
+            <div class="pt-1 pb-0 mb-3" v-text="user.introduce"></div>
           </v-card>
         </div>
 
@@ -109,8 +109,15 @@
 </template>
 
 <script lang="ts">
+import axios from "axios";
 import Vue from "vue";
-export default Vue.extend({});
+export default Vue.extend({
+  async asyncData({ params }) {
+    return axios.get(`/users/${params.id}`).then((res) => {
+      return { user: res.data };
+    });
+  },
+});
 </script>
 
 <style>

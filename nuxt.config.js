@@ -50,10 +50,58 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/auth-next'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  // production: "https://tubuanpanman.com/api/v1"
+  axios: {
+    baseURL: process.env.BASE_URL || 'http://localhost:5000/api/v1'
+  },
+  auth: {
+    redirect: {
+      login: '/welcome', // User will be redirected to this path if login is required.
+      logout: '/welcome', // User will be redirected to this path if after logout, current route is protected.
+      callback: false,
+      home: '/' // User will be redirected to this path after login. (rewriteRedirects will rewrite this path)
+    },
+    localStorage: false,
+    strategies: {
+      local: {
+        scheme: '~/plugins/customRefresh.js',
+        token: {
+          property: 'access_token',
+          type: 'Bearer',
+          maxAge: 60 * 60,
+          required: true,
+        },
+        refreshToken: {
+          property: 'refresh_token',
+          data: 'refresh_token',
+          maxAge: 60 * 60 * 24 * 30
+        },
+        user: {
+          property: false
+        },
+        endpoints: {
+          login: { url: '/auth/login', method: 'post', propertyName: 'access_token' },
+          refresh: { url: '/auth/refresh', method: 'post', propertyName: 'refresh_token' },
+          user: { url: '/auth/protected', method: 'get', propertyName: false },
+          logout: { url: '/auth/logout', method: 'delete', propertyName: 'access_token' }
+        }
+      }
+    }
+  },
+
+  // middlware
+  router: {
+    middleware: ['auth', 'redirect']
+  },
+
+  // avatar
+  publicRuntimeConfig: {
+    avatarUrl: process.env.AVATAR_URL
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
