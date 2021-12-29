@@ -45,7 +45,7 @@
             color="grey darken-3"
           ></v-text-field>
 
-          <v-btn @click="loginWithAuthModule" tabindex="1" color="grey darken-3" dark>
+          <v-btn @click="login" tabindex="1" color="grey darken-3" dark>
             login
           </v-btn>
           <v-divider class="my-5"></v-divider>
@@ -80,12 +80,13 @@ export default Vue.extend({
     },
   }),
   methods: {
-    async loginWithAuthModule() {
+    async login() {
       try {
         const res = await this.$auth.loginWith("local", {
           data: this.loginModel,
         });
         this.$accessor.dialog.setLoginDialog(false);
+        this.$router.push('/')
         this.$accessor.flash.showMessage(
           {
             message: `hello, ${this.$auth.user.name}!!`,

@@ -48,16 +48,31 @@
     </v-app-bar>
 
     <!-- drawer -->
-    <v-navigation-drawer v-model="drawer" fixed temporary dark color="grey darken-3">
+    <v-navigation-drawer
+      v-if="$auth.loggedIn"
+      v-model="drawer"
+      fixed
+      temporary
+      dark
+      color="grey darken-3"
+    >
       <v-list class="pa-0">
-        <v-list-item class="pointer" @click="$router.push(`/users/${$auth.user.id}`)">
+        <v-list-item
+          class="pointer"
+          @click="$router.push(`/users/${$auth.user.id}`)"
+        >
           <v-list-item-avatar size="60">
-            <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
+            <v-img :src="$avatar($auth.user.avatar)"></v-img>
           </v-list-item-avatar>
           <v-list-item-content>
-            <v-list-item-title class="font-weight-bold" v-text="user.public_id">
+            <v-list-item-title
+              class="font-weight-bold"
+              v-text="$auth.user.public_id"
+            >
             </v-list-item-title>
-            <v-list-item-subtitle v-text="user.name"></v-list-item-subtitle>
+            <v-list-item-subtitle
+              v-text="$auth.user.name"
+            ></v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -120,11 +135,12 @@ export default Vue.extend({
     };
   },
   methods: {
-    logout(): void {
-      this.$router.push("/welcome");
+    logout() {
+      this.$auth.logout();
+      this.drawer = null;
       this.$accessor.flash.showMessage(
         {
-          message: `logouted completly.`,
+          message: "logouted completly",
           type: "info",
           status: true,
         },

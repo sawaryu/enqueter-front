@@ -57,9 +57,9 @@ export default {
         to: "/setting/password",
       },
       {
-        title: "unsubscribe",
+        title: "delete",
         icon: "mdi-account-off",
-        to: "/setting/unsubscribe",
+        to: "/setting/delete",
       },
     ],
   }),

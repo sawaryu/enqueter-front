@@ -7,7 +7,7 @@
         <div class="d-flex justify-center">
           <div class="ml-4">
             <v-avatar size="60">
-              <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
+              <v-img :src="$avatar(user.avatar)"></v-img>
             </v-avatar>
           </div>
           <div class="pt-2">
@@ -51,7 +51,7 @@
               v-text="user.name"
             ></div>
             <div class="pa-0 text-caption text--secondary">
-              point: 321pt / correct ratio: 32% / total answered: 131
+              point: {{user.point}}pt / correct ratio: 32% / total answered: 131
             </div>
             <div class="pt-1 pb-0 mb-3" v-text="user.introduce"></div>
           </v-card>
@@ -87,17 +87,9 @@
     <v-col cols="12" sm="8">
       <!-- navigation -->
       <v-bottom-navigation background-color="grey lighten-4" shift grow>
-        <v-btn exact to="/users/1">
-          <span>My questions</span>
-          <v-icon>mdi-file-question</v-icon>
-        </v-btn>
-        <v-btn exact to="/users/1/answered">
-          <span>Answered</span>
-          <v-icon>mdi-checkbox-marked-circle-outline</v-icon>
-        </v-btn>
-        <v-btn exact to="/users/1/bookmark">
-          <span>Bookmark</span>
-          <v-icon>mdi-bookmark</v-icon>
+        <v-btn v-for="(n, index) in navigations" exact :to="n.to" :key="index">
+          <span v-text="n.title"></span>
+          <v-icon v-text="n.icon"></v-icon>
         </v-btn>
       </v-bottom-navigation>
 
@@ -109,13 +101,32 @@
 </template>
 
 <script lang="ts">
-import axios from "axios";
 import Vue from "vue";
 export default Vue.extend({
-  async asyncData({ params }) {
-    return axios.get(`/users/${params.id}`).then((res) => {
-      return { user: res.data };
-    });
+  async asyncData({ params, $axios }) {
+    const res = await $axios.$get(`/users/${params.id}`);
+    return { user: res };
+  },
+  computed: {
+    navigations(): Object[] {
+      return [
+        {
+          title: "My questions",
+          icon: "mdi-file-question",
+          to: `/users/${this.$route.params.id}`,
+        },
+        {
+          title: "Answered",
+          icon: "mdi-checkbox-marked-circle-outline",
+          to: `/users/${this.$route.params.id}/answered`,
+        },
+        {
+          title: "Bookmark",
+          icon: "mdi-bookmark",
+          to: `/users/${this.$route.params.id}/bookmark`,
+        },
+      ];
+    },
   },
 });
 </script>

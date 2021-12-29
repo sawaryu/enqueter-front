@@ -9,7 +9,7 @@
       color="grey darken-3"
       style="width: 100px"
     ></v-checkbox>
-    <v-btn :disabled="!checkbox" @click="unsubscribe()">unsubscribe</v-btn>
+    <v-btn :disabled="!checkbox" @click="unsubscribe()">delete</v-btn>
   </div>
 </template>
 

@@ -1,8 +1,8 @@
-export default ({ app: { $axios } }) => {
+export default ({ app: { $axios, $accessor } }) => {
   $axios.onError(error => {
     const statusCode = error.response.status;
     if (statusCode == 400 || statusCode == 409 || statusCode == 401) {
-      this.$accessor.flash.showMessage(
+      $accessor.flash.showMessage(
         {
           message: error.response.data.message,
           type: "error",
