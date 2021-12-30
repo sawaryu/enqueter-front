@@ -1,5 +1,9 @@
-# ts and nuxt sample app
+# Enqueter Front
 
+## 概要
+EnqueterプロジェクトのFront。Vue.js(Nuxt.js)を使用
+
+* setup
 ```
 # confirm vue version
 $ yarn list vue
@@ -23,17 +27,19 @@ $ yarn add @nuxtjs/vuetify -D
 }
 ```
 
-# vuexのtypescript化
+## vuexのtypescript化
 （参考）
 > https://tech.smartshopping.co.jp/nuxt-typed-vuex
 
-# build
+
+## build and CI/CD
+* build
+
 ```
 $ yarn run generate
 ```
 
-# deploy
-netlify
+* confirming netlify
 ```
 drag dist deir on your netlify
 ```
