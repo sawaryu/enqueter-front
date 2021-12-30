@@ -3,10 +3,12 @@
     <v-card-title class="font-weight-bold">
       <v-icon color="black" size="40">mdi-file-question</v-icon>
       Question
-      <!-- <span class="text-caption ml-2 success--text"
+      <span v-if="question.is_open" class="text-caption ml-2 success--text"
         ><v-icon color="success">mdi-check</v-icon>open</span
-      > -->
-      <span class="text-caption text--secondary ml-2"><v-icon>mdi-close-octagon-outline</v-icon>closed</span>
+      >
+      <span v-else class="text-caption text--secondary ml-2"
+        ><v-icon>mdi-close-octagon-outline</v-icon>closed</span
+      >
       <v-spacer></v-spacer>
       <v-btn icon @click="isBookmark = !isBookmark">
         <v-icon>{{ bookmarkIcon }}</v-icon>
@@ -34,17 +36,17 @@
     <v-card-title
       class="pt-0 pointer"
       @click="$router.push(`/questions/${question.id}`)"
-      ><span class="question-title">{{ question.title }}?</span></v-card-title
+      ><span class="question-title">{{ question.content }}</span></v-card-title
     >
     <v-card-actions>
-      <v-avatar class="pointer" size="40">
-        <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img
+      <v-avatar class="pointer" size="40" @click="$router.push(`/users/${question.user.id}`)">
+        <v-img :src="$avatar(question.user.avatar)"></v-img
       ></v-avatar>
-      <div class="pl-1 underline pointer">
+      <div class="pl-1 underline pointer" @click="$router.push(`/users/${question.user.id}`)">
         <div class="text-caption">
-          <span class="font-weight-medium"> sample123 </span>
+          <span class="font-weight-medium" v-text="question.user.public_id"></span>
         </div>
-        <div class="text-caption text--secondary">aiueo</div>
+        <div class="text-caption text--secondary" v-text="question.user.name"></div>
       </div>
       <v-spacer></v-spacer>
       <div class="text-caption">
@@ -58,7 +60,22 @@
 import Vue, { PropOptions } from "vue";
 interface Question {
   id: number;
-  title: string;
+  user_id: number;
+  content: string;
+  created_at: string;
+  updated_at: string;
+  is_open: boolean;
+  user: {
+    id: number;
+    public_id: string;
+    name: string;
+    introduce: string;
+    avatar: string;
+    point: number;
+    created_at: string;
+    updated_at: string;
+    role: string;
+  };
 }
 export default Vue.extend({
   props: {

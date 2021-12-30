@@ -5,7 +5,7 @@
         Enqueter
       </v-card-title>
       <v-card-text>choise the majority.</v-card-text>
-      <v-card-actions class="d-felx justify-center">
+      <v-card-actions class="d-flex justify-center">
         <v-btn
           x-large
           color="grey darken-2"

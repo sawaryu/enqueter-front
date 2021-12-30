@@ -22,15 +22,11 @@
 </template>
 
 <script lang="ts">
-import axios from "axios";
 import Vue from "vue";
 export default Vue.extend({
-  async asyncData(context) {
-    return axios
-      .get(`https://jsonplaceholder.typicode.com/users/1/posts`)
-      .then((res) => {
-        return { questions: res.data };
-      });
+  async asyncData({ params, $axios }) {
+    const res = await $axios.$get(`/users/${params.id}/questions`);
+    return { questions: res };
   },
   data() {
     return { items: ["new", "popular", "closed"] };

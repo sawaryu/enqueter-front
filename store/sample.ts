@@ -17,7 +17,7 @@ export const mutations = mutationTree(state, {
 export const actions = actionTree(
   { state, getters, mutations },
   {
-    initialise({ commit }) {
+    initialize({ commit }) {
       commit('setText', 'typed-vuex test!!')
     },
   }

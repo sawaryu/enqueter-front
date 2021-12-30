@@ -14,25 +14,67 @@
       </v-card-title>
 
       <v-card-text>
-        <v-textarea
-          color="black"
-          maxlength="255"
-          counter="255"
-          dense
-        >
-        </v-textarea>
+        <v-form ref="form" v-model="valid" lazy-validation>
+          <v-textarea
+            v-model="questionModel.content"
+            :rules="questionRules"
+            color="black"
+            maxlength="255"
+            counter="255"
+            dense
+          >
+          </v-textarea>
+        </v-form>
       </v-card-text>
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn>create</v-btn>
+        <v-btn @click="create">create</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
 
-<script>
-export default {};
+<script lang="ts">
+import Vue from "vue";
+export default Vue.extend({
+  data() {
+    return {
+      valid: true,
+      questionModel: {
+        content: "",
+      },
+      questionRules: [
+        (v: string) => (!!v && /\S/.test(v)) || "Must be required",
+        (v: string) => v.length <= 255 || "Must be less than 255 characters",
+      ],
+    };
+  },
+  methods: {
+    async create() {
+      if (!(this.$refs.form as any).validate()) {
+        return;
+      }
+
+      try {
+        const res = await this.$axios.$post("/questions", this.questionModel);
+        this.$accessor.flash.showMessage(
+          {
+            message: `created completely new question.`,
+            type: "success",
+            status: true,
+          },
+          { root: true }
+        );
+        this.$accessor.dialog.setQuestionDialog(false);
+        console.log(res.data)
+        this.$router.push(`/questions/${res.data.id}`);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
+});
 </script>
 
 <style>

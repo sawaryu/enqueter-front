@@ -66,7 +66,7 @@
             tabindex="1"
             type="password"
             v-model="signupModel.password_confirmation"
-            :rules="passwordConfimarionRules"
+            :rules="passwordConfirmationRules"
             label="password (confirmation)"
             color="grey darken-3"
             counter="72"
@@ -133,7 +133,7 @@ export default Vue.extend({
           this.closeOpen();
           this.$accessor.flash.showMessage(
             {
-              message: "Signup complely, please login.",
+              message: "Signup completely, please login.",
               type: "success",
               status: true,
             },
@@ -152,7 +152,7 @@ export default Vue.extend({
     },
   },
   computed: {
-    passwordConfimarionRules() {
+    passwordConfirmationRules() {
       // mostly same as `passwordRules`
       return [
         (v: string) => (!!v && /\S/.test(v)) || "Must be required",

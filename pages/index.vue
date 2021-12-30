@@ -3,9 +3,7 @@
     <v-col cols="12" md="4">
       <div style="position: sticky; top: 76px">
         <v-card height="18vh">
-          <v-card-title
-            ><v-icon>mdi-home</v-icon>Home</v-card-title
-          >
+          <v-card-title><v-icon>mdi-home</v-icon>Home</v-card-title>
           <v-card-text class="d-flex justify-space-around align-center">
             <div class="text-subtitle-1 black--text">
               <v-icon>mdi-file-question</v-icon>
@@ -27,7 +25,9 @@
             ><v-icon>mdi-crown</v-icon>Ranking
             <v-spacer></v-spacer>
             <v-btn icon @click="changeCategory()">
-              <v-icon size="38">{{$accessor.ranking.getCurrentCategory}}</v-icon>
+              <v-icon size="38">{{
+                $accessor.ranking.getCurrentCategory
+              }}</v-icon>
             </v-btn>
           </v-card-title>
           <v-divider></v-divider>
@@ -93,15 +93,11 @@
 </template>
 
 <script lang="ts">
-import axios from "axios";
 import Vue from "vue";
 export default Vue.extend({
-  async asyncData(context) {
-    return axios
-      .get(`https://jsonplaceholder.typicode.com/users/1/posts`)
-      .then((res) => {
-        return { questions: res.data };
-      });
+  async asyncData({ $axios }) {
+    const res = await $axios.$get(`/questions/timeline`);
+    return { questions: res };
   },
   data() {
     return {
@@ -125,7 +121,10 @@ export default Vue.extend({
       }
     },
     changeCategory() {
-      if (this.$accessor.ranking.getCurrentCategory === "mdi-alpha-p-circle-outline") {
+      if (
+        this.$accessor.ranking.getCurrentCategory ===
+        "mdi-alpha-p-circle-outline"
+      ) {
         this.$accessor.ranking.setCurrentCategory("mdi-file-question");
       } else {
         this.$accessor.ranking.setCurrentCategory("mdi-alpha-p-circle-outline");

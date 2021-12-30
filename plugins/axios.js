@@ -15,7 +15,7 @@ export default ({ app: { $axios, $accessor } }) => {
     else if (statusCode == 500) {
       $nuxt.error({
         statusCode: statusCode,
-        message: "Server erros occured.",
+        message: "Server errors occurred.",
       });
     } else if (statusCode == 503) {
       $nuxt.error({

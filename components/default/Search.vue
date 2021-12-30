@@ -15,7 +15,7 @@
       @focus="menu = true"
     ></v-text-field>
 
-    <!-- manu card -->
+    <!-- menu card -->
     <v-card
       color="white"
       light

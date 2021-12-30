@@ -28,7 +28,7 @@ export default Vue.extend({
         const res = await this.$axios.$delete("/auth");
         this.$accessor.flash.showMessage(
           {
-            message: `deleted completly.`,
+            message: `deleted completely.`,
             type: "info",
             status: true,
           },

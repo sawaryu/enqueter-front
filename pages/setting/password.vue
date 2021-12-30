@@ -28,7 +28,7 @@
     <v-text-field
       type="password"
       v-model="passwordModel.password_confirmation"
-      :rules="passwordConfimarionRules"
+      :rules="passwordConfirmationRules"
       maxlength="72"
       counter="72"
       color="grey darken-3"
@@ -81,7 +81,7 @@ export default Vue.extend({
         (this.$refs.form as any).resetValidation();
         this.$accessor.flash.showMessage(
           {
-            message: `updated completly your password.`,
+            message: `updated completely your password.`,
             type: "success",
             status: true,
           },
@@ -93,7 +93,7 @@ export default Vue.extend({
     },
   },
   computed: {
-    passwordConfimarionRules() {
+    passwordConfirmationRules() {
       // mostly same as `passwordRules`
       return [
         (v: string) => (!!v && /\S/.test(v)) || "Must be required",
