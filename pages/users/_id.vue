@@ -2,7 +2,7 @@
   <v-row justify="center">
     <!-- profile -->
     <v-col cols="12" sm="4">
-      <!-- main -->
+      <!-- main TODO: profile design -->
       <v-card class="pa-4" style="position: sticky; top: 76px">
         <div class="d-flex justify-center">
           <div class="ml-4">
