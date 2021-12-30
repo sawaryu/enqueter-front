@@ -31,17 +31,19 @@
           <v-text-field
             tabindex="1"
             v-model="signupModel.public_id"
+            :rules="publicIdRules"
             label="user id"
             color="grey darken-3"
             counter="15"
             maxlength="15"
-            hint="Please type using half-width characters."
+            hint="Please type using half-width alphanumeric characters."
             persistent-hint
           ></v-text-field>
 
           <v-text-field
             tabindex="1"
             v-model="signupModel.name"
+            :rules="nameRules"
             label="nickname"
             color="grey darken-3"
             maxlength="20"
@@ -52,21 +54,25 @@
             tabindex="1"
             type="password"
             v-model="signupModel.password"
+            :rules="passwordRules"
             label="password"
             color="grey darken-3"
             counter="72"
+            hint="Please type using half-width alphanumeric characters."
+            persistent-hint
           ></v-text-field>
 
           <v-text-field
             tabindex="1"
             type="password"
             v-model="signupModel.password_confirmation"
+            :rules="passwordConfimarionRules"
             label="password (confirmation)"
             color="grey darken-3"
             counter="72"
           ></v-text-field>
 
-          <v-btn tabindex="1" color="grey darken-3" dark> signup </v-btn>
+          <v-btn tabindex="1" color="grey darken-3" dark @click="signup"> signup </v-btn>
           <v-divider class="my-5"></v-divider>
           <div class="text-primary mb-1">
             In case of already having the account.
@@ -88,21 +94,56 @@
   </v-dialog>
 </template>
 
-<script>
-export default {
-  auth: false,
+<script lang="ts">
+import Vue from "vue";
+export default Vue.extend({
   data: () => ({
     valid: true,
-    is_success: false,
-    show: false,
     signupModel: {
       public_id: "",
       name: "",
       password: "",
       password_confirmation: "",
     },
+    publicIdRules: [
+      (v: string) => (!!v && /\S/.test(v)) || "Must be required",
+      (v: string) => v.length <= 15 || "Must be less than 15 characters",
+      (v: string) =>
+        /^[A-Za-z0-9]*$/.test(v) ||
+        "Must be using half-width alphanumeric characters.",
+    ],
+    nameRules: [
+      (v: string) => (!!v && /\S/.test(v)) || "Must be required",
+      (v: string) => v.length <= 20 || "Must be less than 20 characters",
+    ],
+    passwordRules: [
+      (v: string) => (!!v && /\S/.test(v)) || "Must be required",
+      (v: string) => v.length >= 8 || "Must be more than 8 characters",
+      (v: string) => v.length <= 72 || "Must be less than 72 characters",
+      (v: string) =>
+        /^[A-Za-z0-9]*$/.test(v) ||
+        "Must be using half-width alphanumeric characters.",
+    ],
   }),
   methods: {
+    async signup() {
+      if (this.$refs.form.validate()) {
+        try {
+          const res = await this.$axios.$post("/auth", this.signupModel);
+          this.closeOpen();
+          this.$accessor.flash.showMessage(
+            {
+              message: "Signup complely, please login.",
+              type: "success",
+              status: true,
+            },
+            { root: true }
+          );
+        } catch (e) {
+          console.log(e);
+        }
+      }
+    },
     closeOpen() {
       this.$accessor.dialog.setSignupDialog(false);
       setTimeout(() => {
@@ -110,5 +151,21 @@ export default {
       }, 200);
     },
   },
-};
+  computed: {
+    passwordConfimarionRules() {
+      // mostly same as `passwordRules`
+      return [
+        (v: string) => (!!v && /\S/.test(v)) || "Must be required",
+        (v: string) => v.length >= 8 || "Must be more than 8 characters",
+        (v: string) => v.length <= 72 || "Must be less than 72 characters",
+        (v: string) =>
+          /^[A-Za-z0-9]*$/.test(v) ||
+          "Must be using half-width alphanumeric characters.",
+        // only for this methods.
+        (v: string) =>
+          this.signupModel.password == v || `not match with the password.`,
+      ];
+    },
+  },
+});
 </script>

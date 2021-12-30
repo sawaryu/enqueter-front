@@ -1,8 +1,9 @@
 <template>
-  <v-form ref="form" lazy-validation>
+  <v-form ref="form" v-model="valid" lazy-validation>
     <v-text-field
       type="password"
       v-model="passwordModel.current_password"
+      :rules="passwordRules"
       maxlength="72"
       counter="72"
       color="grey darken-3"
@@ -14,16 +15,20 @@
     <v-text-field
       type="password"
       v-model="passwordModel.new_password"
+      :rules="passwordRules"
       maxlength="72"
       counter="72"
       color="grey darken-3"
       label="new password"
+      hint="Please type using half-width alphanumeric characters."
+      persistent-hint
       tabindex="1"
     >
     </v-text-field>
     <v-text-field
       type="password"
       v-model="passwordModel.password_confirmation"
+      :rules="passwordConfimarionRules"
       maxlength="72"
       counter="72"
       color="grey darken-3"
@@ -31,7 +36,7 @@
       tabindex="1"
     >
     </v-text-field>
-    <v-btn tabindex="1" @click="change">change</v-btn>
+    <v-btn tabindex="1" @click="change">update</v-btn>
   </v-form>
 </template>
 
@@ -41,15 +46,28 @@ import Vue from "vue";
 export default Vue.extend({
   data() {
     return {
+      valid: true,
       passwordModel: {
-        current_password: "",
-        new_password: "",
-        password_confirmation: "",
+        current_password: "" as string,
+        new_password: "" as string,
+        password_confirmation: "" as string,
       },
+      passwordRules: [
+        (v: string) => (!!v && /\S/.test(v)) || "Must be required",
+        (v: string) => v.length >= 8 || "Must be more than 8 characters",
+        (v: string) => v.length <= 72 || "Must be less than 72 characters",
+        (v: string) =>
+          /^[A-Za-z0-9]*$/.test(v) ||
+          "Must be using half-width alphanumeric characters.",
+      ],
     };
   },
   methods: {
     async change() {
+      if (!(this.$refs.form as any).validate()) {
+        return;
+      }
+
       try {
         const res = await this.$axios.$put(
           "/auth/password",
@@ -60,6 +78,7 @@ export default Vue.extend({
           new_password: "",
           password_confirmation: "",
         };
+        (this.$refs.form as any).resetValidation();
         this.$accessor.flash.showMessage(
           {
             message: `updated completly your password.`,
@@ -71,6 +90,23 @@ export default Vue.extend({
       } catch (e) {
         console.log(e);
       }
+    },
+  },
+  computed: {
+    passwordConfimarionRules() {
+      // mostly same as `passwordRules`
+      return [
+        (v: string) => (!!v && /\S/.test(v)) || "Must be required",
+        (v: string) => v.length >= 8 || "Must be more than 8 characters",
+        (v: string) => v.length <= 72 || "Must be less than 72 characters",
+        (v: string) =>
+          /^[A-Za-z0-9]*$/.test(v) ||
+          "Must be using half-width alphanumeric characters.",
+        // only for this methods.
+        (v: string) =>
+          this.passwordModel.new_password == v ||
+          `not match with the new password.`,
+      ];
     },
   },
 });

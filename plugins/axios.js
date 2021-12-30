@@ -1,6 +1,7 @@
 export default ({ app: { $axios, $accessor } }) => {
   $axios.onError(error => {
     const statusCode = error.response.status;
+    // TODO (when account delete)
     if (statusCode == 400 || statusCode == 409 || statusCode == 401) {
       $accessor.flash.showMessage(
         {

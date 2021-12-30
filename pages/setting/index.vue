@@ -1,18 +1,20 @@
 <template>
-  <v-form ref="form" lazy-validation>
+  <v-form ref="form" v-model="valid" lazy-validation>
     <v-text-field
       color="grey darken-3"
       v-model="profileModel.public_id"
+      :rules="publicIdRules"
       label="user id"
       maxlength="15"
       counter="15"
-      hint="Please type using half-width characters."
+      hint="Please type using half-width alphanumeric characters."
       persistent-hint
     ></v-text-field>
 
     <v-text-field
       color="grey darken-3"
       v-model="profileModel.name"
+      :rules="nameRules"
       label="nickname"
       maxlength="20"
       counter="20"
@@ -30,7 +32,7 @@
       light
     ></v-textarea>
 
-    <v-btn @click="update">change</v-btn>
+    <v-btn @click="update">update</v-btn>
   </v-form>
 </template>
 
@@ -40,11 +42,23 @@ import Vue from "vue";
 export default Vue.extend({
   data() {
     return {
+      valid: true,
       profileModel: {
         public_id: "",
         name: "",
         introduce: "",
       },
+      publicIdRules: [
+        (v: string) => (!!v && /\S/.test(v)) || "Must be required",
+        (v: string) => v.length <= 15 || "Must be less than 15 characters",
+        (v: string) =>
+          /^[A-Za-z0-9]*$/.test(v) ||
+          "Must be using half-width alphanumeric characters.",
+      ],
+      nameRules: [
+        (v: string) => (!!v && /\S/.test(v)) || "Must be required",
+        (v: string) => v.length <= 20 || "Must be less than 20 characters",
+      ],
     };
   },
   created() {
@@ -54,6 +68,10 @@ export default Vue.extend({
   },
   methods: {
     async update() {
+      if (!this.$refs.form.validate()) {
+        return;
+      }
+
       try {
         const res = await this.$axios.$put("/auth", this.profileModel);
         this.$auth.fetchUser();

@@ -18,11 +18,13 @@
   </v-container>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from "vue";
+export default Vue.extend({
+  auth: false,
   data: () => ({}),
   created() {
     // console.log(this.$vuetify.breakpoint.width)
   },
-};
+});
 </script>

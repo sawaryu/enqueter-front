@@ -1,25 +1,92 @@
 <template>
-  <v-form class="mb-15" ref="form" lazy-validation>
-    <!-- avatar -->
-    <v-avatar size="110">
+  <v-form class="mb-15" ref="form" v-model="valid" lazy-validation>
+    <!-- current avatar -->
+    <v-avatar v-if="!avatar" size="110">
       <v-img :src="$avatar($auth.user.avatar)"></v-img>
+    </v-avatar>
+
+    <!-- selected avatar -->
+    <v-avatar v-else size="110" class="mb-3">
+      <v-img :src="avatar"></v-img>
     </v-avatar>
 
     <v-file-input
       ref="inputFile"
       counter
       show-size
+      :rules="rules"
       accept="image/png, image/jpeg, image/jpg"
       prepend-icon="mdi-camera"
       color="grey darken-3"
+      v-on:change="fileSelected"
     ></v-file-input>
 
-    <v-btn>change</v-btn>
+    <v-btn
+      class="white--text"
+      :disabled="isDisabled"
+      @click="update"
+      color="grey darken-2"
+      >update</v-btn
+    >
   </v-form>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      rules: [
+        (value) =>
+          !value || value.size < 2000000 || "File size must be less than 2MB.",
+      ],
+      valid: true,
+      avatar: "",
+    };
+  },
+  methods: {
+    async update() {
+      if (this.$refs.form.validate() && this.avatar != "") {
+        const formData = new FormData();
+        formData.append("image", this.avatar);
+        try {
+          const res = await this.$axios.$post("/upload", formData, {});
+          this.avatar = "";
+          this.$refs.inputFile.reset();
+          this.$auth.fetchUser();
+          this.$accessor.flash.showMessage(
+            {
+              message: `updated completly your avatar.`,
+              type: "success",
+              status: true,
+            },
+            { root: true }
+          );
+        } catch (e) {
+          console.log(e);
+        }
+      }
+    },
+    fileSelected(event) {
+      if (event !== undefined && event !== null) {
+        if (event.name.lastIndexOf(".") <= 0) {
+          return;
+        }
+        const file = new FileReader();
+        file.readAsDataURL(event);
+        file.addEventListener("load", () => {
+          this.avatar = file.result;
+        });
+      } else {
+        this.avatar = "";
+      }
+    },
+  },
+  computed: {
+    isDisabled() {
+      return this.avatar == "";
+    },
+  },
+};
 </script>
 
 <style>

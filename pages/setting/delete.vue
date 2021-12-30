@@ -23,23 +23,19 @@ export default Vue.extend({
     };
   },
   methods: {
-    destroy() {
-      this.$axios
-        .$delete("/auth")
-        .then((response) => {
-          this.$accessor.flash.showMessage(
-            {
-              message: `deleted completly.`,
-              type: "info",
-              status: true,
-            },
-            { root: true }
-          );
-          this.$auth.logout();
-        })
-        .catch((e) => {
-          console.log(e);
-        });
+    async destroy() {
+      try {
+        const res = await this.$axios.$delete("/auth");
+        this.$accessor.flash.showMessage(
+          {
+            message: `deleted completly.`,
+            type: "info",
+            status: true,
+          },
+          { root: true }
+        );
+        this.$auth.logout()
+      } catch (error) {}
     },
   },
 });
