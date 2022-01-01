@@ -1,5 +1,14 @@
 <template>
   <v-form class="mb-15" ref="form" v-model="valid" lazy-validation>
+    <!-- loading -->
+    <v-overlay :value="loading">
+      <v-progress-circular
+        color="black"
+        indeterminate
+        size="64"
+      ></v-progress-circular>
+    </v-overlay>
+
     <!-- current avatar -->
     <v-avatar v-if="!avatar" size="110">
       <v-img :src="$avatar($auth.user.avatar)"></v-img>
@@ -40,12 +49,15 @@ export default {
           !value || value.size < 2000000 || "File size must be less than 2MB.",
       ],
       valid: true,
+      loading: false,
       avatar: "",
     };
   },
   methods: {
     async update() {
-      if (this.$refs.form.validate() && this.avatar != "") {
+      if (!this.$refs.form.validate() || this.avatar == "") { return }
+
+        this.loading = true
         const formData = new FormData();
         formData.append("image", this.avatar);
         try {
@@ -63,8 +75,9 @@ export default {
           );
         } catch (e) {
           console.log(e);
+        } finally {
+          this.loading = false
         }
-      }
     },
     fileSelected(event) {
       if (event !== undefined && event !== null) {

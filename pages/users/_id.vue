@@ -12,7 +12,10 @@
 
             <v-btn class="mt-3" small plain text :ripple="false" disabled>
               <v-sheet>
-                <div class="text-subtitle-1 font-weight-black">31</div>
+                <div
+                  class="text-subtitle-1 font-weight-black"
+                  v-text="user.questions_count"
+                ></div>
                 <small>question</small>
               </v-sheet>
             </v-btn>
@@ -24,7 +27,12 @@
               @click="$accessor.dialog.setFollowingDialog(true)"
             >
               <div>
-                <div class="text-subtitle-1 font-weight-black">11</div>
+                <div
+                  class="text-subtitle-1 font-weight-black"
+                  v-text="user.following_count"
+                >
+                  11
+                </div>
                 <small>following</small>
               </div>
             </v-btn>
@@ -36,7 +44,10 @@
               @click="$accessor.dialog.setFollowerDialog(true)"
             >
               <div>
-                <div class="text-subtitle-1 font-weight-black">11</div>
+                <div
+                  class="text-subtitle-1 font-weight-black"
+                  v-text="user.follower_count"
+                ></div>
                 <small>follower</small>
               </div>
             </v-btn>
@@ -53,7 +64,7 @@
           </div>
 
           <v-card-actions>
-            <FollowButton />
+            <FollowButton :user="user" @follow="user.is_following = !user.is_following" />
             <v-spacer></v-spacer>
             <v-menu offset-y>
               <template v-slot:activator="{ on, attrs }">
@@ -97,10 +108,10 @@
         </v-btn>
       </v-bottom-navigation>
 
-      <NuxtChild keep-alive />
+      <NuxtChild />
     </v-col>
-    <Following />
-    <Follower />
+    <Following v-if="$accessor.dialog.getFollowingDialog" />
+    <Follower v-if="$accessor.dialog.getFollowerDialog" />
   </v-row>
 </template>
 

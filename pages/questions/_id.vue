@@ -14,6 +14,7 @@ import Vue from "vue";
 export default Vue.extend({
   async asyncData({ params, $axios }) {
     const res = await $axios.$get(`/questions/${params.id}`);
+    console.log(res)
     return { question: res };
   },
   data() {

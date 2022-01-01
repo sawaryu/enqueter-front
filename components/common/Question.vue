@@ -10,8 +10,10 @@
         ><v-icon>mdi-close-octagon-outline</v-icon>closed</span
       >
       <v-spacer></v-spacer>
-      <v-btn icon @click="isBookmark = !isBookmark">
-        <v-icon>{{ bookmarkIcon }}</v-icon>
+      <v-btn icon @click="bookmark">
+        <v-icon
+          v-text="question.is_bookmarked ? 'mdi-bookmark' : 'mdi-bookmark-outline'"
+        ></v-icon>
       </v-btn>
       <v-menu offset-y>
         <template v-slot:activator="{ on, attrs }">
@@ -39,14 +41,27 @@
       ><span class="question-title">{{ question.content }}</span></v-card-title
     >
     <v-card-actions>
-      <v-avatar class="pointer" size="40" @click="$router.push(`/users/${question.user.id}`)">
+      <v-avatar
+        class="pointer"
+        size="40"
+        @click="$router.push(`/users/${question.user.id}`)"
+      >
         <v-img :src="$avatar(question.user.avatar)"></v-img
       ></v-avatar>
-      <div class="pl-1 underline pointer" @click="$router.push(`/users/${question.user.id}`)">
+      <div
+        class="pl-1 underline pointer"
+        @click="$router.push(`/users/${question.user.id}`)"
+      >
         <div class="text-caption">
-          <span class="font-weight-medium" v-text="question.user.public_id"></span>
+          <span
+            class="font-weight-medium"
+            v-text="question.user.public_id"
+          ></span>
         </div>
-        <div class="text-caption text--secondary" v-text="question.user.name"></div>
+        <div
+          class="text-caption text--secondary"
+          v-text="question.user.name"
+        ></div>
       </div>
       <v-spacer></v-spacer>
       <div class="text-caption">
@@ -65,6 +80,7 @@ interface Question {
   created_at: string;
   updated_at: string;
   is_open: boolean;
+  is_bookmarked: boolean;
   user: {
     id: number;
     public_id: string;
@@ -74,6 +90,7 @@ interface Question {
     point: number;
     created_at: string;
     updated_at: string;
+    is_following: boolean,
     role: string;
   };
 }
@@ -81,17 +98,28 @@ export default Vue.extend({
   props: {
     question: { type: Object, default: null } as PropOptions<Question>,
   },
-  data() {
-    return {
-      isBookmark: false,
-    };
-  },
-  computed: {
-    bookmarkIcon() {
-      if (this.isBookmark) {
-        return "mdi-bookmark";
+  methods: {
+    async bookmark() {
+      if (this.question.is_bookmarked) {
+        try {
+          const res = await this.$axios.$delete("/questions/bookmark", {
+            data: {
+              question_id: this.question.id,
+            },
+          });
+          this.question.is_bookmarked = false;
+        } catch (error) {
+          console.log(error);
+        }
       } else {
-        return "mdi-bookmark-outline";
+        try {
+          const res = await this.$axios.$post("/questions/bookmark", {
+            question_id: this.question.id,
+          });
+          this.question.is_bookmarked = true;
+        } catch (error) {
+          console.log(error);
+        }
       }
     },
   },

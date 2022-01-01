@@ -4,7 +4,7 @@
       <v-card-title class="text-h3 font-weight-bold text-center">
         Enqueter
       </v-card-title>
-      <v-card-text>choise the majority.</v-card-text>
+      <v-card-text>choose the majority.</v-card-text>
       <v-card-actions class="d-flex justify-center">
         <v-btn
           x-large

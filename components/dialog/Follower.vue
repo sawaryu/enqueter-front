@@ -17,21 +17,18 @@
       <!-- content -->
 
       <v-list class="overflow-y-auto" style="max-height: 320px">
-        <v-list-item
-          v-for="n in 30"
-          :key="n"
-        >
+        <v-list-item v-for="user in users" :key="user.id">
           <v-list-item-avatar size="37">
-            <v-img src="https://cdn.vuetifyjs.com/images/john.jpg"></v-img>
+            <v-img :src="$avatar(user.avatar)"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title>test123</v-list-item-title>
-            <v-list-item-subtitle>test</v-list-item-subtitle>
+            <v-list-item-title v-text="user.public_id"></v-list-item-title>
+            <v-list-item-subtitle v-text="user.name"></v-list-item-subtitle>
           </v-list-item-content>
 
           <v-list-item-action>
-            <FollowButton />
+            <FollowButton :user="user" @follow="follow(user.id)" />
           </v-list-item-action>
         </v-list-item>
       </v-list>
@@ -39,8 +36,42 @@
   </v-dialog>
 </template>
 
-<script>
-export default {};
+<script lang="ts">
+import Vue from "vue";
+export default Vue.extend({
+  data() {
+    return {
+      users: [],
+    };
+  },
+  created() {
+    this.init();
+  },
+  methods: {
+    async init() {
+      try {
+        const res = await this.$axios.$get(
+          `/users/${this.$route.params.id}/followers`
+        );
+        this.users = res;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    follow(user_id: number) {
+      this.users.every((user: { id: number }, index: number) => {
+        if (user.id === user_id) {
+          this.users[index].is_following = !this.users[index].is_following;
+          // stop
+          return false;
+        } else {
+          // continue
+          return true;
+        }
+      });
+    },
+  },
+});
 </script>
 
 <style>
