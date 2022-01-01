@@ -17,12 +17,22 @@
       <!-- content -->
       <v-list class="overflow-y-auto" style="max-height: 320px">
         <v-list-item v-for="user in users" :key="user.id">
-          <v-list-item-avatar size="37">
+          <v-list-item-avatar
+            class="pointer"
+            size="37"
+            @click="goProfile(user.id)"
+          >
             <v-img :src="$avatar(user.avatar)"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title v-text="user.public_id"></v-list-item-title>
+            <v-list-item-title>
+              <span
+                class="underline pointer"
+                @click="goProfile(user.id)"
+                v-text="user.public_id"
+              ></span>
+            </v-list-item-title>
             <v-list-item-subtitle v-text="user.name"></v-list-item-subtitle>
           </v-list-item-content>
 
@@ -57,18 +67,22 @@ export default Vue.extend({
         console.log(error);
       }
     },
-    follow(user_id: number){
-      this.users.every((user: {id: number}, index: number) => {
+    follow(user_id: number) {
+      this.users.every((user: { id: number }, index: number) => {
         if (user.id === user_id) {
-          this.users[index].is_following = !this.users[index].is_following
+          this.users[index].is_following = !this.users[index].is_following;
           // stop
-          return false
+          return false;
         } else {
           // continue
-          return true
+          return true;
         }
       });
-    }
+    },
+    goProfile(user_id: number): void {
+      this.$accessor.dialog.setFollowingDialog(false);
+      this.$router.push(`/users/${user_id}`);
+    },
   },
 });
 </script>

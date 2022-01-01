@@ -1,5 +1,5 @@
 <template>
-  <v-btn small :outlined="relationshipBtn.outlined" @click="follow">{{
+  <v-btn v-if="user.id !== $auth.user.id" small :outlined="relationshipBtn.outlined" @click="follow">{{
     relationshipBtn.text
   }}</v-btn>
 </template>

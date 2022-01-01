@@ -12,7 +12,9 @@
       <v-spacer></v-spacer>
       <v-btn icon @click="bookmark">
         <v-icon
-          v-text="question.is_bookmarked ? 'mdi-bookmark' : 'mdi-bookmark-outline'"
+          v-text="
+            question.is_bookmarked ? 'mdi-bookmark' : 'mdi-bookmark-outline'
+          "
         ></v-icon>
       </v-btn>
       <v-menu offset-y>
@@ -27,11 +29,12 @@
               ><v-icon>mdi-flag</v-icon> report</v-list-item-title
             >
           </v-list-item>
-          <v-list-item link>
+          <!-- TODO -->
+          <!-- <v-list-item link>
             <v-list-item-title
               ><v-icon>mdi-delete</v-icon> delete</v-list-item-title
             >
-          </v-list-item>
+          </v-list-item> -->
         </v-list>
       </v-menu>
     </v-card-title>
@@ -48,13 +51,11 @@
       >
         <v-img :src="$avatar(question.user.avatar)"></v-img
       ></v-avatar>
-      <div
-        class="pl-1 underline pointer"
-        @click="$router.push(`/users/${question.user.id}`)"
-      >
+      <div class="pl-1">
         <div class="text-caption">
           <span
-            class="font-weight-medium"
+            class="font-weight-medium underline pointer"
+            @click="$router.push(`/users/${question.user.id}`)"
             v-text="question.user.public_id"
           ></span>
         </div>
@@ -64,14 +65,15 @@
         ></div>
       </div>
       <v-spacer></v-spacer>
-      <div class="text-caption">
-        <v-icon>mdi-clipboard-text-clock</v-icon>6 days to close.
+      <div class="text-caption text--secondary">
+        {{beforeTime}}
       </div>
     </v-card-actions>
   </v-card>
 </template>
 
 <script lang="ts">
+import moment from "moment";
 import Vue, { PropOptions } from "vue";
 interface Question {
   id: number;
@@ -90,13 +92,19 @@ interface Question {
     point: number;
     created_at: string;
     updated_at: string;
-    is_following: boolean,
+    is_following: boolean;
     role: string;
   };
 }
 export default Vue.extend({
   props: {
     question: { type: Object, default: null } as PropOptions<Question>,
+  },
+  computed: {
+    beforeTime(): string {
+      moment.locale("en");
+      return moment(this.question.created_at).fromNow();
+    }
   },
   methods: {
     async bookmark() {
@@ -121,7 +129,7 @@ export default Vue.extend({
           console.log(error);
         }
       }
-    },
+    }
   },
 });
 </script>

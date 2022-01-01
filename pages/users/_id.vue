@@ -9,7 +9,6 @@
             <v-avatar size="60">
               <v-img :src="$avatar(user.avatar)"></v-img>
             </v-avatar>
-
             <v-btn class="mt-3" small plain text :ripple="false" disabled>
               <v-sheet>
                 <div
@@ -52,6 +51,7 @@
               </div>
             </v-btn>
           </div>
+
           <div class="d-flex ml-2">
             <v-card width="340" elevation="0">
               <div class="pa-0 text-subtitle-2" v-text="user.public_id"></div>
@@ -63,8 +63,11 @@
             </v-card>
           </div>
 
-          <v-card-actions>
-            <FollowButton :user="user" @follow="user.is_following = !user.is_following" />
+          <v-card-actions v-if="user.id !== $auth.user.id">
+            <FollowButton
+              :user="user"
+              @follow="user.is_following = !user.is_following"
+            />
             <v-spacer></v-spacer>
             <v-menu offset-y>
               <template v-slot:activator="{ on, attrs }">
@@ -78,11 +81,12 @@
                     ><v-icon>mdi-flag</v-icon> report</v-list-item-title
                   >
                 </v-list-item>
-                <v-list-item>
+                <!-- TODO -->
+                <!-- <v-list-item>
                   <v-list-item-title
                     ><v-icon>mdi-delete</v-icon> delete</v-list-item-title
                   >
-                </v-list-item>
+                </v-list-item> -->
               </v-list>
             </v-menu>
           </v-card-actions>
@@ -90,10 +94,37 @@
 
         <!-- information -->
         <v-card class="mt-5">
-          <v-card-title> information </v-card-title>
-          <v-card-text>
-            point: {{ user.point }}pt / correct ratio: 32% / total answered: 131
-          </v-card-text>
+          <v-card-title
+            ><v-icon>mdi-information</v-icon> information
+            <v-spacer></v-spacer>
+            <v-btn
+              v-for="period in periods"
+              color="grey darken-2"
+              dark
+              :key="period.id"
+              v-text="period.text"
+              :text="period.id != $accessor.ranking.getCurrentPeriod"
+              @click="$accessor.ranking.setCurrentPeriod(period.id)"
+              x-small
+            ></v-btn>
+          </v-card-title>
+          <v-divider></v-divider>
+          <v-list>
+            <v-list-item>
+              <v-list-item-icon>
+                <v-icon>mdi-alpha-p-circle-outline</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>31 pt</v-list-item-title>
+              <v-list-item-action v-text="ordinal(1)"></v-list-item-action>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-icon>
+                <v-icon>mdi-file-question</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>31 questions</v-list-item-title>
+              <v-list-item-action v-text="ordinal(32)"></v-list-item-action>
+            </v-list-item>
+          </v-list>
         </v-card>
       </div>
     </v-col>
@@ -116,11 +147,21 @@
 </template>
 
 <script lang="ts">
+import ordinal from "ordinal";
 import Vue from "vue";
 export default Vue.extend({
   async asyncData({ params, $axios }) {
     const res = await $axios.$get(`/users/${params.id}`);
     return { user: res };
+  },
+  data() {
+    return {
+      periods: [
+        { id: "week", text: "week" },
+        { id: "month", text: "month" },
+        { id: "all", text: "all" },
+      ] as Array<object>,
+    };
   },
   computed: {
     navigations(): Object[] {
@@ -141,6 +182,11 @@ export default Vue.extend({
           to: `/users/${this.$route.params.id}/bookmark`,
         },
       ];
+    },
+  },
+  methods: {
+    ordinal(number: number) {
+      return ordinal(number);
     },
   },
 });

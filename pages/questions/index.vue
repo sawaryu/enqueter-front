@@ -19,7 +19,7 @@ export default Vue.extend({
   async asyncData({ $axios }) {
     const res = await $axios.$get("/questions");
     return { questions: res };
-  },
+  }
 });
 </script>
 

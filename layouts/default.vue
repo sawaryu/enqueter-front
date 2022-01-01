@@ -140,7 +140,7 @@ export default Vue.extend({
       this.drawer = null;
       this.$accessor.flash.showMessage(
         {
-          message: "logouted completly",
+          message: "logout completely.",
           type: "info",
           status: true,
         },
