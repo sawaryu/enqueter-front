@@ -85,7 +85,10 @@
     </v-col>
 
     <v-col cols="12" sm="8" md="8">
-      <v-row class="pa-3 mt-2">
+      <v-row class="pa-3">
+        <v-col cols="12">
+          <div class="font-weight-bold text-h6"><v-icon>mdi-clock-time-four</v-icon>Timeline</div>
+        </v-col>
         <v-col class="pt-0" v-for="q in questions" :key="q.id" cols="12" sm="6">
           <!-- a question. -->
           <Question :question="q" />

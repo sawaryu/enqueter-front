@@ -173,7 +173,7 @@ export default Vue.extend({
         },
         {
           title: "Answered",
-          icon: "mdi-checkbox-marked-circle-outline",
+          icon: "mdi-checkbox-marked-circle",
           to: `/users/${this.$route.params.id}/answered`,
         },
         {

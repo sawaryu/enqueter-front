@@ -2,7 +2,6 @@
   <v-card max-width="500px">
     <v-card-title class="font-weight-bold">
       <v-icon color="black" size="40">mdi-file-question</v-icon>
-      Question
 
       <!-- is_open? -->
       <span v-if="question.is_open" class="text-caption ml-2 success--text"
@@ -13,12 +12,18 @@
       >
 
       <!-- is_answered -->
-      <span v-if="question.is_answered" class="text-caption ml-2 success--text"
-        ><v-icon color="success">mdi-check</v-icon>answered</span
-      >
-      <span v-else class="text-caption text--secondary ml-2"
-        ><v-icon>mdi-close-octagon-outline</v-icon>unanswered</span
-      >
+      <template v-if="question.user_id !== this.$auth.user.id">
+        <span
+          v-if="question.is_answered"
+          class="text-caption text--secondary ml-2"
+          ><v-icon>mdi-checkbox-marked-circle</v-icon>answered</span
+        >
+        <span v-else class="text-caption ml-2 info--text"
+          ><v-icon color="info">mdi-checkbox-marked-circle-outline</v-icon
+          >unanswered</span
+        >
+      </template>
+
       <v-spacer></v-spacer>
       <v-btn icon @click="bookmark">
         <v-icon
@@ -75,8 +80,11 @@
         ></div>
       </div>
       <v-spacer></v-spacer>
-      <div class="text-caption text--secondary">
+      <!-- <div class="text-caption text--secondary">
         {{ beforeTime }}
+      </div> -->
+      <div class="text-caption text--secondary">
+        <v-icon>mdi-timer-sand</v-icon>{{ question.closed_at }}
       </div>
     </v-card-actions>
   </v-card>
@@ -89,6 +97,7 @@ interface Question {
   id: number;
   user_id: number;
   content: string;
+  closed_at: string;
   created_at: string;
   updated_at: string;
   is_open: boolean;

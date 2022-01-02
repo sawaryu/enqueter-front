@@ -46,15 +46,5 @@ export const actions = actionTree(
   }
 )
 
+// timerID for Flash message.
 let flashTimer: any;
-
-// Ex of call.(* normal store mode)
-// this.$store.dispatch(
-//   "flashMessage/showMessage",
-//   {
-//     message: `hello, ${this.$auth.user.name}`,
-//     type: "success",
-//     status: true,
-//   },
-//   { root: true }
-// );
