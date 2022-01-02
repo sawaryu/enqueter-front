@@ -3,11 +3,21 @@
     <v-card-title class="font-weight-bold">
       <v-icon color="black" size="40">mdi-file-question</v-icon>
       Question
+
+      <!-- is_open? -->
       <span v-if="question.is_open" class="text-caption ml-2 success--text"
         ><v-icon color="success">mdi-check</v-icon>open</span
       >
       <span v-else class="text-caption text--secondary ml-2"
         ><v-icon>mdi-close-octagon-outline</v-icon>closed</span
+      >
+
+      <!-- is_answered -->
+      <span v-if="question.is_answered" class="text-caption ml-2 success--text"
+        ><v-icon color="success">mdi-check</v-icon>answered</span
+      >
+      <span v-else class="text-caption text--secondary ml-2"
+        ><v-icon>mdi-close-octagon-outline</v-icon>unanswered</span
       >
       <v-spacer></v-spacer>
       <v-btn icon @click="bookmark">

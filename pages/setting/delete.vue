@@ -26,6 +26,7 @@ export default Vue.extend({
     async destroy() {
       try {
         const res = await this.$axios.$delete("/auth");
+        this.$auth.logout();
         this.$accessor.flash.showMessage(
           {
             message: `deleted completely.`,
@@ -34,7 +35,6 @@ export default Vue.extend({
           },
           { root: true }
         );
-        this.$auth.logout()
       } catch (error) {}
     },
   },

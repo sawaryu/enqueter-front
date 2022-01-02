@@ -31,12 +31,12 @@
       >
         <v-row class="text-center">
           <v-col cols="12">
-            <div class="text-sm-h1 text-h3 blue--text">
+            <div class="text-sm-h1 text-h3 blue--text font-weight-bold">
               <NumberDrumRoll :count="28" />%
             </div>
           </v-col>
           <v-col cols="12">
-            <div class="text-h6 text-sm-h3 blue--text">
+            <div class="text-h6 text-sm-h3 blue--text font-weight-bold">
               (<span> <NumberDrumRoll :count="16" /></span> people)
             </div>
           </v-col>

@@ -95,7 +95,7 @@ export default {
     }
   },
 
-  // middlware
+  // middleware
   router: {
     middleware: ['auth', 'redirect']
   },

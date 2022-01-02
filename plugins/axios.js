@@ -1,8 +1,10 @@
 export default ({ app: { $axios, $accessor } }) => {
   $axios.onError(error => {
     const statusCode = error.response.status;
-    // TODO (when account delete)
-    if (statusCode == 400 || statusCode == 409 || statusCode == 401) {
+
+    // when deleting the account, logout method occurs error. below 'if ~' avoid its error.
+    // Therefore, In that case, logout methods work as only the method clearing local storage completely.
+    if (error.response.config.url !== "/auth/logout" && (statusCode == 400 || statusCode == 409 || statusCode == 401)) {
       $accessor.flash.showMessage(
         {
           message: error.response.data.message,

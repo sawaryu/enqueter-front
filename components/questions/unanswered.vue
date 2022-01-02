@@ -1,24 +1,24 @@
 <template>
   <div>
     <v-row class="justify-center">
-      <!-- NO -->
+      <!-- Yes -->
       <v-card
         class="d-flex justify-center align-center ma-6"
         :width="size"
         :height="size"
         link
-        @click="$router.push(`/questions/${$route.params.id}/answered`)"
+        @click="submit(true)"
       >
         <v-icon color="red" size="100">mdi-circle-outline</v-icon>
       </v-card>
 
-      <!-- YES -->
+      <!-- No -->
       <v-card
         class="d-flex justify-center align-center ma-6"
         :width="size"
         :height="size"
         link
-        @click="$router.push(`/questions/${$route.params.id}/answered`)"
+        @click="submit(false)"
       >
         <v-icon color="blue" size="100">mdi-close</v-icon>
       </v-card>
@@ -37,6 +37,19 @@ export default Vue.extend({
       } else {
         return 250;
       }
+    },
+  },
+  methods: {
+    // todo after answered
+    async submit(is_yes: boolean) {
+      // try {
+      //   const res = await this.$axios.$post(
+      //     `/questions/${this.$route.params.id}/answer`,
+      //     {
+      //       is_yes: is_yes,
+      //     }
+      //   );
+      // } catch (error) {}
     },
   },
 });
