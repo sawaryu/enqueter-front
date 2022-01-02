@@ -24,7 +24,7 @@ export default Vue.extend({
         try {
           const res = await this.$axios.$delete("/users/relationships", {
             data: {
-              target_id: this.user.id,
+              user_id: this.user.id,
             },
           });
           this.$emit("follow");
@@ -33,7 +33,7 @@ export default Vue.extend({
         // follow
         try {
           const res = await this.$axios.$post("/users/relationships", {
-            target_id: this.user.id
+            user_id: this.user.id
           });
           this.$emit("follow");
         } catch (error) {}
@@ -45,7 +45,7 @@ export default Vue.extend({
       if (this.user.is_following) {
         return {
           outlined: true as boolean,
-          text: "following" as string,
+          text: "unfollow" as string,
         };
       } else {
         return {

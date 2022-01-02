@@ -5,6 +5,7 @@
     "vuex",
     "axios",
     "navigations",
-    "Enqueter"
+    "Enqueter",
+    "unfollow"
   ]
 }

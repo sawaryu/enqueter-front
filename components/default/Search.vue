@@ -173,7 +173,7 @@ export default Vue.extend({
     async goProfile(user_id: number) {
       try {
         const res = await this.$axios.$post("/users/search/history", {
-          target_id: user_id,
+          user_id: user_id,
         });
         this.menu = false;
         this.search = "";

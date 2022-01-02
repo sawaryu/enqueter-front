@@ -5,7 +5,7 @@
       <!-- <v-col class="pt-0" v-for="q in questions" :key="q.id" cols="12" sm="6">
         <Question :question="q" />
       </v-col> -->
-      <div>not implemented.</div>
+      <div class="text--secondary">No questions.</div>
     </v-row>
   </div>
 </template>

@@ -48,6 +48,7 @@
               </div>
             </v-list-item>
             <v-list-item v-for="(n, index) in 10" :key="n">
+              <div v-text="ordinal(index + 1)"></div>
               <v-badge
                 :value="[0, 1, 2].includes(index)"
                 :color="sizeAndColorByRank(index).color"
@@ -65,9 +66,11 @@
                   ></v-img>
                 </v-list-item-avatar>
               </v-badge>
-              <v-list-item-content class="pointer underline">
+              <v-list-item-content>
                 <v-list-item-title class="text-subtitle-2"
-                  >sample123</v-list-item-title
+                  ><span class="pointer underline"
+                    >sample123</span
+                  ></v-list-item-title
                 >
                 <v-list-item-subtitle>sample</v-list-item-subtitle>
               </v-list-item-content>
@@ -93,6 +96,7 @@
 </template>
 
 <script lang="ts">
+import ordinal from "ordinal";
 import Vue from "vue";
 export default Vue.extend({
   async asyncData({ $axios }) {
@@ -120,7 +124,7 @@ export default Vue.extend({
         return { size: 33, color: null };
       }
     },
-    changeCategory() {
+    changeCategory(): void {
       if (
         this.$accessor.ranking.getCurrentCategory ===
         "mdi-alpha-p-circle-outline"
@@ -129,6 +133,9 @@ export default Vue.extend({
       } else {
         this.$accessor.ranking.setCurrentCategory("mdi-alpha-p-circle-outline");
       }
+    },
+    ordinal(number: number): string {
+      return ordinal(number);
     },
   },
 });

@@ -6,6 +6,8 @@
         <!-- a question. -->
         <Question :question="q" />
       </v-col>
+
+      <div v-if="!questions.length" class="text--secondary">No questions.</div>
     </v-row>
   </div>
 </template>
