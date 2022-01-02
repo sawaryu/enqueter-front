@@ -66,7 +66,7 @@
       </div>
       <v-spacer></v-spacer>
       <div class="text-caption text--secondary">
-        {{beforeTime}}
+        {{ beforeTime }}
       </div>
     </v-card-actions>
   </v-card>
@@ -82,6 +82,7 @@ interface Question {
   created_at: string;
   updated_at: string;
   is_open: boolean;
+  is_answered: boolean;
   is_bookmarked: boolean;
   user: {
     id: number;
@@ -104,7 +105,7 @@ export default Vue.extend({
     beforeTime(): string {
       moment.locale("en");
       return moment(this.question.created_at).fromNow();
-    }
+    },
   },
   methods: {
     async bookmark() {
@@ -129,7 +130,7 @@ export default Vue.extend({
           console.log(error);
         }
       }
-    }
+    },
   },
 });
 </script>

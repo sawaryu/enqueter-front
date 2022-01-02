@@ -43,25 +43,26 @@
           <v-list-item-content>
             <!-- follow -->
             <div v-if="notification.category == 'follow'" class="text-caption">
-              followed by <span @click="goProfile(notification.user.id)" class="underline pointer font-weight-bold">{{ notification.user.public_id }}</span>
+              followed by
+              <span
+                @click="goProfile(notification.user.id)"
+                class="underline pointer font-weight-bold"
+                >{{ notification.user.public_id }}</span
+              >
             </div>
 
-            <!-- TODO: answer -->
-            <div
-              v-else-if="notification.category == 'answer'"
-              class="text-caption"
-            >
-              <nuxt-link
-                :to="`/questions/${notification.question_id}`"
-                class="font-weight-black black--text"
+            <!-- answer -->
+            <div v-if="notification.category == 'answer'" class="text-caption">
+              <span
+                @click="goProfile(notification.user.id)"
+                class="underline pointer font-weight-bold"
+                >{{ notification.user.public_id }}</span
               >
-                {{ notification.user.public_id }}
-              </nuxt-link>
-              answered
-              <nuxt-link
-                :to="`/subjects/${notification.subject_id}`"
-                class="font-weight-black black--text"
-                >your question.</nuxt-link
+              answered your
+              <span
+                @click="goQuestion(notification.question_id)"
+                class="underline pointer font-weight-bold"
+                >question.</span
               >
             </div>
 
@@ -140,9 +141,7 @@ export default Vue.extend({
       try {
         const res = await this.$axios.$delete("/notifications");
         this.notWatchCount = 0;
-        setTimeout(() => {
-          this.notifications = [];
-        }, 500);
+        this.notifications = [];
       } catch (e) {
         console.log(e);
       }
@@ -165,10 +164,15 @@ export default Vue.extend({
       moment.locale("en");
       return moment(created_at).fromNow();
     },
-    // go profile and close the notification menu.
+    // go profile and close the notifications menu.
     goProfile(user_id: number) {
       this.menu = null;
       this.$router.push(`/users/${user_id}`);
+    },
+    // go question and close the notifications menu.
+    goQuestion(question_id: number) {
+      this.menu = null;
+      this.$router.push(`/questions/${question_id}`)
     },
   },
 });
