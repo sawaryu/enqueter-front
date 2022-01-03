@@ -1,6 +1,6 @@
 # Enqueter Front
 
-## 概要
+## Summary
 EnqueterプロジェクトのFront。Vue.js(Nuxt.js)を使用
 
 * setup
@@ -41,5 +41,5 @@ $ yarn run generate
 
 * confirming netlify
 ```
-drag dist deir on your netlify
+drag dist dir on your netlify
 ```
