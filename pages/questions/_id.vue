@@ -25,11 +25,11 @@ export default Vue.extend({
     // display the component by the question status from view of the current_user.
     currentComponent() {
       if (this.question.user_id == this.$auth.user.id) {
-        return "owner";
+        return "Owner";
       } else if (!this.question.is_answered) {
-        return "unanswered";
+        return "Unanswered";
       } else if (this.question.is_answered) {
-        return "answered";
+        return "Answered";
       }
     },
   },
