@@ -32,7 +32,7 @@
       light
     ></v-textarea>
 
-    <v-btn @click="update">update</v-btn>
+    <v-btn @click="update" :disabled="isDisable">update</v-btn>
   </v-form>
 </template>
 
@@ -60,6 +60,18 @@ export default Vue.extend({
         (v: string) => v.length <= 20 || "Must be less than 20 characters",
       ],
     };
+  },
+  computed: {
+    isDisable() {
+      const profileModel = {
+        public_id: this.$auth.user.public_id,
+        name: this.$auth.user.name,
+        introduce: this.$auth.user.introduce,
+      };
+
+      // 'Json.stringify()' make another instances of Object to be able to compare.
+      return JSON.stringify(profileModel) === JSON.stringify(this.profileModel)
+    },
   },
   created() {
     this.profileModel.public_id = this.$auth.user.public_id;

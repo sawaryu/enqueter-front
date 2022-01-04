@@ -17,9 +17,14 @@
 <script lang="ts">
 import Vue from "vue";
 export default Vue.extend({
+  // this page catch the error. Because it can be only accessed by current_user.
   async asyncData({ params, $axios }) {
-    const res = await $axios.$get(`/users/${params.id}/questions/bookmark`);
-    return { questions: res };
+    try {
+      const res = await $axios.$get(`/users/${params.id}/questions/bookmark`);
+      return { questions: res };
+    } catch (error) {
+      console.log(error)
+    }
   },
 });
 </script>

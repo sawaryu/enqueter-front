@@ -165,7 +165,8 @@ export default Vue.extend({
   },
   computed: {
     navigations(): Object[] {
-      return [
+      // general.
+      let navigations: Object[] = [
         {
           title: "My questions",
           icon: "mdi-file-question",
@@ -176,12 +177,18 @@ export default Vue.extend({
           icon: "mdi-checkbox-marked-circle",
           to: `/users/${this.$route.params.id}/answered`,
         },
-        {
+      ];
+
+      // if current_user profile.
+      if (this.$auth.user.id == this.$route.params.id) {
+        navigations.push({
           title: "Bookmark",
           icon: "mdi-bookmark",
           to: `/users/${this.$route.params.id}/bookmark`,
-        },
-      ];
+        });
+      }
+
+      return navigations;
     },
   },
   methods: {
