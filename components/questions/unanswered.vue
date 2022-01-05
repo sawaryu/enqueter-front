@@ -9,7 +9,8 @@
         link
         @click="submit(true)"
       >
-        <v-icon color="#EF9A9A" size="100">mdi-circle-outline</v-icon>
+        <!-- <v-icon color="#EF9A9A" size="100">mdi-circle-outline</v-icon> -->
+        <div class="text-h4 red--text">Yes</div>
       </v-card>
 
       <!-- No -->
@@ -20,7 +21,8 @@
         link
         @click="submit(false)"
       >
-        <v-icon color="#90CAF9" size="100">mdi-close</v-icon>
+        <!-- <v-icon color="#90CAF9" size="100">mdi-close</v-icon> -->
+        <div class="text-h4 blue--text">No</div>
       </v-card>
     </v-row>
   </div>

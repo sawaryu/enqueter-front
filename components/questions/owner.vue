@@ -8,9 +8,32 @@
             <v-col cols="12" sm="4" order="second" order-sm="first">
               <v-card :height="pieHeight">
                 <v-card-title
-                  ><v-icon>mdi-account</v-icon> Users (10 users
-                  answered)</v-card-title
-                >
+                  >Total
+                  <v-spacer></v-spacer>
+                  (41 people)
+                </v-card-title>
+                <LineChart />
+              </v-card>
+            </v-col>
+
+            <!-- chart -->
+            <v-col cols="12" sm="4" order="first" order-sm="second">
+              <div ref="pie">
+                <v-card>
+                  <v-card-title>
+                    Ratio
+                    <v-spacer></v-spacer>
+                    (dominance of&nbsp;<span style="color:#bbdefb;">No</span>)
+                  </v-card-title>
+                  <PieChart />
+                </v-card>
+              </div>
+            </v-col>
+
+            <!-- other -->
+            <v-col cols="12" sm="4">
+              <v-card :height="pieHeight">
+                <v-card-title>Users</v-card-title>
                 <v-divider></v-divider>
                 <v-list
                   class="overflow-y-auto"
@@ -31,25 +54,6 @@
                     </v-list-item-content>
                   </v-list-item>
                 </v-list>
-              </v-card>
-            </v-col>
-
-            <!-- chart -->
-            <v-col cols="12" sm="4" order="first" order-sm="second">
-              <div ref="pie">
-                <v-card>
-                  <v-card-title><v-icon>mdi-poll</v-icon> Data </v-card-title>
-                  <v-divider></v-divider>
-                  <Pie />
-                </v-card>
-              </div>
-            </v-col>
-
-            <!-- other -->
-            <v-col cols="12" sm="4">
-              <v-card :height="pieHeight">
-                <v-card-title>Other</v-card-title>
-                <v-divider></v-divider>
               </v-card>
             </v-col>
           </v-row>

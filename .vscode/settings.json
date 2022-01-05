@@ -8,6 +8,7 @@
     "axios",
     "navigations",
     "unfollow",
-    "chartjs"
+    "chartjs",
+    "datalabels"
   ]
 }
