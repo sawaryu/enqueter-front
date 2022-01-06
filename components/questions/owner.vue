@@ -10,7 +10,7 @@
                 <v-card-title
                   >Total
                   <v-spacer></v-spacer>
-                  (41 people)
+                  (41 people answered)
                 </v-card-title>
                 <LineChart />
               </v-card>
@@ -33,7 +33,7 @@
             <!-- other -->
             <v-col cols="12" sm="4">
               <v-card :height="pieHeight">
-                <v-card-title>Users</v-card-title>
+                <v-card-title>Answered Users</v-card-title>
                 <v-divider></v-divider>
                 <v-list
                   class="overflow-y-auto"

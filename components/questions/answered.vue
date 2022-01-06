@@ -1,4 +1,5 @@
 <template>
+  <!-- このコンポーネントは現在は一旦使用しない方向で進める。 -->
   <div>
     <v-row class="justify-center">
       <!-- YES -->

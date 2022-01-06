@@ -1,12 +1,12 @@
 <template>
   <div>
     <!-- QUESTION -->
-    <v-row class="justify-center mt-4">
+    <v-row class="justify-center my-4">
       <Question :question="question" />
     </v-row>
 
     <!-- by the status -->
-    <component :is="currentComponent"></component>
+    <component @answered="question.is_answered = true" :is="currentComponent"></component>
   </div>
 </template>
 
@@ -24,19 +24,16 @@ export default Vue.extend({
   computed: {
     // display the component by the question status from view of the current_user.
     currentComponent() {
-      if (this.question.user_id == this.$auth.user.id) {
+      if (
+        this.question.user_id == this.$auth.user.id ||
+        this.question.is_answered
+      ) {
         return "Owner";
       } else if (!this.question.is_answered) {
         return "Unanswered";
-      } else if (this.question.is_answered) {
-        return "Answered";
       }
     },
-  },
-  methods: {
-    next(): void {},
-    questions(): void {},
-  },
+  }
 });
 </script>
 
