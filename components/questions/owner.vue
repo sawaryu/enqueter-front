@@ -1,15 +1,16 @@
 <template>
   <v-row class="justify-center">
-    <v-col cols="12">
+    <v-alert width="400" dense color="success" dark dismissible> ok!! </v-alert>
+
+    <v-col cols="12" class="mt-0 pt-0">
       <v-card flat color="rgb(0, 0, 0, 0)">
         <v-card-text>
           <v-row justify="center">
             <!-- Pie data -->
             <v-col cols="12" sm="4" order-sm="second">
               <v-card color="rgb(0, 0, 0, 0)" flat>
-                <v-card-title>
+                <v-card-title class="justify-center">
                   Answered Ratio
-                  <v-spacer></v-spacer>
                   <!-- (dominance of&nbsp;<span style="color: #bbdefb">No</span>) -->
                 </v-card-title>
                 <v-divider></v-divider>
@@ -17,23 +18,27 @@
                   v-if="loaded && isPieData"
                   :chartData="pieChartData"
                 />
-                <v-card-text v-else> No one answered yet. </v-card-text>
+                <v-card-text class="text-center" v-else
+                  >The answered ratio is displayed here.
+                </v-card-text>
               </v-card>
             </v-col>
 
             <!-- Answered Users -->
             <v-col cols="12" sm="4">
-              <v-card :height="cardHeight" color="rgb(0, 0, 0, 0)" flat>
-                <v-card-title>Answered Users ({{users.length}})</v-card-title>
+              <v-card height="420" color="rgb(0, 0, 0, 0)" flat>
+                <v-card-title class="justify-center"
+                  >Answered Users ({{ users.length }})</v-card-title
+                >
                 <v-divider></v-divider>
-                <v-card-text v-if="!users.length">
-                  No one answered yet.
+                <v-card-text class="text-center" v-if="!users.length">
+                  Answered users is displayed here.
                 </v-card-text>
                 <v-list
                   v-else
                   color="rgb(0, 0, 0, 0)"
                   class="overflow-y-auto"
-                  :style="{ height: cardHeight / 1.18 + 'px' }"
+                  :style="{ height: 420 / 1.18 + 'px' }"
                 >
                   <v-list-item v-for="user in users" :key="user.id">
                     <v-list-item-avatar class="pointer" size="37">
@@ -81,8 +86,6 @@ export default Vue.extend({
           },
         ],
       },
-      // common card height
-      cardHeight: 420,
     };
   },
   created() {
@@ -103,6 +106,8 @@ export default Vue.extend({
         console.log(res);
         this.users = res.users;
         this.pieChartData.datasets[0].data = res.pie_chart_data;
+
+        // important
         this.loaded = true;
       } catch (error) {}
     },
