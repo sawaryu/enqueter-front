@@ -3,6 +3,7 @@ import * as sample from '~/store/sample'
 import * as dialog from '~/store/dialog'
 import * as ranking from '~/store/ranking'
 import * as flash from '~/store/flash'
+import * as flashAnswered from '~/store/flashAnswered'
 
 export const state = () => {
   return {}
@@ -19,6 +20,7 @@ export const accessorType = getAccessorType({
     sample,
     dialog,
     ranking,
-    flash
+    flash,
+    flashAnswered
   },
 })

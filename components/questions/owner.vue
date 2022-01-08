@@ -1,10 +1,13 @@
 <template>
   <v-row class="justify-center">
     <v-col cols="12">
+      {{ questionData }}
+    </v-col>
+    <v-col cols="12">
       <v-card flat color="rgb(0, 0, 0, 0)">
         <v-card-text>
           <v-row justify="center">
-            <!-- answered user -->
+            <!-- Line data -->
             <v-col cols="12" sm="4" order="second" order-sm="first">
               <v-card :height="pieHeight">
                 <v-card-title
@@ -16,21 +19,21 @@
               </v-card>
             </v-col>
 
-            <!-- chart -->
+            <!-- Pie data -->
             <v-col cols="12" sm="4" order="first" order-sm="second">
               <div ref="pie">
                 <v-card>
                   <v-card-title>
                     Ratio
                     <v-spacer></v-spacer>
-                    (dominance of&nbsp;<span style="color:#bbdefb;">No</span>)
+                    (dominance of&nbsp;<span style="color: #bbdefb">No</span>)
                   </v-card-title>
-                  <PieChart />
+                  <PieChart :pie_chart="questionData.pie_chart" />
                 </v-card>
               </div>
             </v-col>
 
-            <!-- other -->
+            <!-- Answered Users -->
             <v-col cols="12" sm="4">
               <v-card :height="pieHeight">
                 <v-card-title>Answered Users</v-card-title>
@@ -39,18 +42,24 @@
                   class="overflow-y-auto"
                   :style="{ height: pieHeight / 1.18 + 'px' }"
                 >
-                  <v-list-item v-for="n in 10" :key="n">
+                  <v-list-item
+                    v-for="user in questionData.users"
+                    :key="user.id"
+                  >
                     <v-list-item-avatar class="pointer" size="37">
-                      <v-img
-                        src="https://cdn.vuetifyjs.com/images/john.jpg"
-                      ></v-img>
+                      <v-img :src="$avatar(user.avatar)"></v-img>
                     </v-list-item-avatar>
 
                     <v-list-item-content>
                       <v-list-item-title>
-                        <span class="underline pointer">sample123</span>
+                        <span
+                          class="underline pointer"
+                          v-text="user.public_id"
+                        ></span>
                       </v-list-item-title>
-                      <v-list-item-subtitle>sample</v-list-item-subtitle>
+                      <v-list-item-subtitle
+                        v-text="user.name"
+                      ></v-list-item-subtitle>
                     </v-list-item-content>
                   </v-list-item>
                 </v-list>
@@ -65,17 +74,35 @@
 
 <script lang="ts">
 import Vue from "vue";
+interface QuestionData {
+  line_chart_data: {};
+  pie_chart_data: {};
+  users: [];
+}
 export default Vue.extend({
-  // the api only for the question owner.
-  async asyncData({ params, $axios }) {
-    const res = await $axios.$get(`/questions/${params.id}/owner`);
-    console.log(res);
-    return { question: res };
-  },
   data() {
     return {
+      questionData: {
+        line_chart_data: { yes: 0, no: 0 },
+        pie_chart_data: {}, // todo
+        users: [],
+      } as QuestionData,
       pieHeight: 0 as number,
     };
+  },
+  created() {
+    this.getQuestionData();
+  },
+  methods: {
+    async getQuestionData() {
+      try {
+        const res = await this.$axios.$get(
+          `/questions/${this.$route.params.id}/owner`
+        );
+        console.log(res);
+        this.questionData = res;
+      } catch (error) {}
+    },
   },
   mounted() {
     const dom = this.$refs.pie;
