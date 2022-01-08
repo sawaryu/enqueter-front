@@ -156,7 +156,7 @@ export default Vue.extend({
       // general.
       let navigations: Object[] = [
         {
-          title: "My questions",
+          title: "Questions",
           icon: "mdi-file-question",
           to: `/users/${this.$route.params.id}`,
         },

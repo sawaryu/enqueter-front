@@ -1,6 +1,5 @@
 <template>
   <v-row class="justify-center">
-    <v-alert width="400" dense color="success" dark dismissible> ok!! </v-alert>
 
     <v-col cols="12" class="mt-0 pt-0">
       <v-card flat color="rgb(0, 0, 0, 0)">
@@ -10,7 +9,7 @@
             <v-col cols="12" sm="4" order-sm="second">
               <v-card color="rgb(0, 0, 0, 0)" flat>
                 <v-card-title class="justify-center">
-                  Answered Ratio
+                  <v-icon>mdi-circle-slice-1</v-icon>Ratio
                   <!-- (dominance of&nbsp;<span style="color: #bbdefb">No</span>) -->
                 </v-card-title>
                 <v-divider></v-divider>
@@ -28,7 +27,7 @@
             <v-col cols="12" sm="4">
               <v-card height="420" color="rgb(0, 0, 0, 0)" flat>
                 <v-card-title class="justify-center"
-                  >Answered Users ({{ users.length }})</v-card-title
+                  ><v-icon>mdi-account-multiple</v-icon>{{ users.length }} users answered</v-card-title
                 >
                 <v-divider></v-divider>
                 <v-card-text class="text-center" v-if="!users.length">
@@ -76,12 +75,12 @@ export default Vue.extend({
       loaded: false,
       // users
       users: [],
-      // pie chart data
+      // pie chart data (* attention yes no order )
       pieChartData: {
-        labels: ["Yes", "No"],
+        labels: ["No", "Yes"],
         datasets: [
           {
-            backgroundColor: ["#FFCDD2", "#BBDEFB"],
+            backgroundColor: ["#BBDEFB", "#FFCDD2"],
             data: [0, 0],
           },
         ],

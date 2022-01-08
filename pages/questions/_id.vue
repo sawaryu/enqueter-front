@@ -1,12 +1,24 @@
 <template>
   <div>
+    <!-- After answer result. -->
+    <SnackAnswered
+      :snackbar="snackbar"
+      :snackDisplay="snackDisplay"
+      @close="snackbar = false"
+    />
+
+    <!-- float -->
+    <FloatNext v-if="float" @close="snackbar = false" />
+
     <!-- QUESTION -->
     <v-row class="justify-center my-4">
       <Question :question="question" />
     </v-row>
 
     <!-- by the status -->
-    <component @answered="question.is_answered = true" :is="currentComponent"></component>
+    <transition name="fade" mode="out-in">
+      <component @answered="answered" :is="currentComponent"></component>
+    </transition>
   </div>
 </template>
 
@@ -19,7 +31,15 @@ export default Vue.extend({
     return { question: res };
   },
   data() {
-    return {};
+    return {
+      // use only after answered
+      snackbar: false,
+      snackDisplay: {
+        message: "",
+        color: "",
+      },
+      float: false,
+    };
   },
   computed: {
     // display the component by the question status from view of the current_user.
@@ -33,7 +53,36 @@ export default Vue.extend({
         return "Unanswered";
       }
     },
-  }
+  },
+  methods: {
+    // change component and show snackbar.
+    answered(arg: any) {
+      if (arg.result === "right") {
+        this.snackDisplay = {
+          message: "right",
+          color: "success",
+        };
+      } else if (arg.result === "wrong") {
+        this.snackDisplay = {
+          message: "wrong",
+          color: "dark",
+        };
+      } else if (arg.result === "even") {
+        this.snackDisplay = {
+          message: "The ratio is even.",
+          color: "warning",
+        };
+      } else if (arg.result === "first") {
+        this.snackDisplay = {
+          message: "You are first who answered this question.",
+          color: "info",
+        };
+      }
+      this.float = true;
+      this.snackbar = true;
+      this.question.is_answered = true;
+    },
+  },
 });
 </script>
 

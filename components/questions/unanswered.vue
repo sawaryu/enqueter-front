@@ -48,30 +48,7 @@ export default Vue.extend({
           question_id: Number(this.$route.params.id),
           is_yes: is_yes,
         });
-        let msg: string;
-        let type: string;
-        if (res.message === "right") {
-          msg = "right";
-          type = "success";
-        } else if (res.message === "wrong") {
-          msg = "wrong";
-          type = "dark";
-        } else if (res.message === "even") {
-          msg = "even";
-          type = "warning";
-        } else if (res.message === "first") {
-          msg = "first";
-          type = "info";
-        }
-        this.$emit("answered")
-        this.$accessor.flash.showMessage(
-          {
-            message: msg,
-            type: type,
-            status: true,
-          },
-          { root: true }
-        );
+        this.$emit("answered", res);
       } catch (error) {}
     },
   },
