@@ -4,22 +4,19 @@ import chartjsPluginDatalabels from "chartjs-plugin-datalabels";
 
 export default {
   extends: Pie,
+  props: {
+    chartData: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
-      chartData: {
-        labels: ["Yes", "No"],
-        datasets: [
-          {
-            backgroundColor: ["#FFCDD2", "#BBDEFB"],
-            data: [6, 15],
-          },
-        ],
-      },
       options: {
         legend: {
           // when click, no actions occur.
           onClick: this.legendItem,
-          reverse: true
+          reverse: true,
         },
         title: {
           display: false,

@@ -93,9 +93,9 @@
         </v-card>
 
         <!-- information -->
-        <!-- <v-card class="mt-5">
+        <v-card class="mt-5">
           <v-card-title
-            >stats
+            >Stats
             <v-spacer></v-spacer>
             <v-btn
               v-for="period in periods"
@@ -109,23 +109,11 @@
             ></v-btn>
           </v-card-title>
           <v-divider></v-divider>
-          <v-list>
-            <v-list-item>
-              <v-list-item-icon>
-                <v-icon size="30">mdi-alpha-p-circle-outline</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title v-text="ordinal(1)"></v-list-item-title>
-              <v-list-item-action>33pt</v-list-item-action>
-            </v-list-item>
-            <v-list-item>
-              <v-list-item-icon>
-                <v-icon size="30">mdi-file-question</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title>31 questions</v-list-item-title>
-              <v-list-item-action v-text="ordinal(32)"></v-list-item-action>
-            </v-list-item>
-          </v-list>
-        </v-card> -->
+
+          <v-card-text>
+            Not implemented.
+          </v-card-text>
+        </v-card>
       </div>
     </v-col>
 

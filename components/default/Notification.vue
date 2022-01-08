@@ -76,7 +76,7 @@
         <v-list-item @click="deleteNotifications()">
           <v-list-item-content>
             <v-list-item-subtitle class="text-center text-caption red--text">
-              delete all questions.
+              delete all notifications.
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
