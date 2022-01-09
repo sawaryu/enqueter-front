@@ -60,7 +60,7 @@ export default Vue.extend({
         const res = await this.$axios.$post("/questions", this.questionModel);
         this.$accessor.flash.showMessage(
           {
-            message: `created completely new question.`,
+            message: `Created completely new question.`,
             type: "success",
             status: true,
           },

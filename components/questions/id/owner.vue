@@ -2,7 +2,7 @@
   <v-row class="justify-center">
 
     <v-col cols="12" class="mt-0 pt-0">
-      <v-card flat color="rgb(0, 0, 0, 0)">
+      <v-card class="mt-0 pt-0" flat color="rgb(0, 0, 0, 0)">
         <v-card-text>
           <v-row justify="center">
             <!-- Pie data -->

@@ -4,6 +4,7 @@
       <!-- Yes -->
       <v-card
         class="d-flex justify-center align-center ma-6"
+        rounded="circle"
         :width="size"
         :height="size"
         link
@@ -16,6 +17,7 @@
       <!-- No -->
       <v-card
         class="d-flex justify-center align-center ma-6"
+        rounded="circle"
         :width="size"
         :height="size"
         link

@@ -8,6 +8,7 @@
     :color="snackDisplay.color"
     timeout="5000"
     rounded="pill"
+    height="8vh"
   >
     {{ snackDisplay.message }}
     <template v-slot:action="{ attrs }">

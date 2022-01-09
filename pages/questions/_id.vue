@@ -7,7 +7,7 @@
       @close="snackbar = false"
     />
 
-    <!-- float -->
+    <!-- Go to the next question. -->
     <FloatNext v-if="float" @close="snackbar = false" />
 
     <!-- QUESTION -->
@@ -59,12 +59,12 @@ export default Vue.extend({
     answered(arg: any) {
       if (arg.result === "right") {
         this.snackDisplay = {
-          message: "right",
+          message: "right (+3pt)",
           color: "success",
         };
       } else if (arg.result === "wrong") {
         this.snackDisplay = {
-          message: "wrong",
+          message: "wrong (-2pt)",
           color: "dark",
         };
       } else if (arg.result === "even") {
@@ -74,7 +74,7 @@ export default Vue.extend({
         };
       } else if (arg.result === "first") {
         this.snackDisplay = {
-          message: "You are first who answered this question.",
+          message: "You are the first. (+1pt)",
           color: "info",
         };
       }

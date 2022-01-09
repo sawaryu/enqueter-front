@@ -1,5 +1,5 @@
 <template>
-  <v-card width="500px">
+  <v-card width="500px" rounded="xl">
     <v-card-title class="font-weight-bold">
       <!-- <v-icon color="black" size="40">mdi-file-question</v-icon> -->
 
@@ -44,12 +44,6 @@
               ><v-icon>mdi-flag</v-icon> report</v-list-item-title
             >
           </v-list-item>
-          <!-- TODO -->
-          <!-- <v-list-item link>
-            <v-list-item-title
-              ><v-icon>mdi-delete</v-icon> delete</v-list-item-title
-            >
-          </v-list-item> -->
         </v-list>
       </v-menu>
     </v-card-title>
