@@ -1,7 +1,7 @@
 <template>
   <v-card width="500px">
     <v-card-title class="font-weight-bold">
-      <v-icon color="black" size="40">mdi-file-question</v-icon>
+      <!-- <v-icon color="black" size="40">mdi-file-question</v-icon> -->
 
       <!-- is_open? -->
       <span v-if="question.is_open" class="text-caption ml-2 success--text"
