@@ -1,5 +1,5 @@
 <template>
-  <v-card max-width="700px" rounded="xl">
+  <v-card min-width="300px" max-width="700px" rounded="xl">
     <v-card-title class="font-weight-bold">
       <!-- <v-icon color="black" size="40">mdi-file-question</v-icon> -->
 
@@ -103,7 +103,6 @@ interface Question {
     name: string;
     introduce: string;
     avatar: string;
-    point: number;
     created_at: string;
     updated_at: string;
     is_following: boolean;

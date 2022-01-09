@@ -43,8 +43,14 @@
               </v-list-item-title>
               <v-list-item-subtitle v-text="user.name"></v-list-item-subtitle>
             </v-list-item-content>
+
+            <v-list-item-action>
+              <div v-if="user.is_yes" class="red--text">Yes</div>
+              <div v-else class="blue--text">No</div>
+            </v-list-item-action>
           </v-list-item>
         </v-list>
+        <v-divider v-if="users.length"></v-divider>
       </v-card>
     </v-col>
   </v-row>

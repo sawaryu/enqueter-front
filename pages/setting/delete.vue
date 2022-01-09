@@ -29,7 +29,7 @@ export default Vue.extend({
         this.$auth.logout();
         this.$accessor.flash.showMessage(
           {
-            message: `deleted completely.`,
+            message: `Deleted completely.`,
             type: "info",
             status: true,
           },

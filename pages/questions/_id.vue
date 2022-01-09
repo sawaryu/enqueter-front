@@ -57,22 +57,22 @@ export default Vue.extend({
   methods: {
     // change component and show snackbar.
     answered(arg: any) {
-      if (arg.result === "right") {
+      if (arg.result === 3) {
         this.snackDisplay = {
-          message: "right (+3pt)",
+          message: "Right (+3pt)",
           color: "success",
         };
-      } else if (arg.result === "wrong") {
+      } else if (arg.result === -2) {
         this.snackDisplay = {
-          message: "wrong (-2pt)",
+          message: "Wrong (-2pt)",
           color: "dark",
         };
-      } else if (arg.result === "even") {
+      } else if (arg.result === 0) {
         this.snackDisplay = {
           message: "The ratio is even.",
           color: "warning",
         };
-      } else if (arg.result === "first") {
+      } else if (arg.result === 1) {
         this.snackDisplay = {
           message: "You are the first. (+1pt)",
           color: "info",

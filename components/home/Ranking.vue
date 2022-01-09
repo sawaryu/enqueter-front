@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mt-5">
+  <v-card>
     <v-card-title
       ><v-icon>mdi-crown</v-icon>Ranking
       <v-spacer></v-spacer>

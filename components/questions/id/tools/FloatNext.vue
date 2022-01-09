@@ -1,6 +1,6 @@
 <template>
   <v-fab-transition>
-    <v-btn class="mb-6" large fixed bottom left dark fab @click="next">
+    <v-btn class="mb-10" large fixed bottom left dark fab @click="next">
       <v-icon dark>mdi-chevron-left</v-icon>
     </v-btn>
   </v-fab-transition>

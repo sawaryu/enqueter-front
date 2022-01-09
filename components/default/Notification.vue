@@ -76,6 +76,9 @@
         <v-list-item @click="deleteNotifications()">
           <v-list-item-content>
             <v-list-item-subtitle class="text-center text-caption red--text">
+              <span>
+                <v-icon color="red">mdi-delete-outline</v-icon>
+              </span>
               delete all notifications.
             </v-list-item-subtitle>
           </v-list-item-content>
@@ -172,7 +175,7 @@ export default Vue.extend({
     // go question and close the notifications menu.
     goQuestion(question_id: number) {
       this.menu = null;
-      this.$router.push(`/questions/${question_id}`)
+      this.$router.push(`/questions/${question_id}`);
     },
   },
 });

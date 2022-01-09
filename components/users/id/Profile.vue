@@ -87,7 +87,6 @@ interface User {
   name: string;
   introduce: string;
   avatar: string;
-  point: number;
   created_at: string;
   updated_at: string;
   is_following: boolean;

@@ -16,7 +16,7 @@ export default Vue.extend({
     return {
       // start and result number.
       startCount: 0 as number,
-      // ?.
+      // ?
       intervalId: 0 as number,
     };
   },
@@ -25,7 +25,7 @@ export default Vue.extend({
   },
   methods: {
     performDrumRolling(): void {
-      // 今回は0.5秒以内にドラムロールが完了するようにしているため、　その間にどれくらいずつ値を変化させていくかの数値。
+      // Time length of finishing drumroll.
       const countInterval = Math.abs(Math.floor((this.count - this.startCount) / 100)) || 1;
 
       // setInterval メソッドを使用して、0.01秒間隔で数値の変更処理を実行する

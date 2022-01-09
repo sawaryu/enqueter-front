@@ -12,7 +12,7 @@
     "esModuleInterop": true,
     "allowJs": true,
     "sourceMap": true,
-    // 一時的にfalse
+    // TODO: temporarily false.
     "strict": false,
     "noEmit": true,
     "experimentalDecorators": true,
