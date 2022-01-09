@@ -1,5 +1,5 @@
 <template>
-  <v-card width="500px" rounded="xl">
+  <v-card max-width="700px" rounded="xl">
     <v-card-title class="font-weight-bold">
       <!-- <v-icon color="black" size="40">mdi-file-question</v-icon> -->
 
@@ -18,9 +18,9 @@
           class="text-caption text--secondary ml-2"
           ><v-icon>mdi-checkbox-marked-circle</v-icon>answered</span
         >
-        <span v-else class="text-caption ml-2 info--text"
-          ><v-icon color="info">mdi-checkbox-marked-circle-outline</v-icon
-          >unanswered</span
+        <span v-else class="text-caption ml-2 success--text"
+          ><v-icon color="success">mdi-checkbox-marked-circle-outline</v-icon
+          >can answer</span
         >
       </template>
 

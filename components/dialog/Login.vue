@@ -89,7 +89,7 @@ export default Vue.extend({
         this.$router.push('/')
         this.$accessor.flash.showMessage(
           {
-            message: `hello, ${this.$auth.user.name}!!`,
+            message: `Hello, ${this.$auth.user.name}.`,
             type: "success",
             status: true,
           },

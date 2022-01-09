@@ -19,8 +19,8 @@
             v-model="questionModel.content"
             :rules="questionRules"
             color="black"
-            maxlength="255"
-            counter="255"
+            maxlength="140"
+            counter="140"
             dense
           >
           </v-textarea>
@@ -46,7 +46,7 @@ export default Vue.extend({
       },
       questionRules: [
         (v: string) => (!!v && /\S/.test(v)) || "Must be required",
-        (v: string) => v.length <= 255 || "Must be less than 255 characters",
+        (v: string) => v.length <= 140 || "Must be less than 255 characters",
       ],
     };
   },

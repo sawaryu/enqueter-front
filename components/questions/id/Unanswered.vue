@@ -1,6 +1,12 @@
 <template>
   <div>
-    <v-row class="justify-center">
+    <v-row class="mt-4" justify="center">
+      <v-col class="text-center" cols="12">
+        <div class="text-h6 font-weight-bold">Which is majority?</div>
+      </v-col>
+    </v-row>
+
+    <v-row justify="center">
       <!-- Yes -->
       <v-card
         class="d-flex justify-center align-center ma-6"

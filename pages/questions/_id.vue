@@ -8,7 +8,7 @@
     />
 
     <!-- Go to the next question. -->
-    <FloatNext v-if="float" @close="snackbar = false" />
+    <FloatNext v-if="float || currentComponent === 'Unanswered'" @close="snackbar = false" />
 
     <!-- QUESTION -->
     <v-row class="justify-center my-4">
