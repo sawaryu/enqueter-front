@@ -17,7 +17,7 @@
 
     <!-- Answered Users -->
     <v-col class="mt-0 pt-0" cols="12" sm="4">
-      <v-card height="420" color="rgb(0, 0, 0, 0)" flat>
+      <v-card color="rgb(0, 0, 0, 0)" flat>
         <v-card-title class="justify-center mt-0 pt-1"
           ><v-icon>mdi-account-multiple</v-icon>{{ users.length }} users
           answered</v-card-title
@@ -28,6 +28,7 @@
         </v-card-text>
         <v-list
           v-else
+          max-height="420"
           color="rgb(0, 0, 0, 0)"
           class="overflow-y-auto"
           :style="{ height: 420 / 1.18 + 'px' }"
