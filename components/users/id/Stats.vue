@@ -16,8 +16,9 @@
     </v-card-title>
     <v-divider></v-divider>
 
-    <v-card-text class="text-subtitle-1">
-      <div><span class="font-weight-bold mr-3">Total point:</span><span>38pt / 3rd</span></div>
+    <!-- TODO -->
+    <v-card-text v-if="stats" class="text-subtitle-1">
+      <div><span class="font-weight-bold mr-3">Total point:</span><span>{{stats.total_point}}pt / {{stats.rank}}</span></div>
       <div><span class="font-weight-bold mr-3">Right rate<sup>*</sup>:</span><span>38pt / 3rd</span></div>
       <div class="text-caption">* Need more than 10 questions the user answered.</div>
     </v-card-text>
@@ -39,13 +40,13 @@ export default Vue.extend({
     };
   },
   created() {
-    // this.getStats()
+    this.getStats()
   },
   methods: {
     async getStats() {
       try {
         const res = await this.$axios.$get(
-          `/users/${this.route.params.id}/stats`,
+          `/users/${this.$route.params.id}/stats`,
           {
             params: {
               period: this.currentId,
@@ -58,7 +59,7 @@ export default Vue.extend({
   },
   watch: {
     currentId() {
-      // this.getStats();
+      this.getStats();
     },
   },
 });
