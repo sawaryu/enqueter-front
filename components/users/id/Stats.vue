@@ -16,8 +16,10 @@
     </v-card-title>
     <v-divider></v-divider>
 
-    <v-card-text>
-      23pt
+    <v-card-text class="text-subtitle-1">
+      <div><span class="font-weight-bold mr-3">Total point:</span><span>38pt / 3rd</span></div>
+      <div><span class="font-weight-bold mr-3">Right rate<sup>*</sup>:</span><span>38pt / 3rd</span></div>
+      <div class="text-caption">* Need more than 10 questions the user answered.</div>
     </v-card-text>
   </v-card>
 </template>
@@ -27,6 +29,7 @@ import Vue from "vue";
 export default Vue.extend({
   data() {
     return {
+      stats: null as object,
       currentId: "week",
       periods: [
         { id: "week", text: "week" },
@@ -35,12 +38,29 @@ export default Vue.extend({
       ] as Array<object>,
     };
   },
+  created() {
+    // this.getStats()
+  },
+  methods: {
+    async getStats() {
+      try {
+        const res = await this.$axios.$get(
+          `/users/${this.route.params.id}/stats`,
+          {
+            params: {
+              period: this.currentId,
+            },
+          }
+        );
+        this.stats = res;
+      } catch (error) {}
+    },
+  },
   watch: {
-    currentId(){
-      // call API
-      console.log(this.currentId)
-    }
-  }
+    currentId() {
+      // this.getStats();
+    },
+  },
 });
 </script>
 

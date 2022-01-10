@@ -18,8 +18,11 @@
       <v-stepper v-model="e1">
         <v-stepper-items>
           <!-- item1 -->
-          <v-stepper-content step="1">
-            <v-subheader class="black--text text-subtitle-1 font-weight-bold">The reason of the report</v-subheader>
+          <v-stepper-content class="pa-5" step="1">
+            <v-subheader class="black--text text-subtitle-1 font-weight-bold"
+              >The reason of the report</v-subheader
+            >
+            <v-divider></v-divider>
             <v-card height="200" flat>
               <v-list dense>
                 <v-list-item
@@ -38,44 +41,51 @@
           </v-stepper-content>
 
           <!-- item2 -->
-          <v-stepper-content step="2">
-            <v-subheader class="black--text text-subtitle-1 font-weight-bold">The specific reason</v-subheader>
+          <v-stepper-content class="pa-5" step="2">
+            <v-subheader class="black--text text-subtitle-1 font-weight-bold"
+              >The specific reason</v-subheader
+            >
             <v-card class="overflow-y-auto" height="200" flat>
               <v-textarea
                 v-model="content"
-                color="black"
+                auto-grow
                 filled
-                rows="3"
-                hint="If possible, write the specific reasons."
+                color="black"
+                rows="4"
+                hint="If possible, please write the specific reasons."
                 persistent-hint
                 counter="200"
                 maxlength="200"
               ></v-textarea>
+
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="grey darken-2" dark @click="e1 = 3"
-                  >Confirm</v-btn
-                >
+                <v-btn @click="e1 = 3">Confirm</v-btn>
               </v-card-actions>
             </v-card>
           </v-stepper-content>
 
           <!-- item3 -->
-          <v-stepper-content step="3">
+          <v-stepper-content class="pa-5" step="3">
             <v-subheader class="black--text text-subtitle-1 font-weight-bold"
               >On the below, you go to report.</v-subheader
             >
+            <v-divider></v-divider>
             <v-card class="overflow-y-auto" height="200" v-if="selected" flat>
               <v-card-text>
-                <div class="black--text">The reason of the report</div>
-                <span>{{ selected.title }}</span>
+                <div class="black--text text-subtitle-2">
+                  The reason of the report
+                </div>
+                <span class="text-caption">{{ selected.title }}</span>
 
-                <div class="black--text mt-5">The specific reason</div>
-                <span>{{ contentResult }}</span>
+                <div class="black--text text-subtitle-2 mt-5">
+                  The specific reason
+                </div>
+                <span class="text-caption">{{ contentResult }}</span>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="grey darken-2" dark @click="submit">submit</v-btn>
+                <v-btn @click="submit">submit</v-btn>
               </v-card-actions>
             </v-card>
           </v-stepper-content>
@@ -108,9 +118,17 @@ export default {
       this.selected = item;
       this.e1 += 1;
     },
-    submit(){
-      this.$accessor.dialog.setReportDialog(false)
-    }
+    submit() {
+      this.$accessor.dialog.setReportDialog(false);
+      this.$accessor.flash.showMessage(
+        {
+          message: `Thank you for your cooperation.`,
+          type: "info",
+          status: true,
+        },
+        { root: true }
+      );
+    },
   },
   computed: {
     contentResult() {
@@ -125,9 +143,12 @@ export default {
   watch: {
     dialog() {
       // reset
-      this.selected = null
-      this.content = "";
-      this.e1 = 1;
+      // solution for stepper bug of display.
+      setTimeout(() => {
+        this.selected = null;
+        this.content = "";
+        this.e1 = 1;
+      }, 300);
     },
   },
 };

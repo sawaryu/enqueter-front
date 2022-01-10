@@ -2,7 +2,7 @@
   <v-row justify="center">
     <!-- Pie data -->
     <v-col class="mt-0 pt-0" cols="12" sm="4" order-sm="second">
-      <v-card color="rgb(0, 0, 0, 0)" flat>
+      <v-card width="340" color="rgb(0, 0, 0, 0)" flat>
         <v-card-title class="justify-center mt-0 pt-1">
           <v-icon>mdi-circle-slice-1</v-icon>Ratio
           <!-- (dominance of&nbsp;<span style="color: #bbdefb">No</span>) -->
