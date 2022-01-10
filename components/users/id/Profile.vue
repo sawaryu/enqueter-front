@@ -68,7 +68,7 @@
           </v-btn>
         </template>
         <v-list>
-          <v-list-item>
+          <v-list-item @click="$accessor.dialog.setReportDialog({value: true, id: user.id})">
             <v-list-item-title
               ><v-icon>mdi-flag</v-icon> report</v-list-item-title
             >

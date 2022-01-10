@@ -117,6 +117,7 @@
     <!-- main -->
     <v-main class="grey lighten-3">
       <v-container>
+        <Report />
         <Flash />
         <Nuxt />
       </v-container>
@@ -129,6 +130,7 @@
 <script lang="ts">
 import Vue from "vue";
 export default Vue.extend({
+  name: "default",
   data() {
     return {
       drawer: null as null | boolean,

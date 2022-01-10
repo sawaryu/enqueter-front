@@ -5,7 +5,11 @@ export const state = () => ({
   followerDialog: false as Boolean,
   followingDialog: false as Boolean,
   loginDialog: false as Boolean,
-  signupDialog: false as Boolean
+  signupDialog: false as Boolean,
+  reportDialog: false as Boolean,
+
+  // used in report dialog, subtly special.
+  reportTargetId: null as number
 })
 
 export const getters = getterTree(state, {
@@ -13,7 +17,11 @@ export const getters = getterTree(state, {
   getFollowerDialog: (state) => state.followerDialog,
   getFollowingDialog: (state) => state.followingDialog,
   getLoginDialog: (state) => state.loginDialog,
-  getSignupDialog: (state) => state.signupDialog
+  getSignupDialog: (state) => state.signupDialog,
+  getReportDialog: (state) => state.reportDialog,
+
+  // used in report dialog, subtly special.
+  getReportTargetId: (state) => state.reportTargetId
 })
 
 export const mutations = mutationTree(state, {
@@ -31,5 +39,12 @@ export const mutations = mutationTree(state, {
   },
   setSignupDialog(state, value: boolean) {
     state.signupDialog = value
+  },
+
+  // when opening dialog, set the targetId.
+  // when closing, set null.
+  setReportDialog(state, {value, id = null}: {value: boolean, id: number}) {
+    state.reportDialog = value
+    state.reportTargetId = id
   },
 })
