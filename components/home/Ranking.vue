@@ -1,8 +1,6 @@
 <template>
   <v-card>
-    <v-card-title
-      ><v-icon>mdi-crown</v-icon>Ranking
-    </v-card-title>
+    <v-card-title><v-icon>mdi-crown</v-icon>Ranking </v-card-title>
     <v-divider></v-divider>
     <v-list dense max-height="60vh" class="overflow-y-auto">
       <v-list-item>
@@ -33,13 +31,18 @@
           <v-list-item-avatar
             class="pointer"
             :size="sizeAndColorByRank(index).size"
+            @click="$router.push(`/users/${user.id}`)"
           >
             <v-img :src="$avatar(user.avatar)"></v-img>
           </v-list-item-avatar>
         </v-badge>
         <v-list-item-content>
           <v-list-item-title class="text-subtitle-2"
-            ><span class="pointer underline" v-text="user.public_id"></span
+            ><span
+              class="pointer underline"
+              v-text="user.public_id"
+              @click="$router.push(`/users/${user.id}`)"
+            ></span
           ></v-list-item-title>
           <v-list-item-subtitle v-text="user.name"></v-list-item-subtitle>
         </v-list-item-content>
@@ -53,7 +56,6 @@
 
 <script lang="ts">
 import ordinal from "ordinal";
-
 import Vue from "vue";
 export default Vue.extend({
   data() {
@@ -103,7 +105,7 @@ export default Vue.extend({
   },
   watch: {
     period() {
-      this.getRanking()
+      this.getRanking();
     },
   },
 });

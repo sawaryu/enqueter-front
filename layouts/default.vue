@@ -7,7 +7,7 @@
       app
       flat
     >
-      <v-toolbar-title class="font-weight-bold">Enqueter </v-toolbar-title>
+      <v-toolbar-title class="text-h5 font-weight-bold">Enqueter</v-toolbar-title>
 
       <v-spacer></v-spacer>
       <v-btn
@@ -115,7 +115,7 @@
     </v-navigation-drawer>
 
     <!-- main -->
-    <v-main class="grey lighten-3">
+    <v-main :class="{'grey lighten-3': !$route.path.includes('/welcome')}">
       <v-container>
         <Report />
         <Flash />

@@ -7,9 +7,6 @@
       <span v-if="question.is_open" class="text-caption ml-2 success--text"
         ><v-icon color="success">mdi-check</v-icon>open</span
       >
-      <span v-else class="text-caption text--secondary ml-2"
-        ><v-icon>mdi-close-octagon-outline</v-icon>closed</span
-      >
 
       <!-- is_answered -->
       <template v-if="question.user_id !== this.$auth.user.id">
@@ -79,7 +76,10 @@
         {{ beforeTime }}
       </div> -->
       <div class="text-caption text--secondary">
-        <v-icon>mdi-timer-sand</v-icon>{{ question.closed_at }}
+        <span v-if="question.is_open">
+          <v-icon>mdi-timer-sand</v-icon>{{ question.closed_at }}
+        </span>
+        <span v-else> <v-icon>mdi-close-octagon-outline</v-icon>closed </span>
       </div>
     </v-card-actions>
   </v-card>

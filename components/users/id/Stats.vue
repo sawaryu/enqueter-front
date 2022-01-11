@@ -18,14 +18,23 @@
 
     <!-- TODO -->
     <v-card-text v-if="stats" class="text-subtitle-1">
-      <div><span class="font-weight-bold mr-3">Total point:</span><span>{{stats.total_point}}pt / {{stats.rank}}</span></div>
-      <div><span class="font-weight-bold mr-3">Right rate<sup>*</sup>:</span><span>38pt / 3rd</span></div>
-      <div class="text-caption">* Need more than 10 questions the user answered.</div>
+      <div>
+        <span class="font-weight-bold mr-3">Total point:</span
+        ><span>{{ stats.total_point }}pt | {{ rankOrdinal }}</span>
+      </div>
+      <div>
+        <span class="font-weight-bold mr-3">Right rate<sup>*</sup>:</span
+        ><span>38pt | 3rd</span>
+      </div>
+      <div class="text-caption">
+        * Need more than 10 questions the user answered.
+      </div>
     </v-card-text>
   </v-card>
 </template>
 
 <script lang="ts">
+import ordinal from "ordinal";
 import Vue from "vue";
 export default Vue.extend({
   data() {
@@ -39,8 +48,17 @@ export default Vue.extend({
       ] as Array<object>,
     };
   },
+  computed: {
+    rankOrdinal(): string {
+      if (this.stats.rank) {
+        return ordinal(this.stats.rank);
+      } else {
+        return "n/a"
+      }
+    },
+  },
   created() {
-    this.getStats()
+    this.getStats();
   },
   methods: {
     async getStats() {

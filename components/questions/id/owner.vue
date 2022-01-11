@@ -34,13 +34,21 @@
           :style="{ height: 420 / 1.18 + 'px' }"
         >
           <v-list-item v-for="user in users" :key="user.id">
-            <v-list-item-avatar class="pointer" size="37">
+            <v-list-item-avatar
+              class="pointer"
+              size="37"
+              @click="$router.push(`/users/${user.id}`)"
+            >
               <v-img :src="$avatar(user.avatar)"></v-img>
             </v-list-item-avatar>
 
             <v-list-item-content>
               <v-list-item-title>
-                <span class="underline pointer" v-text="user.public_id"></span>
+                <span
+                  class="underline pointer"
+                  v-text="user.public_id"
+                  @click="$router.push(`/users/${user.id}`)"
+                ></span>
               </v-list-item-title>
               <v-list-item-subtitle v-text="user.name"></v-list-item-subtitle>
             </v-list-item-content>
