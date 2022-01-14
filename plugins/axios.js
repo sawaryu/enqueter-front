@@ -32,7 +32,7 @@ export default ({ app: { $axios, $accessor } }) => {
     } else if (statusCode == 403) {
       $nuxt.error({
         statusCode: statusCode,
-        message: "you don`t have the authorization for access to this page.",
+        message: "You don`t have the authorization for access to this page.",
       });
     }
     return;

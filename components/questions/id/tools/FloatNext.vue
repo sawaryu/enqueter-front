@@ -19,7 +19,7 @@ export default Vue.extend({
           this.$router.push("/questions");
           this.$accessor.flash.showMessage(
             {
-              message: `Sorry, there are no questions you can answer now.`,
+              message: `There are no more answerable questions.`,
               type: "dark",
               status: true,
             },

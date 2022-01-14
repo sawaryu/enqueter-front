@@ -1,9 +1,10 @@
 <template>
   <v-card min-width="300px" max-width="700px" rounded="xl">
     <v-card-title class="font-weight-bold">
-      <!-- is_open? -->
+
+      <!-- closed -->
       <div v-if="!question.is_open" class="text-caption text--secondary">
-        <span> <v-icon>mdi-close-octagon-outline</v-icon>closed </span>
+        <span> <v-icon>mdi-close-octagon-outline</v-icon>closed</span>
       </div>
 
       <!-- is_answered -->
@@ -13,13 +14,22 @@
           class="text-caption text--secondary ml-2"
           ><v-icon>mdi-checkbox-marked-circle</v-icon>answered</span
         >
-        <span v-else class="text-caption ml-2 success--text"
+        <span v-else-if="question.is_open" class="text-caption ml-2 success--text"
           ><v-icon color="success">mdi-checkbox-marked-circle-outline</v-icon
-          >can answer</span
+          >open</span
         >
       </template>
 
       <v-spacer></v-spacer>
+
+      <!-- owner chip -->
+      <v-chip
+        small
+        class="text-caption"
+        v-if="$auth.user.id === question.user_id"
+        >own</v-chip
+      >
+
       <v-btn icon @click="bookmark">
         <v-icon
           v-text="
@@ -71,13 +81,7 @@
       </div>
       <v-spacer></v-spacer>
 
-      <!-- is_open? -->
-      <!-- <div class="text-caption text--secondary">
-        <span v-if="question.is_open">
-          <v-icon>mdi-timer-sand</v-icon>{{ question.closed_at }}
-        </span>
-        <span v-else> <v-icon>mdi-close-octagon-outline</v-icon>closed </span>
-      </div> -->
+      <!-- before time -->
       <div class="text--secondary text-caption">{{ beforeTime }}</div>
     </v-card-actions>
   </v-card>

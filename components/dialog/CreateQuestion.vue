@@ -22,6 +22,8 @@
             maxlength="140"
             counter="140"
             dense
+            persistent-hint
+            hint="Answerable due is set to one week."
           >
           </v-textarea>
         </v-form>
@@ -67,7 +69,7 @@ export default Vue.extend({
           { root: true }
         );
         this.$accessor.dialog.setQuestionDialog(false);
-        console.log(res.data)
+        console.log(res.data);
         this.$router.push(`/questions/${res.data.id}`);
       } catch (error) {
         console.log(error);

@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="12" sm="3">
+      <v-col cols="12" md="3">
         <v-card class="mx-auto">
           <v-list>
             <v-subheader><v-icon>mdi-cog</v-icon>setting</v-subheader>
@@ -25,7 +25,7 @@
         </v-card>
       </v-col>
 
-      <v-col cols="12" sm="9">
+      <v-col cols="12" md="9">
         <v-card elevation="2">
           <v-toolbar color="grey lighten-4" elevation="2">
             <v-toolbar-title

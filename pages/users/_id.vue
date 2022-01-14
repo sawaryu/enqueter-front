@@ -1,14 +1,14 @@
 <template>
   <v-row justify="center">
     <!-- Basic -->
-    <v-col cols="12" sm="4">
+    <v-col cols="12" md="4">
       <div style="position: sticky; top: 76px">
         <Profile :user="user" />
         <Stats />
       </div>
     </v-col>
 
-    <v-col cols="12" sm="8">
+    <v-col cols="12" md="8">
       <v-bottom-navigation background-color="grey lighten-4" shift grow>
         <v-btn v-for="(n, index) in navigations" exact :to="n.to" :key="index">
           <span v-text="n.title"></span>

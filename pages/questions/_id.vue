@@ -46,7 +46,7 @@ export default Vue.extend({
     currentComponent() {
       if (
         this.question.user_id == this.$auth.user.id ||
-        this.question.is_answered
+        this.question.is_answered || !this.question.is_open
       ) {
         return "Owner";
       } else if (!this.question.is_answered) {
