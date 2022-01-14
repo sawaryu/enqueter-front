@@ -27,7 +27,7 @@
     <!--  -->
 
     <v-col cols="12" md="4">
-      <div style="position: sticky; top: 150px">
+      <div style="position: sticky; top: 70px">
         <!-- <Information /> -->
         <Ranking />
       </div>

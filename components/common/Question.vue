@@ -1,12 +1,10 @@
 <template>
   <v-card min-width="300px" max-width="700px" rounded="xl">
     <v-card-title class="font-weight-bold">
-      <!-- <v-icon color="black" size="40">mdi-file-question</v-icon> -->
-
       <!-- is_open? -->
-      <span v-if="question.is_open" class="text-caption ml-2 success--text"
-        ><v-icon color="success">mdi-check</v-icon>open</span
-      >
+      <div v-if="!question.is_open" class="text-caption text--secondary">
+        <span> <v-icon>mdi-close-octagon-outline</v-icon>closed </span>
+      </div>
 
       <!-- is_answered -->
       <template v-if="question.user_id !== this.$auth.user.id">
@@ -72,15 +70,15 @@
         ></div>
       </div>
       <v-spacer></v-spacer>
+
+      <!-- is_open? -->
       <!-- <div class="text-caption text--secondary">
-        {{ beforeTime }}
-      </div> -->
-      <div class="text-caption text--secondary">
         <span v-if="question.is_open">
           <v-icon>mdi-timer-sand</v-icon>{{ question.closed_at }}
         </span>
         <span v-else> <v-icon>mdi-close-octagon-outline</v-icon>closed </span>
-      </div>
+      </div> -->
+      <div class="text--secondary text-caption">{{ beforeTime }}</div>
     </v-card-actions>
   </v-card>
 </template>

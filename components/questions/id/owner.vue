@@ -10,7 +10,7 @@
         <v-divider></v-divider>
         <PieChart v-if="loaded && isPieData" :chartData="pieChartData" />
         <v-card-text class="text-center" v-else
-          >The answered ratio is displayed here.
+          >'Yes' and 'No' ratio is displayed here.
         </v-card-text>
       </v-card>
     </v-col>
