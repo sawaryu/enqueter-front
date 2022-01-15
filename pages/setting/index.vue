@@ -70,7 +70,7 @@ export default Vue.extend({
       };
 
       // 'Json.stringify()' make another instances of Object to be able to compare.
-      return JSON.stringify(profileModel) === JSON.stringify(this.profileModel)
+      return JSON.stringify(profileModel) === JSON.stringify(this.profileModel);
     },
   },
   created() {

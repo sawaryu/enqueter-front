@@ -28,10 +28,14 @@
 
 `1/16`
 * question deleteをmy pageのみで実行表示できるように修正: ok
-* ※高難易度:next questionを押下後にヘッダーのバグが生じる(対応策としてxs,smでは検索をモーダル化する) :
+* (最優先)createQuestion, introduceに改行処理: ok (pre-wrapでおkだった)
+* introduce 「http://」でリンク化: 
+
+`追々対応`
+* ER図の作成
 * point system 最適化
+* ※高難易度:next questionを押下後にヘッダーのバグが生じる(対応策としてxs,smでは検索をモーダル化する) :
 * ※高難易度:report system
-* (最優先)createQuestion, introduceに改行処理: 
 
 ## Summary
 EnqueterプロジェクトのFront。Vue.js(Nuxt.js)を使用

@@ -51,7 +51,11 @@
       <v-card width="340" elevation="0">
         <div class="pa-0 text-subtitle-2" v-text="user.public_id"></div>
         <div class="pa-0 text-caption text--secondary" v-text="user.name"></div>
-        <div class="pt-1 pb-0 mb-3" v-text="user.introduce"></div>
+        <div
+          class="pt-1 pb-0 mb-3"
+          style="white-space: pre-wrap"
+          v-text="user.introduce"
+        ></div>
       </v-card>
     </div>
 
@@ -68,7 +72,11 @@
           </v-btn>
         </template>
         <v-list>
-          <v-list-item @click="$accessor.dialog.setReportDialog({value: true, id: user.id})">
+          <v-list-item
+            @click="
+              $accessor.dialog.setReportDialog({ value: true, id: user.id })
+            "
+          >
             <v-list-item-title
               ><v-icon>mdi-flag</v-icon> report</v-list-item-title
             >
@@ -80,7 +88,7 @@
 </template>
 
 <script lang="ts">
-import Vue, {PropOptions} from "vue";
+import Vue, { PropOptions } from "vue";
 export interface User {
   id: number;
   public_id: string;
@@ -97,7 +105,7 @@ export default Vue.extend({
     user: {
       type: Object,
       required: true,
-    } as PropOptions<User>
+    } as PropOptions<User>,
   },
 });
 </script>

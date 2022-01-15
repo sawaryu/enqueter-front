@@ -62,6 +62,7 @@
 
     <v-card-title
       class="pt-0 pb-2 pointer"
+      style="white-space: pre-wrap"
       @click="$router.push(`/questions/${question.id}`)"
       ><span class="question-title">{{ question.content }}</span></v-card-title
     >
