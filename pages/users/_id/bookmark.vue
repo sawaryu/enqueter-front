@@ -4,7 +4,7 @@
     <v-row class="pa-3 mt-2">
       <v-col class="pt-0" v-for="q in questions" :key="q.id" cols="12" sm="6">
         <!-- a question. -->
-        <Question :question="q" @remove="remove(q.id)" />
+        <Question :question="q" />
       </v-col>
 
       <v-col v-if="!questions.length" class="text--secondary text-center">
@@ -22,17 +22,10 @@ export default Vue.extend({
   async asyncData({ params, $axios }) {
     try {
       const res = await $axios.$get(`/users/${params.id}/questions/bookmark`);
-      return { questions: res };
+      return { questions: res as Question[] };
     } catch (error) {
       console.log(error);
     }
-  },
-  methods: {
-    remove(question_id: number) {
-      this.questions = this.questions.filter(
-        (q: Question) => q.id !== question_id
-      );
-    },
   },
 });
 </script>

@@ -1,21 +1,37 @@
 # Enqueter Front
 
+```diff
+-    remove(question_id: number){
+-      this.questions = this.questions.filter((q: Question) => q.id !== question_id)
+-    }
+-  }
++    remove(question_id: number) {
++      this.questions = this.questions.filter(
++        (q: Question) => q.id !== question_id
++      );
++    },
++  },
+```
+
 ## Tasks
 
 `1/15`
 * Questionの状態判断を見た目から用意にする。: ok
 * question show page をcloseの場合に結果のみを表示する。: ok
-* breakpointがxs,smを同一グリッドレイアウトにする。 : おおよそok
+* breakpointがxs,smを同一グリッドレイアウトにする。 : ok
  -setting: ok
- -profile(インスタを真似る): ▲
+ -profile(インスタを真似る): ok
  -questions: ok
  -home: ok
 * 質問切れ時のメッセージ最適化わかりやすく: ok
 * Create answer modalの説明(クローズ日時): ok
 
 `1/16`
-* question delete の構成を考え、反映する。
+* question deleteをmy pageのみで実行表示できるように修正: ok
 * ※高難易度:next questionを押下後にヘッダーのバグが生じる(対応策としてxs,smでは検索をモーダル化する) :
+* point system 最適化
+* ※高難易度:report system
+* (最優先)createQuestion, introduceに改行処理: 
 
 ## Summary
 EnqueterプロジェクトのFront。Vue.js(Nuxt.js)を使用

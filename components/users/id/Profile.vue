@@ -81,7 +81,7 @@
 
 <script lang="ts">
 import Vue, {PropOptions} from "vue";
-interface User {
+export interface User {
   id: number;
   public_id: string;
   name: string;

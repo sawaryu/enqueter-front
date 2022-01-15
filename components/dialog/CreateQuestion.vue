@@ -31,7 +31,7 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn @click="create">create</v-btn>
+        <v-btn :disabled="!(/\S/.test(questionModel.content))" @click="create">create</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

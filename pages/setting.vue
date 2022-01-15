@@ -4,7 +4,7 @@
       <v-col cols="12" md="3">
         <v-card class="mx-auto">
           <v-list>
-            <v-subheader><v-icon>mdi-cog</v-icon>setting</v-subheader>
+            <v-subheader><v-icon>mdi-cog</v-icon>Setting</v-subheader>
             <v-list-item-group>
               <v-list-item
                 v-for="(item, i) in items"
@@ -49,15 +49,15 @@
 export default {
   data: () => ({
     items: [
-      { title: "basic", icon: "mdi-account", to: "/setting" },
-      { title: "avatar", icon: "mdi-emoticon", to: "/setting/avatar" },
+      { title: "Basic", icon: "mdi-account", to: "/setting" },
+      { title: "Avatar", icon: "mdi-emoticon", to: "/setting/avatar" },
       {
-        title: "password",
+        title: "Password",
         icon: "mdi-key-variant",
         to: "/setting/password",
       },
       {
-        title: "delete",
+        title: "Delete",
         icon: "mdi-account-off",
         to: "/setting/delete",
       },

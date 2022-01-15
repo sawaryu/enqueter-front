@@ -53,14 +53,9 @@
               ><v-icon>mdi-flag</v-icon> report</v-list-item-title
             >
           </v-list-item>
-          <v-list-item
-            v-if="question.user_id === $auth.user.id"
-            @click="remove"
-          >
-            <v-list-item-title
-              ><v-icon>mdi-delete-outline</v-icon>delete</v-list-item-title
-            >
-          </v-list-item>
+
+          <!-- slot -->
+          <slot></slot>
         </v-list>
       </v-menu>
     </v-card-title>
@@ -158,25 +153,7 @@ export default Vue.extend({
           console.log(error);
         }
       }
-    },
-    async remove() {
-      try {
-        const res = await this.$axios.$delete("/questions", {
-          data: {
-            question_id: this.question.id,
-          },
-        });
-        this.$emit("remove");
-        this.$accessor.flash.showMessage(
-          {
-            message: "The question was successfully deleted.",
-            type: "info",
-            status: true,
-          },
-          { root: true }
-        );
-      } catch (error) {}
-    },
+    }
   },
 });
 </script>
