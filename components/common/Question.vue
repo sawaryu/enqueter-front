@@ -41,7 +41,7 @@
       </v-btn>
 
       <!-- menu -->
-      <v-menu offset-y>
+      <v-menu v-if="question.user_id !== $auth.user.id" offset-y>
         <template v-slot:activator="{ on, attrs }">
           <v-btn icon v-bind="attrs" v-on="on">
             <v-icon>mdi-dots-vertical</v-icon>
@@ -53,11 +53,11 @@
               ><v-icon>mdi-flag</v-icon> report</v-list-item-title
             >
           </v-list-item>
-
-          <!-- slot -->
-          <slot></slot>
         </v-list>
       </v-menu>
+
+      <!-- slot -->
+      <slot> </slot>
     </v-card-title>
 
     <v-card-title
@@ -154,7 +154,7 @@ export default Vue.extend({
           console.log(error);
         }
       }
-    }
+    },
   },
 });
 </script>

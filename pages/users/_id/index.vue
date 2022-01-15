@@ -25,11 +25,21 @@
         <!-- a question. -->
         <Question :question="q">
           <!-- slot: (* go to see parent infos) -->
-          <v-list-item v-if="q.user_id === $auth.user.id" @click="remove(q.id)">
-            <v-list-item-title class="red--text"
-              ><v-icon color="red">mdi-delete</v-icon>delete</v-list-item-title
-            >
-          </v-list-item>
+          <v-menu v-if="q.user_id === $auth.user.id" offset-y>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn icon v-bind="attrs" v-on="on">
+                <v-icon>mdi-dots-vertical</v-icon>
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-item @click="remove(q.id)">
+                <v-list-item-title class="red--text"
+                  ><v-icon color="red">mdi-delete</v-icon
+                  >delete</v-list-item-title
+                >
+              </v-list-item>
+            </v-list>
+          </v-menu>
         </Question>
       </v-col>
 
