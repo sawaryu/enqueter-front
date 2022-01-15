@@ -54,8 +54,7 @@
         <div
           class="pt-1 pb-0 mb-3"
           style="white-space: pre-wrap"
-          v-text="user.introduce"
-        ></div>
+        >{{user.introduce}}</div>
       </v-card>
     </div>
 
@@ -88,6 +87,7 @@
 </template>
 
 <script lang="ts">
+// import VueHighlights, { autoLink, autoHighlight } from "vue-highlights";
 import Vue, { PropOptions } from "vue";
 export interface User {
   id: number;
@@ -107,6 +107,11 @@ export default Vue.extend({
       required: true,
     } as PropOptions<User>,
   },
+  // computed: {
+  //   introduceLinked() {
+  //     return autoLink(this.user.introduce);
+  //   },
+  // },
 });
 </script>
 
