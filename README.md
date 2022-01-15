@@ -5,14 +5,17 @@
 `1/15`
 * Questionの状態判断を見た目から用意にする。: ok
 * question show page をcloseの場合に結果のみを表示する。: ok
-* breakpointがxs,smを同一グリッドレイアウトにする。 :
+* breakpointがxs,smを同一グリッドレイアウトにする。 : おおよそok
  -setting: ok
  -profile(インスタを真似る): ▲
  -questions: ok
  -home: ok
-* ※高難易度:next questionを押下後にヘッダーのバグが生じる(対応策としてxs,smでは検索をモーダル化する) :
 * 質問切れ時のメッセージ最適化わかりやすく: ok
-* Create answer modalの説明(クローズ日時)
+* Create answer modalの説明(クローズ日時): ok
+
+`1/16`
+* question delete の構成を考え、反映する。
+* ※高難易度:next questionを押下後にヘッダーのバグが生じる(対応策としてxs,smでは検索をモーダル化する) :
 
 ## Summary
 EnqueterプロジェクトのFront。Vue.js(Nuxt.js)を使用

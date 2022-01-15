@@ -1,19 +1,10 @@
 <template>
   <v-row justify="center">
-    <!-- profile -->
-    <v-col cols="12" sm="4">
-      <!-- main TODO: profile design -->
-      <v-card>
+    <v-col v-for="item in items" :key="item.id">
+      <v-card width="300">
+        <v-card-text> content{{ item.id }} </v-card-text>
         <v-card-actions>
-          <v-avatar size="70">
-            <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img
-          ></v-avatar>
-          <div class="ml-2">
-            <div class="text-h5">
-              <span class="font-weight-medium"> sample123 </span>
-            </div>
-            <div class="text-subtitle-1 text--secondary">aiueo</div>
-          </div>
+          <v-btn @click="remove(item.id)">delete</v-btn>
         </v-card-actions>
       </v-card>
     </v-col>
@@ -22,7 +13,26 @@
 
 <script lang="ts">
 import Vue from "vue";
-export default Vue.extend({});
+export default Vue.extend({
+  data() {
+    return {
+      items: [
+        { id: 1 },
+        { id: 2 },
+        { id: 3 },
+        { id: 4 },
+        { id: 5 },
+      ] as Array<Object>,
+    };
+  },
+  methods: {
+    remove(id: number) {
+      this.items = this.items.filter((item: { id: number }) => {
+        return item.id != id;
+      });
+    },
+  },
+});
 </script>
 
 <style>

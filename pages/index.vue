@@ -12,13 +12,8 @@
         </v-card-text>
 
         <v-row class="mt-3" v-else>
-          <v-col
-            v-for="q in questions"
-            :key="q.id"
-            cols="12"
-            sm="6"
-          >
-            <Question :question="q" />
+          <v-col v-for="q in questions" :key="q.id" cols="12" sm="6">
+            <Question :question="q" @remove="remove(q.id)" />
           </v-col>
         </v-row>
       </v-card>
@@ -36,11 +31,19 @@
 </template>
 
 <script lang="ts">
+import { Question } from "@/components/common/Question.vue";
 import Vue from "vue";
 export default Vue.extend({
   async asyncData({ $axios }) {
     const res = await $axios.$get(`/questions/timeline`);
     return { questions: res };
+  },
+  methods: {
+    remove(question_id: number) {
+      this.questions = this.questions.filter(
+        (q: Question) => q.id !== question_id
+      );
+    },
   },
 });
 </script>

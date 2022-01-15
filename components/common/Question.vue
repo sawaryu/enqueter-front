@@ -1,7 +1,6 @@
 <template>
   <v-card min-width="300px" max-width="700px" rounded="xl">
     <v-card-title class="font-weight-bold">
-
       <!-- closed -->
       <div v-if="!question.is_open" class="text-caption text--secondary">
         <span> <v-icon>mdi-close-octagon-outline</v-icon>closed</span>
@@ -14,7 +13,9 @@
           class="text-caption text--secondary ml-2"
           ><v-icon>mdi-checkbox-marked-circle</v-icon>answered</span
         >
-        <span v-else-if="question.is_open" class="text-caption ml-2 success--text"
+        <span
+          v-else-if="question.is_open"
+          class="text-caption ml-2 success--text"
           ><v-icon color="success">mdi-checkbox-marked-circle-outline</v-icon
           >open</span
         >
@@ -27,9 +28,10 @@
         small
         class="text-caption"
         v-if="$auth.user.id === question.user_id"
-        >own</v-chip
+        >your</v-chip
       >
 
+      <!-- bookmark -->
       <v-btn icon @click="bookmark">
         <v-icon
           v-text="
@@ -37,6 +39,8 @@
           "
         ></v-icon>
       </v-btn>
+
+      <!-- menu -->
       <v-menu offset-y>
         <template v-slot:activator="{ on, attrs }">
           <v-btn icon v-bind="attrs" v-on="on">
@@ -47,6 +51,14 @@
           <v-list-item link>
             <v-list-item-title
               ><v-icon>mdi-flag</v-icon> report</v-list-item-title
+            >
+          </v-list-item>
+          <v-list-item
+            v-if="question.user_id === $auth.user.id"
+            @click="remove"
+          >
+            <v-list-item-title
+              ><v-icon>mdi-delete-outline</v-icon>delete</v-list-item-title
             >
           </v-list-item>
         </v-list>
@@ -90,7 +102,8 @@
 <script lang="ts">
 import moment from "moment";
 import Vue, { PropOptions } from "vue";
-interface Question {
+// export interface.
+export interface Question {
   id: number;
   user_id: number;
   content: string;
@@ -145,6 +158,24 @@ export default Vue.extend({
           console.log(error);
         }
       }
+    },
+    async remove() {
+      try {
+        const res = await this.$axios.$delete("/questions", {
+          data: {
+            question_id: this.question.id,
+          },
+        });
+        this.$emit("remove");
+        this.$accessor.flash.showMessage(
+          {
+            message: "The question was successfully deleted.",
+            type: "info",
+            status: true,
+          },
+          { root: true }
+        );
+      } catch (error) {}
     },
   },
 });
