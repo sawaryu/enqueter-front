@@ -66,7 +66,7 @@ export default Vue.extend({
       if (this.user.is_following) {
         return {
           outlined: true as boolean,
-          text: "unfollow" as string,
+          text: "following" as string,
         };
       } else {
         return {

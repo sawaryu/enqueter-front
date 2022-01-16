@@ -66,10 +66,10 @@
 
 <script lang="ts">
 import Vue from "vue";
-import PieChart from "~/chart/PieChart"
+import PieChart from "~/chart/PieChart";
 export default Vue.extend({
   components: {
-    PieChart
+    PieChart,
   },
   data() {
     return {
@@ -107,10 +107,11 @@ export default Vue.extend({
         console.log(res);
         this.users = res.users;
         this.pieChartData.datasets[0].data = res.pie_chart_data;
-
+      } catch (error) {
+      } finally {
         // important
         this.loaded = true;
-      } catch (error) {}
+      }
     },
   },
 });

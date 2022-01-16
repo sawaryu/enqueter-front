@@ -38,7 +38,8 @@
 `追々対応`
 * ER図の作成
 * point system 最適化
-* ※高難易度:next questionを押下後にヘッダーのバグが生じる(対応策としてxs,smでは検索をモーダル化する) :
+* ※高難易度:next questionを押下後にヘッダーのバグが生じる(対応策としてxs,smでは検索をモーダル化する) : ok
+* ownerから画面遷移時にヘッダーがバグる（原因はchartであるが対策不明）
 * ※高難易度:report system
 
 ## Summary
@@ -84,3 +85,7 @@ $ yarn run generate
 ```
 drag dist dir on your netlify
 ```
+
+# ライフサイクル
+
+![image](static/20190529112056.png)
