@@ -1,13 +1,21 @@
 <template>
-  <v-card>
-    <!-- TODO: 改行 -->
-    <v-card-text
-      style="white-space: pre-wrap"
-      v-text="newLine(content)"
-    ></v-card-text>
+  <v-row>
+    <v-col cols="4">
+      <v-card>
+        <v-row>
+          <v-avatar></v-avatar>
+        </v-row>
 
-    <v-textarea dense v-model="content"> </v-textarea>
-  </v-card>
+        <v-row>
+
+        </v-row>
+
+        <v-row>
+
+        </v-row>
+      </v-card>
+    </v-col>
+  </v-row>
 </template>
 
 <script lang="ts">

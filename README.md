@@ -39,7 +39,7 @@
 * ER図の作成
 * point system 最適化
 * ※高難易度:next questionを押下後にヘッダーのバグが生じる(対応策としてxs,smでは検索をモーダル化する) : ok
-* ownerから画面遷移時にヘッダーがバグる（原因はchartであるが対策不明）
+* ownerから画面遷移時にヘッダーがバグる（原因はchartであるが対策不明）: 実機にて要確認
 * ※高難易度:report system
 
 ## Summary
