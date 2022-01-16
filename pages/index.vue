@@ -1,6 +1,5 @@
 <template>
   <v-row>
-    <!-- todo:　高さの異なる繰り返し要素を詰める(colをしなければ詰められる？) -->
     <v-col cols="12" md="8" order="last" order-sm="first">
       <v-card color="rgb(0, 0, 0, 0)" flat>
         <v-card-title><v-icon>mdi-home</v-icon>Timeline</v-card-title>
@@ -22,8 +21,7 @@
     <!--  -->
 
     <v-col cols="12" md="4">
-      <div style="position: sticky; top: 70px">
-        <!-- <Information /> -->
+      <div style="position: sticky; top: 65px">
         <Ranking />
       </div>
     </v-col>

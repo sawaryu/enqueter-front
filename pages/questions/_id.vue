@@ -8,7 +8,10 @@
     />
 
     <!-- Go to the next question. -->
-    <FloatNext v-if="float || currentComponent === 'Unanswered'" @close="snackbar = false" />
+    <FloatNext
+      v-if="float || currentComponent === 'Unanswered'"
+      @close="snackbar = false"
+    />
 
     <!-- QUESTION -->
     <v-row class="justify-center my-4">
@@ -26,9 +29,11 @@
 import Vue from "vue";
 export default Vue.extend({
   async asyncData({ params, $axios }) {
-    const res = await $axios.$get(`/questions/${params.id}`);
-    console.log(res);
-    return { question: res };
+    try {
+      const res = await $axios.$get(`/questions/${params.id}`);
+      console.log(res);
+      return { question: res };
+    } catch (error) {}
   },
   data() {
     return {
@@ -46,7 +51,8 @@ export default Vue.extend({
     currentComponent() {
       if (
         this.question.user_id == this.$auth.user.id ||
-        this.question.is_answered || !this.question.is_open
+        this.question.is_answered ||
+        !this.question.is_open
       ) {
         return "Owner";
       } else if (!this.question.is_answered) {
@@ -69,12 +75,12 @@ export default Vue.extend({
         };
       } else if (arg.result === 0) {
         this.snackDisplay = {
-          message: "The ratio is even.",
+          message: "Even",
           color: "warning",
         };
       } else if (arg.result === 1) {
         this.snackDisplay = {
-          message: "You are the first. (+1pt)",
+          message: "First (+1pt)",
           color: "info",
         };
       }

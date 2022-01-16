@@ -1,6 +1,6 @@
 <template>
   <!-- NOTICE!: only be able to use in methods -->
-  <span class="mr-1" style="width: 180px" v-click-outside="closeMenu">
+  <span v-if="$vuetify.breakpoint.name != 'xs'" class="mr-1" style="width: 180px" v-click-outside="closeMenu">
     <!-- search field -->
     <v-text-field
       v-model="search"
@@ -74,7 +74,7 @@
         </v-list>
 
         <v-card-text v-else class="text-center text-caption">
-          No recent search history.
+          No recent search histories.
         </v-card-text>
       </template>
 
@@ -117,14 +117,15 @@
 </template>
 
 <script lang="ts">
+import {User} from "@/components/users/id/Profile.vue"
 import Vue from "vue";
 export default Vue.extend({
   data() {
     return {
-      menu: false,
-      search: "",
-      usersHistory: [],
-      users: [],
+      menu: false as Boolean,
+      search: "" as String,
+      usersHistory: [] as User[],
+      users: [] as User[],
     };
   },
   methods: {
@@ -160,7 +161,7 @@ export default Vue.extend({
         const res = await this.$axios.$delete(
           `/users/${user_id}/search/history`
         );
-        this.usersHistory.forEach((user: any, index: number) => {
+        this.usersHistory.forEach((user: User, index: number) => {
           if (user.id == user_id) {
             this.usersHistory.splice(index, 1);
           }

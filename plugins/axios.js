@@ -1,9 +1,11 @@
 export default ({ app: { $axios, $accessor } }) => {
   $axios.onError(error => {
+    // Initially, get the status code.
     const statusCode = error.response.status;
 
     // when deleting the account, logout method occurs error. Below 'if ~' avoid its error infecting flash message.
     // Therefore in that case, logout methods work as only the method clearing local storage completely.
+    // <Status Codes> 400: Bad Request, 409: Conflict(* used for optimistic lock), 401: Unauthorized
     if (error.response.config.url !== "/auth/logout" && (statusCode == 400 || statusCode == 409 || statusCode == 401)) {
       $accessor.flash.showMessage(
         {
@@ -14,6 +16,8 @@ export default ({ app: { $axios, $accessor } }) => {
         { root: true }
       );
     }
+
+    // When getting other status code from above,  move to the fixed error pages.
     else if (statusCode == 500) {
       $nuxt.error({
         statusCode: statusCode,
@@ -27,7 +31,7 @@ export default ({ app: { $axios, $accessor } }) => {
     } else if (statusCode == 404) {
       $nuxt.error({
         statusCode: statusCode,
-        message: "Not found",
+        message: "This page is no longer available",
       });
     } else if (statusCode == 403) {
       $nuxt.error({

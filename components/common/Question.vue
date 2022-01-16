@@ -17,7 +17,7 @@
           v-else-if="question.is_open"
           class="text-caption ml-2 success--text"
           ><v-icon color="success">mdi-checkbox-marked-circle-outline</v-icon
-          >open</span
+          >answerable</span
         >
       </template>
 

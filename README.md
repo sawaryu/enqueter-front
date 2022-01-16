@@ -1,5 +1,9 @@
 # Enqueter Front
 
+```html
+(dominance of&nbsp;<span style="color: #bbdefb">No</span>)
+```
+
 ```diff
 -    remove(question_id: number){
 -      this.questions = this.questions.filter((q: Question) => q.id !== question_id)

@@ -34,7 +34,7 @@
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title
         @click="$router.push('/')"
-        class="font-weight-bold pointer text-body-2 text-sm-h6 pl-2"
+        class="font-weight-bold pointer pl-2"
         >Enqueter</v-toolbar-title
       >
 
@@ -42,6 +42,7 @@
 
       <!-- Search -->
       <Search />
+      <SearchXs />
 
       <!-- Notification -->
       <Notification />

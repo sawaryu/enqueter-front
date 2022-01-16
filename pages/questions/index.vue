@@ -46,13 +46,17 @@ export default Vue.extend({
     return { questions: res as Question[] };
   },
   data() {
-    return { sorts: ["all", "closed"] };
+    return { sorts: ["all", "answerable", "closed"] };
   },
   computed: {
     questionsSorted(): Question[] {
-      const currentSort = this.$accessor.sort.getQuestionsSort;
+      const currentSort: string = this.$accessor.sort.getQuestionsSort;
       if (currentSort == "closed") {
         return this.questions.filter((q: Question) => !q.is_open);
+      } else if (currentSort == "answerable") {
+        return this.questions.filter((q: Question) => {
+          return q.is_open && !q.is_answered && q.user_id != this.$auth.user.id;
+        });
       }
       return this.questions;
     },

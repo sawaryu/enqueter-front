@@ -1,11 +1,10 @@
 <template>
   <v-row justify="center">
     <!-- Pie data -->
-    <v-col class="mt-0 pt-0" cols="12" sm="4" order-sm="second">
-      <v-card width="340" color="rgb(0, 0, 0, 0)" flat>
+    <v-col class="mt-0 pt-0" cols="12" sm="4">
+      <v-card width="450" color="rgb(0, 0, 0, 0)" flat>
         <v-card-title class="justify-center mt-0 pt-1">
           <v-icon>mdi-circle-slice-1</v-icon>Ratio
-          <!-- (dominance of&nbsp;<span style="color: #bbdefb">No</span>) -->
         </v-card-title>
         <v-divider></v-divider>
         <PieChart v-if="loaded && isPieData" :chartData="pieChartData" />
@@ -67,7 +66,11 @@
 
 <script lang="ts">
 import Vue from "vue";
+import PieChart from "~/chart/PieChart"
 export default Vue.extend({
+  components: {
+    PieChart
+  },
   data() {
     return {
       // is loaded

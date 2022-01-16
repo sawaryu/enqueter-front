@@ -1,7 +1,5 @@
-<script>
 import { Pie } from "vue-chartjs";
 import chartjsPluginDatalabels from "chartjs-plugin-datalabels";
-
 export default {
   extends: Pie,
   props: {
@@ -44,4 +42,3 @@ export default {
     this.renderChart(this.chartData, this.options);
   },
 };
-</script>

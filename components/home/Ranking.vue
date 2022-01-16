@@ -1,8 +1,40 @@
 <template>
-  <v-card>
-    <v-card-title><v-icon>mdi-crown</v-icon>Ranking </v-card-title>
+  <v-card color="rgb(0, 0, 0, 0)" flat>
+    <v-card-title
+      ><v-icon>mdi-crown</v-icon>Rank
+      <v-spacer></v-spacer>
+
+      <div class="text-caption mr-3">34th</div>
+
+      <!-- current user -->
+      <v-avatar class="pointer" size="40">
+        <v-img :src="$avatar($auth.user.avatar)"></v-img
+      ></v-avatar>
+      <div class="pl-1">
+        <div class="text-caption">
+          <span
+            class="font-weight-medium underline pointer"
+            v-text="$auth.user.public_id"
+          ></span>
+        </div>
+        <div
+          class="text-caption text--secondary"
+          v-text="$auth.user.name"
+        ></div>
+      </div>
+
+      <div class="ml-2 text-caption">10pt</div>
+    </v-card-title>
+
     <v-divider></v-divider>
-    <v-list dense max-height="60vh" class="overflow-y-auto">
+
+    <!-- top 10 -->
+    <v-list
+      color="rgb(0, 0, 0, 0)"
+      dense
+      max-height="60vh"
+      class="overflow-y-auto"
+    >
       <v-list-item>
         <v-spacer></v-spacer>
         <div>
@@ -18,6 +50,7 @@
           ></v-btn>
         </div>
       </v-list-item>
+
       <v-list-item v-for="(user, index) in users" :key="user.id">
         <div v-text="ordinal(index + 1)"></div>
         <v-badge
@@ -55,7 +88,7 @@
 </template>
 
 <script lang="ts">
-import { User } from "@/components/users/id/Profile.vue"
+import { User } from "@/components/users/id/Profile.vue";
 import ordinal from "ordinal";
 import Vue from "vue";
 export default Vue.extend({
