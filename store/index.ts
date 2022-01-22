@@ -4,6 +4,7 @@ import * as dialog from '~/store/dialog'
 import * as ranking from '~/store/ranking'
 import * as flash from '~/store/flash'
 import * as sort from '~/store/sort'
+import * as overlay from '~/store/overlay'
 
 export const state = () => {
   return {}
@@ -21,6 +22,7 @@ export const accessorType = getAccessorType({
     dialog,
     ranking,
     flash,
-    sort
+    sort,
+    overlay
   },
 })

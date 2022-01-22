@@ -25,8 +25,6 @@
         @click="$accessor.dialog.setSignupDialog(true)"
         >SignUp</v-btn
       >
-      <Login />
-      <Signup />
     </v-app-bar>
 
     <!-- header -->
@@ -120,6 +118,7 @@
       <v-container>
         <Report />
         <Flash />
+        <Overlay />
         <Nuxt />
       </v-container>
     </v-main>

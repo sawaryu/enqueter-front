@@ -21,6 +21,14 @@
           lazy-validation
           style="width: 300px"
         >
+          <div v-if="user_id_not_confirmed" class="mb-5">
+            <v-alert color="warning" outlined prominent border="left">
+              <div>You are not confirmed. please check your email.</div>
+            </v-alert>
+            In case of resend E-mail. please click
+            <span class="pointer underline blue--text" @click="resend">here.</span>
+          </div>
+
           <div class="text-center">
             <v-icon class="mx-auto" size="48" color="grey darken-4">
               mdi-login
@@ -30,8 +38,8 @@
 
           <v-text-field
             tabindex="1"
-            v-model="loginModel.public_id"
-            label="user id"
+            v-model="loginModel.public_id_or_email"
+            label="user_id (E-mail)"
             required
             color="grey darken-3"
           ></v-text-field>
@@ -75,9 +83,10 @@ export default Vue.extend({
   data: () => ({
     valid: true,
     loginModel: {
-      public_id: "",
+      public_id_or_email: "",
       password: "",
     },
+    user_id_not_confirmed: null,
   }),
   methods: {
     async login() {
@@ -86,7 +95,7 @@ export default Vue.extend({
           data: this.loginModel,
         });
         this.$accessor.dialog.setLoginDialog(false);
-        this.$router.push('/')
+        this.$router.push("/");
         this.$accessor.flash.showMessage(
           {
             message: `Hello, ${this.$auth.user.name}.`,
@@ -96,7 +105,27 @@ export default Vue.extend({
           { root: true }
         );
       } catch (e) {
-        console.log(e);
+        this.user_id_not_confirmed = e.response.data.user_id_not_confirmed
+      }
+    },
+    async resend(): Promise<any> {
+      this.$accessor.overlay.setOverlay(true)
+      try {
+        const res = await this.$axios.$post(
+          `/auth/${this.user_id_not_confirmed}/confirm/resend`
+        );
+        this.$accessor.dialog.setLoginDialog(false);
+        this.$accessor.flash.showMessage(
+          {
+            message: `Resent the E-mail, please check your email.`,
+            type: "info",
+            status: true,
+          },
+          { root: true }
+        );
+        this.$emit("sent")
+      } catch (error) {} finally {
+        this.$accessor.overlay.setOverlay(false)
       }
     },
     closeOpen() {

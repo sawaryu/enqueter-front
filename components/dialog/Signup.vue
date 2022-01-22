@@ -32,12 +32,22 @@
             tabindex="1"
             v-model="signupModel.public_id"
             :rules="publicIdRules"
-            label="user id"
+            label="user_id"
             color="grey darken-3"
             counter="15"
             maxlength="15"
             hint="Please type using half-width alphanumeric characters."
             persistent-hint
+          ></v-text-field>
+
+          <v-text-field
+            tabindex="1"
+            v-model="signupModel.email"
+            :rules="emailRules"
+            label="E-mail"
+            color="grey darken-3"
+            counter="255"
+            max-length="255"
           ></v-text-field>
 
           <v-text-field
@@ -58,7 +68,7 @@
             label="password"
             color="grey darken-3"
             counter="72"
-            hint="Please type using half-width alphanumeric characters."
+            hint="Please type more than 8 characters using half-width alphanumeric."
             persistent-hint
           ></v-text-field>
 
@@ -72,7 +82,9 @@
             counter="72"
           ></v-text-field>
 
-          <v-btn tabindex="1" color="grey darken-3" dark @click="signup"> signup </v-btn>
+          <v-btn tabindex="1" color="grey darken-3" dark @click="signup">
+            signup
+          </v-btn>
           <v-divider class="my-5"></v-divider>
           <div class="text-primary mb-1">
             In case of already having the account.
@@ -101,46 +113,56 @@ export default Vue.extend({
     valid: true,
     signupModel: {
       public_id: "",
+      email: "",
       name: "",
       password: "",
       password_confirmation: "",
     },
     publicIdRules: [
-      (v: string) => (!!v && /\S/.test(v)) || "Must be required",
-      (v: string) => v.length <= 15 || "Must be less than 15 characters",
+      (v: string) => (!!v && /\S/.test(v)) || "Must be required.",
+      (v: string) => v.length <= 15 || "Must be less than 15 characters.",
       (v: string) =>
         /^[A-Za-z0-9]*$/.test(v) ||
         "Must be using half-width alphanumeric characters.",
     ],
+    emailRules: [
+      (v: string) => (!!v && /\S/.test(v)) || "Must be required.",
+      (v: string) => (!!v && /[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(v)) || "Incorrect email format.",
+      (v: string) => v.length <= 255 || "Must be less than 255 characters.",
+    ],
     nameRules: [
-      (v: string) => (!!v && /\S/.test(v)) || "Must be required",
-      (v: string) => v.length <= 20 || "Must be less than 20 characters",
+      (v: string) => (!!v && /\S/.test(v)) || "Must be required.",
+      (v: string) => v.length <= 20 || "Must be less than 20 characters.",
     ],
     passwordRules: [
-      (v: string) => (!!v && /\S/.test(v)) || "Must be required",
-      (v: string) => v.length >= 8 || "Must be more than 8 characters",
-      (v: string) => v.length <= 72 || "Must be less than 72 characters",
+      (v: string) => (!!v && /\S/.test(v)) || "Must be required.",
+      (v: string) => v.length >= 8 || "Must be more than 8 characters.",
+      (v: string) => v.length <= 72 || "Must be less than 72 characters.",
       (v: string) =>
         /^[A-Za-z0-9]*$/.test(v) ||
         "Must be using half-width alphanumeric characters.",
     ],
   }),
   methods: {
-    async signup() {
+    async signup(): Promise<any> {
       if (this.$refs.form.validate()) {
+        this.$accessor.overlay.setOverlay(true)
         try {
           const res = await this.$axios.$post("/auth", this.signupModel);
-          this.closeOpen();
+          this.$accessor.dialog.setSignupDialog(false);
           this.$accessor.flash.showMessage(
             {
-              message: "Signup completely, please login.",
-              type: "success",
+              message: "Account created. please check your email.",
+              type: "info",
               status: true,
             },
             { root: true }
           );
+          this.$emit("sent")
         } catch (e) {
           console.log(e);
+        } finally {
+          this.$accessor.overlay.setOverlay(false)
         }
       }
     },
