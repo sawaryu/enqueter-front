@@ -26,7 +26,9 @@
               <div>You are not confirmed. please check your email.</div>
             </v-alert>
             In case of resend E-mail. please click
-            <span class="pointer underline blue--text" @click="resend">here.</span>
+            <span class="pointer underline blue--text" @click="resend"
+              >here.</span
+            >
           </div>
 
           <div class="text-center">
@@ -81,15 +83,16 @@
 import Vue from "vue";
 export default Vue.extend({
   data: () => ({
-    valid: true,
+    valid: true as boolean,
     loginModel: {
-      public_id_or_email: "",
-      password: "",
-    },
-    user_id_not_confirmed: null,
+      public_id_or_email: "" as string,
+      password: "" as string,
+    } as Object,
+    user_id_not_confirmed: null as number,
   }),
   methods: {
-    async login() {
+    // login.
+    async login(): Promise<any> {
       try {
         const res = await this.$auth.loginWith("local", {
           data: this.loginModel,
@@ -105,11 +108,12 @@ export default Vue.extend({
           { root: true }
         );
       } catch (e) {
-        this.user_id_not_confirmed = e.response.data.user_id_not_confirmed
+        this.user_id_not_confirmed = e.response.data.user_id_not_confirmed;
       }
     },
+    // resend confirmation E-mail.
     async resend(): Promise<any> {
-      this.$accessor.overlay.setOverlay(true)
+      this.$accessor.overlay.setOverlay(true);
       try {
         const res = await this.$axios.$post(
           `/auth/${this.user_id_not_confirmed}/confirm/resend`
@@ -123,16 +127,23 @@ export default Vue.extend({
           },
           { root: true }
         );
-        this.$emit("sent")
-      } catch (error) {} finally {
-        this.$accessor.overlay.setOverlay(false)
+        this.reset()
+        this.$emit("sent");
+      } catch (error) {
+      } finally {
+        this.$accessor.overlay.setOverlay(false);
       }
     },
-    closeOpen() {
+    // modal close, then open signup modal.
+    closeOpen(): void {
       this.$accessor.dialog.setLoginDialog(false);
       setTimeout(() => {
         this.$accessor.dialog.setSignupDialog(true);
       }, 200);
+    },
+    // reset all data. rewrite initial object statement.
+    reset(): void {
+      Object.assign(this.$data, this.$options.data());
     },
   },
 });

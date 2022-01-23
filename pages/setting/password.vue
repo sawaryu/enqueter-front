@@ -20,7 +20,6 @@
       counter="72"
       color="grey darken-3"
       label="new password"
-      hint="Please type using half-width alphanumeric characters."
       persistent-hint
       tabindex="1"
     >
@@ -54,11 +53,11 @@ export default Vue.extend({
       },
       passwordRules: [
         (v: string) => (!!v && /\S/.test(v)) || "Must be required",
-        (v: string) => v.length >= 8 || "Must be more than 8 characters",
-        (v: string) => v.length <= 72 || "Must be less than 72 characters",
         (v: string) =>
           /^[A-Za-z0-9]*$/.test(v) ||
           "Must be using half-width alphanumeric characters.",
+        (v: string) => v.length >= 8 || "Must be more than 8 characters",
+        (v: string) => v.length <= 72 || "Must be less than 72 characters",
       ],
     };
   },
@@ -94,15 +93,7 @@ export default Vue.extend({
   },
   computed: {
     passwordConfirmationRules() {
-      // mostly same as `passwordRules`
       return [
-        (v: string) => (!!v && /\S/.test(v)) || "Must be required",
-        (v: string) => v.length >= 8 || "Must be more than 8 characters",
-        (v: string) => v.length <= 72 || "Must be less than 72 characters",
-        (v: string) =>
-          /^[A-Za-z0-9]*$/.test(v) ||
-          "Must be using half-width alphanumeric characters.",
-        // only for this methods.
         (v: string) =>
           this.passwordModel.new_password == v ||
           `not match with the new password.`,

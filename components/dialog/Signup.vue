@@ -36,7 +36,6 @@
             color="grey darken-3"
             counter="15"
             maxlength="15"
-            hint="Please type using half-width alphanumeric characters."
             persistent-hint
           ></v-text-field>
 
@@ -68,7 +67,6 @@
             label="password"
             color="grey darken-3"
             counter="72"
-            hint="Please type more than 8 characters using half-width alphanumeric."
             persistent-hint
           ></v-text-field>
 
@@ -120,14 +118,16 @@ export default Vue.extend({
     },
     publicIdRules: [
       (v: string) => (!!v && /\S/.test(v)) || "Must be required.",
-      (v: string) => v.length <= 15 || "Must be less than 15 characters.",
       (v: string) =>
         /^[A-Za-z0-9]*$/.test(v) ||
         "Must be using half-width alphanumeric characters.",
+      (v: string) => v.length <= 15 || "Must be less than 15 characters.",
     ],
     emailRules: [
       (v: string) => (!!v && /\S/.test(v)) || "Must be required.",
-      (v: string) => (!!v && /[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(v)) || "Incorrect email format.",
+      (v: string) =>
+        (!!v && /[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(v)) ||
+        "Incorrect email format.",
       (v: string) => v.length <= 255 || "Must be less than 255 characters.",
     ],
     nameRules: [
@@ -136,17 +136,17 @@ export default Vue.extend({
     ],
     passwordRules: [
       (v: string) => (!!v && /\S/.test(v)) || "Must be required.",
-      (v: string) => v.length >= 8 || "Must be more than 8 characters.",
-      (v: string) => v.length <= 72 || "Must be less than 72 characters.",
       (v: string) =>
         /^[A-Za-z0-9]*$/.test(v) ||
         "Must be using half-width alphanumeric characters.",
+      (v: string) => v.length >= 8 || "Must be more than 8 characters.",
+      (v: string) => v.length <= 72 || "Must be less than 72 characters.",
     ],
   }),
   methods: {
     async signup(): Promise<any> {
       if (this.$refs.form.validate()) {
-        this.$accessor.overlay.setOverlay(true)
+        this.$accessor.overlay.setOverlay(true);
         try {
           const res = await this.$axios.$post("/auth", this.signupModel);
           this.$accessor.dialog.setSignupDialog(false);
@@ -158,11 +158,11 @@ export default Vue.extend({
             },
             { root: true }
           );
-          this.$emit("sent")
+          this.$emit("sent");
         } catch (e) {
           console.log(e);
         } finally {
-          this.$accessor.overlay.setOverlay(false)
+          this.$accessor.overlay.setOverlay(false);
         }
       }
     },
@@ -175,17 +175,10 @@ export default Vue.extend({
   },
   computed: {
     passwordConfirmationRules() {
-      // mostly same as `passwordRules`
+      // is same with "password" ?
       return [
-        (v: string) => (!!v && /\S/.test(v)) || "Must be required",
-        (v: string) => v.length >= 8 || "Must be more than 8 characters",
-        (v: string) => v.length <= 72 || "Must be less than 72 characters",
         (v: string) =>
-          /^[A-Za-z0-9]*$/.test(v) ||
-          "Must be using half-width alphanumeric characters.",
-        // only for this methods.
-        (v: string) =>
-          this.signupModel.password == v || `not match with the password.`,
+          this.signupModel.password == v || `Not match with the password.`,
       ];
     },
   },

@@ -51,6 +51,7 @@ export default {
     items: [
       { title: "Basic", icon: "mdi-account", to: "/setting" },
       { title: "Avatar", icon: "mdi-emoticon", to: "/setting/avatar" },
+      { title: "Email", icon: "mdi-email", to: "/setting/email" },
       {
         title: "Password",
         icon: "mdi-key-variant",

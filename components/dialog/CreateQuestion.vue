@@ -23,7 +23,7 @@
             counter="140"
             dense
             persistent-hint
-            hint="Answerable due is set to one week."
+            hint="* A question will be expired after a week."
           >
           </v-textarea>
         </v-form>

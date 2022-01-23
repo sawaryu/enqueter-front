@@ -2,9 +2,8 @@
   <v-row>
     <v-col cols="12" md="8" order="last" order-sm="first">
       <v-card color="rgb(0, 0, 0, 0)" flat>
-        <v-card-title><v-icon>mdi-home</v-icon>Timeline</v-card-title>
-
-        <v-divider></v-divider>
+        <!-- <v-card-title><v-icon>mdi-home</v-icon>Timeline</v-card-title>
+        <v-divider></v-divider> -->
 
         <v-card-text v-if="!questions.length" class="text-center">
           Questions that you and your following users have are displayed there.
@@ -21,7 +20,7 @@
     <!--  -->
 
     <v-col cols="12" md="4">
-      <div style="position: sticky; top: 65px">
+      <div style="position: sticky; top: 80px">
         <Ranking />
       </div>
     </v-col>

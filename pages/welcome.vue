@@ -13,13 +13,13 @@
       </v-alert>
 
       <v-alert
-        v-else-if="confirm"
+        v-else-if="res"
         class="text-center"
         dense
         outlined
-        type="success"
+        :type="res.type"
       >
-        You are already confirmed. please login !!
+        {{ res.message }}
       </v-alert>
     </div>
 
@@ -50,21 +50,23 @@
 import Vue from "vue";
 export default Vue.extend({
   auth: false,
-  data: () => ({ isSent: false, confirm: false }),
+  data: () => ({
+    isSent: null,
+    res: null as object,
+  }),
   created() {
-    // console.log(this.$vuetify.breakpoint.width)
     this.init();
   },
   methods: {
     async init() {
       const query = this.$route.query.confirm;
-      console.log(query)
+      console.log(query);
       if (!query) {
         return;
       }
       try {
         const res = await this.$axios.$get(`/auth/${query}/confirm`);
-        this.confirm = true;
+        this.res = res;
       } catch (error) {}
     },
   },
