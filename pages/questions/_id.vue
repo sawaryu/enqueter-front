@@ -68,9 +68,9 @@ export default Vue.extend({
           message: "Right (+3pt)",
           color: "success",
         };
-      } else if (arg.result === -2) {
+      } else if (arg.result === -3) {
         this.snackDisplay = {
-          message: "Wrong (-2pt)",
+          message: "Wrong (-3pt)",
           color: "dark",
         };
       } else if (arg.result === 0) {

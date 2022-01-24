@@ -28,6 +28,10 @@
         <Question :question="q" />
       </v-col>
 
+      <v-col class="text-center" v-if="!questionsSorted.length">
+        <div class="text--secondary">There are no questions.</div>
+      </v-col>
+
       <!-- float btn for creating th question. -->
       <Float />
       <CreateQuestion />

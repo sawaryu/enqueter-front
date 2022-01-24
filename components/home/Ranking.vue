@@ -1,29 +1,25 @@
 <template>
   <v-card color="rgb(0, 0, 0, 0)" flat>
     <v-card-title
-      ><v-icon>mdi-crown</v-icon>Rank
+      ><v-icon>mdi-crown</v-icon>Ranking
+
       <v-spacer></v-spacer>
 
-      <div class="text-caption mr-3">34th</div>
+      <template v-if="current_user">
+        <!-- current user -->
+        <v-avatar class="pointer mr-1" size="40" @click="$router.push(`/users/${current_user.id}`)">
+          <v-img :src="$avatar(current_user.avatar)"></v-img
+        ></v-avatar>
 
-      <!-- current user -->
-      <v-avatar class="pointer" size="40">
-        <v-img :src="$avatar($auth.user.avatar)"></v-img
-      ></v-avatar>
-      <div class="pl-1">
-        <div class="text-caption">
-          <span
-            class="font-weight-medium underline pointer"
-            v-text="$auth.user.public_id"
-          ></span>
-        </div>
+        <div class="text-caption" v-text="ordinal(current_user.rank)"></div>
+
+        <span class="mx-1 text-caption">/</span>
+
         <div
-          class="text-caption text--secondary"
-          v-text="$auth.user.name"
+          class="text-caption"
+          v-text="current_user.total_point + 'pt'"
         ></div>
-      </div>
-
-      <div class="ml-2 text-caption">10pt</div>
+      </template>
     </v-card-title>
 
     <v-divider></v-divider>
@@ -95,6 +91,7 @@ export default Vue.extend({
   data() {
     return {
       users: [] as Array<User>,
+      current_user: null as object,
       periods: [
         { id: "week", text: "week" },
         { id: "month", text: "month" },
@@ -113,7 +110,10 @@ export default Vue.extend({
             period: this.$accessor.ranking.getCurrentPeriod,
           },
         });
-        this.users = res;
+        this.users = res.users.filter(
+          (user: User, index: number) => index <= 9
+        );
+        this.current_user = res.current_user;
       } catch (error) {}
     },
     sizeAndColorByRank(index: number): {} {

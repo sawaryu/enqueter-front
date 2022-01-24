@@ -13,7 +13,7 @@
       tabindex="1"
       v-model="emailModel.email"
       :rules="emailRules"
-      label="New E-mail"
+      label="E-mail"
       color="grey darken-3"
       counter="255"
       max-length="255"
