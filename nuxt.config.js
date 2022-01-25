@@ -115,10 +115,10 @@ export default {
   },
 
   // first loading (only SPA?)
-  loadingIndicator: {
-    name: 'three-bounce',
-    color: '#000000',
-    background: 'white'
-  }
+  // loadingIndicator: {
+  //   name: 'three-bounce',
+  //   color: '#000000',
+  //   background: 'white'
+  // }
 
 }

@@ -1,5 +1,14 @@
 <template>
   <v-app id="inspire">
+    <!-- loading -->
+    <v-overlay :value="loading" color="#F8F9FA" opacity="1" z-index="9999">
+      <VueLoading
+        type="bars"
+        color="#333"
+        :size="{ width: '80px', height: '80px' }"
+      />
+    </v-overlay>
+
     <!-- header welcome -->
     <v-app-bar
       v-if="$route.path.includes('/welcome')"
@@ -7,7 +16,9 @@
       app
       flat
     >
-      <v-toolbar-title class="text-h5 font-weight-bold">Enqueter</v-toolbar-title>
+      <v-toolbar-title class="text-h5 font-weight-bold"
+        >Enqueter</v-toolbar-title
+      >
 
       <v-spacer></v-spacer>
       <v-btn
@@ -114,7 +125,7 @@
     </v-navigation-drawer>
 
     <!-- main -->
-    <v-main :class="{'grey lighten-3': !$route.path.includes('/welcome')}">
+    <v-main :class="{ 'grey lighten-3': !$route.path.includes('/welcome') }">
       <v-container>
         <Report />
         <Flash />
@@ -128,13 +139,23 @@
 </template>
 
 <script lang="ts">
+import { VueLoading } from "vue-loading-template";
 import Vue from "vue";
 export default Vue.extend({
+  components: {
+    VueLoading,
+  },
   name: "default",
   data() {
     return {
+      loading: true,
       drawer: null as null | boolean,
     };
+  },
+  mounted() {
+    setTimeout(() => {
+      this.loading = false;
+    }, 500);
   },
   methods: {
     logout() {
