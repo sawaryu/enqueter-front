@@ -66,11 +66,11 @@
           <v-list-item-content>
             <v-list-item-title
               class="font-weight-bold"
-              v-text="$auth.user.public_id"
+              v-text="$auth.user.username"
             >
             </v-list-item-title>
             <v-list-item-subtitle
-              v-text="$auth.user.name"
+              v-text="$auth.user.nickname"
             ></v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>

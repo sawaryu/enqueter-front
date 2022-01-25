@@ -40,8 +40,8 @@
 
           <v-text-field
             tabindex="1"
-            v-model="loginModel.public_id_or_email"
-            label="user_id (E-mail)"
+            v-model="loginModel.username_or_email"
+            label="Username (E-mail)"
             required
             color="grey darken-3"
           ></v-text-field>
@@ -90,7 +90,7 @@ export default Vue.extend({
   data: () => ({
     valid: true as boolean,
     loginModel: {
-      public_id_or_email: "" as string,
+      username_or_email: "" as string,
       password: "" as string,
     } as Object,
     user_id_not_confirmed: null as number,
@@ -106,7 +106,7 @@ export default Vue.extend({
         this.$router.push("/");
         this.$accessor.flash.showMessage(
           {
-            message: `Hello, ${this.$auth.user.name}.`,
+            message: `Hello, ${this.$auth.user.nickname}.`,
             type: "success",
             status: true,
           },

@@ -30,9 +30,9 @@
 
           <v-text-field
             tabindex="1"
-            v-model="signupModel.public_id"
-            :rules="publicIdRules"
-            label="user_id"
+            v-model="signupModel.username"
+            :rules="usernameRules"
+            label="Username"
             color="grey darken-3"
             counter="15"
             maxlength="15"
@@ -51,9 +51,9 @@
 
           <v-text-field
             tabindex="1"
-            v-model="signupModel.name"
-            :rules="nameRules"
-            label="nickname"
+            v-model="signupModel.nickname"
+            :rules="nicknameRules"
+            label="Nickname"
             color="grey darken-3"
             maxlength="20"
             counter="20"
@@ -110,13 +110,13 @@ export default Vue.extend({
   data: () => ({
     valid: true,
     signupModel: {
-      public_id: "",
+      username: "",
       email: "",
-      name: "",
+      nickname: "",
       password: "",
       password_confirmation: "",
     },
-    publicIdRules: [
+    usernameRules: [
       (v: string) => (!!v && /\S/.test(v)) || "Must be required.",
       (v: string) =>
         /^[A-Za-z0-9]*$/.test(v) ||
@@ -130,7 +130,7 @@ export default Vue.extend({
         "Incorrect email format.",
       (v: string) => v.length <= 255 || "Must be less than 255 characters.",
     ],
-    nameRules: [
+    nicknameRules: [
       (v: string) => (!!v && /\S/.test(v)) || "Must be required.",
       (v: string) => v.length <= 20 || "Must be less than 20 characters.",
     ],

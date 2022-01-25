@@ -60,9 +60,9 @@
             <v-list-item-content>
               <v-list-item-title
                 class="text-subtitle-2"
-                v-text="user.public_id"
+                v-text="user.username"
               ></v-list-item-title>
-              <v-list-item-subtitle v-text="user.name"></v-list-item-subtitle>
+              <v-list-item-subtitle v-text="user.nickname"></v-list-item-subtitle>
             </v-list-item-content>
 
             <v-list-item-action>
@@ -101,9 +101,9 @@
             <v-list-item-content>
               <v-list-item-title
                 class="text-subtitle-2"
-                v-text="user.public_id"
+                v-text="user.username"
               ></v-list-item-title>
-              <v-list-item-subtitle v-text="user.name"></v-list-item-subtitle>
+              <v-list-item-subtitle v-text="user.nickname"></v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-list>

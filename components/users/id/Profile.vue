@@ -49,10 +49,10 @@
 
     <div class="d-flex ml-2">
       <v-card width="340" elevation="0">
-        <div class="pa-0 text-subtitle-2" v-text="user.public_id"></div>
-        <div class="pa-0 text-caption text--secondary" v-text="user.name"></div>
+        <div class="pa-0 text-subtitle-2" v-text="user.username"></div>
+        <div class="pa-0 text-caption text--secondary" v-text="user.nickname"></div>
         <div
-          class="pt-1 pb-0 mb-3"
+          class="pt-3 pb-0 mb-3"
           style="white-space: pre-wrap"
           v-html="introduceLinked"
         ></div>
@@ -92,8 +92,8 @@ import { autoLink } from "vue-highlights";
 import Vue, { PropOptions } from "vue";
 export interface User {
   id: number;
-  public_id: string;
-  name: string;
+  username: string;
+  nickname: string;
   introduce: string;
   avatar: string;
   created_at: string;

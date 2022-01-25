@@ -2,26 +2,25 @@
   <v-form ref="form" v-model="valid" lazy-validation>
     <v-text-field
       color="grey darken-3"
-      v-model="profileModel.public_id"
-      :rules="publicIdRules"
-      label="user id"
+      v-model="profileModel.username"
+      :rules="usernameRules"
+      label="Username"
       maxlength="15"
       counter="15"
-      hint="Please type using half-width alphanumeric characters."
       persistent-hint
     ></v-text-field>
 
     <v-text-field
       color="grey darken-3"
-      v-model="profileModel.name"
-      :rules="nameRules"
-      label="nickname"
+      v-model="profileModel.nickname"
+      :rules="nicknameRules"
+      label="Nickname"
       maxlength="20"
       counter="20"
     ></v-text-field>
 
     <v-textarea
-      label="introduce"
+      label="Introduce"
       v-model="profileModel.introduce"
       color="grey darken-3"
       placeholder="Hi, my name is john."
@@ -44,18 +43,18 @@ export default Vue.extend({
     return {
       valid: true,
       profileModel: {
-        public_id: "",
-        name: "",
+        username: "",
+        nickname: "",
         introduce: "",
       },
-      publicIdRules: [
+      usernameRules: [
         (v: string) => (!!v && /\S/.test(v)) || "Must be required",
         (v: string) => v.length <= 15 || "Must be less than 15 characters",
         (v: string) =>
           /^[A-Za-z0-9]*$/.test(v) ||
           "Must be using half-width alphanumeric characters.",
       ],
-      nameRules: [
+      nicknameRules: [
         (v: string) => (!!v && /\S/.test(v)) || "Must be required",
         (v: string) => v.length <= 20 || "Must be less than 20 characters",
       ],
@@ -64,8 +63,8 @@ export default Vue.extend({
   computed: {
     isDisable() {
       const profileModel = {
-        public_id: this.$auth.user.public_id,
-        name: this.$auth.user.name,
+        username: this.$auth.user.username,
+        nickname: this.$auth.user.nickname,
         introduce: this.$auth.user.introduce,
       };
 
@@ -74,8 +73,8 @@ export default Vue.extend({
     },
   },
   created() {
-    this.profileModel.public_id = this.$auth.user.public_id;
-    this.profileModel.name = this.$auth.user.name;
+    this.profileModel.username = this.$auth.user.username;
+    this.profileModel.nickname = this.$auth.user.nickname;
     this.profileModel.introduce = this.$auth.user.introduce;
   },
   methods: {

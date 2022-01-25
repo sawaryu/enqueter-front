@@ -31,10 +31,10 @@
               <span
                 class="underline pointer"
                 @click="goProfile(user.id)"
-                v-text="user.public_id"
+                v-text="user.username"
               ></span>
             </v-list-item-title>
-            <v-list-item-subtitle v-text="user.name"></v-list-item-subtitle>
+            <v-list-item-subtitle v-text="user.nickname"></v-list-item-subtitle>
           </v-list-item-content>
 
           <v-list-item-action>

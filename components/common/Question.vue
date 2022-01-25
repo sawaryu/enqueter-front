@@ -79,12 +79,12 @@
           <span
             class="font-weight-medium underline pointer"
             @click="$router.push(`/users/${question.user.id}`)"
-            v-text="question.user.public_id"
+            v-text="question.user.username"
           ></span>
         </div>
         <div
           class="text-caption text--secondary"
-          v-text="question.user.name"
+          v-text="question.user.nickname"
         ></div>
       </div>
       <v-spacer></v-spacer>
@@ -97,6 +97,7 @@
 
 <script lang="ts">
 import moment from "moment";
+import { User } from "@/components/users/id/Profile.vue";
 import Vue, { PropOptions } from "vue";
 // export interface.
 export interface Question {
@@ -109,17 +110,7 @@ export interface Question {
   is_open: boolean;
   is_answered: boolean;
   is_bookmarked: boolean;
-  user: {
-    id: number;
-    public_id: string;
-    name: string;
-    introduce: string;
-    avatar: string;
-    created_at: string;
-    updated_at: string;
-    is_following: boolean;
-    role: string;
-  };
+  user: User;
 }
 export default Vue.extend({
   props: {

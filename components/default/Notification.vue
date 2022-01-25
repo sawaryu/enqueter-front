@@ -47,7 +47,7 @@
               <span
                 @click="goProfile(notification.user.id)"
                 class="underline pointer font-weight-bold"
-                >{{ notification.user.public_id }}</span
+                >{{ notification.user.username }}</span
               >
             </div>
 
@@ -56,7 +56,7 @@
               <span
                 @click="goProfile(notification.user.id)"
                 class="underline pointer font-weight-bold"
-                >{{ notification.user.public_id }}</span
+                >{{ notification.user.username }}</span
               >
               answered your
               <span

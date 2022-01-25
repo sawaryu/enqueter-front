@@ -24,6 +24,7 @@ export default Vue.extend({
   },
   methods: {
     async destroy() {
+      this.$accessor.overlay.setOverlay(true);
       try {
         const res = await this.$axios.$delete("/auth");
         this.$auth.logout();
@@ -35,7 +36,10 @@ export default Vue.extend({
           },
           { root: true }
         );
-      } catch (error) {}
+      } catch (error) {
+      } finally {
+        this.$accessor.overlay.setOverlay(false);
+      }
     },
   },
 });

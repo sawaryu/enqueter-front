@@ -45,11 +45,11 @@
               <v-list-item-title>
                 <span
                   class="underline pointer"
-                  v-text="user.public_id"
+                  v-text="user.username"
                   @click="$router.push(`/users/${user.id}`)"
                 ></span>
               </v-list-item-title>
-              <v-list-item-subtitle v-text="user.name"></v-list-item-subtitle>
+              <v-list-item-subtitle v-text="user.nickname"></v-list-item-subtitle>
             </v-list-item-content>
 
             <v-list-item-action>
