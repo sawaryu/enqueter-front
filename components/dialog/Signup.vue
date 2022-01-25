@@ -15,10 +15,10 @@
 
       <v-card-text class="d-flex justify-center pb-15">
         <v-form
-          class="text-center"
           ref="form"
           v-model="valid"
           lazy-validation
+          class="text-center"
           style="width: 300px"
         >
           <div class="text-center">
@@ -158,7 +158,12 @@ export default Vue.extend({
             },
             { root: true }
           );
-          this.$emit("sent");
+          this.$refs.form.resetValidation()
+          Object.assign(this.$data, this.$options.data());
+          this.$accessor.alert.setAlert({
+            type: "info",
+            message: "Please check your email to activate the account.",
+          });
         } catch (e) {
           console.log(e);
         } finally {

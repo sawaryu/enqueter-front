@@ -30,8 +30,8 @@
       </v-card>
     </div>
 
-    <Login @sent="sent" />
-    <Signup @sent="sent" />
+    <Login />
+    <Signup />
   </v-container>
 </template>
 
@@ -60,13 +60,7 @@ export default Vue.extend({
           message: res.message,
         });
       } catch (error) {}
-    },
-    sent(): void {
-      this.$accessor.alert.setAlert({
-        type: "info",
-        message: "Please check your email to activate the account.",
-      });
-    },
+    }
   },
 });
 </script>

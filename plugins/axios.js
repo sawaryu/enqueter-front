@@ -10,7 +10,7 @@ export default ({ app: { $axios, $accessor } }) => {
       $accessor.flash.showMessage(
         {
           message: error.response.data.message,
-          type: "error",
+          type: "warning",
           status: true,
         },
         { root: true }
