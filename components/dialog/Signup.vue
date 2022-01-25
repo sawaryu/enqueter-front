@@ -175,7 +175,6 @@ export default Vue.extend({
   },
   computed: {
     passwordConfirmationRules() {
-      // is same with "password" ?
       return [
         (v: string) =>
           this.signupModel.password == v || `Not match with the password.`,

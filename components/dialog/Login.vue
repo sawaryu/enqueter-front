@@ -15,6 +15,7 @@
 
       <v-card-text class="d-flex justify-center pb-15">
         <v-form
+          v-if="!forgotten"
           class="text-center"
           ref="form"
           v-model="valid"
@@ -56,7 +57,10 @@
           ></v-text-field>
 
           <div class="mb-5">
-            If you forget password, click <a href="#">here.</a>
+            If you forget the password, click
+            <span class="blue--text pointer underline" @click="forgotten = true"
+              >here.</span
+            >
           </div>
 
           <v-btn @click="login" tabindex="1" color="grey darken-3" dark>
@@ -79,6 +83,47 @@
             signup
           </v-btn>
         </v-form>
+
+        <!--------------->
+
+        <v-form v-else class="text-center" style="width: 300px">
+          <div class="text-center">
+            <v-icon class="mx-auto" size="48" color="grey darken-4">
+              mdi-lock
+            </v-icon>
+            <span class="font-weight-bold text-h6 text--primary"
+              >Reset password</span
+            >
+          </div>
+
+          <v-text-field
+            tabindex="1"
+            v-model="resetModel.email"
+            label="E-mail"
+            required
+            color="grey darken-3"
+            hint="Send email to your registered E-mail."
+            persistent-hint
+          ></v-text-field>
+
+          <v-btn class="mt-5" tabindex="1" color="grey darken-3" dark>
+            send
+          </v-btn>
+
+          <v-divider class="my-5"></v-divider>
+
+          <v-btn
+            @click="forgotten = false"
+            tabindex="1"
+            small
+            outlined
+            color="grey darken-3"
+            dark
+            rounded
+          >
+            cancel
+          </v-btn>
+        </v-form>
       </v-card-text>
     </v-card>
   </v-dialog>
@@ -89,10 +134,14 @@ import Vue from "vue";
 export default Vue.extend({
   data: () => ({
     valid: true as boolean,
+    forgotten: false,
     loginModel: {
       username_or_email: "" as string,
       password: "" as string,
     } as Object,
+    resetModel: {
+      email: "",
+    } as object,
     user_id_not_confirmed: null as number,
   }),
   methods: {

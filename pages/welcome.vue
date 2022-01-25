@@ -2,24 +2,13 @@
   <v-container>
     <div class="d-flex justify-center">
       <v-alert
-        v-if="isSent"
-        class="text-center"
-        icon="mdi-email"
-        dense
-        outlined
-        type="info"
-      >
-        Please check your email to activate the account.
-      </v-alert>
-
-      <v-alert
-        v-else-if="res"
+        v-if="$accessor.alert.getAlert"
         class="text-center"
         dense
         outlined
-        :type="res.type"
+        :type="$accessor.alert.getAlert.type"
       >
-        {{ res.message }}
+        {{ $accessor.alert.getAlert.message }}
       </v-alert>
     </div>
 
@@ -41,8 +30,8 @@
       </v-card>
     </div>
 
-    <Login @sent="isSent = true" />
-    <Signup @sent="isSent = true" />
+    <Login @sent="sent" />
+    <Signup @sent="sent" />
   </v-container>
 </template>
 
@@ -51,10 +40,10 @@ import Vue from "vue";
 export default Vue.extend({
   auth: false,
   data: () => ({
-    isSent: null,
     res: null as object,
   }),
   created() {
+    this.$accessor.alert.setAlert(null);
     this.init();
   },
   methods: {
@@ -66,8 +55,17 @@ export default Vue.extend({
       }
       try {
         const res = await this.$axios.$get(`/auth/${query}/confirm`);
-        this.res = res;
+        this.$accessor.alert.setAlert({
+          type: res.type,
+          message: res.message,
+        });
       } catch (error) {}
+    },
+    sent(): void {
+      this.$accessor.alert.setAlert({
+        type: "info",
+        message: "Please check your email to activate the account.",
+      });
     },
   },
 });

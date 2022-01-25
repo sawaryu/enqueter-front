@@ -5,6 +5,7 @@ import * as ranking from '~/store/ranking'
 import * as flash from '~/store/flash'
 import * as sort from '~/store/sort'
 import * as overlay from '~/store/overlay'
+import * as alert from '~/store/alert'
 
 export const state = () => {
   return {}
@@ -23,6 +24,7 @@ export const accessorType = getAccessorType({
     ranking,
     flash,
     sort,
-    overlay
+    overlay,
+    alert
   },
 })
