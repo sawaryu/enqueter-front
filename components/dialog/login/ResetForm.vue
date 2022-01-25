@@ -59,7 +59,7 @@ export default Vue.extend({
     async submit() {
       try {
         const res = await this.$axios.$post(
-          `/auth/password/reset`,
+          `/auth/password_reset`,
           this.emailModel
         );
         this.$accessor.dialog.setLoginDialog(false);
