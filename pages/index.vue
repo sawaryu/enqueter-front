@@ -6,10 +6,13 @@
         <v-divider></v-divider> -->
 
         <v-card-text v-if="!questions.length" class="text-center">
-          Questions that you and your following users have are displayed there.
+          <div class="font-weight-bold text-h6">
+            Questions related to you will be displayed here
+          </div>
+          <div class="text-caption">Let's try create questions and follow people.</div>
         </v-card-text>
 
-        <v-row class="mt-3" v-else>
+        <v-row v-else>
           <v-col v-for="q in questions" :key="q.id" cols="12" sm="6">
             <Question :question="q" @remove="remove(q.id)" />
           </v-col>

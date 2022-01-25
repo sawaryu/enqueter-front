@@ -44,7 +44,9 @@
       </v-col>
 
       <v-col v-if="!questionsSorted.length" class="text--secondary text-center">
-        No questions.
+        <div class="font-weight-bold">
+          There are no questions.
+        </div>
       </v-col>
     </v-row>
   </div>

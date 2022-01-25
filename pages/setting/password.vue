@@ -7,7 +7,7 @@
       maxlength="72"
       counter="72"
       color="grey darken-3"
-      label="current password"
+      label="Current password"
       tabindex="1"
     >
     </v-text-field>
@@ -19,7 +19,7 @@
       maxlength="72"
       counter="72"
       color="grey darken-3"
-      label="new password"
+      label="New password"
       persistent-hint
       tabindex="1"
     >
@@ -31,7 +31,7 @@
       maxlength="72"
       counter="72"
       color="grey darken-3"
-      label="new password (confirmation)"
+      label="New password (confirmation)"
       tabindex="1"
     >
     </v-text-field>

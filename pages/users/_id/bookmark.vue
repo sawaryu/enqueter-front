@@ -8,7 +8,8 @@
       </v-col>
 
       <v-col v-if="!questions.length" class="text--secondary text-center">
-        No questions.
+        <div class="font-weight-bold">You haven't added any Questions to your Bookmarks yet</div>
+        <div class="text-caption">When you do, they'll show up here.</div>
       </v-col>
     </v-row>
   </div>
