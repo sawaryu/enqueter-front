@@ -55,9 +55,14 @@
             color="grey darken-3"
           ></v-text-field>
 
+          <div class="mb-5">
+            If you forget password, click <a href="#">here.</a>
+          </div>
+
           <v-btn @click="login" tabindex="1" color="grey darken-3" dark>
             login
           </v-btn>
+
           <v-divider class="my-5"></v-divider>
           <div class="text-primary mb-1">
             In case of not having the account.
@@ -127,7 +132,7 @@ export default Vue.extend({
           },
           { root: true }
         );
-        this.reset()
+        this.reset();
         this.$emit("sent");
       } catch (error) {
       } finally {

@@ -85,7 +85,7 @@
           </v-btn>
           <v-divider class="my-5"></v-divider>
           <div class="text-primary mb-1">
-            In case of already having the account.
+            In case of having the account already.
           </div>
           <v-btn
             @click="closeOpen"
