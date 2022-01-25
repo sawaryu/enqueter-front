@@ -118,8 +118,11 @@ export default Vue.extend({
   },
   computed: {
     beforeTime(): string {
+      if (!this.question.is_open) {
+        return "";
+      }
       moment.locale("en");
-      return moment(this.question.created_at).fromNow();
+      return "closed " + moment.unix(this.question.closed_at).fromNow();
     },
   },
   methods: {
