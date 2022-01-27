@@ -82,7 +82,7 @@ export default Vue.extend({
       this.$accessor.overlay.setOverlay(true);
       try {
         const res = await this.$axios.$post(
-          "/auth/update_confirmation",
+          "/auth/update_email",
           this.emailModel
         );
         this.$accessor.flash.showMessage(
@@ -104,7 +104,7 @@ export default Vue.extend({
     async update(): Promise<void> {
       try {
         const res = await this.$axios.$put(
-          "/auth/update_confirmation",
+          "/auth/update_email",
           this.tokenModel
         );
         this.sent = false;
