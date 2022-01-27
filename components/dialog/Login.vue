@@ -15,7 +15,7 @@
 
       <v-card-text class="d-flex justify-center pb-15">
         <LoginForm v-if="!forgotten" @open="forgotten = true" />
-        <ResetForm v-else @close="forgotten = false" />
+        <EmailForm v-else @close="forgotten = false" />
       </v-card-text>
     </v-card>
   </v-dialog>

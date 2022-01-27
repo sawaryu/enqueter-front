@@ -1,5 +1,5 @@
 <template>
-  <v-form class="text-center" style="width: 300px">
+  <v-form ref="form" class="text-center" style="width: 300px">
     <div class="text-center">
       <v-icon class="mx-auto" size="48" color="grey darken-4">
         mdi-lock
@@ -57,13 +57,25 @@ export default Vue.extend({
   },
   methods: {
     async submit() {
+      if (!(this.$refs.form as any).validate()) {
+        return;
+      }
+
+      this.$accessor.overlay.setOverlay(true);
       try {
         const res = await this.$axios.$post(
           `/auth/password_reset`,
           this.emailModel
         );
         this.$accessor.dialog.setLoginDialog(false);
-      } catch (error) {}
+        this.$accessor.alert.setAlert({
+          type: "info",
+          message: res.message,
+        });
+      } catch (error) {
+      } finally {
+        this.$accessor.overlay.setOverlay(false);
+      }
     },
   },
 });

@@ -21,21 +21,24 @@
       >
 
       <v-spacer></v-spacer>
-      <v-btn
-        :large="isLarge"
-        class="mr-3"
-        color="grey darken-2"
-        outlined
-        @click="$accessor.dialog.setLoginDialog(true)"
-        >Login</v-btn
-      >
-      <v-btn
-        :large="isLarge"
-        color="grey darken-2"
-        dark
-        @click="$accessor.dialog.setSignupDialog(true)"
-        >SignUp</v-btn
-      >
+
+      <template v-if="!$accessor.error.getIsError">
+        <v-btn
+          :large="isLarge"
+          class="mr-3"
+          color="grey darken-2"
+          outlined
+          @click="$accessor.dialog.setLoginDialog(true)"
+          >Login</v-btn
+        >
+        <v-btn
+          :large="isLarge"
+          color="grey darken-2"
+          dark
+          @click="$accessor.dialog.setSignupDialog(true)"
+          >SignUp</v-btn
+        >
+      </template>
     </v-app-bar>
 
     <!-- header -->
@@ -49,12 +52,14 @@
 
       <v-spacer></v-spacer>
 
-      <!-- Search -->
-      <Search />
-      <SearchXs />
+      <template v-if="!$accessor.error.getIsError">
+        <!-- Search -->
+        <Search />
+        <SearchXs />
 
-      <!-- Notification -->
-      <Notification />
+        <!-- Notification -->
+        <Notification />
+      </template>
     </v-app-bar>
 
     <!-- drawer -->

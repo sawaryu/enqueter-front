@@ -31,7 +31,7 @@ export default ({ app: { $axios, $accessor } }) => {
     } else if (statusCode == 404) {
       $nuxt.error({
         statusCode: statusCode,
-        message: "This page is no longer available",
+        message: "This page doesn't exist.",
       });
     } else if (statusCode == 403) {
       $nuxt.error({

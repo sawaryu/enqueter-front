@@ -105,14 +105,6 @@ export default Vue.extend({
           `/auth/${this.user_id_not_confirmed}/confirm/resend`
         );
         this.$accessor.dialog.setLoginDialog(false);
-        this.$accessor.flash.showMessage(
-          {
-            message: `Resent the E-mail, please check your email.`,
-            type: "info",
-            status: true,
-          },
-          { root: true }
-        );
         Object.assign(this.$data, this.$options.data());
         this.$accessor.alert.setAlert({
           type: "info",

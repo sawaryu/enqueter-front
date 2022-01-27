@@ -17,7 +17,7 @@
         <v-card-title class="text-h3 font-weight-bold text-center">
           Enqueter
         </v-card-title>
-        <v-card-text>choose the majority.</v-card-text>
+        <v-card-text>This is the sample application.</v-card-text>
         <v-card-actions class="d-flex justify-center">
           <v-btn
             x-large
@@ -32,6 +32,7 @@
 
     <Login />
     <Signup />
+    <Reset :resetInfo="resetInfo" @close="resetInfo = null" />
   </v-container>
 </template>
 
@@ -40,7 +41,7 @@ import Vue from "vue";
 export default Vue.extend({
   auth: false,
   data: () => ({
-    res: null as object,
+    resetInfo: null as object,
   }),
   created() {
     this.$accessor.alert.setAlert(null);
@@ -48,19 +49,53 @@ export default Vue.extend({
   },
   methods: {
     async init() {
-      const query = this.$route.query.confirm;
-      console.log(query);
-      if (!query) {
-        return;
+      // confirmation
+      const confirmId = this.$route.query.confirm;
+      if (confirmId) {
+        this.authConfirm(confirmId);
       }
+
+      // password reset
+      const token = this.$route.query.token;
+      const email = this.$route.query.email;
+      if (token && email) {
+        this.authResetPassword(token, email);
+      }
+    },
+    async authConfirm(confirmId: string): Promise<void> {
       try {
-        const res = await this.$axios.$get(`/auth/${query}/confirm`);
+        const res = await this.$axios.$get(`/auth/${confirmId}/confirm`);
         this.$accessor.alert.setAlert({
           type: res.type,
           message: res.message,
         });
       } catch (error) {}
-    }
+    },
+    async authResetPassword(token: string, email: string): Promise<void> {
+      try {
+        const res = await this.$axios.$get(`/auth/password_reset`, {
+          params: {
+            token: token,
+            email: email,
+          },
+        });
+
+        console.log(res.status)
+
+        if (res.message === "expired") {
+          this.$accessor.alert.setAlert({
+            type: "warning",
+            message: "The link is expired. please start over.",
+          });
+          return;
+        }
+
+        this.resetInfo = {
+          token: token,
+          email: email,
+        };
+      } catch (error) {}
+    },
   },
 });
 </script>

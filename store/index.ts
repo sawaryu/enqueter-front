@@ -6,6 +6,7 @@ import * as flash from '~/store/flash'
 import * as sort from '~/store/sort'
 import * as overlay from '~/store/overlay'
 import * as alert from '~/store/alert'
+import * as error from '~/store/error'
 
 export const state = () => {
   return {}
@@ -25,6 +26,7 @@ export const accessorType = getAccessorType({
     flash,
     sort,
     overlay,
-    alert
+    alert,
+    error
   },
 })
