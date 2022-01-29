@@ -1,7 +1,7 @@
-import { RefreshScheme } from '~auth/runtime'
+import { RefreshScheme } from '@nuxtjs/auth-next/dist/runtime'
 
 export default class CustomScheme extends RefreshScheme {
-  refreshTokens() {
+  async refreshTokens(): Promise<any> {
     // Refresh endpoint is disabled
     if (!this.options.endpoints.refresh) {
       return
@@ -30,15 +30,14 @@ export default class CustomScheme extends RefreshScheme {
     this.requestHandler.axios.defaults.headers.common[this.options.token.name] = `${this.options.token.type} ${this.refreshToken.get()}`
 
     // Make refresh request
-    return this.$auth
-      .request({}, this.options.endpoints.refresh)
-      .then((response) => {
-        // Update tokens
-        this.updateTokens(response, { isRefreshing: true })
-      })
-      .catch((error) => {
-        this.$auth.callOnError(error, { method: 'refreshToken' })
-        return Promise.reject(error)
-      })
+    try {
+      const response = await this.$auth
+        .request({}, this.options.endpoints.refresh)
+      // Update tokens
+      this.updateTokens(response, { isRefreshing: true })
+    } catch (error) {
+      this.$auth.callOnError(error, { method: 'refreshToken' })
+      return await Promise.reject(error)
+    }
   }
 }

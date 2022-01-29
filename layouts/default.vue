@@ -110,7 +110,7 @@
             <v-list-item-icon>
               <v-icon>mdi-account</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>Profile</v-list-item-title>
+            <v-list-item-title>My Page</v-list-item-title>
           </v-list-item>
           <v-list-item nuxt to="/setting">
             <v-list-item-icon>

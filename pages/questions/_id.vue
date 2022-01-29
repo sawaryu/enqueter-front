@@ -7,8 +7,12 @@
       @close="snackbar = false"
     />
 
-    <!-- Go to the next question. -->
+    <!-- Go to the next question. Back to questions. -->
     <FloatNext
+      v-if="float || currentComponent === 'Unanswered'"
+      @close="snackbar = false"
+    />
+    <FloatBack
       v-if="float || currentComponent === 'Unanswered'"
       @close="snackbar = false"
     />

@@ -18,7 +18,7 @@
     <v-col class="mt-0 pt-0" cols="12" sm="4">
       <v-card color="rgb(0, 0, 0, 0)" flat>
         <v-card-title class="justify-center mt-0 pt-1"
-          ><v-icon>mdi-account-multiple</v-icon>{{ users.length }} users
+          ><v-icon>mdi-account-multiple</v-icon>{{ users.length }} people
           answered</v-card-title
         >
         <v-divider></v-divider>

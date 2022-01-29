@@ -34,7 +34,7 @@
       "@nuxtjs/auth-next",
       "@types/nuxtjs__auth"
     ],
-    // importtant!! (make to be able to use vuex type modules)
+    // important!! (make to be able to use vuex type modules)
     "typeRoots": [
       "types",
       "node_modules/@types"

@@ -28,7 +28,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@/plugins/axios',
-    '@/plugins/common'
+    '@/plugins/common.ts'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -70,7 +70,7 @@ export default {
     localStorage: false,
     strategies: {
       local: {
-        scheme: '~/plugins/customRefresh.js',
+        scheme: '@/plugins/customRefresh.ts',
         token: {
           property: 'access_token',
           type: 'Bearer',

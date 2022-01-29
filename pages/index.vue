@@ -1,6 +1,6 @@
 <template>
   <v-row>
-    <v-col cols="12" md="8" order="last" order-sm="first">
+    <v-col cols="12" md="8" order="last" order-sm="second">
       <v-card color="rgb(0, 0, 0, 0)" flat>
         <!-- <v-card-title><v-icon>mdi-home</v-icon>Timeline</v-card-title>
         <v-divider></v-divider> -->

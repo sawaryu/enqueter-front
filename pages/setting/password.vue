@@ -80,7 +80,7 @@ export default Vue.extend({
         (this.$refs.form as any).resetValidation();
         this.$accessor.flash.showMessage(
           {
-            message: `updated completely your password.`,
+            message: `Updated completely your password.`,
             type: "success",
             status: true,
           },
