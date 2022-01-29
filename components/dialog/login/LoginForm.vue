@@ -7,7 +7,7 @@
     style="width: 300px"
   >
     <div v-if="user_id_not_confirmed" class="mb-5">
-      <v-alert color="warning" outlined prominent border="left">
+      <v-alert type="warning">
         <div>You are not confirmed. please check your email.</div>
       </v-alert>
       If you need to resend email. please click

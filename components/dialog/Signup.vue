@@ -150,14 +150,6 @@ export default Vue.extend({
         try {
           const res = await this.$axios.$post("/auth", this.signupModel);
           this.$accessor.dialog.setSignupDialog(false);
-          this.$accessor.flash.showMessage(
-            {
-              message: "Account created. please check your email.",
-              type: "info",
-              status: true,
-            },
-            { root: true }
-          );
           this.$refs.form.resetValidation()
           Object.assign(this.$data, this.$options.data());
           this.$accessor.alert.setAlert({

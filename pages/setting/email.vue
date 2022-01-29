@@ -30,8 +30,8 @@
 
   <!-- after sent email. -->
   <v-form v-else>
-    <v-alert dense outlined type="info" icon="mdi-email">
-      Please check your email and enter the <strong>token</strong> to confirm new E-mail.
+    <v-alert type="info">
+      Please check your E-mail and enter the <strong>token</strong> to the field.
       <div>
         <small>* A token is expired within 30 minutes after mailed.</small>
       </div>

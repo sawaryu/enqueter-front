@@ -4,8 +4,6 @@
       <v-alert
         v-if="$accessor.alert.getAlert"
         class="text-center"
-        dense
-        outlined
         :type="$accessor.alert.getAlert.type"
       >
         {{ $accessor.alert.getAlert.message }}
@@ -79,9 +77,6 @@ export default Vue.extend({
             email: email,
           },
         });
-
-        console.log(res.status)
-
         if (res.message === "expired") {
           this.$accessor.alert.setAlert({
             type: "warning",
@@ -89,7 +84,6 @@ export default Vue.extend({
           });
           return;
         }
-
         this.resetInfo = {
           token: token,
           email: email,
