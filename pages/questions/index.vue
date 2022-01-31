@@ -43,54 +43,20 @@
 <script lang="ts">
 import { Question } from "@/components/common/Question.vue";
 import { VueLoading } from "vue-loading-template";
-import InfiniteLoading from "vue-infinite-loading";
 import Vue from "vue";
 import CreateQuestion from "~/components/dialog/CreateQuestion.vue";
 export default Vue.extend({
-  components: { CreateQuestion, VueLoading, InfiniteLoading },
+  components: { CreateQuestion, VueLoading },
   async asyncData({ $axios }) {
     const res = await $axios.$get("/questions");
     return { questions: res as Question[] };
   },
   data() {
     return {
-      loading: false as Boolean,
-      page: 1 as Number
+      loading: false as boolean,
     };
   },
   methods: {
-    async init() {
-      if (!this.apiUrl) {
-        return;
-      }
-      try {
-        this.isLoading = true;
-        const res = await this.$axios.$get(this.apiUrl + `?page=${this.page}`);
-        console.log(res);
-        this.subjects = res;
-        this.page++;
-      } catch (e) {
-        console.log(e);
-      } finally {
-        this.isLoading = false;
-      }
-    },
-    async getMore($state) {
-      try {
-        const res = await this.$axios.$get(this.apiUrl + `?page=${this.page}`);
-        setTimeout(() => {
-          if (res.length) {
-            this.page += 1;
-            this.subjects.push(...res);
-            $state.loaded();
-          } else {
-            $state.complete();
-          }
-        }, 1000);
-      } catch (e) {
-        console.log(e);
-      }
-    },
     update() {
       this.loading = true;
       setTimeout(() => {

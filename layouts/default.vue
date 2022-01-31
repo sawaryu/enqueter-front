@@ -140,6 +140,7 @@
     </v-main>
 
     <!-- footer?? -->
+    <Footer />
   </v-app>
 </template>
 
