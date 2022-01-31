@@ -10,7 +10,7 @@
     color="grey darken-3"
     @click="$accessor.dialog.setQuestionDialog(true)"
   >
-    <v-icon dark>mdi-file-question</v-icon>
+    <v-icon dark>mdi-pencil</v-icon>
   </v-btn>
 </template>
 

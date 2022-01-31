@@ -4,7 +4,7 @@
     @input="$accessor.dialog.setFollowingDialog(false)"
     width="500"
   >
-    <v-card>
+    <v-card class="rounded-lg">
       <v-card-title>
         Following
         <v-spacer></v-spacer>
@@ -41,6 +41,15 @@
           </v-list-item-action>
         </v-list-item>
       </v-list>
+
+      <v-card-text v-if="!users.length" class="text-center">
+        <div class="font-weight-bold text-h6">
+          You aren't following anyone yet
+        </div>
+        <div class="text-caption">
+          When you do, they'll be listed here and you'll see their Questions in timeline.
+        </div>
+      </v-card-text>
     </v-card>
   </v-dialog>
 </template>

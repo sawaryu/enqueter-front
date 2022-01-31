@@ -4,7 +4,7 @@
     @input="$accessor.dialog.setFollowerDialog(false)"
     width="500"
   >
-    <v-card>
+    <v-card class="rounded-lg">
       <v-card-title>
         Follower
         <v-spacer></v-spacer>
@@ -42,6 +42,15 @@
           </v-list-item-action>
         </v-list-item>
       </v-list>
+
+      <v-card-text v-if="!users.length" class="text-center">
+        <div class="font-weight-bold text-h6">
+          You don't have any followers yet
+        </div>
+        <div class="text-caption">
+          When someone follows you, you'll see them here.
+        </div>
+      </v-card-text>
     </v-card>
   </v-dialog>
 </template>
@@ -80,10 +89,10 @@ export default Vue.extend({
         }
       });
     },
-    goProfile(user_id: number): void{
-      this.$accessor.dialog.setFollowerDialog(false)
-      this.$router.push(`/users/${user_id}`)
-    }
+    goProfile(user_id: number): void {
+      this.$accessor.dialog.setFollowerDialog(false);
+      this.$router.push(`/users/${user_id}`);
+    },
   },
 });
 </script>

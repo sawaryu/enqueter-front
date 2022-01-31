@@ -1,6 +1,14 @@
 <template>
   <v-row>
-    <v-col cols="12" md="8" order="last" order-sm="second">
+    <v-col cols="12" md="4" order="first" order-sm="second">
+      <div style="position: sticky; top: 80px">
+        <Ranking />
+      </div>
+    </v-col>
+
+    <!--  -->
+    
+    <v-col cols="12" md="8">
       <v-card color="rgb(0, 0, 0, 0)" flat>
         <!-- <v-card-title><v-icon>mdi-home</v-icon>Timeline</v-card-title>
         <v-divider></v-divider> -->
@@ -9,7 +17,9 @@
           <div class="font-weight-bold text-h6">
             Questions related to you will be displayed here
           </div>
-          <div class="text-caption">Let's try create questions and follow people.</div>
+          <div class="text-caption">
+            Let's try create questions or follow people.
+          </div>
         </v-card-text>
 
         <v-row v-else>
@@ -18,14 +28,6 @@
           </v-col>
         </v-row>
       </v-card>
-    </v-col>
-
-    <!--  -->
-
-    <v-col cols="12" md="4">
-      <div style="position: sticky; top: 80px">
-        <Ranking />
-      </div>
     </v-col>
   </v-row>
 </template>

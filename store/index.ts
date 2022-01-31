@@ -1,5 +1,6 @@
 import { getAccessorType } from 'typed-vuex'
 import * as sample from '~/store/sample'
+import * as questions from '~/store/questions'
 import * as dialog from '~/store/dialog'
 import * as ranking from '~/store/ranking'
 import * as flash from '~/store/flash'
@@ -21,6 +22,7 @@ export const accessorType = getAccessorType({
   actions,
   modules: {
     sample,
+    questions,
     dialog,
     ranking,
     flash,

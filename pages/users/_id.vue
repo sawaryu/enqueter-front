@@ -49,7 +49,7 @@ export default Vue.extend({
       // if current_user profile.
       if (this.$auth.user.id == this.$route.params.id) {
         navigations.push({
-          title: "Bookmark",
+          title: "Bookmarks",
           icon: "mdi-bookmark",
           to: `/users/${this.$route.params.id}/bookmark`,
         });

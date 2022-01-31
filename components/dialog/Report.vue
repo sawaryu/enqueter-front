@@ -4,9 +4,9 @@
     @input="$accessor.dialog.setReportDialog(false)"
     max-width="500"
   >
-    <v-card>
+    <v-card class="rounded-lg">
       <v-subheader>
-        <v-btn icon v-if="e1 > 1" @click="e1 -= 1">
+        <v-btn icon v-show="e1 > 1" @click="e1 -= 1">
           <v-icon>mdi-chevron-left</v-icon>
         </v-btn>
         <v-spacer></v-spacer>

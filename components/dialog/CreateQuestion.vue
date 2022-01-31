@@ -4,9 +4,9 @@
     @input="$accessor.dialog.setQuestionDialog(false)"
     width="500"
   >
-    <v-card>
+    <v-card class="rounded-lg">
       <v-card-title>
-        <v-icon size="30">mdi-file-question</v-icon>Create Question.
+        <v-icon size="30">mdi-pencil</v-icon>Create Question.
         <v-spacer></v-spacer>
         <v-btn icon @click="$accessor.dialog.setQuestionDialog(false)">
           <v-icon>mdi-close</v-icon>
