@@ -100,7 +100,7 @@
             </v-list-item-icon>
             <v-list-item-title>Home</v-list-item-title>
           </v-list-item>
-          <v-list-item nuxt to="/questions">
+          <v-list-item nuxt to="/questions?page=1">
             <v-list-item-icon>
               <v-icon>mdi-file-question</v-icon>
             </v-list-item-icon>

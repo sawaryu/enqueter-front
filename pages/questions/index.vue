@@ -25,11 +25,23 @@
       </v-row>
 
       <v-row v-else key="questions">
-        <v-col v-for="q in questions" :key="q.id" cols="12" sm="6" md="4">
-          <Question :question="q" />
-        </v-col>
+        <template v-if="questions.length">
+          <v-col v-for="q in questions" :key="q.id" cols="12" sm="6" md="4">
+            <Question :question="q" />
+          </v-col>
 
-        <v-col class="text-center" v-if="!questions.length">
+          <v-col cols="12" class="text-center mb-10 mt-5">
+            <v-pagination
+              :value="currentPage"
+              @input="push"
+              :length="totalPages"
+              color="grey darken-3"
+              circle
+            ></v-pagination>
+          </v-col>
+        </template>
+
+        <v-col class="text-center" v-else>
           <div class="text--secondary">There are no questions.</div>
         </v-col>
 
@@ -47,21 +59,48 @@ import Vue from "vue";
 import CreateQuestion from "~/components/dialog/CreateQuestion.vue";
 export default Vue.extend({
   components: { CreateQuestion, VueLoading },
-  async asyncData({ $axios }) {
-    const res = await $axios.$get("/questions");
-    return { questions: res as Question[] };
-  },
   data() {
     return {
+      totalPages: 0 as number,
+      questions: [] as Question[],
       loading: false as boolean,
     };
   },
+  computed: {
+    currentPage() {
+      return Number(this.$route.query.page);
+    },
+  },
   methods: {
+    async getQuestions() {
+      try {
+        const res = await this.$axios.$get("/questions", {
+          params: {
+            page: this.$route.query.page,
+          },
+        });
+        this.questions = res.data.questions;
+        this.totalPages = res.data.total_pages;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    push(event: number) {
+      this.$router.push({ path: "questions", query: { page: String(event) } });
+    },
     update() {
       this.loading = true;
       setTimeout(() => {
         this.loading = false;
       }, 1000);
+    },
+  },
+  watch: {
+    '$route.query': {
+      handler(to, from) {
+        this.getQuestions();
+      },
+      immediate: true
     },
   },
 });
