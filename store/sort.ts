@@ -2,7 +2,7 @@ import { getterTree, mutationTree, actionTree } from 'typed-vuex'
 
 export const state = () => ({
   userQuestionsSort: 'all' as string,
-  questionsSort: 'all' as string,
+  questionsSort: 'answerable' as string,
 })
 
 export const getters = getterTree(state, {

@@ -5,7 +5,7 @@
     </v-btn>
 
     <v-dialog v-model="dialog">
-      <v-card>
+      <v-card class="rounded-lg">
         <!-- common -->
         <v-card-title>
           <v-text-field

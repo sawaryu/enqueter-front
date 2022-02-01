@@ -1,18 +1,31 @@
 <template>
   <div>
+    <!-- title -->
     <v-row>
       <v-col cols="12">
         <v-card-title>
           <div><v-icon>mdi-file-question</v-icon> Questions</div>
           <v-spacer></v-spacer>
-          <v-btn icon large @click="update">
-            <v-icon>mdi-cached</v-icon>
-          </v-btn>
+          <div>
+            <v-select
+              color="black"
+              dense
+              solo
+              class="mt-2 ml-2"
+              item-color="black"
+              :value="$accessor.sort.getQuestionsSort"
+              @change="$accessor.sort.setQuestionsSort($event)"
+              :items="sorts"
+              outlined
+              style="width: 150px; height: 50px"
+            ></v-select>
+          </div>
         </v-card-title>
       </v-col>
     </v-row>
     <v-divider class="mb-4"></v-divider>
 
+    <!-- questions -->
     <transition name="fade" mode="out-in">
       <v-row v-if="loading" justify="center" key="loading">
         <v-col cols="12">
@@ -44,11 +57,12 @@
         <v-col class="text-center" v-else>
           <div class="text--secondary">There are no questions.</div>
         </v-col>
-
-        <FloatCreate />
-        <CreateQuestion />
       </v-row>
     </transition>
+
+    <!-- tools -->
+    <FloatCreate />
+    <CreateQuestion />
   </div>
 </template>
 
@@ -64,6 +78,7 @@ export default Vue.extend({
       totalPages: 0 as number,
       questions: [] as Question[],
       loading: false as boolean,
+      sorts: ["answerable", "all", "closed"],
     };
   },
   computed: {
@@ -74,6 +89,10 @@ export default Vue.extend({
   methods: {
     async getQuestions() {
       try {
+        this.loading = true;
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+        }, 200);
         const res = await this.$axios.$get("/questions", {
           params: {
             page: this.$route.query.page,
@@ -83,24 +102,25 @@ export default Vue.extend({
         this.totalPages = res.data.total_pages;
       } catch (error) {
         console.log(error);
+      } finally {
+        setTimeout(() => {
+          this.loading = false;
+        }, 250);
       }
     },
     push(event: number) {
-      this.$router.push({ path: "questions", query: { page: String(event) } });
-    },
-    update() {
-      this.loading = true;
-      setTimeout(() => {
-        this.loading = false;
-      }, 1000);
+      this.$router.push({
+        path: "questions",
+        query: { page: String(event) },
+      });
     },
   },
   watch: {
-    '$route.query': {
+    "$route.query": {
       handler(to, from) {
         this.getQuestions();
       },
-      immediate: true
+      immediate: true,
     },
   },
 });
