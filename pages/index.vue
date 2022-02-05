@@ -29,6 +29,7 @@
         </v-row>
       </v-card>
     </v-col>
+    <FloatAnswer />
   </v-row>
 </template>
 

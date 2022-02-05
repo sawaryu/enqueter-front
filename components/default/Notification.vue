@@ -79,7 +79,7 @@
               <span>
                 <v-icon color="red">mdi-delete-outline</v-icon>
               </span>
-              delete all notifications.
+              Delete all notifications.
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>

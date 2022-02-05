@@ -1,7 +1,7 @@
 <template>
   <v-app id="inspire">
     <!-- loading -->
-    <v-overlay :value="loading" color="#F8F9FA" opacity="1" z-index="9999">
+    <v-overlay :value="loading" color="#FFFFFF" opacity="1" z-index="9999">
       <VueLoading
         type="bars"
         color="#333"
@@ -94,6 +94,12 @@
       <v-divider></v-divider>
       <v-list nav dense>
         <v-list-item-group>
+          <v-list-item nuxt @click="next">
+            <v-list-item-icon>
+              <v-icon>mdi-checkbox-marked-circle-outline</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Answer</v-list-item-title>
+          </v-list-item>
           <v-list-item nuxt to="/">
             <v-list-item-icon>
               <v-icon>mdi-home</v-icon>
@@ -164,6 +170,24 @@ export default Vue.extend({
     }, 500);
   },
   methods: {
+    async next() {
+      try {
+        const res = await this.$axios.$get("/questions/next");
+        if (res.data) {
+          this.$router.push(`/questions/${res.data}`);
+        } else {
+          this.$router.push("/questions");
+          this.$accessor.flash.showMessage(
+            {
+              message: `There are no more answerable questions.`,
+              type: "dark",
+              status: true,
+            },
+            { root: true }
+          );
+        }
+      } catch (error) {}
+    },
     logout() {
       this.$auth.logout();
       this.drawer = null;

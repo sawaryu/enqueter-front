@@ -67,7 +67,7 @@ export default {
           this.$auth.fetchUser();
           this.$accessor.flash.showMessage(
             {
-              message: `updated completely your avatar.`,
+              message: `Updated completely your avatar.`,
               type: "success",
               status: true,
             },

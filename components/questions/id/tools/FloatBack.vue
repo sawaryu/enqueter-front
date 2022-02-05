@@ -1,7 +1,7 @@
 <template>
   <v-fab-transition>
-    <v-btn class="mb-10" large fixed bottom right dark fab @click="back">
-      <v-icon dark>mdi-chevron-right</v-icon>
+    <v-btn class="mb-10" large fixed bottom left dark fab @click="back">
+      <v-icon dark>mdi-chevron-left</v-icon>
     </v-btn>
   </v-fab-transition>
 </template>

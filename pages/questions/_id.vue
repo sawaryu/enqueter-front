@@ -8,14 +8,8 @@
     />
 
     <!-- Go to the next question. Back to questions. -->
-    <FloatNext
-      v-if="float || currentComponent === 'Unanswered'"
-      @close="snackbar = false"
-    />
-    <FloatBack
-      v-if="float || currentComponent === 'Unanswered'"
-      @close="snackbar = false"
-    />
+    <FloatAnswer @close="snackbar = false" />
+    <FloatBack @close="snackbar = false" />
 
     <!-- QUESTION -->
     <v-row class="justify-center my-4">
@@ -47,7 +41,6 @@ export default Vue.extend({
         message: "",
         color: "",
       },
-      float: false,
     };
   },
   computed: {
@@ -88,7 +81,6 @@ export default Vue.extend({
           color: "info",
         };
       }
-      this.float = true;
       this.snackbar = true;
       this.question.is_answered = true;
     },

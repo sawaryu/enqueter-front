@@ -17,7 +17,7 @@
         @click="answer(true)"
       >
         <!-- <v-icon color="#EF9A9A" size="100">mdi-circle-outline</v-icon> -->
-        <div class="text-h4 red--text">Yes</div>
+        <div class="text-h4 red--text font-weight-bold">Yes</div>
       </v-card>
 
       <!-- No -->
@@ -30,7 +30,7 @@
         @click="answer(false)"
       >
         <!-- <v-icon color="#90CAF9" size="100">mdi-close</v-icon> -->
-        <div class="text-h4 blue--text">No</div>
+        <div class="text-h4 blue--text font-weight-bold">No</div>
       </v-card>
     </v-row>
   </div>

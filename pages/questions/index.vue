@@ -4,7 +4,14 @@
     <v-row>
       <v-col cols="12">
         <v-card-title>
-          <div><v-icon>mdi-file-question</v-icon> Questions</div>
+          <v-btn
+            dark
+            large
+            color="grey darken-3"
+            @click="$accessor.dialog.setQuestionDialog(true)"
+          >
+            <v-icon dark>mdi-pencil</v-icon>
+          </v-btn>
           <v-spacer></v-spacer>
           <div>
             <v-select
@@ -14,7 +21,7 @@
               class="mt-2 ml-2"
               item-color="black"
               :value="$accessor.sort.getQuestionsSort"
-              @change="$accessor.sort.setQuestionsSort($event)"
+              @change="changeSort($event)"
               :items="sorts"
               outlined
               style="width: 150px; height: 50px"
@@ -48,6 +55,7 @@
               :value="currentPage"
               @input="push"
               :length="totalPages"
+              :total-visible="5"
               color="grey darken-3"
               circle
             ></v-pagination>
@@ -60,8 +68,7 @@
       </v-row>
     </transition>
 
-    <!-- tools -->
-    <FloatCreate />
+    <!-- modal -->
     <CreateQuestion />
   </div>
 </template>
@@ -78,7 +85,7 @@ export default Vue.extend({
       totalPages: 0 as number,
       questions: [] as Question[],
       loading: false as boolean,
-      sorts: ["answerable", "all", "closed"],
+      sorts: ["answerable", "closed", "all"],
     };
   },
   computed: {
@@ -87,7 +94,7 @@ export default Vue.extend({
     },
   },
   methods: {
-    async getQuestions() {
+    async getQuestions(): Promise<void> {
       try {
         this.loading = true;
         setTimeout(() => {
@@ -96,6 +103,7 @@ export default Vue.extend({
         const res = await this.$axios.$get("/questions", {
           params: {
             page: this.$route.query.page,
+            sort: this.$accessor.sort.getQuestionsSort,
           },
         });
         this.questions = res.data.questions;
@@ -108,10 +116,23 @@ export default Vue.extend({
         }, 250);
       }
     },
-    push(event: number) {
+    push(event: number): void {
       this.$router.push({
         path: "questions",
         query: { page: String(event) },
+      });
+    },
+    changeSort(event: string): void {
+      console.log(event);
+      this.$accessor.sort.setQuestionsSort(event);
+
+      if (this.$route.query.page === "1") {
+        this.getQuestions();
+      }
+
+      this.$router.push({
+        path: "questions",
+        query: { page: "1" },
       });
     },
   },
