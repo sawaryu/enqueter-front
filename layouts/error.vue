@@ -3,7 +3,7 @@
     class="d-flex justify-center align-center"
     elevation="0"
     width="100vw"
-    height="85vh"
+    height="80vh"
     color="rgb(0, 0, 0, 0)"
   >
     <div>
@@ -12,7 +12,7 @@
       >
       <v-card-text class="text-h4 text-center">{{ error.message }}</v-card-text>
 
-      <v-card-text class="text-center">
+      <v-card-text class="text-center" v-if="error.statusCode != 503">
         <v-btn large dark color="grey darken-3" @click="goHome"
           >Back <v-icon right dark> mdi-home </v-icon></v-btn
         >

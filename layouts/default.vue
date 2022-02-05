@@ -160,17 +160,18 @@ export default Vue.extend({
   name: "default",
   data() {
     return {
-      loading: true,
+      loading: true as boolean,
       drawer: null as null | boolean,
     };
   },
   mounted() {
+    this.checkMaintenance();
     setTimeout(() => {
       this.loading = false;
     }, 500);
   },
   methods: {
-    async next() {
+    async next(): Promise<void> {
       try {
         const res = await this.$axios.$get("/questions/next");
         if (res.data) {
@@ -188,7 +189,13 @@ export default Vue.extend({
         }
       } catch (error) {}
     },
-    logout() {
+    async checkMaintenance(): Promise<void> {
+      try {
+        const res = await this.$axios.$get("/maintenance");
+        console.log(res.message);
+      } catch (error) {}
+    },
+    logout(): void {
       this.$auth.logout();
       this.drawer = null;
       this.$accessor.flash.showMessage(

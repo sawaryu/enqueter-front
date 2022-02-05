@@ -13,7 +13,7 @@
         </v-btn>
       </v-card-title>
 
-      <v-card-text>
+      <v-card-text class="pb-2">
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-textarea
             v-model="questionModel.content"
@@ -23,15 +23,21 @@
             counter="140"
             dense
             persistent-hint
-            hint="* A question will be expired after a week."
           >
           </v-textarea>
         </v-form>
+
+        <div class="text-caption mt-3 mb-0">
+          * A question will be closed after a week. <br>
+          * Please create the question that divide people's answers.
+        </div>
       </v-card-text>
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn :disabled="!(/\S/.test(questionModel.content))" @click="create">create</v-btn>
+        <v-btn :disabled="!/\S/.test(questionModel.content)" @click="create"
+          >create</v-btn
+        >
       </v-card-actions>
     </v-card>
   </v-dialog>

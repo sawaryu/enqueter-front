@@ -1,6 +1,5 @@
 export default ({ app: { $axios, $accessor } }) => {
   $axios.onError(error => {
-    
     // Initially, get the status code.
     const statusCode = error.response.status;
 
@@ -24,11 +23,6 @@ export default ({ app: { $axios, $accessor } }) => {
         statusCode: statusCode,
         message: "Server error occurred.",
       });
-    } else if (statusCode == 503) {
-      $nuxt.error({
-        statusCode: statusCode,
-        message: "Server maintenance now.",
-      });
     } else if (statusCode == 404) {
       $nuxt.error({
         statusCode: statusCode,
@@ -38,6 +32,11 @@ export default ({ app: { $axios, $accessor } }) => {
       $nuxt.error({
         statusCode: statusCode,
         message: "You don`t have the authorization.",
+      });
+    } else if (statusCode == 503) {
+      $nuxt.error({
+        statusCode: statusCode,
+        message: "Server maintenance now.",
       });
     }
     return;

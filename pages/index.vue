@@ -7,7 +7,7 @@
     </v-col>
 
     <!--  -->
-    
+
     <v-col cols="12" md="8">
       <v-card color="rgb(0, 0, 0, 0)" flat>
         <!-- <v-card-title><v-icon>mdi-home</v-icon>Timeline</v-card-title>
@@ -38,8 +38,10 @@ import { Question } from "@/components/common/Question.vue";
 import Vue from "vue";
 export default Vue.extend({
   async asyncData({ $axios }) {
-    const res = await $axios.$get(`/questions/timeline`);
-    return { questions: res };
+    try {
+      const res = await $axios.$get(`/questions/timeline`);
+      return { questions: res };
+    } catch (error) {}
   },
   methods: {
     remove(question_id: number) {

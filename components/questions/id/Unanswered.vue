@@ -7,31 +7,12 @@
     </v-row>
 
     <v-row justify="center">
-      <!-- Yes -->
-      <v-card
-        class="d-flex justify-center align-center ma-6"
-        rounded="circle"
-        :width="size"
-        :height="size"
-        link
-        @click="answer(true)"
-      >
-        <!-- <v-icon color="#EF9A9A" size="100">mdi-circle-outline</v-icon> -->
-        <div class="text-h4 red--text font-weight-bold">Yes</div>
-      </v-card>
-
-      <!-- No -->
-      <v-card
-        class="d-flex justify-center align-center ma-6"
-        rounded="circle"
-        :width="size"
-        :height="size"
-        link
-        @click="answer(false)"
-      >
-        <!-- <v-icon color="#90CAF9" size="100">mdi-close</v-icon> -->
-        <div class="text-h4 blue--text font-weight-bold">No</div>
-      </v-card>
+      <AnswerCard
+        v-for="(card, index) in cards"
+        :key="index"
+        :type="card"
+        @answer="answer"
+      />
     </v-row>
   </div>
 </template>
@@ -39,15 +20,14 @@
 <script lang="ts">
 import Vue from "vue";
 export default Vue.extend({
-  computed: {
-    size() {
-      const breakpointName = this.$vuetify.breakpoint.name;
-      if (breakpointName == "xs") {
-        return 130;
-      } else {
-        return 250;
-      }
-    },
+  data() {
+    return {
+      cards: [true, false],
+    };
+  },
+  created() {
+    // randomize cards.
+    this.cards = this.cards.sort(() => Math.random() - 0.5);
   },
   methods: {
     async answer(is_yes: boolean) {

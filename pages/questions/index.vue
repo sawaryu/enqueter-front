@@ -4,6 +4,8 @@
     <v-row>
       <v-col cols="12">
         <v-card-title>
+          <v-icon>mdi-file-question</v-icon>Questions
+          <v-spacer></v-spacer>
           <v-btn
             dark
             large
@@ -12,8 +14,7 @@
           >
             <v-icon dark>mdi-pencil</v-icon>
           </v-btn>
-          <v-spacer></v-spacer>
-          <div>
+          <!-- <div>
             <v-select
               color="black"
               dense
@@ -26,7 +27,7 @@
               outlined
               style="width: 150px; height: 50px"
             ></v-select>
-          </div>
+          </div> -->
         </v-card-title>
       </v-col>
     </v-row>
@@ -85,7 +86,6 @@ export default Vue.extend({
       totalPages: 0 as number,
       questions: [] as Question[],
       loading: false as boolean,
-      sorts: ["answerable", "closed", "all"],
     };
   },
   computed: {
@@ -103,7 +103,7 @@ export default Vue.extend({
         const res = await this.$axios.$get("/questions", {
           params: {
             page: this.$route.query.page,
-            sort: this.$accessor.sort.getQuestionsSort,
+            // sort: this.$accessor.sort.getQuestionsSort,
           },
         });
         this.questions = res.data.questions;
@@ -122,19 +122,19 @@ export default Vue.extend({
         query: { page: String(event) },
       });
     },
-    changeSort(event: string): void {
-      console.log(event);
-      this.$accessor.sort.setQuestionsSort(event);
+    // changeSort(event: string): void {
+    //   console.log(event);
+    //   this.$accessor.sort.setQuestionsSort(event);
 
-      if (this.$route.query.page === "1") {
-        this.getQuestions();
-      }
+    //   if (this.$route.query.page === "1") {
+    //     this.getQuestions();
+    //   }
 
-      this.$router.push({
-        path: "questions",
-        query: { page: "1" },
-      });
-    },
+    //   this.$router.push({
+    //     path: "questions",
+    //     query: { page: "1" },
+    //   });
+    // },
   },
   watch: {
     "$route.query": {
