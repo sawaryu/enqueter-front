@@ -84,7 +84,7 @@
 </template>
 
 <script lang="ts">
-import { User } from "@/components/users/id/Profile.vue";
+import { User } from "@/common/entity/User";
 import ordinal from "ordinal";
 import Vue from "vue";
 export default Vue.extend({

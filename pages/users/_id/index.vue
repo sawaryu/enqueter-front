@@ -53,7 +53,7 @@
 </template>
 
 <script lang="ts">
-import { Question } from "@/components/common/Question.vue";
+import { Question } from "@/common/entity/Question";
 import Vue from "vue";
 export default Vue.extend({
   async asyncData({ params, $axios }) {

@@ -1,6 +1,11 @@
 <template>
   <!-- NOTICE!: only be able to use in methods -->
-  <span v-if="$vuetify.breakpoint.name != 'xs'" class="mr-1" style="width: 180px" v-click-outside="closeMenu">
+  <span
+    v-if="$vuetify.breakpoint.name != 'xs'"
+    class="mr-1"
+    style="width: 180px"
+    v-click-outside="closeMenu"
+  >
     <!-- search field -->
     <v-text-field
       v-model="search"
@@ -62,7 +67,9 @@
                 class="text-subtitle-2"
                 v-text="user.username"
               ></v-list-item-title>
-              <v-list-item-subtitle v-text="user.nickname"></v-list-item-subtitle>
+              <v-list-item-subtitle
+                v-text="user.nickname"
+              ></v-list-item-subtitle>
             </v-list-item-content>
 
             <v-list-item-action>
@@ -103,7 +110,9 @@
                 class="text-subtitle-2"
                 v-text="user.username"
               ></v-list-item-title>
-              <v-list-item-subtitle v-text="user.nickname"></v-list-item-subtitle>
+              <v-list-item-subtitle
+                v-text="user.nickname"
+              ></v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -117,7 +126,7 @@
 </template>
 
 <script lang="ts">
-import {User} from "@/components/users/id/Profile.vue"
+import { User } from "@/common/entity/User";
 import Vue from "vue";
 export default Vue.extend({
   data() {

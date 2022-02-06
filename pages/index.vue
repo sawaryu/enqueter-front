@@ -1,7 +1,7 @@
 <template>
   <v-row>
     <v-col cols="12" md="4" order="first" order-sm="second">
-      <div style="position: sticky; top: 80px">
+      <div style="position: sticky; top: 85px">
         <Ranking />
       </div>
     </v-col>
@@ -50,7 +50,7 @@
                 cols="12"
                 sm="6"
               >
-                <Question :question="q" />
+                <Question :question="q" :isVuex="true" />
               </v-col>
               <v-col cols="12">
                 <infinite-loading
@@ -110,9 +110,9 @@ export default Vue.extend({
   created() {
     this.init();
   },
-  destroyed(){
+  destroyed() {
     // scroll位置を格納する。
-    console.log("Destroyed:", window.scrollY)
+    console.log("Destroyed:", window.scrollY);
   },
   methods: {
     async init(isReset: boolean = false): Promise<void> {

@@ -97,24 +97,12 @@
 
 <script lang="ts">
 import moment from "moment";
-import { User } from "@/components/users/id/Profile.vue";
+import { Question } from "@/common/entity/Question";
 import Vue, { PropOptions } from "vue";
-// export interface.
-export interface Question {
-  id: number;
-  user_id: number;
-  content: string;
-  closed_at: string;
-  created_at: string;
-  updated_at: string;
-  is_open: boolean;
-  is_answered: boolean;
-  is_bookmarked: boolean;
-  user: User;
-}
 export default Vue.extend({
   props: {
     question: { type: Object, default: null } as PropOptions<Question>,
+    isVuex: { type: Boolean, default: false },
   },
   computed: {
     beforeTime(): string {
@@ -134,7 +122,11 @@ export default Vue.extend({
               question_id: this.question.id,
             },
           });
-          this.question.is_bookmarked = false;
+          if (this.isVuex) {
+            this.$accessor.questions.bookmarkQuestion(this.question.id, false);
+          } else {
+            this.question.is_bookmarked = false;
+          }
         } catch (error) {
           console.log(error);
         }
@@ -143,7 +135,11 @@ export default Vue.extend({
           const res = await this.$axios.$post("/questions/bookmark", {
             question_id: this.question.id,
           });
-          this.question.is_bookmarked = true;
+          if (this.isVuex) {
+            this.$accessor.questions.bookmarkQuestion(this.question.id, true);
+          } else {
+            this.question.is_bookmarked = true;
+          }
         } catch (error) {
           console.log(error);
         }

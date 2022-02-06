@@ -75,7 +75,7 @@
 </template>
 
 <script lang="ts">
-import { Question } from "@/components/common/Question.vue";
+import { Question } from "@/common/entity/Question";
 import { VueLoading } from "vue-loading-template";
 import Vue from "vue";
 import CreateQuestion from "~/components/dialog/CreateQuestion.vue";

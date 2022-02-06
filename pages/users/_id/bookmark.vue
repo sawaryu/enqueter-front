@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { Question } from "@/components/common/Question.vue";
+import { Question } from "@/common/entity/Question";
 import Vue from "vue";
 export default Vue.extend({
   // this page catch the error. Because it can be only accessed by current_user.

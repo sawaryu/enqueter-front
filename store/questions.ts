@@ -6,7 +6,7 @@ import { getterTree, mutationTree, actionTree } from 'typed-vuex'
 
 export const state = () => ({
   page: 1 as number,
-  questions: [] as [],
+  questions: [] as { id: number, is_bookmarked: boolean }[],
 })
 
 export const getters = getterTree(state, {
@@ -30,5 +30,14 @@ export const mutations = mutationTree(state, {
   reset(state) {
     state.page = 1
     state.questions = []
+  },
+  bookmarkQuestion(state, { id, value }: { id: number, value: boolean }) {
+    state.questions.some((element: { id: number, is_bookmarked: boolean }, index: number) => {
+      if (element.id === id) {
+        state.questions[index].is_bookmarked = value
+        // break
+        return true
+      }
+    });
   }
 })

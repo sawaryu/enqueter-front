@@ -6,7 +6,7 @@ export default ({ app: { $axios, $accessor } }) => {
     // when deleting the account, logout method occurs error. Below 'if ~' avoid its error infecting flash message.
     // Therefore in that case, logout methods work as only the method clearing local storage completely.
     // <Status Codes> 400: Bad Request, 409: Conflict(* used for optimistic lock), 401: Unauthorized
-    if (error.response.config.url !== "/auth/logout" && (statusCode == 400 || statusCode == 409 || statusCode == 401)) {
+    if (!["/auth/logout", "/auth/protected"].includes(error.response.config.url) && (statusCode == 400 || statusCode == 409 || statusCode == 401)) {
       $accessor.flash.showMessage(
         {
           message: error.response.data.message,

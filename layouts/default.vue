@@ -197,15 +197,16 @@ export default Vue.extend({
     },
     logout(): void {
       this.$auth.logout();
-      this.drawer = null;
-      this.$accessor.flash.showMessage(
-        {
-          message: "Logged out completely.",
-          type: "info",
-          status: true,
-        },
-        { root: true }
-      );
+      this.$router.go("/welcome")
+      // this.drawer = null;
+      // this.$accessor.flash.showMessage(
+      //   {
+      //     message: "Logged out completely.",
+      //     type: "info",
+      //     status: true,
+      //   },
+      //   { root: true }
+      // );
     },
   },
   computed: {
