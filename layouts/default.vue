@@ -191,7 +191,7 @@ export default Vue.extend({
     },
     async checkMaintenance(): Promise<void> {
       try {
-        const res = await this.$axios.$get("/maintenance");
+        const res = await this.$axios.$get("/auth/maintenance");
         console.log(res.message);
       } catch (error) {}
     },

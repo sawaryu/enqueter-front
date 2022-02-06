@@ -26,7 +26,9 @@ export default Vue.extend({
             { root: true }
           );
         }
-      } catch (error) {} finally {
+      } catch (error) {
+        console.log("aaaaaaa")
+      } finally {
         this.$emit("close")
       }
     },

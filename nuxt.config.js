@@ -70,7 +70,7 @@ export default {
     localStorage: false,
     strategies: {
       local: {
-        scheme: '@/plugins/customRefresh.ts',
+        scheme: '@/plugins/customSchema.ts',
         token: {
           property: 'access_token',
           type: 'Bearer',

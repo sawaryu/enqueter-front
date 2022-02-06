@@ -36,7 +36,7 @@ export default ({ app: { $axios, $accessor } }) => {
     } else if (statusCode == 503) {
       $nuxt.error({
         statusCode: statusCode,
-        message: "Server maintenance now.",
+        message: "Sorry, This application is under maintenance.",
       });
     }
     return;
