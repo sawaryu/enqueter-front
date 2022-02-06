@@ -106,7 +106,7 @@
             </v-list-item-icon>
             <v-list-item-title>Home</v-list-item-title>
           </v-list-item>
-          <v-list-item nuxt to="/questions?page=1">
+          <v-list-item nuxt to="/questions">
             <v-list-item-icon>
               <v-icon>mdi-file-question</v-icon>
             </v-list-item-icon>
@@ -198,15 +198,6 @@ export default Vue.extend({
     logout(): void {
       this.$auth.logout();
       this.$router.go("/welcome")
-      // this.drawer = null;
-      // this.$accessor.flash.showMessage(
-      //   {
-      //     message: "Logged out completely.",
-      //     type: "info",
-      //     status: true,
-      //   },
-      //   { root: true }
-      // );
     },
   },
   computed: {

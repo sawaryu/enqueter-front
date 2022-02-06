@@ -39,8 +39,8 @@
 
           <v-col cols="12" class="text-center mb-10 mt-5">
             <v-pagination
-              :value="currentPage"
-              @input="push"
+              :value="$accessor.questions.getCurrentPage"
+              @input="changePage"
               :length="totalPages"
               :total-visible="5"
               color="grey darken-3"
@@ -74,10 +74,8 @@ export default Vue.extend({
       loading: false as boolean,
     };
   },
-  computed: {
-    currentPage() {
-      return Number(this.$route.query.page);
-    },
+  created(){
+    this.getQuestions()
   },
   methods: {
     async getQuestions(): Promise<void> {
@@ -88,8 +86,7 @@ export default Vue.extend({
         }, 200);
         const res = await this.$axios.$get("/questions", {
           params: {
-            page: this.$route.query.page,
-            // sort: this.$accessor.sort.getQuestionsSort,
+            page: this.$accessor.questions.getCurrentPage,
           },
         });
         this.questions = res.data.questions;
@@ -102,19 +99,9 @@ export default Vue.extend({
         }, 250);
       }
     },
-    push(event: number): void {
-      this.$router.push({
-        path: "questions",
-        query: { page: String(event) },
-      });
-    }
-  },
-  watch: {
-    "$route.query": {
-      handler(to, from) {
-        this.getQuestions();
-      },
-      immediate: true,
+    changePage(event: number): void {
+      this.$accessor.questions.setCurrentPage(event);
+      this.getQuestions();
     },
   },
 });

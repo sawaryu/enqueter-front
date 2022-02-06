@@ -9,7 +9,7 @@
     <!--  -->
 
     <!-- min height solve ranking display bugs -->
-    <v-col cols="12" md="8" style="min-height: 300px">
+    <v-col cols="12" md="8" style="min-height: 60vh">
       <v-card color="rgb(0, 0, 0, 0)" flat>
         <v-card-title>
           <v-spacer></v-spacer>

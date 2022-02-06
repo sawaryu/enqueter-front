@@ -9,7 +9,7 @@ export const state = () => ({
 })
 
 export const getters = getterTree(state, {
-  getPage: (state) => state.currentPage,
+  getCurrentPage: (state) => state.currentPage,
 })
 
 export const mutations = mutationTree(state, {
