@@ -59,7 +59,7 @@ export default Vue.extend({
     };
   },
   methods: {
-    async create() {
+    async create(): Promise<void> {
       if (!(this.$refs.form as any).validate()) {
         return;
       }

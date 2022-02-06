@@ -1,4 +1,5 @@
-import { getterTree, mutationTree, actionTree } from 'typed-vuex'
+import { getterTree, mutationTree } from 'typed-vuex'
+import { Question } from "@/common/entity/Question";
 
 /*
   * Use in timeline.
@@ -6,7 +7,7 @@ import { getterTree, mutationTree, actionTree } from 'typed-vuex'
 
 export const state = () => ({
   page: 1 as number,
-  questions: [] as { id: number, is_bookmarked: boolean }[],
+  questions: [] as Question[],
 })
 
 export const getters = getterTree(state, {
@@ -32,7 +33,7 @@ export const mutations = mutationTree(state, {
     state.questions = []
   },
   bookmarkQuestion(state, { id, value }: { id: number, value: boolean }) {
-    state.questions.some((element: { id: number, is_bookmarked: boolean }, index: number) => {
+    state.questions.some((element: Question, index: number) => {
       if (element.id === id) {
         state.questions[index].is_bookmarked = value
         // break

@@ -55,18 +55,19 @@
 </template>
 
 <script lang="ts">
+import { User } from "@/common/entity/User";
 import Vue from "vue";
 export default Vue.extend({
   data() {
     return {
-      users: [],
+      users: [] as User[],
     };
   },
   created() {
     this.init();
   },
   methods: {
-    async init() {
+    async init(): Promise<void> {
       try {
         const res = await this.$axios.$get(
           `/users/${this.$route.params.id}/followings`
@@ -76,8 +77,8 @@ export default Vue.extend({
         console.log(error);
       }
     },
-    follow(user_id: number) {
-      this.users.every((user: { id: number }, index: number) => {
+    follow(user_id: number): void {
+      this.users.every((user: User, index: number) => {
         if (user.id === user_id) {
           this.users[index].is_following = !this.users[index].is_following;
           // stop
