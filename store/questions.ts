@@ -1,46 +1,19 @@
 import { getterTree, mutationTree } from 'typed-vuex'
-import { Question } from "@/common/entity/Question";
 
 /*
-  * Use in timeline.
+  * Use in questions page.
 */
 
 export const state = () => ({
-  page: 1 as number,
-  questions: [] as Question[],
+  currentPage: 1 as number,
 })
 
 export const getters = getterTree(state, {
-  getPage: (state) => state.page,
-  getQuestions: (state) => state.questions,
+  getPage: (state) => state.currentPage,
 })
 
 export const mutations = mutationTree(state, {
-  incrementPage(state) {
-    state.page++;
+  setCurrentPage(state, value: number) {
+    state.currentPage = value;
   },
-  resetPage(state) {
-    state.page = 1;
-  },
-  setQuestions(state, questions: []) {
-    state.questions = questions;
-  },
-  pushQuestions(state, questions: []) {
-    state.questions.push(...questions);
-  },
-  reset(state) {
-    state.page = 1
-    state.questions = []
-  },
-  // important only use in timeline page.
-  bookmarkQuestion(state, { id, value }: { id: number, value: boolean }) {
-    state.questions.some((element: Question, index: number) => {
-      if (element.id == id) {
-        state.questions[index].is_bookmarked = value
-        console.log("bookmarked")
-        // break
-        return true
-      }
-    });
-  }
 })

@@ -123,7 +123,7 @@ export default Vue.extend({
             },
           });
           if (this.isVuex) {
-            this.$accessor.questions.bookmarkQuestion({
+            this.$accessor.timeline.bookmarkQuestion({
               id: this.question.id,
               value: false,
             });
@@ -139,7 +139,7 @@ export default Vue.extend({
             question_id: this.question.id,
           });
           if (this.isVuex) {
-            this.$accessor.questions.bookmarkQuestion({
+            this.$accessor.timeline.bookmarkQuestion({
               id: this.question.id,
               value: true,
             });

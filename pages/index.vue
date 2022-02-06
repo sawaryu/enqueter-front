@@ -1,7 +1,7 @@
 <template>
   <v-row>
     <v-col cols="12" md="4">
-      <div style="position: sticky; top: 85px;">
+      <div style="position: sticky; top: 85px">
         <Ranking />
       </div>
     </v-col>
@@ -9,7 +9,7 @@
     <!--  -->
 
     <!-- min height solve ranking display bugs -->
-    <v-col cols="12" md="8" style="min-height:300px;">
+    <v-col cols="12" md="8" style="min-height: 300px">
       <v-card color="rgb(0, 0, 0, 0)" flat>
         <v-card-title>
           <v-spacer></v-spacer>
@@ -32,7 +32,7 @@
           <span v-else key="questions">
             <!-- Nothing -->
             <v-card-text
-              v-if="!$accessor.questions.getQuestions.length"
+              v-if="!$accessor.timeline.getQuestions.length"
               class="text-center"
             >
               <div class="font-weight-bold text-h6">
@@ -46,7 +46,7 @@
             <!-- Questions -->
             <v-row v-else>
               <v-col
-                v-for="q in $accessor.questions.getQuestions"
+                v-for="q in $accessor.timeline.getQuestions"
                 :key="q.id"
                 cols="12"
                 sm="6"
@@ -56,8 +56,8 @@
               <v-col cols="12">
                 <infinite-loading
                   v-if="
-                    $accessor.questions.getPage >= 2 &&
-                    $accessor.questions.getQuestions.length >= 10
+                    $accessor.timeline.getPage >= 2 &&
+                    $accessor.timeline.getQuestions.length >= 10
                   "
                   @infinite="getMore"
                 >
@@ -110,30 +110,33 @@ export default Vue.extend({
   },
   created() {
     this.init();
+    this.$vuetify.goTo(this.$accessor.timeline.getScrollY)
   },
   destroyed() {
     // scroll位置を格納する。
     console.log("Destroyed:", window.scrollY);
+    this.$accessor.timeline.saveScroll(window.scrollY);
   },
   methods: {
+    // Initially
     async init(isReset: boolean = false): Promise<void> {
       if (isReset) {
         this.loading = true;
-        this.$accessor.questions.reset();
+        this.$accessor.timeline.reset();
       }
-      if (this.$accessor.questions.getPage >= 2) {
+      if (this.$accessor.timeline.getPage >= 2) {
         return;
       }
       try {
         this.loading = true;
         const res = await this.$axios.$get(`/questions/timeline`, {
           params: {
-            page: this.$accessor.questions.getPage,
+            page: this.$accessor.timeline.getPage,
           },
         });
-        this.$accessor.questions.incrementPage();
+        this.$accessor.timeline.incrementPage();
         console.log(res);
-        this.$accessor.questions.setQuestions(res);
+        this.$accessor.timeline.setQuestions(res);
       } catch (error) {
       } finally {
         setTimeout(() => {
@@ -141,18 +144,19 @@ export default Vue.extend({
         }, 250);
       }
     },
+    // More
     async getMore($state: any): Promise<void> {
       try {
         const res = await this.$axios.$get(`/questions/timeline`, {
           params: {
-            page: this.$accessor.questions.getPage,
+            page: this.$accessor.timeline.getPage,
           },
         });
         console.log(res);
         setTimeout(() => {
           if (res.length) {
-            this.$accessor.questions.incrementPage();
-            this.$accessor.questions.pushQuestions(res);
+            this.$accessor.timeline.incrementPage();
+            this.$accessor.timeline.pushQuestions(res);
             $state.loaded();
           } else {
             $state.complete();

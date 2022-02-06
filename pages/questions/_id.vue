@@ -9,7 +9,7 @@
 
     <!-- Go to the next question. Back to questions. -->
     <FloatAnswer @close="snackbar = false" />
-    <FloatBack @close="snackbar = false" />
+    <FloatTimeline @close="snackbar = false" />
 
     <!-- QUESTION -->
     <v-row class="justify-center my-4">

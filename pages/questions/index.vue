@@ -14,20 +14,6 @@
           >
             <v-icon dark>mdi-pencil</v-icon>
           </v-btn>
-          <!-- <div>
-            <v-select
-              color="black"
-              dense
-              solo
-              class="mt-2 ml-2"
-              item-color="black"
-              :value="$accessor.sort.getQuestionsSort"
-              @change="changeSort($event)"
-              :items="sorts"
-              outlined
-              style="width: 150px; height: 50px"
-            ></v-select>
-          </div> -->
         </v-card-title>
       </v-col>
     </v-row>
@@ -121,20 +107,7 @@ export default Vue.extend({
         path: "questions",
         query: { page: String(event) },
       });
-    },
-    // changeSort(event: string): void {
-    //   console.log(event);
-    //   this.$accessor.sort.setQuestionsSort(event);
-
-    //   if (this.$route.query.page === "1") {
-    //     this.getQuestions();
-    //   }
-
-    //   this.$router.push({
-    //     path: "questions",
-    //     query: { page: "1" },
-    //   });
-    // },
+    }
   },
   watch: {
     "$route.query": {
