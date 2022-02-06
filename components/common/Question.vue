@@ -123,7 +123,10 @@ export default Vue.extend({
             },
           });
           if (this.isVuex) {
-            this.$accessor.questions.bookmarkQuestion(this.question.id, false);
+            this.$accessor.questions.bookmarkQuestion({
+              id: this.question.id,
+              value: false,
+            });
           } else {
             this.question.is_bookmarked = false;
           }
@@ -136,7 +139,10 @@ export default Vue.extend({
             question_id: this.question.id,
           });
           if (this.isVuex) {
-            this.$accessor.questions.bookmarkQuestion(this.question.id, true);
+            this.$accessor.questions.bookmarkQuestion({
+              id: this.question.id,
+              value: true,
+            });
           } else {
             this.question.is_bookmarked = true;
           }

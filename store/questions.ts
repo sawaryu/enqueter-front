@@ -32,10 +32,12 @@ export const mutations = mutationTree(state, {
     state.page = 1
     state.questions = []
   },
+  // important only use in timeline page.
   bookmarkQuestion(state, { id, value }: { id: number, value: boolean }) {
     state.questions.some((element: Question, index: number) => {
-      if (element.id === id) {
+      if (element.id == id) {
         state.questions[index].is_bookmarked = value
+        console.log("bookmarked")
         // break
         return true
       }
