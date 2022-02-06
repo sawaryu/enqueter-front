@@ -57,7 +57,7 @@
                 <infinite-loading
                   v-if="
                     $accessor.timeline.getPage >= 2 &&
-                    $accessor.timeline.getQuestions.length >= 10
+                    $accessor.timeline.getQuestions.length >= 15
                   "
                   @infinite="getMore"
                 >
@@ -65,20 +65,20 @@
                     <VueLoading
                       type="bars"
                       color="#333"
-                      :size="{ width: '40px', height: '40px' }"
+                      :size="{ width: '50px', height: '50px' }"
                     />
                   </div>
                   <div
                     class="font-weight-bold"
                     slot="no-more"
-                    style="height: 40px"
+                    style="height: 50px"
                   >
                     No more questions.
                   </div>
                   <div
                     class="font-weight-bold"
                     slot="no-results"
-                    style="height: 40px"
+                    style="height: 50px"
                   >
                     No more questions.
                   </div>

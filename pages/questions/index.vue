@@ -74,13 +74,18 @@ export default Vue.extend({
       loading: false as boolean,
     };
   },
-  created(){
-    this.getQuestions()
+  created() {
+    this.getQuestions(true);
+  },
+  destroyed() {
+    console.log("Save", window.scrollY);
+    this.$accessor.questions.saveScroll(window.scrollY);
   },
   methods: {
-    async getQuestions(): Promise<void> {
+    async getQuestions(isInit: boolean = false): Promise<void> {
       try {
         this.loading = true;
+
         setTimeout(() => {
           window.scrollTo(0, 0);
         }, 200);
@@ -97,6 +102,13 @@ export default Vue.extend({
         setTimeout(() => {
           this.loading = false;
         }, 250);
+
+        if (isInit) {
+          setTimeout(() => {
+            console.log("Go", this.$accessor.questions.getScrollY)
+            this.$vuetify.goTo(this.$accessor.questions.getScrollY);
+          }, 500);
+        }
       }
     },
     changePage(event: number): void {
