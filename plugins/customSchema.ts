@@ -8,7 +8,7 @@ export default class CustomScheme extends RefreshScheme {
   /* 
     Custom Refresh
    */
-  async refreshTokens(): Promise<any> {
+  async refreshTokens(): Promise<void> {
     // Refresh endpoint is disabled
     if (!this.options.endpoints.refresh) {
       return
