@@ -1,14 +1,15 @@
 <template>
   <v-row>
-    <v-col cols="12" md="4" order="first" order-sm="second">
-      <div style="position: sticky; top: 85px">
+    <v-col cols="12" md="4">
+      <div style="position: sticky; top: 85px;">
         <Ranking />
       </div>
     </v-col>
 
     <!--  -->
 
-    <v-col cols="12" md="8">
+    <!-- min height solve ranking display bugs -->
+    <v-col cols="12" md="8" style="min-height:300px;">
       <v-card color="rgb(0, 0, 0, 0)" flat>
         <v-card-title>
           <v-spacer></v-spacer>
@@ -28,7 +29,7 @@
             </v-col>
           </v-row>
 
-          <div v-else key="questions">
+          <span v-else key="questions">
             <!-- Nothing -->
             <v-card-text
               v-if="!$accessor.questions.getQuestions.length"
@@ -84,7 +85,7 @@
                 </infinite-loading>
               </v-col>
             </v-row>
-          </div>
+          </span>
         </transition>
       </v-card>
     </v-col>
