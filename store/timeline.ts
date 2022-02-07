@@ -35,6 +35,9 @@ export const mutations = mutationTree(state, {
     state.questions = []
     state.scrollY = 0
   },
+  saveScroll(state, value: number) {
+    state.scrollY = value
+  },
   // important only use in timeline(home) page.
   bookmarkQuestion(state, { id, value }: { id: number, value: boolean }) {
     state.questions.some((element: Question, index: number) => {
@@ -46,7 +49,12 @@ export const mutations = mutationTree(state, {
       }
     });
   },
-  saveScroll(state, value: number) {
-    state.scrollY = value
+  answeredQuestion(state, id: number) {
+    state.questions.some((element: Question, index: number) => {
+      if (element.id == id) {
+        state.questions[index].is_answered = true
+        return true
+      }
+    });
   }
 })

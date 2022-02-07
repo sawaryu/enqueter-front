@@ -2,7 +2,7 @@
   <div>
     <v-row class="mt-4" justify="center">
       <v-col class="text-center" cols="12">
-        <div class="text-h6 font-weight-bold">Which is majority?</div>
+        <div class="text-h6 font-weight-light">Which is majority?</div>
       </v-col>
     </v-row>
 
@@ -32,10 +32,13 @@ export default Vue.extend({
   methods: {
     async answer(is_yes: boolean) {
       try {
+        const question_id: number = Number(this.$route.params.id);
         const res = await this.$axios.$post("/questions/answer", {
-          question_id: Number(this.$route.params.id),
+          question_id: question_id,
           is_yes: is_yes,
         });
+        // change store
+        this.$accessor.timeline.answeredQuestion(question_id);
         this.$emit("answered", res);
       } catch (error) {}
     },

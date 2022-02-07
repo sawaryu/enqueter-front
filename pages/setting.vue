@@ -26,7 +26,7 @@
       </v-col>
 
       <v-col cols="12" md="9">
-        <v-card elevation="2">
+        <v-card elevation="8">
           <v-toolbar color="grey lighten-4" elevation="2">
             <v-toolbar-title
               ><v-icon class="mr-2" large>{{ current.icon }}</v-icon

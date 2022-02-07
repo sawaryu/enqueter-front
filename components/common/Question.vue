@@ -1,5 +1,5 @@
 <template>
-  <v-card min-width="300px" max-width="700px" rounded="xl">
+  <v-card elevation="8" min-width="300px" max-width="700px" rounded="xl">
     <v-card-title class="font-weight-bold">
       <!-- closed -->
       <div v-if="!question.is_open" class="text-caption text--secondary">
@@ -64,7 +64,7 @@
       class="pt-0 pb-2 pointer"
       style="white-space: pre-wrap"
       @click="$router.push(`/questions/${question.id}`)"
-      ><span class="question-title">{{ question.content }}</span></v-card-title
+      ><span class="question-title font-weight-light">{{ question.content }}</span></v-card-title
     >
     <v-card-actions>
       <v-avatar

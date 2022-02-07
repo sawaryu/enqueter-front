@@ -52,7 +52,7 @@
         <div class="pa-0 text-subtitle-2" v-text="user.username"></div>
         <div class="pa-0 text-caption text--secondary" v-text="user.nickname"></div>
         <div
-          class="pt-3 pb-0 mb-3"
+          class="pt-3 pb-0 mb-3 font-weight-light text--secondary"
           style="white-space: pre-wrap"
           v-html="introduceLinked"
         ></div>

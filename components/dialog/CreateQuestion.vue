@@ -5,7 +5,7 @@
     width="500"
   >
     <v-card class="rounded-lg">
-      <v-card-title>
+      <v-card-title class="font-weight-light">
         <v-icon size="30">mdi-pencil</v-icon>Create Question.
         <v-spacer></v-spacer>
         <v-btn icon @click="$accessor.dialog.setQuestionDialog(false)">

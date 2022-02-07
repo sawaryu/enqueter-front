@@ -1,14 +1,15 @@
 {
   "cSpell.words": [
+    "axios",
+    "chartjs",
+    "datalabels",
     "Enqueter",
+    "navigations",
     "Nuxt",
     "nuxtjs",
-    "vuetify",
-    "vuex",
-    "axios",
-    "navigations",
+    "sparkline",
     "unfollow",
-    "chartjs",
-    "datalabels"
+    "vuetify",
+    "vuex"
   ]
 }

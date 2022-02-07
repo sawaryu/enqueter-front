@@ -3,7 +3,7 @@
     <!-- title -->
     <v-row>
       <v-col cols="12">
-        <v-card-title>
+        <v-card-title class="font-weight-light">
           <v-icon>mdi-file-question</v-icon>Questions
           <v-spacer></v-spacer>
           <v-btn

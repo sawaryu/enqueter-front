@@ -1,8 +1,10 @@
 <template>
   <v-btn
+    color="blue"
+    dark
+    small
     :loading="loading"
     v-if="user.id !== $auth.user.id"
-    small
     :outlined="relationshipBtn.outlined"
     @click="follow"
     >{{ relationshipBtn.text }}</v-btn
