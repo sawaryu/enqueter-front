@@ -5,9 +5,9 @@ export default {
     return {
       chartData: {
         labels: [
-          'Question',
-          'Answer',
-          'Point',
+          'Responses',
+          'Questions',
+          'Answers',
         ],
         datasets: [{
           data: [65, 59, 90],

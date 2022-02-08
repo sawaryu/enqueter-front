@@ -1,6 +1,6 @@
 <template>
-  <v-container>
-    <div class="d-flex justify-center">
+  <div>
+    <div class="d-flex justify-center top-alert">
       <v-alert
         v-if="$accessor.alert.getAlert"
         class="text-center"
@@ -10,13 +10,16 @@
       </v-alert>
     </div>
 
-    <div class="d-flex justify-center">
-      <v-card class="pt-12 mt-12 text-center" flat color="rgb(0, 0, 0, 0)">
-        <v-card-title class="text-h3 font-weight-bold text-center">
+    <div class="d-flex justify-start">
+      <v-card class="pt-12 mt-12" flat color="rgb(0, 0, 0, 0)">
+        <v-card-title class="text-h3 text-sm-h1 font-weight-bold">
           Enqueter
         </v-card-title>
-        <v-card-text>This is the sample application.</v-card-text>
-        <v-card-actions class="d-flex justify-center">
+        <v-card-text style="width: 80vw"
+          >Lorem ipsum dolor sit repudiandae quam repellat, amet voluptas
+          incidunt nesciunt illum maxime ut?</v-card-text
+        >
+        <v-card-actions class="d-flex justify-start">
           <v-btn
             x-large
             color="grey darken-2"
@@ -31,7 +34,7 @@
     <Login />
     <Signup />
     <Reset :resetInfo="resetInfo" @close="resetInfo = null" />
-  </v-container>
+  </div>
 </template>
 
 <script lang="ts">
@@ -93,3 +96,11 @@ export default Vue.extend({
   },
 });
 </script>
+
+<style scoped>
+.top-alert {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 20px;
+}
+</style>

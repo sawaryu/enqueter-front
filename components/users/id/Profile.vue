@@ -1,5 +1,5 @@
 <template>
-  <v-card class="pa-2">
+  <v-card class="py-3">
     <div class="d-flex justify-space-around">
       <v-avatar size="60">
         <v-img :src="$avatar(user.avatar)"></v-img>
@@ -47,43 +47,44 @@
       </v-btn>
     </div>
 
-    <div class="d-flex ml-2">
-      <v-card width="340" elevation="0">
-        <div class="pa-0 text-subtitle-2" v-text="user.username"></div>
-        <div class="pa-0 text-caption text--secondary" v-text="user.nickname"></div>
-        <div
-          class="pt-3 pb-0 mb-3 font-weight-light text--secondary"
-          style="white-space: pre-wrap"
-          v-html="introduceLinked"
-        ></div>
-      </v-card>
-    </div>
-
-    <v-card-actions v-if="user.id !== $auth.user.id">
-      <FollowButton
-        :user="user"
-        @follow="user.is_following = !user.is_following"
-      />
-      <v-spacer></v-spacer>
-      <v-menu offset-y>
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn icon v-bind="attrs" v-on="on">
-            <v-icon>mdi-dots-vertical</v-icon>
-          </v-btn>
-        </template>
-        <v-list>
-          <v-list-item
-            @click="
-              $accessor.dialog.setReportDialog({ value: true, id: user.id })
-            "
-          >
-            <v-list-item-title
-              ><v-icon>mdi-flag</v-icon> report</v-list-item-title
-            >
-          </v-list-item>
-        </v-list>
-      </v-menu>
-    </v-card-actions>
+    <v-card elevation="0">
+      <v-card-actions>
+        <div>
+          <div class="text-subtitle-2" v-text="user.username"></div>
+          <div
+            class="text-caption text--secondary"
+            v-text="user.nickname"
+          ></div>
+        </div>
+        <v-spacer></v-spacer>
+        <span v-if="user.id !== $auth.user.id">
+          <FollowButton
+            :user="user"
+            @follow="user.is_following = !user.is_following"
+          />
+          <v-menu offset-y>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn icon v-bind="attrs" v-on="on">
+                <v-icon>mdi-dots-vertical</v-icon>
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-item
+                @click="
+                  $accessor.dialog.setReportDialog({ value: true, id: user.id })
+                "
+              >
+                <v-list-item-title
+                  ><v-icon>mdi-flag</v-icon> report</v-list-item-title
+                >
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </span>
+      </v-card-actions>
+      <v-card-text class="pa-0 pl-2" v-html="introduceLinked" style="white-space: pre-wrap">
+      </v-card-text>
+    </v-card>
   </v-card>
 </template>
 

@@ -11,7 +11,7 @@
 
     <!-- header welcome -->
     <v-app-bar
-      v-if="$route.path.includes('/welcome')"
+      v-if="isWelcome"
       color="rgb(0, 0, 0, 0)"
       app
       flat
@@ -136,7 +136,7 @@
     </v-navigation-drawer>
 
     <!-- main -->
-    <v-main :class="{ 'grey lighten-3': !$route.path.includes('/welcome') }">
+    <v-main :class="{ 'grey lighten-3': !isWelcome }">
       <v-container>
         <Report />
         <Flash />
@@ -197,10 +197,13 @@ export default Vue.extend({
     },
     logout(): void {
       this.$auth.logout();
-      this.$router.go("/welcome")
+      this.$router.go("/welcome");
     },
   },
   computed: {
+    isWelcome() {
+      return this.$route.path.includes("/welcome");
+    },
     isLarge() {
       switch (this.$vuetify.breakpoint.name) {
         case "xs":

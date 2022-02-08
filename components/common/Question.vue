@@ -28,7 +28,7 @@
         small
         class="text-caption"
         v-if="$auth.user.id === question.user_id"
-        >your</v-chip
+        >You</v-chip
       >
 
       <!-- bookmark -->
