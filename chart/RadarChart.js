@@ -14,10 +14,10 @@ export default {
           fill: true,
           backgroundColor: 'rgba(128, 128, 128, 0.2)',
           borderColor: '#616161',
-          pointBackgroundColor: '#424242',
-          pointBorderColor: '#fff',
-          pointHoverBackgroundColor: '#212121',
-          pointHoverBorderColor: '#212121'
+          pointBackgroundColor: '#616161',
+          pointBorderColor: '#616161',
+          pointHoverBackgroundColor: '#616161',
+          pointHoverBorderColor: '#616161'
         }]
       },
       options: {
@@ -29,7 +29,13 @@ export default {
           line: {
             borderWidth: 2
           }
-        }
+        },
+        // show name when hover tip.
+        tooltips: {
+          callbacks: {
+            title: (tooltipItem, data) => data.labels[tooltipItem[0].index]
+          }
+        },
       },
     };
   },

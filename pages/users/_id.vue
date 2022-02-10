@@ -4,7 +4,7 @@
     <v-col cols="12" md="4">
       <div style="position: sticky; top: 76px">
         <Profile :user="user" />
-        <Analytics />
+        <Analytics class="mt-5" />
       </div>
     </v-col>
 

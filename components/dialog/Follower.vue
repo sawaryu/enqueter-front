@@ -5,7 +5,7 @@
     width="500"
   >
     <v-card class="rounded-lg">
-      <v-card-title>
+      <v-card-title class="font-weight-light">
         Follower
         <v-spacer></v-spacer>
         <v-btn icon @click="$accessor.dialog.setFollowerDialog(false)">

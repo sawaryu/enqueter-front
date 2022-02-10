@@ -22,7 +22,9 @@
         <v-card-actions class="d-flex justify-start">
           <v-btn
             x-large
+            elevation="0"
             color="grey darken-2"
+            rounded
             dark
             @click="$accessor.dialog.setSignupDialog(true)"
             >start</v-btn

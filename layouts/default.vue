@@ -25,6 +25,7 @@
       <template v-if="!$accessor.error.getIsError">
         <v-btn
           :large="isLarge"
+          rounded
           class="mr-3"
           color="grey darken-2"
           outlined
@@ -32,7 +33,9 @@
           >Login</v-btn
         >
         <v-btn
+          elevation="0"
           :large="isLarge"
+          rounded
           color="grey darken-2"
           dark
           @click="$accessor.dialog.setSignupDialog(true)"
@@ -180,7 +183,7 @@ export default Vue.extend({
           this.$router.push("/questions");
           this.$accessor.flash.showMessage(
             {
-              message: `There are no more answerable questions.`,
+              message: `Sorry, there are no more answerable questions.`,
               type: "dark",
               status: true,
             },
