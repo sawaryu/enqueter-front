@@ -5,20 +5,21 @@
 
       <v-spacer></v-spacer>
 
-      <template v-if="current_user">
+      <template v-if="logged_in_user">
         <!-- current user -->
-        <v-avatar class="pointer mr-1" size="40" @click="$router.push(`/users/${current_user.id}`)">
-          <v-img :src="$avatar(current_user.avatar)"></v-img
+        <v-avatar
+          class="pointer mr-1"
+          size="40"
+          @click="$router.push(`/users/${logged_in_user.id}`)"
+        >
+          <v-img :src="$avatar(logged_in_user.avatar)"></v-img
         ></v-avatar>
 
-        <div class="text-caption" v-text="ordinal(current_user.rank)"></div>
+        <div class="text-caption" v-text="ordinal(logged_in_user.rank)"></div>
 
         <span class="mx-1 text-caption">/</span>
 
-        <div
-          class="text-caption"
-          v-text="current_user.total_point + 'pt'"
-        ></div>
+        <div class="text-caption" v-text="logged_in_user.point + 'pt'"></div>
       </template>
     </v-card-title>
 
@@ -32,6 +33,10 @@
       class="overflow-y-auto"
     >
       <v-list-item>
+        <v-icon class="mr-2" small> mdi-clock </v-icon>
+        <span class="text-caption text--secondary font-weight-light"
+          >Regularly aggregated.</span
+        >
         <v-spacer></v-spacer>
         <div>
           <v-btn
@@ -76,7 +81,7 @@
           <v-list-item-subtitle v-text="user.nickname"></v-list-item-subtitle>
         </v-list-item-content>
         <v-list-item-action>
-          <div>{{ user.total_point }}pt</div>
+          <div>{{ user.point }}pt</div>
         </v-list-item-action>
       </v-list-item>
     </v-list>
@@ -85,14 +90,14 @@
 </template>
 
 <script lang="ts">
-import { User } from "@/common/entity/User";
+import { UserRanking } from "@/common/entity/UserRanking";
 import ordinal from "ordinal";
 import Vue from "vue";
 export default Vue.extend({
   data() {
     return {
-      users: [] as Array<User>,
-      current_user: null as object,
+      users: [] as Array<UserRanking>,
+      logged_in_user: null as UserRanking,
       periods: [
         { id: "week", text: "week" },
         { id: "month", text: "month" },
@@ -100,8 +105,20 @@ export default Vue.extend({
       ] as Array<object>,
     };
   },
-  created() {
-    this.getRanking();
+  computed: {
+    // for watch store state variable.
+    period() {
+      return this.$accessor.ranking.getCurrentPeriod;
+    },
+  },
+  watch: {
+    period: {
+      handler() {
+        this.getRanking();
+      },
+      immediate: true,
+      deep: true,
+    },
   },
   methods: {
     async getRanking() {
@@ -111,10 +128,8 @@ export default Vue.extend({
             period: this.$accessor.ranking.getCurrentPeriod,
           },
         });
-        this.users = res.users.filter(
-          (user: User, index: number) => index <= 9
-        );
-        this.current_user = res.current_user;
+        this.users = res.users;
+        this.logged_in_user = res.logged_in_user;
       } catch (error) {}
     },
     sizeAndColorByRank(index: number): {} {
@@ -130,17 +145,6 @@ export default Vue.extend({
     },
     ordinal(number: number): string {
       return ordinal(number);
-    },
-  },
-  computed: {
-    // for watch store state variable.
-    period() {
-      return this.$accessor.ranking.getCurrentPeriod;
-    },
-  },
-  watch: {
-    period() {
-      this.getRanking();
     },
   },
 });
