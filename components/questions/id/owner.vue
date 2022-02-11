@@ -7,7 +7,7 @@
           <v-icon>mdi-circle-slice-1</v-icon>Ratio
         </v-card-title>
         <v-divider></v-divider>
-        <PieChart v-if="!loading && isPieData" :chartData="pieChartData" />
+        <PieChart v-if="!loading" :ratio="ratio" />
         <v-card-text class="text-center" v-else
           >'Yes' and 'No' ratio is displayed here.
         </v-card-text>
@@ -49,7 +49,9 @@
                   @click="$router.push(`/users/${user.id}`)"
                 ></span>
               </v-list-item-title>
-              <v-list-item-subtitle v-text="user.nickname"></v-list-item-subtitle>
+              <v-list-item-subtitle
+                v-text="user.nickname"
+              ></v-list-item-subtitle>
             </v-list-item-content>
 
             <v-list-item-action>
@@ -73,30 +75,13 @@ export default Vue.extend({
   },
   data() {
     return {
-      // is loading now.
       loading: true,
-      // users
       users: [],
-      // pie chart data (* attention yes no order )
-      pieChartData: {
-        labels: ["No", "Yes"],
-        datasets: [
-          {
-            backgroundColor: ["#BBDEFB", "#FFCDD2"],
-            data: [0, 0],
-          },
-        ],
-      },
+      ratio: [0, 0],
     };
   },
   created() {
     this.getQuestionData();
-  },
-  computed: {
-    isPieData() {
-      const data = this.pieChartData.datasets[0].data;
-      return data[0] || data[1];
-    },
   },
   methods: {
     async getQuestionData() {
@@ -104,12 +89,10 @@ export default Vue.extend({
         const res = await this.$axios.$get(
           `/questions/${this.$route.params.id}/owner`
         );
-        console.log(res);
         this.users = res.users;
-        this.pieChartData.datasets[0].data = res.pie_chart_data;
+        this.ratio = res.pie_chart_data;
       } catch (error) {
       } finally {
-        // important
         this.loading = false;
       }
     },

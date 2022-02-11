@@ -3,13 +3,22 @@ import chartjsPluginDatalabels from "chartjs-plugin-datalabels";
 export default {
   extends: Pie,
   props: {
-    chartData: {
-      type: Object,
-      required: true,
+    ratio: {
+      type: Array,
+      default: [0, 0],
     },
   },
   data() {
     return {
+      chartData: {
+        labels: ["No", "Yes"],
+        datasets: [
+          {
+            backgroundColor: ["#BBDEFB", "#FFCDD2"],
+            data: this.ratio,
+          },
+        ],
+      },
       options: {
         legend: {
           // when click, no actions occur.
