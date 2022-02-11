@@ -9,7 +9,7 @@ import * as sort from '~/store/sort'
 import * as overlay from '~/store/overlay'
 import * as alert from '~/store/alert'
 import * as error from '~/store/error'
-import * as stats from '~/store/stats'
+import * as analytics from '~/store/analytics'
 
 export const state = () => {
   return {}
@@ -33,6 +33,6 @@ export const accessorType = getAccessorType({
     overlay,
     alert,
     error,
-    stats
+    analytics
   },
 })

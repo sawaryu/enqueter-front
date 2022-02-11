@@ -7,7 +7,7 @@
           <v-icon>mdi-circle-slice-1</v-icon>Ratio
         </v-card-title>
         <v-divider></v-divider>
-        <PieChart v-if="loaded && isPieData" :chartData="pieChartData" />
+        <PieChart v-if="!loading && isPieData" :chartData="pieChartData" />
         <v-card-text class="text-center" v-else
           >'Yes' and 'No' ratio is displayed here.
         </v-card-text>
@@ -73,8 +73,8 @@ export default Vue.extend({
   },
   data() {
     return {
-      // is loaded
-      loaded: false,
+      // is loading now.
+      loading: true,
       // users
       users: [],
       // pie chart data (* attention yes no order )
@@ -110,7 +110,7 @@ export default Vue.extend({
       } catch (error) {
       } finally {
         // important
-        this.loaded = true;
+        this.loading = false;
       }
     },
   },

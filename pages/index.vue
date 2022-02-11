@@ -9,7 +9,7 @@
     <!--  -->
 
     <!-- min height solve ranking display bugs -->
-    <v-col cols="12" md="8" style="min-height: 60vh">
+    <v-col cols="12" md="8" style="min-height: 80vh;">
       <v-card color="rgb(0, 0, 0, 0)" flat>
         <v-card-title>
           <v-spacer></v-spacer>
@@ -110,7 +110,7 @@ export default Vue.extend({
   },
   created() {
     this.init();
-    this.$vuetify.goTo(this.$accessor.timeline.getScrollY)
+    this.$vuetify.goTo(this.$accessor.timeline.getScrollY);
   },
   destroyed() {
     // scroll位置を格納する。
