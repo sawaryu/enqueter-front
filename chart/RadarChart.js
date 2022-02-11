@@ -42,6 +42,21 @@ export default {
             title: (tooltipItem, data) => data.labels[tooltipItem[0].index]
           }
         },
+        // ng: scales, ok: scale
+        scale: {
+          ticks: {
+            // stepSize: 10
+            beginAtZero: true,
+            userCallback: function (label, index, labels) {
+              if (Math.floor(label) === label) {
+                return label;
+              } else {
+                return "";
+              }
+            }
+
+          },
+        },
       },
     };
   },

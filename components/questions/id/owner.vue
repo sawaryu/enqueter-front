@@ -7,7 +7,7 @@
           <v-icon>mdi-circle-slice-1</v-icon>Ratio
         </v-card-title>
         <v-divider></v-divider>
-        <PieChart v-if="!loading" :ratio="ratio" />
+        <PieChart v-if="!loading && isRatio" :ratio="ratio" />
         <v-card-text class="text-center" v-else
           >'Yes' and 'No' ratio is displayed here.
         </v-card-text>
@@ -80,6 +80,11 @@ export default Vue.extend({
       ratio: [0, 0],
     };
   },
+  computed: {
+    isRatio() {
+      return this.ratio[0] || this.ratio[1];
+    },
+  },
   created() {
     this.getQuestionData();
   },
@@ -91,6 +96,7 @@ export default Vue.extend({
         );
         this.users = res.users;
         this.ratio = res.pie_chart_data;
+        console.log(res.pie_chart_data);
       } catch (error) {
       } finally {
         this.loading = false;

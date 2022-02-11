@@ -1,6 +1,8 @@
 <template>
   <v-btn
     color="blue"
+    rounded
+    elevation="0"
     dark
     small
     :loading="loading"

@@ -67,7 +67,7 @@ export default Vue.extend({
       emailRules: [
         (v: string) => (!!v && /\S/.test(v)) || "Must be required.",
         (v: string) =>
-          (!!v && /[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(v)) ||
+          (!!v && /^(?!.*…)[a-zA-Z0-9_+-]+(.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/.test(v)) ||
           "Incorrect email format.",
         (v: string) => v.length <= 255 || "Must be less than 255 characters.",
       ],

@@ -80,6 +80,7 @@
         </v-list-item-action>
       </v-list-item>
     </v-list>
+    <v-divider></v-divider>
   </v-card>
 </template>
 

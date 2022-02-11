@@ -3,8 +3,10 @@
     <div class="d-flex justify-center top-alert">
       <v-alert
         v-if="$accessor.alert.getAlert"
-        class="text-center"
         :type="$accessor.alert.getAlert.type"
+        outlined
+        class="text-center"
+        style="position:fixed;"
       >
         {{ $accessor.alert.getAlert.message }}
       </v-alert>
