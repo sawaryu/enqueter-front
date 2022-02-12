@@ -15,7 +15,7 @@
       ></v-btn>
     </v-card-title>
 
-    <v-card-text class="pb-0 pt-0">
+    <!-- <v-card-text class="pb-0 pt-0">
       <v-divider class="my-2"></v-divider>
       <v-icon class="mr-2" small> mdi-clock </v-icon>
       <span class="text-caption grey--text font-weight-light"
@@ -34,13 +34,14 @@
         <div class="font-weight-light text--secondary">No data yet.</div>
         <small class="grey--text">*It takes time to reflect</small>
       </template>
-    </div>
+    </div> -->
   </v-card>
 </template>
 
 <script lang="ts">
 import RadarChart from "~/chart/RadarChart";
 import Vue from "vue";
+import UserStats from "@/common/entity/UserStats";
 export default Vue.extend({
   components: {
     RadarChart,
@@ -48,6 +49,7 @@ export default Vue.extend({
   data() {
     return {
       loading: true,
+      stats: null as UserStats,
       periods: [
         { id: "week", text: "week" },
         { id: "month", text: "month" },
@@ -58,11 +60,57 @@ export default Vue.extend({
     };
   },
   computed: {
+    currentRadarData() {
+      const stats: UserStats = this.stats;
+      if (!stats) {
+        return false;
+      }
+      switch (this.currentPeriod) {
+        case "week":
+          return [
+            stats.week_response,
+            stats.week_questions,
+            stats.week_answers,
+          ];
+        case "month":
+          return [
+            stats.month_response,
+            stats.month_questions,
+            stats.month_answers,
+          ];
+        case "total":
+          return [
+            stats.total_rank_response,
+            stats.total_questions,
+            stats.total_answers,
+          ];
+      }
+    },
+    currentStats() {
+      const stats: UserStats = this.stats;
+      if (stats) {
+        return false;
+      }
+      switch (this.currentPeriod) {
+        case "week":
+          return {
+            rank: stats.week_rank_point,
+            point: stats.week_point,
+          };
+        case "month":
+          return {
+            rank: stats.month_rank_point,
+            point: stats.month_point,
+          };
+        case "total":
+          return {
+            rank: stats.total_rank_point,
+            point: stats.total_point,
+          };
+      }
+    },
     currentPeriod() {
       return this.$accessor.analytics.getCurrentPeriod;
-    },
-    isRadarData() {
-      return this.radar_data[0] || this.radar_data[1] || this.radar_data[2];
     },
   },
   watch: {
@@ -78,14 +126,8 @@ export default Vue.extend({
     async getStats() {
       try {
         const res = await this.$axios.$get(
-          `/users/${this.$route.params.id}/stats`,
-          {
-            params: {
-              period: this.currentPeriod,
-            },
-          }
+          `/users/${this.$route.params.id}/stats`
         );
-        console.log(this.currentPeriod, res);
         this.radar_data = res.radar_data;
         this.point_stats = res.point_stats;
         this;
