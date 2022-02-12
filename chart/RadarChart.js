@@ -2,7 +2,7 @@ import { Radar } from "vue-chartjs";
 export default {
   extends: Radar,
   props: {
-    analytics: {
+    radar_data: {
       type: Array,
       default: [0, 0, 0]
     }
@@ -16,7 +16,7 @@ export default {
           'Answers',
         ],
         datasets: [{
-          data: this.analytics,
+          data: this.radar_data,
           fill: true,
           backgroundColor: 'rgba(128, 128, 128, 0.2)',
           borderColor: '#616161',
