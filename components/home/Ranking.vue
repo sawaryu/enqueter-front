@@ -64,10 +64,15 @@ import { VueLoading } from "vue-loading-template";
 import Vue from "vue";
 export default Vue.extend({
   components: { VueLoading },
+  props: {
+    users: {
+      type: Array,
+      required: true,
+    },
+  },
   data() {
     return {
-      loading: true,
-      users: [],
+      loading: false,
     };
   },
   computed: {
@@ -77,12 +82,8 @@ export default Vue.extend({
     },
   },
   watch: {
-    period: {
-      handler() {
-        this.getRanking();
-      },
-      immediate: true,
-      deep: true,
+    period() {
+      this.getRanking();
     },
   },
   methods: {
@@ -94,7 +95,7 @@ export default Vue.extend({
             period: this.period,
           },
         });
-        this.users = res;
+        this.$emit("changePeriod", res);
       } catch (error) {
       } finally {
         setTimeout(() => {

@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mt-2 pb-3 mx-auto">
+  <v-card class="mx-auto pb-5">
     <v-card-title class="pb-0 text--secondary">
       <div>
         <div>Stats</div>

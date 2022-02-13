@@ -203,6 +203,7 @@ export default Vue.extend({
         { root: true }
       );
       setTimeout(() => {
+        this.drawer = null;
         this.$resetStore();
       }, 300);
     },
