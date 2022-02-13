@@ -44,9 +44,7 @@
       </v-col>
 
       <v-col v-if="!questionsSorted.length" class="text--secondary text-center">
-        <div class="font-weight-bold">There are no questions.</div>
-        <div v-if="this.$accessor.sort.getUserQuestionsSort === 'all'" class="text-caption">All questions the user has will be displayed here.</div>
-        <div v-else class="text-caption">Closed questions the user has will be displayed here.</div>
+        <div class="font-weight-light">There are no questions.</div>
       </v-col>
     </v-row>
   </div>

@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mt-2 mx-auto" max-width="400" height="60vh">
+  <v-card class="mt-2 mx-auto" height="60vh">
     <v-card-title class="pb-0 text--secondary">
       Stats
       <v-spacer></v-spacer>

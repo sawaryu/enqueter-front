@@ -193,8 +193,8 @@ export default Vue.extend({
         console.log(res.message);
       } catch (error) {}
     },
-    async logout(): Promise<void> {
-      await this.$auth.logout();
+    logout() {
+      this.$auth.logout();
       this.$accessor.flash.showMessage(
         {
           message: `Logged out completely.`,
