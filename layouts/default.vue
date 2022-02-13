@@ -203,7 +203,6 @@ export default Vue.extend({
         },
         { root: true }
       );
-      this.$router.push("/welcome");
       setTimeout(() => {
         this.$resetStore();
       }, 300);
