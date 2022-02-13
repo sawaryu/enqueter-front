@@ -4,16 +4,17 @@ export default {
   props: {
     radar_data: {
       type: Array,
-      default: [0, 0, 0]
+      default: [0, 0, 0, 0]
     }
   },
   data() {
     return {
       chartData: {
         labels: [
-          'Responses',
-          'Questions',
-          'Answers',
+          'Right',
+          'First',
+          'Wrong',
+          'Even',
         ],
         datasets: [{
           data: this.radar_data,

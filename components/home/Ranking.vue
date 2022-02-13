@@ -5,21 +5,21 @@
 
       <v-spacer></v-spacer>
 
-      <template v-if="logged_in_user">
+      <template v-if="current_user_stats">
         <!-- current user -->
         <v-avatar
           class="pointer mr-1"
           size="40"
-          @click="$router.push(`/users/${logged_in_user.id}`)"
+          @click="$router.push(`/users/${$auth.user.id}`)"
         >
-          <v-img :src="$avatar(logged_in_user.avatar)"></v-img
+          <v-img :src="$avatar($auth.user.avatar)"></v-img
         ></v-avatar>
 
-        <div class="text-caption" v-text="ordinal(logged_in_user.rank)"></div>
+        <div class="text-caption" v-text="ordinal(current_user_stats[0])"></div>
 
         <span class="mx-1 text-caption">/</span>
 
-        <div class="text-caption" v-text="logged_in_user.point + 'pt'"></div>
+        <div class="text-caption" v-text="current_user_stats[1] + 'pt'"></div>
       </template>
     </v-card-title>
 
@@ -90,14 +90,13 @@
 </template>
 
 <script lang="ts">
-import { UserRanking } from "@/common/entity/UserRanking";
 import ordinal from "ordinal";
 import Vue from "vue";
 export default Vue.extend({
   data() {
     return {
-      users: [] as Array<UserRanking>,
-      logged_in_user: null as UserRanking,
+      users: [],
+      current_user_stats: null,
       periods: [
         { id: "week", text: "week" },
         { id: "month", text: "month" },
@@ -125,11 +124,12 @@ export default Vue.extend({
       try {
         const res = await this.$axios.$get("/users/ranking", {
           params: {
-            period: this.$accessor.ranking.getCurrentPeriod,
+            period: this.period,
           },
         });
+        console.log(res)
         this.users = res.users;
-        this.logged_in_user = res.logged_in_user;
+        this.current_user_stats = res.current_user_stats;
       } catch (error) {}
     },
     sizeAndColorByRank(index: number): {} {
