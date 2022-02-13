@@ -1,5 +1,5 @@
 <template>
-  <v-card color="rgb(0, 0, 0, 0)" flat>
+  <v-sheet color="rgb(0, 0, 0, 0)" flat>
     <v-card-title class="font-weight-light">
       <v-icon>mdi-crown</v-icon>Ranking</v-card-title
     >
@@ -55,7 +55,7 @@
       </v-list-item>
     </v-list>
     <v-divider></v-divider>
-  </v-card>
+  </v-sheet>
 </template>
 
 <script lang="ts">

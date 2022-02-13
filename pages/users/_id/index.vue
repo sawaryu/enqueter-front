@@ -54,9 +54,11 @@
 import { Question } from "@/common/entity/Question";
 import Vue from "vue";
 export default Vue.extend({
-  async asyncData({ params, $axios }) {
-    const res = await $axios.$get(`/users/${params.id}/questions`);
-    return { questions: res as Array<Question> };
+  async asyncData({ params, $axios }): Promise<any> {
+    try {
+      const res = await $axios.$get(`/users/${params.id}/questions`);
+      return { questions: res as Array<Question> };
+    } catch (error) {}
   },
   data() {
     return { sorts: ["all", "closed"] };

@@ -5,11 +5,6 @@
       indeterminate
       size="64"
     ></v-progress-circular>
-    <!-- <VueLoading
-      type="bars"
-      color="#333"
-      :size="{ width: '80px', height: '80px' }"
-    /> -->
   </v-overlay>
 </template>
 
