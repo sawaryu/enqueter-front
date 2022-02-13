@@ -26,7 +26,7 @@
         <v-list v-if="!search" height="300" class="overflow-y-auto">
           <v-list-item>
             <v-list-item-content>
-              <v-list-item-title class="font-weight-bold"
+              <v-list-item-title class="font-weight-light"
                 >History</v-list-item-title
               >
             </v-list-item-content>
@@ -83,7 +83,7 @@
         <v-list v-else height="300" class="overflow-y-auto">
           <v-list-item>
             <v-list-item-content>
-              <v-list-item-title class="font-weight-bold">
+              <v-list-item-title class="font-weight-light">
                 Result
               </v-list-item-title>
             </v-list-item-content>

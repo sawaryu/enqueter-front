@@ -32,7 +32,7 @@
       <!-- history -->
       <template v-if="!search">
         <v-card-title class="pb-1">
-          <div class="text-subtitle-1 font-weight-black">History</div>
+          <div class="text-subtitle-1 font-weight-light">History</div>
           <v-spacer></v-spacer>
           <v-btn
             rounded
@@ -88,7 +88,7 @@
       <!-- searching -->
       <template v-else>
         <v-card-title class="pb-1">
-          <div class="text-subtitle-1 font-weight-black">Result</div>
+          <div class="text-subtitle-1 font-weight-light">Result</div>
           <v-spacer></v-spacer>
         </v-card-title>
 

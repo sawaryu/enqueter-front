@@ -21,7 +21,7 @@ export default Vue.extend({
       periods: [
         { id: "week", text: "week" },
         { id: "month", text: "month" },
-        { id: "all", text: "all" },
+        { id: "total", text: "total" },
       ] as Array<object>,
     };
   },

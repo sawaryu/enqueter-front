@@ -1,6 +1,6 @@
 <template>
   <v-card color="rgb(0, 0, 0, 0)" flat>
-    <v-card-title> <v-icon>mdi-crown</v-icon>Ranking</v-card-title>
+    <v-card-title class="font-weight-light"> <v-icon>mdi-crown</v-icon>Ranking</v-card-title>
     <v-subheader>
       <v-icon class="mr-2" small> mdi-clock </v-icon>
       <span class="text-caption text--secondary font-weight-light"
@@ -15,10 +15,9 @@
 
       <VueLoading
         v-if="loading"
-        class="pt-10 mt-10"
         type="bars"
         color="#333"
-        :size="{ width: '50px', height: '50px' }"
+        :size="{ width: '30px', height: '30px' }"
       />
 
       <v-list-item v-else v-for="(user, index) in users" :key="user.id">
@@ -69,7 +68,6 @@ export default Vue.extend({
     return {
       loading: true,
       users: [],
-      current_user_stats: null,
     };
   },
   computed: {
@@ -97,8 +95,7 @@ export default Vue.extend({
           },
         });
         console.log(res);
-        this.users = res.users;
-        this.current_user_stats = res.current_user_stats;
+        this.users = res;
       } catch (error) {
       } finally {
         setTimeout(() => {

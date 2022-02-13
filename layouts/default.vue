@@ -5,7 +5,7 @@
       <VueLoading
         type="bars"
         color="#333"
-        :size="{ width: '80px', height: '80px' }"
+        :size="{ width: '50px', height: '50px' }"
       />
     </v-overlay>
 

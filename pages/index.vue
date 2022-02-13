@@ -24,7 +24,7 @@
               <VueLoading
                 type="bars"
                 color="#333"
-                :size="{ width: '50px', height: '50px' }"
+                :size="{ width: '30px', height: '30px' }"
               />
             </v-col>
           </v-row>
@@ -65,20 +65,20 @@
                     <VueLoading
                       type="bars"
                       color="#333"
-                      :size="{ width: '50px', height: '50px' }"
+                      :size="{ width: '30px', height: '30px' }"
                     />
                   </div>
                   <div
-                    class="font-weight-bold"
+                    class="font-weight-light"
                     slot="no-more"
-                    style="height: 50px"
+                    style="height: 30px"
                   >
                     No more questions.
                   </div>
                   <div
-                    class="font-weight-bold"
+                    class="font-weight-light"
                     slot="no-results"
-                    style="height: 50px"
+                    style="height: 30px"
                   >
                     No more questions.
                   </div>

@@ -26,7 +26,7 @@
           <VueLoading
             type="bars"
             color="#333"
-            :size="{ width: '50px', height: '50px' }"
+            :size="{ width: '30px', height: '30px' }"
           />
         </v-col>
       </v-row>

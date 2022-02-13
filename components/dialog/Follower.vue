@@ -19,10 +19,9 @@
       <v-list class="overflow-y-auto" height="320">
         <VueLoading
           v-if="loading"
-          class="pt-12 mt-12"
           type="bars"
           color="#333"
-          :size="{ width: '50px', height: '50px' }"
+          :size="{ width: '30px', height: '30px' }"
         />
 
         <v-card-text
