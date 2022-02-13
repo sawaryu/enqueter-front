@@ -12,8 +12,6 @@
       </v-alert>
     </div>
 
-    <div>{{$store.state}}</div>
-
     <div class="d-flex justify-start">
       <v-card class="pt-12 mt-12" flat color="rgb(0, 0, 0, 0)">
         <v-card-title class="text-h3 text-sm-h1 font-weight-bold">
