@@ -96,7 +96,6 @@ export default Vue.extend({
         );
         this.users = res.users;
         this.ratio = res.pie_chart_data;
-        console.log(res.pie_chart_data);
       } catch (error) {
       } finally {
         this.loading = false;

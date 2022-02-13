@@ -23,9 +23,7 @@ export default Vue.extend({
     try {
       const res = await $axios.$get(`/users/${params.id}/questions/bookmark`);
       return { questions: res as Question[] };
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   },
 });
 </script>

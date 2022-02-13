@@ -64,7 +64,9 @@
       class="pt-0 pb-2 pointer"
       style="white-space: pre-wrap"
       @click="$router.push(`/questions/${question.id}`)"
-      ><span class="question-title font-weight-light">{{ question.content }}</span></v-card-title
+      ><span class="question-title font-weight-light">{{
+        question.content
+      }}</span></v-card-title
     >
     <v-card-actions>
       <v-avatar
@@ -130,9 +132,7 @@ export default Vue.extend({
           } else {
             this.question.is_bookmarked = false;
           }
-        } catch (error) {
-          console.log(error);
-        }
+        } catch (error) {}
       } else {
         try {
           const res = await this.$axios.$post("/questions/bookmark", {
@@ -146,9 +146,7 @@ export default Vue.extend({
           } else {
             this.question.is_bookmarked = true;
           }
-        } catch (error) {
-          console.log(error);
-        }
+        } catch (error) {}
       }
     },
   },

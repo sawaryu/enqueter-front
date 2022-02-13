@@ -131,9 +131,7 @@ export default Vue.extend({
           }
           this.notWatchCount = count;
         });
-      } catch (e) {
-        console.log(e);
-      }
+      } catch (e) {}
       // get all notifications every 15 minutes.
       setTimeout(() => {
         this.getAllNotifications();
@@ -145,9 +143,7 @@ export default Vue.extend({
         const res = await this.$axios.$delete("/notifications");
         this.notWatchCount = 0;
         this.notifications = [];
-      } catch (e) {
-        console.log(e);
-      }
+      } catch (e) {}
     },
     // update all notification status to "watched"
     async watchAllNotifications() {
@@ -158,9 +154,7 @@ export default Vue.extend({
       try {
         const res = await this.$axios.$put("/notifications");
         this.notWatchCount = 0;
-      } catch (e) {
-        console.log(e);
-      }
+      } catch (e) {}
     },
     // display optimized created time
     beforeTime(created_at: string) {

@@ -1,6 +1,8 @@
 <template>
   <v-card color="rgb(0, 0, 0, 0)" flat>
-    <v-card-title class="font-weight-light"> <v-icon>mdi-crown</v-icon>Ranking</v-card-title>
+    <v-card-title class="font-weight-light">
+      <v-icon>mdi-crown</v-icon>Ranking</v-card-title
+    >
     <v-subheader>
       <v-icon class="mr-2" small> mdi-clock </v-icon>
       <span class="text-caption text--secondary font-weight-light"
@@ -12,7 +14,6 @@
     <v-divider></v-divider>
 
     <v-list color="rgb(0, 0, 0, 0)" dense height="50vh" class="overflow-y-auto">
-
       <VueLoading
         v-if="loading"
         type="bars"
@@ -52,7 +53,6 @@
           <div>{{ user.point }}pt</div>
         </v-list-item-action>
       </v-list-item>
-
     </v-list>
     <v-divider></v-divider>
   </v-card>
@@ -94,7 +94,6 @@ export default Vue.extend({
             period: this.period,
           },
         });
-        console.log(res);
         this.users = res;
       } catch (error) {
       } finally {

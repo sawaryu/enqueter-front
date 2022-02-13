@@ -94,7 +94,6 @@ export default Vue.extend({
         );
         this.users = res;
       } catch (error) {
-        console.log(error);
       } finally {
         setTimeout(() => {
           this.loading = false;

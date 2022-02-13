@@ -86,9 +86,7 @@ export default Vue.extend({
           },
           { root: true }
         );
-      } catch (e) {
-        console.log(e);
-      }
+      } catch (e) {}
     },
   },
   computed: {

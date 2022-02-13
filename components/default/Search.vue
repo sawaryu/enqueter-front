@@ -150,19 +150,14 @@ export default Vue.extend({
       try {
         const res = await this.$axios.$get("/users/search/history");
         this.usersHistory = res;
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     },
     // Delete all histories
     async deleteAll() {
       try {
         const res = await this.$axios.$delete("users/search/history");
-        console.log(res);
         this.usersHistory = [];
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     },
     // Delete one history
     async deleteOne(user_id: number) {
@@ -175,9 +170,7 @@ export default Vue.extend({
             this.usersHistory.splice(index, 1);
           }
         });
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     },
     // Go to profile and save new history.
     async goProfile(user_id: number) {
@@ -188,9 +181,7 @@ export default Vue.extend({
         this.menu = false;
         this.search = "";
         this.$router.push(`/users/${user_id}`);
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     },
   },
   watch: {
@@ -202,9 +193,7 @@ export default Vue.extend({
             search: this.search,
           });
           this.users = res;
-        } catch (error) {
-          console.log(error);
-        }
+        } catch (error) {}
       } else {
         return;
       }

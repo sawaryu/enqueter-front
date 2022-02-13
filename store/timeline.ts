@@ -46,7 +46,6 @@ export const mutations = mutationTree(state, {
     state.questions.some((element: Question, index: number) => {
       if (element.id == id) {
         state.questions[index].is_bookmarked = value
-        console.log("bookmarked")
         // break
         return true
       }

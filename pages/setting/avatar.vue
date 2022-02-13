@@ -55,29 +55,30 @@ export default {
   },
   methods: {
     async update() {
-      if (!this.$refs.form.validate() || this.avatar == "") { return }
+      if (!this.$refs.form.validate() || this.avatar == "") {
+        return;
+      }
 
-        this.loading = true
-        const formData = new FormData();
-        formData.append("image", this.avatar);
-        try {
-          const res = await this.$axios.$post("/upload", formData, {});
-          this.avatar = "";
-          this.$refs.inputFile.reset();
-          this.$auth.fetchUser();
-          this.$accessor.flash.showMessage(
-            {
-              message: `Updated completely your avatar.`,
-              type: "success",
-              status: true,
-            },
-            { root: true }
-          );
-        } catch (e) {
-          console.log(e);
-        } finally {
-          this.loading = false
-        }
+      this.loading = true;
+      const formData = new FormData();
+      formData.append("image", this.avatar);
+      try {
+        const res = await this.$axios.$post("/upload", formData, {});
+        this.avatar = "";
+        this.$refs.inputFile.reset();
+        this.$auth.fetchUser();
+        this.$accessor.flash.showMessage(
+          {
+            message: `Updated completely your avatar.`,
+            type: "success",
+            status: true,
+          },
+          { root: true }
+        );
+      } catch (e) {
+      } finally {
+        this.loading = false;
+      }
     },
     fileSelected(event) {
       if (event !== undefined && event !== null) {

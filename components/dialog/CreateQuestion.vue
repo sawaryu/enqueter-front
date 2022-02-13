@@ -28,7 +28,7 @@
         </v-form>
 
         <div class="text-caption mt-3 mb-0">
-          * A question will be closed after a week. <br>
+          * A question will be closed after a week. <br />
           * Please create the question that divide people's answers.
         </div>
       </v-card-text>
@@ -75,11 +75,8 @@ export default Vue.extend({
           { root: true }
         );
         this.$accessor.dialog.setQuestionDialog(false);
-        console.log(res.data);
         this.$router.push(`/questions/${res.data.id}`);
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     },
   },
 });

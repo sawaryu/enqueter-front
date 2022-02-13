@@ -1,4 +1,5 @@
 <template>
+  <!-- FIXME: async get ranking init need more refactor   -->
   <v-row>
     <v-col cols="12" md="4">
       <div style="position: sticky; top: 85px">
@@ -6,10 +7,8 @@
       </div>
     </v-col>
 
-    <!--  -->
-
     <!-- min height solve ranking display bugs -->
-    <v-col cols="12" md="8" style="min-height: 80vh;">
+    <v-col cols="12" md="8" style="min-height: 80vh">
       <v-card color="rgb(0, 0, 0, 0)" flat>
         <v-card-title>
           <v-spacer></v-spacer>
@@ -113,8 +112,6 @@ export default Vue.extend({
     this.$vuetify.goTo(this.$accessor.timeline.getScrollY);
   },
   destroyed() {
-    // scroll位置を格納する。
-    console.log("Destroyed:", window.scrollY);
     this.$accessor.timeline.saveScroll(window.scrollY);
   },
   methods: {
@@ -135,7 +132,6 @@ export default Vue.extend({
           },
         });
         this.$accessor.timeline.incrementPage();
-        console.log(res);
         this.$accessor.timeline.setQuestions(res);
       } catch (error) {
       } finally {
@@ -152,7 +148,6 @@ export default Vue.extend({
             page: this.$accessor.timeline.getPage,
           },
         });
-        console.log(res);
         setTimeout(() => {
           if (res.length) {
             this.$accessor.timeline.incrementPage();
@@ -162,13 +157,8 @@ export default Vue.extend({
             $state.complete();
           }
         }, 1000);
-      } catch (e) {
-        console.log(e);
-      }
+      } catch (e) {}
     },
-  },
-  beforeDestroy() {
-    console.log(this.$vuetify);
   },
 });
 </script>

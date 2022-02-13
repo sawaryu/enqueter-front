@@ -1,7 +1,14 @@
 <template>
-  <v-card class="mt-2 mx-auto" height="60vh">
+  <v-card class="mt-2 pb-3 mx-auto">
     <v-card-title class="pb-0 text--secondary">
-      Stats
+      <div>
+        <div>Stats</div>
+        <div>
+          <v-icon class="mr-2" small>mdi-clock</v-icon>
+          <span class="text-caption text--secondary font-weight-light"
+            >Regularly aggregated.</span>
+        </div>
+      </div>
       <v-spacer></v-spacer>
       <v-btn
         v-for="period in periods"
@@ -17,24 +24,21 @@
 
     <v-card-text class="pb-0 pt-0">
       <v-divider class="my-2"></v-divider>
-      <v-icon class="mr-2" small> mdi-clock </v-icon>
-      <span class="text-caption text--secondary font-weight-light"
-        >Regularly aggregated.</span
-      >
       <div class="subheading font-weight-medium text--secondary mt-3">
+        <v-icon class="mb-2">mdi-crown</v-icon>
         <span v-if="point_stats"
           >Point: {{ ordinalRank }} / {{ point_stats[1] }}pt</span
         >
         <span v-else>Point: N / A</span>
       </div>
+      <div class="mx-auto text-center" style="width: 300px; height: 300px">
+        <RadarChart v-if="!loading" :radar_data="radar_data" />
+        <template v-else>
+          <div class="font-weight-light text--secondary">No data yet.</div>
+          <small class="grey--text">*It takes time to reflect</small>
+        </template>
+      </div>
     </v-card-text>
-    <div class="mx-auto text-center" style="width: 90%; height: 60%">
-      <RadarChart v-if="!loading" :radar_data="radar_data" />
-      <template v-else>
-        <div class="font-weight-light text--secondary">No data yet.</div>
-        <small class="grey--text">*It takes time to reflect</small>
-      </template>
-    </div>
   </v-card>
 </template>
 

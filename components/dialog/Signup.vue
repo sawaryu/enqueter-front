@@ -157,7 +157,6 @@ export default Vue.extend({
             message: "Please check your email to activate the account.",
           });
         } catch (e) {
-          console.log(e);
         } finally {
           this.$accessor.overlay.setOverlay(false);
         }

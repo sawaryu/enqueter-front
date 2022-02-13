@@ -19,7 +19,7 @@
         <v-stepper-items>
           <!-- item1 -->
           <v-stepper-content class="pa-5" step="1">
-            <v-subheader class="black--text text-subtitle-1 font-weight-bold"
+            <v-subheader class="font-weight-light"
               >The reason of the report</v-subheader
             >
             <v-divider></v-divider>
@@ -42,7 +42,7 @@
 
           <!-- item2 -->
           <v-stepper-content class="pa-5" step="2">
-            <v-subheader class="black--text text-subtitle-1 font-weight-bold"
+            <v-subheader class="font-weight-light"
               >The specific reason</v-subheader
             >
             <v-card class="overflow-y-auto" height="200" flat>
@@ -67,7 +67,7 @@
 
           <!-- item3 -->
           <v-stepper-content class="pa-5" step="3">
-            <v-subheader class="black--text text-subtitle-1 font-weight-bold"
+            <v-subheader class="font-weight-light"
               >On the below, you go to report.</v-subheader
             >
             <v-divider></v-divider>

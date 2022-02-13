@@ -143,7 +143,6 @@ export default Vue.extend({
         const res = await this.$axios.$get("/users/search/history");
         this.usersHistory = res;
       } catch (error) {
-        console.log(error);
       }
     },
     // Create History
@@ -156,17 +155,14 @@ export default Vue.extend({
         this.search = "";
         this.$router.push(`/users/${user_id}`);
       } catch (error) {
-        console.log(error);
       }
     },
     // Delete all histories
     async deleteAll() {
       try {
         const res = await this.$axios.$delete("users/search/history");
-        console.log(res);
         this.usersHistory = [];
       } catch (error) {
-        console.log(error);
       }
     },
     // Delete one history
@@ -181,7 +177,6 @@ export default Vue.extend({
           }
         });
       } catch (error) {
-        console.log(error);
       }
     },
   },
@@ -193,10 +188,8 @@ export default Vue.extend({
           const res = await this.$axios.$post("/users/search", {
             search: this.search,
           });
-          console.log(res);
           this.users = res;
         } catch (error) {
-          console.log(error);
         }
       } else {
         return;

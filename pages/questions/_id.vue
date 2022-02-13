@@ -29,7 +29,6 @@ export default Vue.extend({
   async asyncData({ params, $axios }) {
     try {
       const res = await $axios.$get(`/questions/${params.id}`);
-      console.log(res);
       return { question: res };
     } catch (error) {}
   },

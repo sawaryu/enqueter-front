@@ -57,7 +57,6 @@ export default Vue.extend({
             },
           }
         );
-        console.log(res);
         setTimeout(() => {
           if (res.length) {
             this.page++;
@@ -67,9 +66,7 @@ export default Vue.extend({
             $state.complete();
           }
         }, 1000);
-      } catch (e) {
-        console.log(e);
-      }
+      } catch (e) {}
     },
   },
 });

@@ -108,7 +108,6 @@ export default Vue.extend({
         return;
       }
       try {
-        console.log(Object.assign(this.resetInfo, this.passwordModel));
         const res = await this.$axios.$put(
           "/auth/password_reset",
           Object.assign(this.resetInfo, this.passwordModel)

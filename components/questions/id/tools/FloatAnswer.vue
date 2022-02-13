@@ -1,6 +1,6 @@
 <template>
   <v-fab-transition>
-    <v-btn class="mb-10" large fixed bottom right  dark fab @click="next">
+    <v-btn class="mb-10" large fixed bottom right dark fab @click="next">
       <v-icon dark>mdi-checkbox-marked-circle-outline</v-icon>
     </v-btn>
   </v-fab-transition>
@@ -27,9 +27,8 @@ export default Vue.extend({
           );
         }
       } catch (error) {
-        console.log("aaaaaaa")
       } finally {
-        this.$emit("close")
+        this.$emit("close");
       }
     },
   },

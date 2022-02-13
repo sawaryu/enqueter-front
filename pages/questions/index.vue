@@ -78,7 +78,6 @@ export default Vue.extend({
     this.getQuestions(true);
   },
   destroyed() {
-    console.log("Save", window.scrollY);
     this.$accessor.questions.saveScroll(window.scrollY);
   },
   methods: {
@@ -97,7 +96,6 @@ export default Vue.extend({
         this.questions = res.data.questions;
         this.totalPages = res.data.total_pages;
       } catch (error) {
-        console.log(error);
       } finally {
         setTimeout(() => {
           this.loading = false;
@@ -105,7 +103,6 @@ export default Vue.extend({
 
         if (isInit) {
           setTimeout(() => {
-            console.log("Go", this.$accessor.questions.getScrollY)
             this.$vuetify.goTo(this.$accessor.questions.getScrollY);
           }, 500);
         }

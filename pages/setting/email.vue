@@ -31,7 +31,8 @@
   <!-- after sent email. -->
   <v-form v-else>
     <v-alert type="info">
-      Please check your E-mail and enter the <strong>token</strong> to the field.
+      Please check your E-mail and enter the <strong>token</strong> to the
+      field.
       <div>
         <small>* A token is expired within 30 minutes after mailed.</small>
       </div>
@@ -67,7 +68,10 @@ export default Vue.extend({
       emailRules: [
         (v: string) => (!!v && /\S/.test(v)) || "Must be required.",
         (v: string) =>
-          (!!v && /^(?!.*…)[a-zA-Z0-9_+-]+(.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/.test(v)) ||
+          (!!v &&
+            /^(?!.*…)[a-zA-Z0-9_+-]+(.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/.test(
+              v
+            )) ||
           "Incorrect email format.",
         (v: string) => v.length <= 255 || "Must be less than 255 characters.",
       ],
@@ -95,7 +99,6 @@ export default Vue.extend({
         );
         this.sent = true;
       } catch (error) {
-        console.log(error);
       } finally {
         this.$accessor.overlay.setOverlay(false);
       }
