@@ -195,7 +195,6 @@ export default Vue.extend({
     },
     async logout(): Promise<void> {
       await this.$auth.logout();
-      this.$resetStore();
       this.$accessor.flash.showMessage(
         {
           message: `Logged out completely.`,
@@ -205,6 +204,9 @@ export default Vue.extend({
         { root: true }
       );
       this.$router.push("/welcome");
+      setTimeout(() => {
+        this.$resetStore();
+      }, 300);
     },
   },
   computed: {

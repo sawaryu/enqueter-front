@@ -1,58 +1,27 @@
 <template>
   <v-card color="rgb(0, 0, 0, 0)" flat>
-    <v-card-title
-      ><v-icon>mdi-crown</v-icon>Ranking
-
+    <v-card-title> <v-icon>mdi-crown</v-icon>Ranking</v-card-title>
+    <v-subheader>
+      <v-icon class="mr-2" small> mdi-clock </v-icon>
+      <span class="text-caption text--secondary font-weight-light"
+        >Regularly aggregated.</span
+      >
       <v-spacer></v-spacer>
-
-      <template v-if="current_user_stats">
-        <!-- current user -->
-        <v-avatar
-          class="pointer mr-1"
-          size="40"
-          @click="$router.push(`/users/${$auth.user.id}`)"
-        >
-          <v-img :src="$avatar($auth.user.avatar)"></v-img
-        ></v-avatar>
-
-        <div class="text-caption" v-text="ordinal(current_user_stats[0])"></div>
-
-        <span class="mx-1 text-caption">/</span>
-
-        <div class="text-caption" v-text="current_user_stats[1] + 'pt'"></div>
-      </template>
-    </v-card-title>
-
+      <PeriodsBtn />
+    </v-subheader>
     <v-divider></v-divider>
 
-    <!-- top 10 -->
-    <v-list
-      color="rgb(0, 0, 0, 0)"
-      dense
-      max-height="60vh"
-      class="overflow-y-auto"
-    >
-      <v-list-item>
-        <v-icon class="mr-2" small> mdi-clock </v-icon>
-        <span class="text-caption text--secondary font-weight-light"
-          >Regularly aggregated.</span
-        >
-        <v-spacer></v-spacer>
-        <div>
-          <v-btn
-            v-for="period in periods"
-            color="grey darken-2"
-            dark
-            :key="period.id"
-            v-text="period.text"
-            :text="period.id != $accessor.ranking.getCurrentPeriod"
-            @click="$accessor.ranking.setCurrentPeriod(period.id)"
-            x-small
-          ></v-btn>
-        </div>
-      </v-list-item>
+    <v-list color="rgb(0, 0, 0, 0)" dense height="50vh" class="overflow-y-auto">
 
-      <v-list-item v-for="(user, index) in users" :key="user.id">
+      <VueLoading
+        v-if="loading"
+        class="pt-10 mt-10"
+        type="bars"
+        color="#333"
+        :size="{ width: '50px', height: '50px' }"
+      />
+
+      <v-list-item v-else v-for="(user, index) in users" :key="user.id">
         <div v-text="ordinal(index + 1)"></div>
         <v-badge
           :value="[0, 1, 2].includes(index)"
@@ -84,6 +53,7 @@
           <div>{{ user.point }}pt</div>
         </v-list-item-action>
       </v-list-item>
+
     </v-list>
     <v-divider></v-divider>
   </v-card>
@@ -91,17 +61,15 @@
 
 <script lang="ts">
 import ordinal from "ordinal";
+import { VueLoading } from "vue-loading-template";
 import Vue from "vue";
 export default Vue.extend({
+  components: { VueLoading },
   data() {
     return {
+      loading: true,
       users: [],
       current_user_stats: null,
-      periods: [
-        { id: "week", text: "week" },
-        { id: "month", text: "month" },
-        { id: "all", text: "all" },
-      ] as Array<object>,
     };
   },
   computed: {
@@ -120,19 +88,25 @@ export default Vue.extend({
     },
   },
   methods: {
-    async getRanking() {
+    async getRanking(): Promise<void> {
+      this.loading = true;
       try {
         const res = await this.$axios.$get("/users/ranking", {
           params: {
             period: this.period,
           },
         });
-        console.log(res)
+        console.log(res);
         this.users = res.users;
         this.current_user_stats = res.current_user_stats;
-      } catch (error) {}
+      } catch (error) {
+      } finally {
+        setTimeout(() => {
+          this.loading = false;
+        }, 300);
+      }
     },
-    sizeAndColorByRank(index: number): {} {
+    sizeAndColorByRank(index: number): object {
       if (index === 0) {
         return { size: 48, color: "amber accent-4" };
       } else if (index === 1) {

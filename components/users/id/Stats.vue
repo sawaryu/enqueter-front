@@ -23,7 +23,7 @@
       >
       <div class="subheading font-weight-medium text--secondary mt-3">
         <span v-if="point_stats"
-          >Point: {{ point_stats[0] }} / {{ point_stats[1] }}pt</span
+          >Point: {{ ordinalRank }} / {{ point_stats[1] }}pt</span
         >
         <span v-else>Point: N / A</span>
       </div>
@@ -39,6 +39,7 @@
 </template>
 
 <script lang="ts">
+import ordinal from "ordinal";
 import RadarChart from "~/chart/RadarChart";
 import Vue from "vue";
 export default Vue.extend({
@@ -58,6 +59,9 @@ export default Vue.extend({
     };
   },
   computed: {
+    ordinalRank(): string {
+      return ordinal(this.point_stats[0]);
+    },
     currentPeriod() {
       return this.$accessor.analytics.getCurrentPeriod;
     },
