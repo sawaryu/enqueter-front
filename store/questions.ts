@@ -4,6 +4,13 @@ import { getterTree, mutationTree } from 'typed-vuex'
   * Use in questions page.
 */
 
+function initialState() {
+  return {
+    currentPage: 1 as number,
+    scrollY: 0 as number
+  }
+}
+
 export const state = () => ({
   currentPage: 1 as number,
   scrollY: 0 as number
@@ -20,5 +27,8 @@ export const mutations = mutationTree(state, {
   },
   saveScroll(state, value: number) {
     state.scrollY = value
+  },
+  reset(state) {
+    Object.assign(state, initialState())
   }
 })

@@ -5,6 +5,12 @@ interface Alert {
   message: string
 }
 
+function initialState() {
+  return {
+    alert: null as Alert,
+  }
+}
+
 export const state = () => ({
   alert: null as Alert,
 })
@@ -16,5 +22,10 @@ export const getters = getterTree(state, {
 export const mutations = mutationTree(state, {
   setAlert(state, alert: Alert) {
     state.alert = alert
+  },
+  reset(state) {
+    Object.assign(state, initialState())
   }
 })
+
+

@@ -5,6 +5,14 @@ import { Question } from "@/common/entity/Question";
   * Use in timeline.
 */
 
+function initialState() {
+  return {
+    page: 1 as number,
+    questions: [] as Question[],
+    scrollY: 0 as number
+  }
+}
+
 export const state = () => ({
   page: 1 as number,
   questions: [] as Question[],
@@ -30,11 +38,6 @@ export const mutations = mutationTree(state, {
   pushQuestions(state, questions: []) {
     state.questions.push(...questions);
   },
-  reset(state) {
-    state.page = 1
-    state.questions = []
-    state.scrollY = 0
-  },
   saveScroll(state, value: number) {
     state.scrollY = value
   },
@@ -56,5 +59,8 @@ export const mutations = mutationTree(state, {
         return true
       }
     });
+  },
+  reset(state) {
+    Object.assign(state, initialState())
   }
 })

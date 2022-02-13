@@ -10,12 +10,7 @@
     </v-overlay>
 
     <!-- header welcome -->
-    <v-app-bar
-      v-if="isWelcome"
-      color="rgb(0, 0, 0, 0)"
-      app
-      flat
-    >
+    <v-app-bar v-if="isWelcome" color="rgb(0, 0, 0, 0)" app flat>
       <v-toolbar-title class="text-h5 font-weight-bold"
         >Enqueter</v-toolbar-title
       >
@@ -198,9 +193,18 @@ export default Vue.extend({
         console.log(res.message);
       } catch (error) {}
     },
-    logout(): void {
-      this.$auth.logout();
-      this.$router.go("/welcome");
+    async logout(): Promise<void> {
+      await this.$auth.logout();
+      this.$resetStore();
+      this.$accessor.flash.showMessage(
+        {
+          message: `Logged out completely.`,
+          type: "info",
+          status: true,
+        },
+        { root: true }
+      );
+      this.$router.push("/welcome");
     },
   },
   computed: {

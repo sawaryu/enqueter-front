@@ -1,5 +1,12 @@
 import { getterTree, mutationTree, actionTree } from 'typed-vuex'
 
+function initialState() {
+  return {
+    userQuestionsSort: 'all' as string,
+    questionsSort: 'answerable' as string,
+  }
+}
+
 export const state = () => ({
   userQuestionsSort: 'all' as string,
   questionsSort: 'answerable' as string,
@@ -17,4 +24,7 @@ export const mutations = mutationTree(state, {
   setQuestionsSort(state, sort: string) {
     state.questionsSort = sort
   },
+  reset(state) {
+    Object.assign(state, initialState())
+  }
 })

@@ -2,6 +2,9 @@
   <div>
     <div>Unsubscribe from this application and delete your account.</div>
     <div class="text-caption">※This operation can't be canceled.</div>
+    <div class="text-caption">
+      ※It may take a while to deleted completely from database.
+    </div>
     <v-checkbox
       v-model="checkbox"
       class="mx-auto"
@@ -23,23 +26,21 @@ export default Vue.extend({
     };
   },
   methods: {
-    async destroy() {
-      this.$accessor.overlay.setOverlay(true);
+    async destroy(): Promise<void> {
       try {
         const res = await this.$axios.$delete("/auth");
-        this.$auth.logout();
+        await this.$auth.logout();
+        await this.$resetStore();
         this.$accessor.flash.showMessage(
           {
-            message: `Deleted completely.`,
+            message: `Deleted your account.`,
             type: "info",
             status: true,
           },
           { root: true }
         );
-      } catch (error) {
-      } finally {
-        this.$accessor.overlay.setOverlay(false);
-      }
+        this.$router.push("/welcome");
+      } catch (error) {}
     },
   },
 });

@@ -1,5 +1,17 @@
 import { getterTree, mutationTree } from 'typed-vuex'
 
+function initialState() {
+  return {
+    questionDialog: false as Boolean,
+    followerDialog: false as Boolean,
+    followingDialog: false as Boolean,
+    loginDialog: false as Boolean,
+    signupDialog: false as Boolean,
+    reportDialog: false as Boolean,
+    reportTargetId: null as number
+  }
+}
+
 export const state = () => ({
   questionDialog: false as Boolean,
   followerDialog: false as Boolean,
@@ -43,8 +55,11 @@ export const mutations = mutationTree(state, {
 
   // when opening dialog, set the targetId.
   // when closing, set null.
-  setReportDialog(state, {value, id = null}: {value: boolean, id: number}) {
+  setReportDialog(state, { value, id = null }: { value: boolean, id: number }) {
     state.reportDialog = value
     state.reportTargetId = id
   },
+  reset(state) {
+    Object.assign(state, initialState())
+  }
 })
