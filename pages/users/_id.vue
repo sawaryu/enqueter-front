@@ -9,7 +9,7 @@
     </v-col>
 
     <v-col cols="12" md="8">
-      <v-bottom-navigation background-color="grey lighten-4" shift grow>
+      <v-bottom-navigation shift grow>
         <v-btn v-for="(n, index) in navigations" exact :to="n.to" :key="index">
           <span v-text="n.title"></span>
           <v-icon v-text="n.icon"></v-icon>

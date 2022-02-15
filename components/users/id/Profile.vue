@@ -1,5 +1,5 @@
 <template>
-  <v-card class="d-flex justify-center">
+  <v-card class="d-flex justify-center overflow-y-auto" height="28vh">
     <v-card class="py-3" width="400" flat>
       <div class="d-flex justify-space-around">
         <v-avatar size="60">

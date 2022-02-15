@@ -2,6 +2,7 @@
   <v-dialog
     :value="$accessor.dialog.getQuestionDialog"
     @input="$accessor.dialog.setQuestionDialog(false)"
+    transition="fade-transition"
     width="500"
   >
     <v-card class="rounded-lg">

@@ -2,6 +2,7 @@
   <v-dialog
     :value="$accessor.dialog.getFollowingDialog"
     @input="$accessor.dialog.setFollowingDialog(false)"
+    transition="fade-transition"
     width="500"
   >
     <v-card class="rounded-lg">

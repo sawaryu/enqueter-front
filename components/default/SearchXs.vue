@@ -4,7 +4,7 @@
       <v-icon>mdi-magnify</v-icon>
     </v-btn>
 
-    <v-dialog v-model="dialog">
+    <v-dialog v-if="dialog" v-model="dialog" transition="fade-transition">
       <v-card class="rounded-lg">
         <!-- common -->
         <v-card-title>
@@ -124,7 +124,6 @@
               <v-list-item-subtitle>No search results.</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
-          
         </v-list>
       </v-card>
     </v-dialog>

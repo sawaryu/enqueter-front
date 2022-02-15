@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="min-height:30vh;">
     <!-- (Attention!) ex: $event = "closed" -->
     <v-select
       color="black"

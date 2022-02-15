@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="min-height:30vh;">
     <!-- questions -->
     <v-row class="pa-3 mt-2">
       <v-col class="pt-0" v-for="q in questions" :key="q.id" cols="12" sm="6">

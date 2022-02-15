@@ -2,6 +2,7 @@
   <v-dialog
     :value="$accessor.dialog.getReportDialog"
     @input="$accessor.dialog.setReportDialog(false)"
+    transition="fade-transition"
     max-width="500"
   >
     <v-card class="rounded-lg">
