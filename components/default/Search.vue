@@ -94,7 +94,19 @@
 
         <v-divider></v-divider>
 
-        <v-list v-if="users.length" max-height="300" class="overflow-y-auto">
+        <v-card-text v-if="loading">
+          <VueLoading
+            type="bars"
+            color="#333"
+            :size="{ width: '30px', height: '30px' }"
+          />
+        </v-card-text>
+
+        <v-list
+          v-else-if="users.length"
+          max-height="300"
+          class="overflow-y-auto"
+        >
           <v-list-item
             v-for="user in users"
             :key="user.id"
@@ -127,11 +139,14 @@
 
 <script lang="ts">
 import { User } from "@/common/entity/User";
+import { VueLoading } from "vue-loading-template";
 import Vue from "vue";
 export default Vue.extend({
+  components: { VueLoading },
   data() {
     return {
       menu: false as Boolean,
+      loading: false,
       search: "" as String,
       usersHistory: [] as User[],
       users: [] as User[],
@@ -186,16 +201,20 @@ export default Vue.extend({
   },
   watch: {
     // Get search results
-    async search() {
-      if (this.search) {
+    async search(): Promise<void> {
+      if (this.search && !this.loading) {
+        this.loading = true;
         try {
           const res = await this.$axios.$post("/users/search", {
             search: this.search,
           });
           this.users = res;
-        } catch (error) {}
-      } else {
-        return;
+        } catch (error) {
+        } finally {
+          setTimeout(() => {
+            this.loading = false;
+          }, 250);
+        }
       }
     },
   },

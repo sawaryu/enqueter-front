@@ -13,7 +13,13 @@
     </v-subheader>
     <v-divider></v-divider>
 
-    <v-list color="rgb(0, 0, 0, 0)" dense height="50vh" class="overflow-y-auto">
+    <v-list
+      color="rgb(0, 0, 0, 0)"
+      dense
+      min-height="7.2vh"
+      max-height="50vh"
+      class="overflow-y-auto"
+    >
       <VueLoading
         v-if="loading"
         type="bars"
@@ -21,7 +27,11 @@
         :size="{ width: '30px', height: '30px' }"
       />
 
-      <v-list-item v-else v-for="(user, index) in users" :key="user.id">
+      <v-list-item
+        v-else-if="users.length"
+        v-for="(user, index) in users"
+        :key="user.id"
+      >
         <div v-text="ordinal(index + 1)"></div>
         <v-badge
           :value="[0, 1, 2].includes(index)"
@@ -52,6 +62,12 @@
         <v-list-item-action>
           <div>{{ user.point }}pt</div>
         </v-list-item-action>
+      </v-list-item>
+
+      <v-list-item v-else>
+        <v-list-item-action-text class="mx-auto my-auto">
+          No users ranked yet.
+        </v-list-item-action-text>
       </v-list-item>
     </v-list>
     <v-divider></v-divider>

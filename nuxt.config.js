@@ -114,6 +114,9 @@ export default {
     }
   },
 
+  // progress bar loading
+  loading: false
+
   // first loading (only SPA?)
   // loadingIndicator: {
   //   name: 'three-bounce',

@@ -24,6 +24,12 @@
 </template>
 
 <script lang="ts">
+const RESULT = {
+  right: 3,
+  wrong: -3,
+  even: 0,
+  first: 1,
+};
 import Vue from "vue";
 export default Vue.extend({
   async asyncData({ params, $axios }) {
@@ -58,23 +64,23 @@ export default Vue.extend({
   },
   methods: {
     // change component and show snackbar.
-    answered(arg: any) {
-      if (arg.result === 3) {
+    answered(result: number) {
+      if (result === RESULT.right) {
         this.snackDisplay = {
           message: "Right (+3pt)",
           color: "success",
         };
-      } else if (arg.result === -3) {
+      } else if (result === RESULT.wrong) {
         this.snackDisplay = {
           message: "Wrong (-3pt)",
           color: "dark",
         };
-      } else if (arg.result === 0) {
+      } else if (result === RESULT.even) {
         this.snackDisplay = {
           message: "Even",
           color: "warning",
         };
-      } else if (arg.result === 1) {
+      } else if (result === RESULT.first) {
         this.snackDisplay = {
           message: "First (+1pt)",
           color: "info",

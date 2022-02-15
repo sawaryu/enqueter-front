@@ -18,24 +18,26 @@
       <v-spacer></v-spacer>
 
       <template v-if="!$accessor.error.getIsError">
-        <v-btn
-          :large="isLarge"
-          rounded
-          class="mr-3"
-          color="grey darken-2"
-          outlined
-          @click="$accessor.dialog.setLoginDialog(true)"
-          >Login</v-btn
-        >
-        <v-btn
-          elevation="0"
-          :large="isLarge"
-          rounded
-          color="grey darken-2"
-          dark
-          @click="$accessor.dialog.setSignupDialog(true)"
-          >SignUp</v-btn
-        >
+        <span>
+          <v-btn
+            :large="isLarge"
+            rounded
+            class="mr-3"
+            color="grey darken-2"
+            outlined
+            @click="$accessor.dialog.setLoginDialog(true)"
+            >Login</v-btn
+          >
+          <v-btn
+            elevation="0"
+            :large="isLarge"
+            rounded
+            color="grey darken-2"
+            dark
+            @click="$accessor.dialog.setSignupDialog(true)"
+            >SignUp</v-btn
+          >
+        </span>
       </template>
     </v-app-bar>
 

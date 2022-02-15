@@ -33,10 +33,6 @@
       </div>
       <div class="mx-auto text-center" style="width: 300px; height: 300px">
         <RadarChart v-if="!loading" :radar_data="radar_data" />
-        <template v-else>
-          <div class="font-weight-light text--secondary">No data yet.</div>
-          <small class="grey--text">*It takes time to reflect</small>
-        </template>
       </div>
     </v-card-text>
   </v-card>

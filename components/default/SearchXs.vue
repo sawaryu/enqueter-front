@@ -88,7 +88,17 @@
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+
+          <v-list-item v-if="loading">
+            <VueLoading
+              type="bars"
+              color="#333"
+              :size="{ width: '30px', height: '30px' }"
+            />
+          </v-list-item>
+
           <v-list-item
+            v-else-if="users.length"
             v-for="user in users"
             :key="user.id"
             @click.stop="goProfile(user.id)"
@@ -109,11 +119,12 @@
             </v-list-item-content>
           </v-list-item>
 
-          <v-list-item v-if="!users.length">
+          <v-list-item v-else>
             <v-list-item-content class="text-center">
               <v-list-item-subtitle>No search results.</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
+          
         </v-list>
       </v-card>
     </v-dialog>
@@ -122,10 +133,13 @@
 
 <script lang="ts">
 import { User } from "@/common/entity/User";
+import { VueLoading } from "vue-loading-template";
 import Vue from "vue";
 export default Vue.extend({
+  components: { VueLoading },
   data() {
     return {
+      loading: false,
       dialog: false as boolean,
       search: "" as string,
       users: [] as User[],
@@ -142,8 +156,7 @@ export default Vue.extend({
       try {
         const res = await this.$axios.$get("/users/search/history");
         this.usersHistory = res;
-      } catch (error) {
-      }
+      } catch (error) {}
     },
     // Create History
     async goProfile(user_id: number) {
@@ -154,16 +167,14 @@ export default Vue.extend({
         this.dialog = false;
         this.search = "";
         this.$router.push(`/users/${user_id}`);
-      } catch (error) {
-      }
+      } catch (error) {}
     },
     // Delete all histories
     async deleteAll() {
       try {
         const res = await this.$axios.$delete("users/search/history");
         this.usersHistory = [];
-      } catch (error) {
-      }
+      } catch (error) {}
     },
     // Delete one history
     async deleteOne(user_id: number) {
@@ -176,23 +187,24 @@ export default Vue.extend({
             this.usersHistory.splice(index, 1);
           }
         });
-      } catch (error) {
-      }
+      } catch (error) {}
     },
   },
   watch: {
-    // Get search results
-    async search() {
-      if (this.search) {
+    async search(): Promise<void> {
+      if (this.search && !this.loading) {
+        this.loading = true;
         try {
           const res = await this.$axios.$post("/users/search", {
             search: this.search,
           });
           this.users = res;
         } catch (error) {
+        } finally {
+          setTimeout(() => {
+            this.loading = false;
+          }, 250);
         }
-      } else {
-        return;
       }
     },
   },

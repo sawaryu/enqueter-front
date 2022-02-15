@@ -7,7 +7,13 @@
           <v-icon>mdi-circle-slice-1</v-icon>Ratio
         </v-card-title>
         <v-divider></v-divider>
-        <PieChart v-if="!loading && isRatio" :ratio="ratio" />
+        <div
+          v-if="!loading && isRatio"
+          class="mx-auto"
+          style="width: 300px; height: 300px"
+        >
+          <PieChart :ratio="ratio" />
+        </div>
         <v-card-text class="text-center" v-else
           >'Yes' and 'No' ratio is displayed here.
         </v-card-text>
