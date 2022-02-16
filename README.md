@@ -2,6 +2,8 @@
 
 ## memo
 
+* rankingのheightを固定する。スマホ時に違和感のある挙動
+
 回答数 正答率 ポイント
 
 ## Summary

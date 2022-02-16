@@ -49,7 +49,7 @@
             max-length="255"
           ></v-text-field>
 
-          <v-text-field
+          <!-- <v-text-field
             tabindex="1"
             v-model="signupModel.nickname"
             :rules="nicknameRules"
@@ -57,7 +57,7 @@
             color="grey darken-3"
             maxlength="20"
             counter="20"
-          ></v-text-field>
+          ></v-text-field> -->
 
           <v-text-field
             tabindex="1"
@@ -85,7 +85,7 @@
           </v-btn>
           <v-divider class="my-5"></v-divider>
           <div class="text-primary mb-1">
-            In case of having the account already.
+            In case of already having the account.
           </div>
           <v-btn
             @click="closeOpen"

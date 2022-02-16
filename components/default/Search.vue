@@ -49,7 +49,7 @@
 
         <v-list
           v-if="usersHistory.length"
-          max-height="250"
+          height="250"
           class="overflow-y-auto"
         >
           <v-list-item
@@ -80,7 +80,7 @@
           </v-list-item>
         </v-list>
 
-        <v-card-text v-else class="text-center text-caption">
+        <v-card-text v-else class="text-center text-caption mb-2">
           No recent search histories.
         </v-card-text>
       </template>
@@ -104,7 +104,7 @@
 
         <v-list
           v-else-if="users.length"
-          max-height="300"
+          height="300"
           class="overflow-y-auto"
         >
           <v-list-item
@@ -129,7 +129,7 @@
           </v-list-item>
         </v-list>
 
-        <v-card-text v-else class="text-center text-caption mt-3">
+        <v-card-text v-else class="text-center text-caption mt-3 mb-2">
           No search results.
         </v-card-text>
       </template>

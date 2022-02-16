@@ -40,9 +40,9 @@
     ></v-text-field>
 
     <div class="mb-5">
-      If you forget the password, click
+      Forgot password? click
       <span class="blue--text pointer underline" @click="$emit('open')"
-        >here.</span
+        >here</span
       >
     </div>
 

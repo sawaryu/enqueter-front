@@ -16,8 +16,7 @@
     <v-list
       color="rgb(0, 0, 0, 0)"
       dense
-      min-height="7.2vh"
-      max-height="50vh"
+      height="40vh"
       class="overflow-y-auto"
     >
       <VueLoading

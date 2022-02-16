@@ -15,7 +15,7 @@
           <v-icon v-text="n.icon"></v-icon>
         </v-btn>
       </v-bottom-navigation>
-      <NuxtChild />
+      <NuxtChild keep-alive />
     </v-col>
     <Following v-if="$accessor.dialog.getFollowingDialog" />
     <Follower v-if="$accessor.dialog.getFollowerDialog" />
