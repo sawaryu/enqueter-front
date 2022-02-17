@@ -8,18 +8,15 @@
     </v-card-title>
 
     <transition name="fade" mode="out-in">
-      <v-row v-if="loading" justify="center" key="loading">
-        <v-col cols="12">
-          <VueLoading
-            type="bars"
-            color="#333"
-            :size="{ width: '30px', height: '30px' }"
-          />
-        </v-col>
-      </v-row>
+      <VueLoading
+        v-if="loading"
+        type="bars"
+        color="#333"
+        key="loading"
+        :size="{ width: '30px', height: '30px' }"
+      />
 
       <span v-else key="questions">
-        
         <v-card-text
           v-if="!$accessor.timeline.getQuestions.length"
           class="text-center"
@@ -72,7 +69,7 @@
               </div>
             </infinite-loading>
           </v-col>
-        </v-row>   
+        </v-row>
       </span>
     </transition>
   </v-sheet>
@@ -97,22 +94,23 @@ export default Vue.extend({
   },
   methods: {
     async init(isReset: boolean = false): Promise<void> {
-      if (isReset) {
-        this.loading = true;
-        this.$accessor.timeline.reset();
-      }
-      if (this.$accessor.timeline.getPage >= 2) {
-        return;
-      }
       try {
+        if (isReset) {
+          this.$accessor.timeline.reset();
+        }
+        if (this.$accessor.timeline.getPage >= 2) {
+          return;
+        }
         this.loading = true;
         const res = await this.$axios.$get(`/questions/timeline`, {
           params: {
             page: this.$accessor.timeline.getPage,
           },
         });
-        this.$accessor.timeline.incrementPage();
-        this.$accessor.timeline.setQuestions(res);
+        if (res.length) {
+          this.$accessor.timeline.incrementPage();
+          this.$accessor.timeline.setQuestions(res);
+        }
       } catch (error) {
       } finally {
         setTimeout(() => {

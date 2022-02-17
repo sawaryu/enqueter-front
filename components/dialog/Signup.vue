@@ -112,7 +112,7 @@ export default Vue.extend({
     signupModel: {
       username: "",
       email: "",
-      nickname: "",
+      // nickname: "",
       password: "",
       password_confirmation: "",
     },
@@ -130,10 +130,10 @@ export default Vue.extend({
         "Incorrect email format.",
       (v: string) => v.length <= 255 || "Must be less than 255 characters.",
     ],
-    nicknameRules: [
-      (v: string) => (!!v && /\S/.test(v)) || "Must be required.",
-      (v: string) => v.length <= 20 || "Must be less than 20 characters.",
-    ],
+    // nicknameRules: [
+    //   (v: string) => (!!v && /\S/.test(v)) || "Must be required.",
+    //   (v: string) => v.length <= 20 || "Must be less than 20 characters.",
+    // ],
     passwordRules: [
       (v: string) => (!!v && /\S/.test(v)) || "Must be required.",
       (v: string) =>

@@ -21,15 +21,13 @@
 
     <!-- questions -->
     <transition name="fade" mode="out-in">
-      <v-row v-if="loading" justify="center" key="loading">
-        <v-col cols="12">
-          <VueLoading
-            type="bars"
-            color="#333"
-            :size="{ width: '30px', height: '30px' }"
-          />
-        </v-col>
-      </v-row>
+      <VueLoading
+        v-if="loading"
+        key="loading"
+        type="bars"
+        color="#333"
+        :size="{ width: '30px', height: '30px' }"
+      />
 
       <v-row v-else key="questions">
         <template v-if="questions.length">
@@ -87,7 +85,7 @@ export default Vue.extend({
 
         setTimeout(() => {
           window.scrollTo(0, 0);
-        }, 200);
+        }, 150);
         const res = await this.$axios.$get("/questions", {
           params: {
             page: this.$accessor.questions.getCurrentPage,
@@ -99,12 +97,12 @@ export default Vue.extend({
       } finally {
         setTimeout(() => {
           this.loading = false;
-        }, 250);
+        }, 50);
 
         if (isInit) {
           setTimeout(() => {
             this.$vuetify.goTo(this.$accessor.questions.getScrollY);
-          }, 500);
+          }, 290);
         }
       }
     },
