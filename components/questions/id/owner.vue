@@ -8,11 +8,11 @@
         </v-card-title>
         <v-divider></v-divider>
         <div
-          v-if="!loading && isRatio"
+          v-if="!loading && isExistCountData"
           class="mx-auto"
           style="width: 300px; height: 300px"
         >
-          <PieChart :ratio="ratio" />
+          <PieChart :count_data="count_data" :options_data="options_data" />
         </div>
         <v-card-text class="text-center" v-else
           >'Yes' and 'No' ratio is displayed here.
@@ -61,8 +61,10 @@
             </v-list-item-content>
 
             <v-list-item-action>
-              <div v-if="user.is_yes" class="red--text">Yes</div>
-              <div v-else class="blue--text">No</div>
+              <div v-if="user.option === 'first'" class="red--text">
+                {{ question.option_first }}
+              </div>
+              <div v-else class="blue--text">{{ question.option_second }}</div>
             </v-list-item-action>
           </v-list-item>
         </v-list>
@@ -73,22 +75,33 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import { User } from "@/common/entity/User";
+import { Question } from "@/common/entity/Question";
 import PieChart from "~/chart/PieChart";
+import Vue, { PropOptions } from "vue";
 export default Vue.extend({
+  props: {
+    question: {
+      type: Object,
+      required: true,
+    } as PropOptions<Question>,
+  },
   components: {
     PieChart,
   },
   data() {
     return {
-      loading: true,
-      users: [],
-      ratio: [0, 0],
+      loading: true as boolean,
+      users: [] as User[],
+      count_data: [0, 0] as Number[],
     };
   },
   computed: {
-    isRatio() {
-      return this.ratio[0] || this.ratio[1];
+    options_data(): String[] {
+      return [this.question.option_first, this.question.option_second]
+    },
+    isExistCountData(): boolean {
+      return this.count_data[0] || this.count_data[1];
     },
   },
   created() {
@@ -101,7 +114,7 @@ export default Vue.extend({
           `/questions/${this.$route.params.id}/owner`
         );
         this.users = res.users;
-        this.ratio = res.pie_chart_data;
+        this.count_data = res.count_data;
       } catch (error) {
       } finally {
         this.loading = false;

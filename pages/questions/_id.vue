@@ -18,7 +18,7 @@
 
     <!-- by the status -->
     <transition name="fade" mode="out-in">
-      <component @answered="answered" :is="currentComponent"></component>
+      <component :question="question" @answered="answered" :is="currentComponent"></component>
     </transition>
   </div>
 </template>

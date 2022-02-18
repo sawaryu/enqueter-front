@@ -3,19 +3,23 @@ import chartjsPluginDatalabels from "chartjs-plugin-datalabels";
 export default {
   extends: Pie,
   props: {
-    ratio: {
+    options_data: {
+      type: Array, // String[]
+      required: true
+    },
+    count_data: {
       type: Array,
-      default: [0, 0],
+      default: [0, 0], // Number[]
     },
   },
   data() {
     return {
       chartData: {
-        labels: ["No", "Yes"],
+        labels: this.options_data.reverse(),
         datasets: [
           {
             backgroundColor: ["#BBDEFB", "#FFCDD2"],
-            data: this.ratio,
+            data: this.count_data.reverse(),
           },
         ],
       },

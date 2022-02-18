@@ -7,37 +7,59 @@
     </v-row>
 
     <v-row justify="center">
-      <AnswerCard
-        v-for="(card, index) in cards"
-        :key="index"
-        :type="card"
-        @answer="answer"
-      />
+      <v-card
+        elevation="8"
+        class="d-flex justify-center align-center ma-6"
+        :width="size"
+        :height="size"
+        link
+        @click="answer('first')"
+      >
+        <div class="text-h6 text-sm-h4 red--text font-weight-bold">{{question.option_first}}</div>
+      </v-card>
+
+      <v-card
+        elevation="8"
+        class="d-flex justify-center align-center ma-6"
+        :width="size"
+        :height="size"
+        link
+        @click="answer('second')"
+      >
+        <div class="text-h6 text-sm-h4 blue--text font-weight-bold">{{question.option_second}}</div>
+      </v-card>
     </v-row>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import { Question } from "@/common/entity/Question";
+import Vue, { PropOptions } from "vue";
 export default Vue.extend({
-  data() {
-    return {
-      cards: [true, false],
-    };
+  props: {
+    question: {
+      type: Object,
+      required: true,
+    } as PropOptions<Question>,
   },
-  created() {
-    // randomize cards.
-    this.cards = this.cards.sort(() => Math.random() - 0.5);
+  computed: {
+    size() {
+      const breakpointName = this.$vuetify.breakpoint.name;
+      if (breakpointName == "xs") {
+        return 130;
+      } else {
+        return 250;
+      }
+    },
   },
   methods: {
-    async answer(is_yes: boolean) {
+    async answer(option: string) {
       try {
         const question_id: number = Number(this.$route.params.id);
         const res = await this.$axios.$post("/questions/answer", {
           question_id: question_id,
-          is_yes: is_yes,
+          option: option,
         });
-        // change store
         this.$accessor.timeline.answeredQuestion(question_id);
         this.$emit("answered", res);
       } catch (error) {}
