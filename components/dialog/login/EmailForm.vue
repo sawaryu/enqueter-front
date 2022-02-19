@@ -13,7 +13,6 @@
       :rules="emailRules"
       label="E-mail"
       required
-      color="grey darken-3"
       hint="Send email to your registered E-mail."
       persistent-hint
     ></v-text-field>
@@ -49,7 +48,10 @@ export default Vue.extend({
       emailRules: [
         (v: string) => (!!v && /\S/.test(v)) || "Must be required.",
         (v: string) =>
-          (!!v && /^(?!.*…)[a-zA-Z0-9_+-]+(.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/.test(v)) ||
+          (!!v &&
+            /^(?!.*…)[a-zA-Z0-9_+-]+(.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/.test(
+              v
+            )) ||
           "Incorrect email format.",
         (v: string) => v.length <= 255 || "Must be less than 255 characters.",
       ],

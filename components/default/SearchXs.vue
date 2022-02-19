@@ -14,7 +14,6 @@
             outlined
             rounded
             dense
-            color="black"
             clearable
             style="height: 40px"
             prepend-inner-icon="mdi-magnify"

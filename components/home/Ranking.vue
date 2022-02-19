@@ -1,8 +1,10 @@
 <template>
   <v-sheet color="rgb(0, 0, 0, 0)" flat>
     <v-card-title class="font-weight-light">
-      <v-icon>mdi-crown</v-icon>Ranking</v-card-title
-    >
+      <v-icon>mdi-crown</v-icon>Ranking
+      <v-spacer></v-spacer>
+      <v-btn small rounded outlined @click="changeCategory" v-text="category"></v-btn>
+    </v-card-title>
     <v-subheader>
       <v-icon class="mr-2" small> mdi-clock </v-icon>
       <span class="text-caption text--secondary font-weight-light"
@@ -64,6 +66,10 @@
 </template>
 
 <script lang="ts">
+const CATEGORY = {
+  point: "point",
+  response: "response",
+};
 import ordinal from "ordinal";
 import Vue from "vue";
 export default Vue.extend({
@@ -76,6 +82,7 @@ export default Vue.extend({
   data() {
     return {
       loading: false,
+      category: "point",
     };
   },
   computed: {
@@ -119,6 +126,13 @@ export default Vue.extend({
     },
     ordinal(number: number): string {
       return ordinal(number);
+    },
+    changeCategory(): void {
+      if (this.category === CATEGORY.point) {
+        this.category = CATEGORY.response;
+      } else {
+        this.category = CATEGORY.point;
+      }
     },
   },
 });

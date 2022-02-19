@@ -1,9 +1,5 @@
 <template>
-  <span
-    class="mr-1"
-    style="width: 180px"
-    v-click-outside="closeMenu"
-  >
+  <span class="mr-1" style="width: 180px" v-click-outside="closeMenu">
     <!-- search field -->
     <v-text-field
       v-model="search"
@@ -19,14 +15,7 @@
     ></v-text-field>
 
     <!-- menu card -->
-    <v-card
-      color="white"
-      light
-      class="search-card"
-      v-if="menu"
-      width="300"
-      elevation="10"
-    >
+    <v-card light class="search-card" v-if="menu" width="300" elevation="10">
       <!-- history -->
       <template v-if="!search">
         <v-card-title class="pb-1">

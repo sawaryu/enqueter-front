@@ -21,7 +21,6 @@
             filled
             v-model="questionModel.content"
             :rules="questionRules"
-            color="black"
             maxlength="140"
             counter="140"
             dense
@@ -35,7 +34,6 @@
                 counter="15"
                 v-model="questionModel.option_first"
                 :rules="optionRules"
-                color="black"
                 maxlength="15"
                 rounded
                 filled
@@ -47,7 +45,6 @@
                 counter="15"
                 v-model="questionModel.option_second"
                 :rules="optionRules"
-                color="black"
                 maxlength="15"
                 rounded
                 filled

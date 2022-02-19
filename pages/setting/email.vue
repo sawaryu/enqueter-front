@@ -5,7 +5,6 @@
       tabindex="1"
       :value="$auth.user.email"
       label="Current E-mail"
-      color="grey darken-3"
       disabled
     ></v-text-field>
 
@@ -14,7 +13,6 @@
       v-model="emailModel.email"
       :rules="emailRules"
       label="E-mail"
-      color="grey darken-3"
       counter="255"
       max-length="255"
     ></v-text-field>
@@ -42,7 +40,6 @@
       tabindex="1"
       v-model="tokenModel.token"
       label="Token"
-      color="grey darken-3"
       counter="50"
       max-length="50"
     ></v-text-field>

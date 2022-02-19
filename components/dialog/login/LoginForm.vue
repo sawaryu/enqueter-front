@@ -8,7 +8,7 @@
   >
     <div v-if="user_id_not_confirmed" class="mb-5">
       <v-alert color="warning" outlined>
-        You are not confirmed. <br>
+        You are not confirmed. <br />
         please check your email.
       </v-alert>
       If you need to resend email. please click
@@ -27,16 +27,14 @@
       v-model="loginModel.username_or_email"
       label="Username (E-mail)"
       required
-      color="grey darken-3"
     ></v-text-field>
 
     <v-text-field
       tabindex="1"
       type="password"
       v-model="loginModel.password"
-      label="password"
+      label="Password"
       required
-      color="grey darken-3"
     ></v-text-field>
 
     <div class="mb-5">

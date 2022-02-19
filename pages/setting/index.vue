@@ -1,7 +1,6 @@
 <template>
   <v-form ref="form" v-model="valid" lazy-validation>
     <v-text-field
-      color="grey darken-3"
       v-model="profileModel.username"
       :rules="usernameRules"
       label="Username"
@@ -11,7 +10,6 @@
     ></v-text-field>
 
     <v-text-field
-      color="grey darken-3"
       v-model="profileModel.nickname"
       :rules="nicknameRules"
       label="Nickname"
@@ -22,7 +20,6 @@
     <v-textarea
       label="Introduce"
       v-model="profileModel.introduce"
-      color="grey darken-3"
       placeholder="Hi, my name is john."
       maxlength="140"
       counter="140"
