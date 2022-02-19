@@ -3,7 +3,6 @@
     <div class="d-flex justify-center">
       <v-checkbox
         v-model="preview"
-        dense
         hide-details
         color="black"
         label="See preview"
@@ -88,7 +87,7 @@
       </v-card>
     </v-row>
 
-    <Preview v-else :question="question" />
+    <Preview class="mt-4" v-else :question="question" />
   </div>
 </template>
 

@@ -1,7 +1,5 @@
 <template>
-  <!-- NOTICE!: only be able to use in methods -->
   <span
-    v-if="$vuetify.breakpoint.name != 'xs'"
     class="mr-1"
     style="width: 180px"
     v-click-outside="closeMenu"

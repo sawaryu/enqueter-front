@@ -1,5 +1,5 @@
 <template>
-  <span v-if="$vuetify.breakpoint.name == 'xs'">
+  <span>
     <v-btn icon @click="openDialog">
       <v-icon>mdi-magnify</v-icon>
     </v-btn>
