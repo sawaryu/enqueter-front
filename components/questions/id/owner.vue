@@ -1,6 +1,5 @@
 <template>
   <v-row justify="center">
-    <!-- Pie data -->
     <v-col class="mt-0 pt-0" cols="12" sm="4">
       <v-card width="450" color="rgb(0, 0, 0, 0)" flat>
         <v-card-title class="justify-center mt-0 pt-1">
@@ -20,7 +19,6 @@
       </v-card>
     </v-col>
 
-    <!-- Answered Users -->
     <v-col class="mt-0 pt-0" cols="12" sm="4">
       <v-card color="rgb(0, 0, 0, 0)" flat>
         <v-card-title class="justify-center mt-0 pt-1"

@@ -64,9 +64,7 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn :disabled="!/\S/.test(questionModel.content)" @click="create"
-          >create</v-btn
-        >
+        <v-btn color="grey darken-3" dark @click="create">create</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -95,9 +93,7 @@ export default Vue.extend({
   },
   methods: {
     async create(): Promise<void> {
-      if (!(this.$refs.form as any).validate()) {
-        return;
-      }
+      if (!(this.$refs.form as any).validate()) { return; }
 
       try {
         const res = await this.$axios.$post("/questions", this.questionModel);

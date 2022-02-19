@@ -7,7 +7,7 @@
     <transition name="fade" mode="out-in">
       <component
         :question="question"
-        @answered="answered"
+        @answer="answer"
         :is="currentComponent"
       ></component>
     </transition>
@@ -25,7 +25,7 @@
 <script lang="ts">
 const COMPONENT = {
   owner: "Owner",
-  unanswered: "Unanswered",
+  unanswered: "Answer",
 };
 const RESULT = {
   right: 3,
@@ -64,7 +64,7 @@ export default Vue.extend({
     },
   },
   methods: {
-    answered(result: number) {
+    answer(result: number) {
       if (result === RESULT.right) {
         this.snackDisplay = {
           message: "Right (+3pt)",

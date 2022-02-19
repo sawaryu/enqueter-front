@@ -72,7 +72,7 @@ export default Vue.extend({
             option: option,
           });
           this.$accessor.timeline.answeredQuestion(question_id);
-          this.$emit("answered", res);
+          this.$emit("answer", res);
         } catch (error) {}
     },
   },
