@@ -15,7 +15,9 @@
         link
         @click="answer('first')"
       >
-        <div class="text-h6 text-sm-h4 red--text font-weight-bold">{{question.option_first}}</div>
+        <div class="text-h6 text-sm-h4 red--text font-weight-bold text-center">
+          {{ question.option_first }}
+        </div>
       </v-card>
 
       <v-card
@@ -26,7 +28,9 @@
         link
         @click="answer('second')"
       >
-        <div class="text-h6 text-sm-h4 blue--text font-weight-bold">{{question.option_second}}</div>
+        <div class="text-h6 text-sm-h4 blue--text font-weight-bold text-center">
+          {{ question.option_second }}
+        </div>
       </v-card>
     </v-row>
   </div>
@@ -54,15 +58,22 @@ export default Vue.extend({
   },
   methods: {
     async answer(option: string) {
-      try {
-        const question_id: number = Number(this.$route.params.id);
-        const res = await this.$axios.$post("/questions/answer", {
-          question_id: question_id,
-          option: option,
-        });
-        this.$accessor.timeline.answeredQuestion(question_id);
-        this.$emit("answered", res);
-      } catch (error) {}
+      if (
+        this.question.user_id == this.$auth.user.id ||
+        this.question.is_answered ||
+        !this.question.is_open
+      ) {
+        return;
+      }
+        try {
+          const question_id: number = Number(this.$route.params.id);
+          const res = await this.$axios.$post("/questions/answer", {
+            question_id: question_id,
+            option: option,
+          });
+          this.$accessor.timeline.answeredQuestion(question_id);
+          this.$emit("answered", res);
+        } catch (error) {}
     },
   },
 });

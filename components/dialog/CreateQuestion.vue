@@ -16,16 +16,44 @@
 
       <v-card-text class="pb-2">
         <v-form ref="form" v-model="valid" lazy-validation>
+          <small>Question</small>
           <v-textarea
+            filled
             v-model="questionModel.content"
             :rules="questionRules"
             color="black"
             maxlength="140"
             counter="140"
             dense
-            persistent-hint
           >
           </v-textarea>
+
+          <div class="d-flex justify-center mt-5">
+            <div class="mr-3">
+              <small>Option 1</small>
+              <v-text-field
+                counter="15"
+                v-model="questionModel.option_first"
+                :rules="optionRules"
+                color="black"
+                maxlength="15"
+                rounded
+                filled
+              ></v-text-field>
+            </div>
+            <div class="ml-3">
+              <small>Option 1</small>
+              <v-text-field
+                counter="15"
+                v-model="questionModel.option_second"
+                :rules="optionRules"
+                color="black"
+                maxlength="15"
+                rounded
+                filled
+              ></v-text-field>
+            </div>
+          </div>
         </v-form>
 
         <div class="text-caption mt-3 mb-0">
@@ -52,10 +80,16 @@ export default Vue.extend({
       valid: true,
       questionModel: {
         content: "",
+        option_first: "",
+        option_second: "",
       },
       questionRules: [
         (v: string) => (!!v && /\S/.test(v)) || "Must be required",
         (v: string) => v.length <= 140 || "Must be less than 255 characters",
+      ],
+      optionRules: [
+        (v: string) => (!!v && /\S/.test(v)) || "Must be required",
+        (v: string) => v.length <= 15 || "Must be less than 15 characters",
       ],
     };
   },

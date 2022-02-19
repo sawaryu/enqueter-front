@@ -33,7 +33,7 @@
         </v-card-text>
         <v-list
           v-else
-          max-height="420"
+          height="420"
           color="rgb(0, 0, 0, 0)"
           class="overflow-y-auto"
           :style="{ height: 420 / 1.18 + 'px' }"
@@ -98,7 +98,7 @@ export default Vue.extend({
   },
   computed: {
     options_data(): String[] {
-      return [this.question.option_first, this.question.option_second]
+      return [this.question.option_first, this.question.option_second];
     },
     isExistCountData(): boolean {
       return this.count_data[0] || this.count_data[1];
