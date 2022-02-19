@@ -16,12 +16,7 @@
       <v-divider></v-divider>
 
       <v-list class="overflow-y-auto" height="320">
-        <VueLoading
-          v-if="loading"
-          type="bars"
-          color="#333"
-          :size="{ width: '30px', height: '30px' }"
-        />
+        <Loading v-if="loading" />
 
         <v-card-text
           v-else-if="!users.length && !loading"
@@ -70,12 +65,9 @@
 </template>
 
 <script lang="ts">
-import { VueLoading } from "vue-loading-template";
-
 import { User } from "@/common/entity/User";
 import Vue from "vue";
 export default Vue.extend({
-  components: { VueLoading },
   data() {
     return {
       loading: true,

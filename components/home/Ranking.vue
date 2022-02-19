@@ -13,18 +13,8 @@
     </v-subheader>
     <v-divider></v-divider>
 
-    <v-list
-      color="rgb(0, 0, 0, 0)"
-      dense
-      height="40vh"
-      class="overflow-y-auto"
-    >
-      <VueLoading
-        v-if="loading"
-        type="bars"
-        color="#333"
-        :size="{ width: '30px', height: '30px' }"
-      />
+    <v-list color="rgb(0, 0, 0, 0)" dense height="40vh" class="overflow-y-auto">
+      <Loading v-if="loading" />
 
       <v-list-item
         v-else-if="users.length"
@@ -75,10 +65,8 @@
 
 <script lang="ts">
 import ordinal from "ordinal";
-import { VueLoading } from "vue-loading-template";
 import Vue from "vue";
 export default Vue.extend({
-  components: { VueLoading },
   props: {
     users: {
       type: Array,

@@ -90,11 +90,7 @@
           </v-list-item>
 
           <v-list-item v-if="loading">
-            <VueLoading
-              type="bars"
-              color="#333"
-              :size="{ width: '30px', height: '30px' }"
-            />
+            <Loading />
           </v-list-item>
 
           <v-list-item
@@ -132,10 +128,8 @@
 
 <script lang="ts">
 import { User } from "@/common/entity/User";
-import { VueLoading } from "vue-loading-template";
 import Vue from "vue";
 export default Vue.extend({
-  components: { VueLoading },
   data() {
     return {
       loading: false,

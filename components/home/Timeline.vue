@@ -8,13 +8,7 @@
     </v-card-title>
 
     <transition name="fade" mode="out-in">
-      <VueLoading
-        v-if="loading"
-        type="bars"
-        color="#333"
-        key="loading"
-        :size="{ width: '30px', height: '30px' }"
-      />
+      <Loading v-if="loading" />
 
       <span v-else key="questions">
         <v-card-text
@@ -47,11 +41,7 @@
               @infinite="getMore"
             >
               <div slot="spinner">
-                <VueLoading
-                  type="bars"
-                  color="#333"
-                  :size="{ width: '30px', height: '30px' }"
-                />
+                <Loading />
               </div>
               <div
                 class="font-weight-light"
@@ -77,11 +67,9 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { VueLoading } from "vue-loading-template";
 import InfiniteLoading from "vue-infinite-loading";
 export default Vue.extend({
   components: {
-    VueLoading,
     InfiniteLoading,
   },
   data() {

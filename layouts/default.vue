@@ -2,11 +2,7 @@
   <v-app id="inspire">
     <!-- loading -->
     <v-overlay :value="loading" color="#FFFFFF" opacity="1" z-index="9999">
-      <VueLoading
-        type="bars"
-        color="#333"
-        :size="{ width: '50px', height: '50px' }"
-      />
+      <Loading :size="{ width: '50px', height: '50px' }" />
     </v-overlay>
 
     <!-- header welcome -->
@@ -149,12 +145,8 @@
 </template>
 
 <script lang="ts">
-import { VueLoading } from "vue-loading-template";
 import Vue from "vue";
 export default Vue.extend({
-  components: {
-    VueLoading,
-  },
   name: "default",
   data() {
     return {
