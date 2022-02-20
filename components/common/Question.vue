@@ -41,7 +41,7 @@
       </v-btn>
 
       <!-- menu -->
-      <v-menu v-if="question.user_id !== $auth.user.id" offset-y>
+      <!-- <v-menu v-if="question.user_id !== $auth.user.id" offset-y>
         <template v-slot:activator="{ on, attrs }">
           <v-btn icon v-bind="attrs" v-on="on">
             <v-icon>mdi-dots-vertical</v-icon>
@@ -54,7 +54,7 @@
             >
           </v-list-item>
         </v-list>
-      </v-menu>
+      </v-menu> -->
 
       <!-- slot -->
       <slot> </slot>

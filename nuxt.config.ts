@@ -68,7 +68,7 @@ export default {
       callback: false,
       home: '/' // User will be redirected to this path after login. (rewriteRedirects will rewrite this path)
     },
-    localStorage: false,
+    localStorage: true,
     strategies: {
       local: {
         scheme: '@/plugins/customSchema.ts',

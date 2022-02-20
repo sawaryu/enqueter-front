@@ -51,6 +51,11 @@ export const mutations = mutationTree(state, {
       }
     });
   },
+  deleteQuestion(state, id: number) {
+    state.questions = state.questions.filter(
+      (q: Question) => q.id !== id
+    );
+  },
   answeredQuestion(state, id: number) {
     state.questions.some((element: Question, index: number) => {
       if (element.id == id) {

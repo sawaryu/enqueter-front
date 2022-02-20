@@ -39,7 +39,7 @@
         <div class="mr-2">
           <v-icon class="mb-2">mdi-crown</v-icon>
           <span v-if="point_stats"
-            >Point: {{ ordinalPointRank }} / {{ point_stats[1] }}pt</span
+            >Point: {{ ordinalPointRank }} / {{ point_stats[1] }} pt</span
           >
           <span v-else>Point: N / A</span>
         </div>
@@ -49,7 +49,7 @@
           <v-icon class="mb-2">mdi-crown</v-icon>
           <span v-if="response_stats"
             >Response: {{ ordinalResponseRank }} /
-            {{ response_stats[1] }}res</span
+            {{ response_stats[1] }} res</span
           >
           <span v-else>Response: N / A</span>
         </div>

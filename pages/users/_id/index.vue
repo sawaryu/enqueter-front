@@ -81,6 +81,7 @@ export default Vue.extend({
         this.questions = this.questions.filter(
           (q: Question) => q.id !== question_id
         );
+        this.$accessor.timeline.deleteQuestion(question_id);
         this.$accessor.flash.showMessage(
           {
             message: "The question was successfully deleted.",

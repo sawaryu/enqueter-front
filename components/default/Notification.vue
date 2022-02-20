@@ -21,6 +21,21 @@
     </template>
 
     <v-card>
+      <v-card-title class="font-weight-light text-subtitle-1 pb-1">
+        Notifications
+        <v-spacer></v-spacer>
+        <v-btn
+          rounded
+          color="red"
+          text
+          small
+          v-if="notifications.length"
+          @click="deleteNotifications()"
+        >
+          delete all
+        </v-btn>
+      </v-card-title>
+      <v-divider></v-divider>
       <!-- If there are any notifications. -->
       <v-list class="overflow-y-auto" height="230" width="300">
         <v-list-item
@@ -70,18 +85,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item v-if="notifications.length" @click="deleteNotifications()">
-          <v-list-item-content>
-            <v-list-item-subtitle class="text-center text-caption red--text">
-              <span>
-                <v-icon color="red">mdi-delete-outline</v-icon>
-              </span>
-              Delete all notifications.
-            </v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-
-        <v-list-item class="mt-16 pt-3" v-else>
+        <v-list-item class="mt-16" v-if="!notifications.length">
           <v-list-item-content>
             <v-list-item-subtitle class="text-center">
               <v-icon class="mb-2">mdi-bell-outline</v-icon>
