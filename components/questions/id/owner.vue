@@ -127,7 +127,7 @@ export default Vue.extend({
     this.getQuestionData();
   },
   methods: {
-    async getQuestionData() {
+    async getQuestionData(): Promise<void> {
       try {
         const res = await this.$axios.$get(
           `/questions/${this.$route.params.id}/owner`

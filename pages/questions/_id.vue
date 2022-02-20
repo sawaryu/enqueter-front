@@ -35,7 +35,7 @@ const RESULT = {
 };
 import Vue from "vue";
 export default Vue.extend({
-  async asyncData({ params, $axios }) {
+  async asyncData({ params, $axios }): Promise<any> {
     try {
       const res = await $axios.$get(`/questions/${params.id}`);
       return { question: res };

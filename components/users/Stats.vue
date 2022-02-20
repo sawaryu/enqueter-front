@@ -104,7 +104,7 @@ export default Vue.extend({
     },
   },
   methods: {
-    async getStats() {
+    async getStats(): Promise<void> {
       try {
         const res = await this.$axios.$get(
           `/users/${this.$route.params.id}/stats`,

@@ -75,7 +75,7 @@ export default Vue.extend({
     this.profileModel.introduce = this.$auth.user.introduce;
   },
   methods: {
-    async update() {
+    async update(): Promise<void> {
       if (!this.$refs.form.validate()) {
         return;
       }

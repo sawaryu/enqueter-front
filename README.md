@@ -1,6 +1,7 @@
 # Enqueter Front
 
 ## memo
+avatar
 
 * rankingのheightを固定する。スマホ時に違和感のある挙動
 

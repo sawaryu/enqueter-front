@@ -57,7 +57,7 @@ export default Vue.extend({
     },
   },
   methods: {
-    async answer(option: string) {
+    async answer(option: string): Promise<void> {
       if (
         this.question.user_id == this.$auth.user.id ||
         this.question.is_answered ||

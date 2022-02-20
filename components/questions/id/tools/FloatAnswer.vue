@@ -10,7 +10,7 @@
 import Vue from "vue";
 export default Vue.extend({
   methods: {
-    async next() {
+    async next(): Promise<void> {
       try {
         const res = await this.$axios.$get("/questions/next");
         if (res.data) {

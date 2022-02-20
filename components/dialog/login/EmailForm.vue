@@ -58,7 +58,7 @@ export default Vue.extend({
     };
   },
   methods: {
-    async submit() {
+    async submit(): Promise<void> {
       if (!(this.$refs.form as any).validate()) {
         return;
       }

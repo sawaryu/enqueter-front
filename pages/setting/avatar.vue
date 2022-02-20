@@ -40,21 +40,22 @@
   </v-form>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from "vue";
+export default Vue.extend({
   data() {
     return {
       rules: [
-        (value) =>
+        (value: any) =>
           !value || value.size < 2000000 || "File size must be less than 2MB.",
       ],
-      valid: true,
-      loading: false,
-      avatar: "",
+      valid: true as boolean,
+      loading: false as boolean,
+      avatar: "" as string,
     };
   },
   methods: {
-    async update() {
+    async update(): Promise<void> {
       if (!this.$refs.form.validate() || this.avatar == "") {
         return;
       }
@@ -80,7 +81,7 @@ export default {
         this.loading = false;
       }
     },
-    fileSelected(event) {
+    fileSelected(event: any): void {
       if (event !== undefined && event !== null) {
         if (event.name.lastIndexOf(".") <= 0) {
           return;
@@ -96,11 +97,11 @@ export default {
     },
   },
   computed: {
-    isDisabled() {
+    isDisabled(): boolean {
       return this.avatar == "";
     },
   },
-};
+});
 </script>
 
 <style>

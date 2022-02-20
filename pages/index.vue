@@ -17,7 +17,7 @@
 <script lang="ts">
 import Vue from "vue";
 export default Vue.extend({
-  async asyncData({ $axios, app }) {
+  async asyncData({ $axios, app }): Promise<any> {
     const url = `/users/${app.$accessor.ranking.getCurrentCategory}_ranking`;
     try {
       const res = await $axios.$get(url, {

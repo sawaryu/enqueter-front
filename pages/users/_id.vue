@@ -26,7 +26,7 @@
 import ordinal from "ordinal";
 import Vue from "vue";
 export default Vue.extend({
-  async asyncData({ params, $axios }) {
+  async asyncData({ params, $axios }): Promise<any> {
     try {
       const res = await $axios.$get(`/users/${params.id}`);
       return { user: res };

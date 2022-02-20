@@ -1,5 +1,5 @@
 <template>
-  <div style="min-height:30vh;">
+  <div style="min-height: 30vh">
     <!-- (Attention!) ex: $event = "closed" -->
     <v-select
       dense
@@ -71,7 +71,7 @@ export default Vue.extend({
     },
   },
   methods: {
-    async remove(question_id: number) {
+    async remove(question_id: number): Promise<void> {
       try {
         const res = await this.$axios.$delete("/questions", {
           data: {

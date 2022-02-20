@@ -53,7 +53,7 @@ export default Vue.extend({
     this.init();
   },
   methods: {
-    async init() {
+    async init(): Promise<void> {
       // confirmation
       const confirmId = this.$route.query.confirm;
       if (confirmId) {
