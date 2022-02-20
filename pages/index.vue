@@ -2,7 +2,7 @@
   <v-row>
     <v-col cols="12" md="4">
       <div style="position: sticky; top: 85px">
-        <Ranking :users="users" @changePeriod="changePeriod" />
+        <Ranking :users="users" @getRanking="getRanking" />
       </div>
     </v-col>
 
@@ -18,14 +18,13 @@
 import Vue from "vue";
 export default Vue.extend({
   async asyncData({ $axios, app }) {
+    const url = `/users/${app.$accessor.ranking.getCurrentCategory}_ranking`;
     try {
-      console.log("----start---")
-      const res = await $axios.$get("/users/ranking", {
+      const res = await $axios.$get(url, {
         params: {
-          period: app.$accessor.ranking.getCurrentPeriod
+          period: app.$accessor.ranking.getCurrentPeriod,
         },
       });
-      console.log(res)
       return { users: res };
     } catch (error) {}
   },
@@ -35,7 +34,7 @@ export default Vue.extend({
     };
   },
   methods: {
-    changePeriod(res: any) {
+    getRanking(res: any) {
       this.users = res;
     },
   },

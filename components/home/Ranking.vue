@@ -3,7 +3,13 @@
     <v-card-title class="font-weight-light">
       <v-icon>mdi-crown</v-icon>Ranking
       <v-spacer></v-spacer>
-      <v-btn small rounded outlined @click="changeCategory" v-text="category"></v-btn>
+      <v-btn
+        small
+        rounded
+        outlined
+        @click="changeCategory"
+        v-text="category"
+      ></v-btn>
     </v-card-title>
     <v-subheader>
       <v-icon class="mr-2" small> mdi-clock </v-icon>
@@ -51,7 +57,8 @@
           <v-list-item-subtitle v-text="user.nickname"></v-list-item-subtitle>
         </v-list-item-content>
         <v-list-item-action>
-          <div>{{ user.point }}pt</div>
+          <div v-if="category === 'point'">{{ user.point }}pt</div>
+          <div v-else>{{ user.response }}res</div>
         </v-list-item-action>
       </v-list-item>
 
@@ -82,30 +89,35 @@ export default Vue.extend({
   data() {
     return {
       loading: false,
-      category: "point",
     };
   },
   computed: {
-    // for watch store state variable.
     period() {
       return this.$accessor.ranking.getCurrentPeriod;
+    },
+    category() {
+      return this.$accessor.ranking.getCurrentCategory;
     },
   },
   watch: {
     period() {
       this.getRanking();
     },
+    category() {
+      this.getRanking();
+    },
   },
   methods: {
     async getRanking(): Promise<void> {
+      const url = `/users/${this.category}_ranking`;
       this.loading = true;
       try {
-        const res = await this.$axios.$get("/users/ranking", {
+        const res = await this.$axios.$get(url, {
           params: {
             period: this.period,
           },
         });
-        this.$emit("changePeriod", res);
+        this.$emit("getRanking", res);
       } catch (error) {
       } finally {
         setTimeout(() => {
@@ -129,9 +141,9 @@ export default Vue.extend({
     },
     changeCategory(): void {
       if (this.category === CATEGORY.point) {
-        this.category = CATEGORY.response;
+        this.$accessor.ranking.setCurrentCategory(CATEGORY.response);
       } else {
-        this.category = CATEGORY.point;
+        this.$accessor.ranking.setCurrentCategory(CATEGORY.point);
       }
     },
   },

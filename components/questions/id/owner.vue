@@ -116,7 +116,8 @@ export default Vue.extend({
   },
   computed: {
     options_data(): String[] {
-      return [this.question.option_first, this.question.option_second];
+      // *reversed for chart.
+      return [this.question.option_second, this.question.option_first];
     },
     isExistCountData(): boolean {
       return this.count_data[0] || this.count_data[1];
@@ -132,7 +133,7 @@ export default Vue.extend({
           `/questions/${this.$route.params.id}/owner`
         );
         this.users = res.users;
-        this.count_data = res.count_data;
+        this.count_data = res.count_data.reverse();
       } catch (error) {
       } finally {
         this.loading = false;

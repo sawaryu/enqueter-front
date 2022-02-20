@@ -1,6 +1,7 @@
 <template>
   <v-sheet color="rgb(0, 0, 0, 0)" flat>
-    <v-card-title>
+    <v-card-title class="font-weight-light">
+      <v-icon>mdi-timer</v-icon>Timeline
       <v-spacer></v-spacer>
       <v-btn x-large icon @click="init(true)">
         <v-icon>mdi-cached</v-icon>

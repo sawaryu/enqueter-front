@@ -15,11 +15,11 @@ export default {
   data() {
     return {
       chartData: {
-        labels: this.options_data.reverse(),
+        labels: this.options_data,
         datasets: [
           {
             backgroundColor: ["#BBDEFB", "#FFCDD2"],
-            data: this.count_data.reverse(),
+            data: this.count_data,
           },
         ],
       },

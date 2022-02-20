@@ -27,16 +27,18 @@
       <v-divider class="my-2"></v-divider>
       <div class="d-flex justify-center subheading font-weight-medium text--secondary mt-3">
         <div class="mr-2">
+          <!-- Point -->
           <v-icon class="mb-2">mdi-crown</v-icon>
           <span v-if="point_stats"
             >Point: {{ ordinalRank }} / {{ point_stats[1] }}pt</span
           >
           <span v-else>Point: N / A</span>
         </div>
+        <!-- Response -->
         <div class="ml-2">
           <v-icon class="mb-2">mdi-crown</v-icon>
           <span v-if="point_stats"
-            >Response: {{ ordinalRank }} / {{ point_stats[1] }}pt</span
+            >Response: {{ ordinalRank }} / {{ point_stats[1] }}res</span
           >
           <span v-else>Point: N / A</span>
         </div>
