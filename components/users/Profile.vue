@@ -1,5 +1,5 @@
 <template>
-  <v-card class="d-flex justify-center overflow-y-auto" height="28vh">
+  <v-card class="d-flex justify-center overflow-y-auto" height="240">
     <v-card class="py-3" width="400" flat>
       <div class="d-flex justify-space-around">
         <v-avatar size="60">
@@ -86,11 +86,9 @@
             </v-menu>
           </span>
         </v-card-actions>
-        <v-card-text
-          class="pa-0 pl-2"
-          v-html="introduceLinked"
-          style="white-space: pre-wrap"
-        >
+        <v-card-text class="pt-1">
+          <v-divider></v-divider>
+          <div class="mt-2" v-html="introduceLinked" style="white-space: pre-wrap"></div>
         </v-card-text>
       </v-card>
     </v-card>

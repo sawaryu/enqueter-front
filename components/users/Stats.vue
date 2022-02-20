@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto pb-5">
+  <v-card class="mx-auto pb-5" height="470">
     <v-card-title class="pb-0 text--secondary">
       <div>
         <div>Stats</div>
@@ -25,39 +25,41 @@
 
     <v-card-text class="pb-0 pt-0">
       <v-divider class="my-2"></v-divider>
-      <div
-        class="
-          d-flex
-          justify-center
-          subheading
-          font-weight-medium
-          text--secondary
-          mt-3
-        "
-      >
-        <!-- Point -->
-        <div class="mr-2">
-          <v-icon class="mb-2">mdi-crown</v-icon>
-          <span v-if="point_stats"
-            >Point: {{ ordinalPointRank }} / {{ point_stats[1] }} pt</span
-          >
-          <span v-else>Point: N / A</span>
-        </div>
 
-        <!-- Response -->
-        <div class="ml-2">
-          <v-icon class="mb-2">mdi-crown</v-icon>
-          <span v-if="response_stats"
-            >Response: {{ ordinalResponseRank }} /
-            {{ response_stats[1] }} res</span
-          >
-          <span v-else>Response: N / A</span>
-        </div>
+      <transition name="fade" mode="out-in">
+        <Loading
+          class="mt-16 pt-16"
+          v-if="loading"
+          width="40px"
+          height="40px"
+        />
 
-      </div>
-      <div class="mx-auto text-center" style="width: 300px; height: 300px">
-        <RadarChart v-if="!loading" :radar_data="radar_data" />
-      </div>
+        <div v-else>
+          <div class="subheading font-weight-medium text--secondary mt-3">
+            <!-- Point -->
+            <div class="">
+              <!-- <v-icon class="mb-2">mdi-crown</v-icon> -->
+              <span v-if="point_stats"
+                >Point: {{ ordinalPointRank }} / {{ point_stats[1] }} pt</span
+              >
+              <span v-else>Point: N / A</span>
+            </div>
+
+            <!-- Response -->
+            <div class="">
+              <!-- <v-icon class="mb-2">mdi-crown</v-icon> -->
+              <span v-if="response_stats"
+                >Response: {{ ordinalResponseRank }} /
+                {{ response_stats[1] }} res</span
+              >
+              <span v-else>Response: N / A</span>
+            </div>
+          </div>
+          <div class="mx-auto text-center" style="width: 300px; height: 300px">
+            <RadarChart v-if="!loading" :radar_data="radar_data" />
+          </div>
+        </div>
+      </transition>
     </v-card-text>
   </v-card>
 </template>
@@ -106,6 +108,7 @@ export default Vue.extend({
   methods: {
     async getStats(): Promise<void> {
       try {
+        this.loading = true;
         const res = await this.$axios.$get(
           `/users/${this.$route.params.id}/stats`,
           {
@@ -120,7 +123,9 @@ export default Vue.extend({
         this;
       } catch (error) {
       } finally {
-        this.loading = false;
+        setTimeout(() => {
+          this.loading = false;
+        }, 300);
       }
     },
   },

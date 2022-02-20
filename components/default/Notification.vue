@@ -26,9 +26,9 @@
         <v-spacer></v-spacer>
         <v-btn
           rounded
-          color="red"
           text
           small
+          class="text-caption blue--text"
           v-if="notifications.length"
           @click="deleteNotifications()"
         >

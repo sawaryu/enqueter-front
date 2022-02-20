@@ -3,7 +3,7 @@
     <div>Unsubscribe from this application and delete your account.</div>
     <div class="text-caption">※This operation can't be canceled.</div>
     <div class="text-caption">
-      ※It may take a while to deleted completely from database.
+      ※It may take a while to deleted completely from the database.
     </div>
     <v-checkbox
       v-model="checkbox"

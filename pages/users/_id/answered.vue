@@ -12,11 +12,7 @@
         <v-col cols="12" v-if="page >= 2 && questions.length >= 15">
           <infinite-loading @infinite="getMore">
             <div slot="spinner">
-              <VueLoading
-                type="bars"
-                color="#333"
-                :size="{ width: '30px', height: '30px' }"
-              />
+              <Loading v-if="loading" />
             </div>
             <div class="font-weight-light" slot="no-more" style="height: 30px">
               No more questions.
