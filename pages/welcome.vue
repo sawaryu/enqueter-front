@@ -18,7 +18,7 @@
           Enqueter
         </v-card-title>
         <v-card-text class="text-subtitle-1 text-sm-h6" style="width: 80vw"
-          >Lorem ipsum dolor sit repudiandae quam repellat, amet voluptas
+          >Lorem ipsum dolor sit, amet voluptas
           incidunt nesciunt illum maxime ut?</v-card-text
         >
         <v-card-actions class="d-flex justify-start">
