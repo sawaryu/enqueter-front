@@ -1,5 +1,5 @@
 <template>
-  <span v-if="$vuetify.breakpoint.name == 'xs'">
+  <span>
     <v-btn icon @click="openDialog">
       <v-icon>mdi-magnify</v-icon>
     </v-btn>
@@ -14,7 +14,6 @@
             outlined
             rounded
             dense
-            color="black"
             clearable
             style="height: 40px"
             prepend-inner-icon="mdi-magnify"
@@ -90,11 +89,7 @@
           </v-list-item>
 
           <v-list-item v-if="loading">
-            <VueLoading
-              type="bars"
-              color="#333"
-              :size="{ width: '30px', height: '30px' }"
-            />
+            <Loading />
           </v-list-item>
 
           <v-list-item
@@ -132,10 +127,8 @@
 
 <script lang="ts">
 import { User } from "@/common/entity/User";
-import { VueLoading } from "vue-loading-template";
 import Vue from "vue";
 export default Vue.extend({
-  components: { VueLoading },
   data() {
     return {
       loading: false,

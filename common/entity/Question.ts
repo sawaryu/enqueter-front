@@ -3,6 +3,8 @@ export interface Question {
   id: number;
   user_id: number;
   content: string;
+  option_first: string;
+  option_second: string,
   closed_at: string;
   created_at: string;
   updated_at: string;

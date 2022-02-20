@@ -2,11 +2,9 @@
   <div style="min-height:30vh;">
     <!-- (Attention!) ex: $event = "closed" -->
     <v-select
-      color="black"
       dense
       solo
       class="mt-2 ml-2"
-      item-color="black"
       :value="$accessor.sort.getUserQuestionsSort"
       @change="$accessor.sort.setUserQuestionsSort($event)"
       :items="sorts"

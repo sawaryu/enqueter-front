@@ -1,8 +1,16 @@
 <template>
   <v-sheet color="rgb(0, 0, 0, 0)" flat>
     <v-card-title class="font-weight-light">
-      <v-icon>mdi-crown</v-icon>Ranking</v-card-title
-    >
+      <v-icon>mdi-crown</v-icon>Ranking
+      <v-spacer></v-spacer>
+      <v-btn
+        small
+        rounded
+        outlined
+        @click="changeCategory"
+        v-text="category"
+      ></v-btn>
+    </v-card-title>
     <v-subheader>
       <v-icon class="mr-2" small> mdi-clock </v-icon>
       <span class="text-caption text--secondary font-weight-light"
@@ -13,18 +21,8 @@
     </v-subheader>
     <v-divider></v-divider>
 
-    <v-list
-      color="rgb(0, 0, 0, 0)"
-      dense
-      height="40vh"
-      class="overflow-y-auto"
-    >
-      <VueLoading
-        v-if="loading"
-        type="bars"
-        color="#333"
-        :size="{ width: '30px', height: '30px' }"
-      />
+    <v-list color="rgb(0, 0, 0, 0)" dense height="40vh" class="overflow-y-auto">
+      <Loading v-if="loading" />
 
       <v-list-item
         v-else-if="users.length"
@@ -59,7 +57,8 @@
           <v-list-item-subtitle v-text="user.nickname"></v-list-item-subtitle>
         </v-list-item-content>
         <v-list-item-action>
-          <div>{{ user.point }}pt</div>
+          <div v-if="category === 'point'">{{ user.point }}pt</div>
+          <div v-else>{{ user.response }}res</div>
         </v-list-item-action>
       </v-list-item>
 
@@ -74,11 +73,13 @@
 </template>
 
 <script lang="ts">
+const CATEGORY = {
+  point: "point",
+  response: "response",
+};
 import ordinal from "ordinal";
-import { VueLoading } from "vue-loading-template";
 import Vue from "vue";
 export default Vue.extend({
-  components: { VueLoading },
   props: {
     users: {
       type: Array,
@@ -91,26 +92,32 @@ export default Vue.extend({
     };
   },
   computed: {
-    // for watch store state variable.
     period() {
       return this.$accessor.ranking.getCurrentPeriod;
+    },
+    category() {
+      return this.$accessor.ranking.getCurrentCategory;
     },
   },
   watch: {
     period() {
       this.getRanking();
     },
+    category() {
+      this.getRanking();
+    },
   },
   methods: {
     async getRanking(): Promise<void> {
+      const url = `/users/${this.category}_ranking`;
       this.loading = true;
       try {
-        const res = await this.$axios.$get("/users/ranking", {
+        const res = await this.$axios.$get(url, {
           params: {
             period: this.period,
           },
         });
-        this.$emit("changePeriod", res);
+        this.$emit("getRanking", res);
       } catch (error) {
       } finally {
         setTimeout(() => {
@@ -131,6 +138,13 @@ export default Vue.extend({
     },
     ordinal(number: number): string {
       return ordinal(number);
+    },
+    changeCategory(): void {
+      if (this.category === CATEGORY.point) {
+        this.$accessor.ranking.setCurrentCategory(CATEGORY.response);
+      } else {
+        this.$accessor.ranking.setCurrentCategory(CATEGORY.point);
+      }
     },
   },
 });

@@ -25,7 +25,6 @@
             :rules="passwordRules"
             maxlength="72"
             counter="72"
-            color="grey darken-3"
             label="New password"
             persistent-hint
             tabindex="1"
@@ -37,7 +36,6 @@
             :rules="passwordConfirmationRules"
             maxlength="72"
             counter="72"
-            color="grey darken-3"
             label="New password (confirmation)"
             tabindex="1"
           >

@@ -6,7 +6,8 @@
         <div>
           <v-icon class="mr-2" small>mdi-clock</v-icon>
           <span class="text-caption text--secondary font-weight-light"
-            >Regularly aggregated.</span>
+            >Regularly aggregated.</span
+          >
         </div>
       </div>
       <v-spacer></v-spacer>
@@ -24,12 +25,23 @@
 
     <v-card-text class="pb-0 pt-0">
       <v-divider class="my-2"></v-divider>
-      <div class="subheading font-weight-medium text--secondary mt-3">
-        <v-icon class="mb-2">mdi-crown</v-icon>
-        <span v-if="point_stats"
-          >Point: {{ ordinalRank }} / {{ point_stats[1] }}pt</span
-        >
-        <span v-else>Point: N / A</span>
+      <div class="d-flex justify-center subheading font-weight-medium text--secondary mt-3">
+        <div class="mr-2">
+          <!-- Point -->
+          <v-icon class="mb-2">mdi-crown</v-icon>
+          <span v-if="point_stats"
+            >Point: {{ ordinalRank }} / {{ point_stats[1] }}pt</span
+          >
+          <span v-else>Point: N / A</span>
+        </div>
+        <!-- Response -->
+        <div class="ml-2">
+          <v-icon class="mb-2">mdi-crown</v-icon>
+          <span v-if="point_stats"
+            >Response: {{ ordinalRank }} / {{ point_stats[1] }}res</span
+          >
+          <span v-else>Point: N / A</span>
+        </div>
       </div>
       <div class="mx-auto text-center" style="width: 300px; height: 300px">
         <RadarChart v-if="!loading" :radar_data="radar_data" />

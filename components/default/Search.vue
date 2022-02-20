@@ -1,11 +1,5 @@
 <template>
-  <!-- NOTICE!: only be able to use in methods -->
-  <span
-    v-if="$vuetify.breakpoint.name != 'xs'"
-    class="mr-1"
-    style="width: 180px"
-    v-click-outside="closeMenu"
-  >
+  <span class="mr-1" style="width: 180px" v-click-outside="closeMenu">
     <!-- search field -->
     <v-text-field
       v-model="search"
@@ -21,14 +15,7 @@
     ></v-text-field>
 
     <!-- menu card -->
-    <v-card
-      color="white"
-      light
-      class="search-card"
-      v-if="menu"
-      width="300"
-      elevation="10"
-    >
+    <v-card light class="search-card" v-if="menu" width="300" elevation="10">
       <!-- history -->
       <template v-if="!search">
         <v-card-title class="pb-1">
@@ -47,11 +34,7 @@
         </v-card-title>
         <v-divider></v-divider>
 
-        <v-list
-          v-if="usersHistory.length"
-          height="250"
-          class="overflow-y-auto"
-        >
+        <v-list v-if="usersHistory.length" height="250" class="overflow-y-auto">
           <v-list-item
             v-for="user in usersHistory"
             :key="user.id"
@@ -95,18 +78,10 @@
         <v-divider></v-divider>
 
         <v-card-text v-if="loading">
-          <VueLoading
-            type="bars"
-            color="#333"
-            :size="{ width: '30px', height: '30px' }"
-          />
+          <Loading />
         </v-card-text>
 
-        <v-list
-          v-else-if="users.length"
-          height="300"
-          class="overflow-y-auto"
-        >
+        <v-list v-else-if="users.length" height="300" class="overflow-y-auto">
           <v-list-item
             v-for="user in users"
             :key="user.id"
@@ -139,10 +114,8 @@
 
 <script lang="ts">
 import { User } from "@/common/entity/User";
-import { VueLoading } from "vue-loading-template";
 import Vue from "vue";
 export default Vue.extend({
-  components: { VueLoading },
   data() {
     return {
       menu: false as Boolean,

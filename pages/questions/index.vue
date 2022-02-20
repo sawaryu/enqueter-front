@@ -21,13 +21,7 @@
 
     <!-- questions -->
     <transition name="fade" mode="out-in">
-      <VueLoading
-        v-if="loading"
-        key="loading"
-        type="bars"
-        color="#333"
-        :size="{ width: '30px', height: '30px' }"
-      />
+      <Loading v-if="loading" key="loading" />
 
       <v-row v-else key="questions">
         <template v-if="questions.length">
@@ -60,11 +54,8 @@
 
 <script lang="ts">
 import { Question } from "@/common/entity/Question";
-import { VueLoading } from "vue-loading-template";
 import Vue from "vue";
-import CreateQuestion from "~/components/dialog/CreateQuestion.vue";
 export default Vue.extend({
-  components: { CreateQuestion, VueLoading },
   data() {
     return {
       totalPages: 0 as number,

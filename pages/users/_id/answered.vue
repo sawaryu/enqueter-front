@@ -2,12 +2,7 @@
   <div style="min-height: 30vh">
     <!-- questions -->
     <v-row class="pa-3 mt-2">
-      <VueLoading
-        v-if="loading"
-        type="bars"
-        color="#333"
-        :size="{ width: '30px', height: '30px' }"
-      />
+      <Loading v-if="loading" />
 
       <template v-else-if="questions.length">
         <v-col class="pt-0" v-for="q in questions" :key="q.id" cols="12" sm="6">
@@ -46,11 +41,10 @@
 
 <script lang="ts">
 import { Question } from "@/common/entity/Question";
-import { VueLoading } from "vue-loading-template";
 import InfiniteLoading from "vue-infinite-loading";
 import Vue from "vue";
 export default Vue.extend({
-  components: { VueLoading, InfiniteLoading },
+  components: { InfiniteLoading },
   data() {
     return {
       loading: true,

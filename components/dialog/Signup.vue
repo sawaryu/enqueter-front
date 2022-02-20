@@ -33,7 +33,6 @@
             v-model="signupModel.username"
             :rules="usernameRules"
             label="Username"
-            color="grey darken-3"
             counter="15"
             maxlength="15"
             persistent-hint
@@ -44,7 +43,6 @@
             v-model="signupModel.email"
             :rules="emailRules"
             label="E-mail"
-            color="grey darken-3"
             counter="255"
             max-length="255"
           ></v-text-field>
@@ -65,7 +63,6 @@
             v-model="signupModel.password"
             :rules="passwordRules"
             label="password"
-            color="grey darken-3"
             counter="72"
             persistent-hint
           ></v-text-field>
@@ -76,7 +73,6 @@
             v-model="signupModel.password_confirmation"
             :rules="passwordConfirmationRules"
             label="password (confirmation)"
-            color="grey darken-3"
             counter="72"
           ></v-text-field>
 
@@ -126,7 +122,10 @@ export default Vue.extend({
     emailRules: [
       (v: string) => (!!v && /\S/.test(v)) || "Must be required.",
       (v: string) =>
-        (!!v && /^(?!.*…)[a-zA-Z0-9_+-]+(.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/.test(v)) ||
+        (!!v &&
+          /^(?!.*…)[a-zA-Z0-9_+-]+(.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/.test(
+            v
+          )) ||
         "Incorrect email format.",
       (v: string) => v.length <= 255 || "Must be less than 255 characters.",
     ],
@@ -150,7 +149,7 @@ export default Vue.extend({
         try {
           const res = await this.$axios.$post("/auth", this.signupModel);
           this.$accessor.dialog.setSignupDialog(false);
-          this.$refs.form.resetValidation()
+          this.$refs.form.resetValidation();
           Object.assign(this.$data, this.$options.data());
           this.$accessor.alert.setAlert({
             type: "info",
