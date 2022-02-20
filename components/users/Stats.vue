@@ -25,23 +25,35 @@
 
     <v-card-text class="pb-0 pt-0">
       <v-divider class="my-2"></v-divider>
-      <div class="d-flex justify-center subheading font-weight-medium text--secondary mt-3">
+      <div
+        class="
+          d-flex
+          justify-center
+          subheading
+          font-weight-medium
+          text--secondary
+          mt-3
+        "
+      >
+        <!-- Point -->
         <div class="mr-2">
-          <!-- Point -->
           <v-icon class="mb-2">mdi-crown</v-icon>
           <span v-if="point_stats"
-            >Point: {{ ordinalRank }} / {{ point_stats[1] }}pt</span
+            >Point: {{ ordinalPointRank }} / {{ point_stats[1] }}pt</span
           >
           <span v-else>Point: N / A</span>
         </div>
+
         <!-- Response -->
         <div class="ml-2">
           <v-icon class="mb-2">mdi-crown</v-icon>
-          <span v-if="point_stats"
-            >Response: {{ ordinalRank }} / {{ point_stats[1] }}res</span
+          <span v-if="response_stats"
+            >Response: {{ ordinalResponseRank }} /
+            {{ response_stats[1] }}res</span
           >
-          <span v-else>Point: N / A</span>
+          <span v-else>Response: N / A</span>
         </div>
+
       </div>
       <div class="mx-auto text-center" style="width: 300px; height: 300px">
         <RadarChart v-if="!loading" :radar_data="radar_data" />
@@ -68,11 +80,15 @@ export default Vue.extend({
       ],
       radar_data: [0, 0, 0],
       point_stats: null,
+      response_stats: null,
     };
   },
   computed: {
-    ordinalRank(): string {
+    ordinalPointRank(): string {
       return ordinal(this.point_stats[0]);
+    },
+    ordinalResponseRank(): string {
+      return ordinal(this.response_stats[0]);
     },
     currentPeriod() {
       return this.$accessor.analytics.getCurrentPeriod;
@@ -100,6 +116,7 @@ export default Vue.extend({
         );
         this.radar_data = res.radar_data;
         this.point_stats = res.point_stats;
+        this.response_stats = res.response_stats;
         this;
       } catch (error) {
       } finally {

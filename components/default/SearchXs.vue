@@ -10,7 +10,7 @@
         <v-card-title>
           <v-text-field
             v-model="search"
-            placeholder="Search users"
+            placeholder="Search"
             outlined
             rounded
             dense

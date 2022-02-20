@@ -4,7 +4,7 @@
     <v-text-field
       v-model="search"
       dark
-      placeholder="search"
+      placeholder="Search"
       outlined
       rounded
       dense
@@ -34,8 +34,13 @@
         </v-card-title>
         <v-divider></v-divider>
 
-        <v-list v-if="usersHistory.length" height="250" class="overflow-y-auto">
+        <v-list height="250" class="overflow-y-auto">
+          <v-card-text class="mt-15" v-if="loading">
+            <Loading />
+          </v-card-text>
+
           <v-list-item
+            v-else-if="usersHistory.length"
             v-for="user in usersHistory"
             :key="user.id"
             @click.stop="goProfile(user.id)"
@@ -61,11 +66,14 @@
               </v-btn>
             </v-list-item-action>
           </v-list-item>
-        </v-list>
 
-        <v-card-text v-else class="text-center text-caption mb-2">
-          No recent search histories.
-        </v-card-text>
+          <v-card-text
+            v-else
+            class="text--secondary text-center text-subtitle-2 mt-15"
+          >
+            No recent search histories.
+          </v-card-text>
+        </v-list>
       </template>
 
       <!-- searching -->
@@ -77,12 +85,13 @@
 
         <v-divider></v-divider>
 
-        <v-card-text v-if="loading">
-          <Loading />
-        </v-card-text>
+        <v-list height="250" class="overflow-y-auto">
+          <v-card-text class="mt-15" v-if="loading">
+            <Loading />
+          </v-card-text>
 
-        <v-list v-else-if="users.length" height="300" class="overflow-y-auto">
           <v-list-item
+            v-else-if="users.length"
             v-for="user in users"
             :key="user.id"
             @click.stop="goProfile(user.id)"
@@ -102,11 +111,14 @@
               ></v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
-        </v-list>
 
-        <v-card-text v-else class="text-center text-caption mt-3 mb-2">
-          No search results.
-        </v-card-text>
+          <v-card-text
+            v-else
+            class="text--secondary text-center text-subtitle-2 mt-15"
+          >
+            No search results.
+          </v-card-text>
+        </v-list>
       </template>
     </v-card>
   </span>
@@ -135,10 +147,19 @@ export default Vue.extend({
     },
     // Get histories
     async getHistory() {
+      if (this.search) {
+        return;
+      }
       try {
+        this.loading = true;
         const res = await this.$axios.$get("/users/search/history");
         this.usersHistory = res;
-      } catch (error) {}
+      } catch (error) {
+      } finally {
+        setTimeout(() => {
+          this.loading = false;
+        }, 250);
+      }
     },
     // Delete all histories
     async deleteAll() {

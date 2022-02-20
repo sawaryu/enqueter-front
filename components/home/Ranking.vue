@@ -57,8 +57,8 @@
           <v-list-item-subtitle v-text="user.nickname"></v-list-item-subtitle>
         </v-list-item-content>
         <v-list-item-action>
-          <div v-if="category === 'point'">{{ user.point }}pt</div>
-          <div v-else>{{ user.response }}res</div>
+          <div v-if="category === 'point'">{{ user.point }} pt</div>
+          <div v-else>{{ user.response }} res</div>
         </v-list-item-action>
       </v-list-item>
 
