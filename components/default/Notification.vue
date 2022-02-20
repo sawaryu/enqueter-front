@@ -22,16 +22,12 @@
 
     <v-card>
       <!-- If there are any notifications. -->
-      <v-list
-        v-if="notifications.length"
-        class="overflow-y-auto"
-        max-height="300"
-      >
+      <v-list class="overflow-y-auto" height="230" width="300">
         <v-list-item
           v-for="notification in notifications"
           :key="notification.id"
         >
-          <!-- avatar -->
+          <!-- AVATAR(COMMON) -->
           <v-list-item-avatar
             class="pointer"
             :size="35"
@@ -41,23 +37,23 @@
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <!-- follow -->
+            <!-- FOLLOW -->
             <div v-if="notification.category == 'follow'" class="text-caption">
               followed by
               <span
                 @click="goProfile(notification.user.id)"
                 class="underline pointer font-weight-bold"
-                >{{ notification.user.username }}</span
-              >
+                v-text="notification.user.username"
+              ></span>
             </div>
 
-            <!-- answer -->
+            <!-- ANSWER -->
             <div v-if="notification.category == 'answer'" class="text-caption">
               <span
                 @click="goProfile(notification.user.id)"
                 class="underline pointer font-weight-bold"
-                >{{ notification.user.username }}</span
-              >
+                v-text="notification.user.username"
+              ></span>
               answered your
               <span
                 @click="goQuestion(notification.question_id)"
@@ -66,14 +62,15 @@
               >
             </div>
 
-            <!-- common -->
-            <v-list-item-subtitle class="text-caption">{{
-              beforeTime(notification.created_at)
-            }}</v-list-item-subtitle>
+            <!-- CREATED_AT(COMMON) -->
+            <v-list-item-subtitle
+              class="text-caption"
+              v-text="beforeTime(notification.created_at)"
+            ></v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item @click="deleteNotifications()">
+        <v-list-item v-if="notifications.length" @click="deleteNotifications()">
           <v-list-item-content>
             <v-list-item-subtitle class="text-center text-caption red--text">
               <span>
@@ -83,14 +80,11 @@
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
-      </v-list>
 
-      <!-- no notifications -->
-      <v-list v-else class="d-flex align-center" height="100" width="300">
-        <v-list-item>
+        <v-list-item class="mt-16 pt-3" v-else>
           <v-list-item-content>
             <v-list-item-subtitle class="text-center">
-              <span><v-icon>mdi-bell-outline</v-icon></span>
+              <v-icon class="mb-2">mdi-bell-outline</v-icon>
               There are no notifications.
             </v-list-item-subtitle>
           </v-list-item-content>
@@ -115,7 +109,7 @@ export default Vue.extend({
     this.getAllNotifications();
   },
   methods: {
-    async getAllNotifications() {
+    async getAllNotifications(): Promise<void> {
       // loop out after logout
       if (!this.$auth.loggedIn) {
         return;
@@ -138,7 +132,7 @@ export default Vue.extend({
       }, 1000 * 60 * 15);
     },
     // delete all notifications.
-    async deleteNotifications() {
+    async deleteNotifications(): Promise<void> {
       try {
         const res = await this.$axios.$delete("/notifications");
         this.notWatchCount = 0;
@@ -146,7 +140,7 @@ export default Vue.extend({
       } catch (e) {}
     },
     // update all notification status to "watched"
-    async watchAllNotifications() {
+    async watchAllNotifications(): Promise<void> {
       if (this.notWatchCount == 0) {
         return;
       }
@@ -157,17 +151,17 @@ export default Vue.extend({
       } catch (e) {}
     },
     // display optimized created time
-    beforeTime(created_at: string) {
+    beforeTime(created_at: string): String {
       moment.locale("en");
       return moment(created_at).fromNow();
     },
     // go profile and close the notifications menu.
-    goProfile(user_id: number) {
+    goProfile(user_id: number): void {
       this.menu = null;
       this.$router.push(`/users/${user_id}`);
     },
     // go question and close the notifications menu.
-    goQuestion(question_id: number) {
+    goQuestion(question_id: number): void {
       this.menu = null;
       this.$router.push(`/questions/${question_id}`);
     },
