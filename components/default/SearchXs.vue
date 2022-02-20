@@ -22,18 +22,18 @@
         <v-divider></v-divider>
 
         <!-- history -->
-        <v-list v-if="!search" height="300" class="overflow-y-auto">
+        <v-list height="300" class="overflow-y-auto">
           <v-list-item>
             <v-list-item-content>
-              <v-list-item-title class="font-weight-light"
-                >History</v-list-item-title
-              >
+              <v-list-item-title
+                class="font-weight-light"
+                v-text="search ? 'Result' : 'History'"
+              ></v-list-item-title>
             </v-list-item-content>
-            <v-list-item-action>
+            <v-list-item-action v-if="usersHistory.length && !search">
               <v-btn
                 rounded
-                small
-                v-if="usersHistory.length"
+                x-small
                 text
                 class="text-caption blue--text"
                 :ripple="false"
@@ -42,8 +42,14 @@
               >
             </v-list-item-action>
           </v-list-item>
+
+          <v-list-item class="mt-10" v-if="loading">
+            <Loading />
+          </v-list-item>
+
           <v-list-item
-            v-for="user in usersHistory"
+            v-else-if="currentUsers.length"
+            v-for="user in currentUsers"
             :key="user.id"
             @click.stop="goProfile(user.id)"
             :ripple="false"
@@ -62,61 +68,25 @@
               ></v-list-item-subtitle>
             </v-list-item-content>
 
-            <v-list-item-action>
+            <v-list-item-action v-if="!search">
               <v-btn icon @click.stop="deleteOne(user.id)">
                 <v-icon>mdi-close</v-icon>
               </v-btn>
             </v-list-item-action>
           </v-list-item>
 
-          <v-list-item v-if="!usersHistory.length">
-            <v-list-item-content class="text-center">
-              <v-list-item-subtitle
-                >No recent search histories.</v-list-item-subtitle
-              >
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-
-        <!-- Searching -->
-        <v-list v-else height="300" class="overflow-y-auto">
-          <v-list-item>
-            <v-list-item-content>
-              <v-list-item-title class="font-weight-light">
-                Result
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-
-          <v-list-item v-if="loading">
-            <Loading />
-          </v-list-item>
-
-          <v-list-item
-            v-else-if="users.length"
-            v-for="user in users"
-            :key="user.id"
-            @click.stop="goProfile(user.id)"
-            :ripple="false"
-          >
-            <v-list-item-avatar class="pointer" size="30">
-              <v-img :src="$avatar(user.avatar)"></v-img>
-            </v-list-item-avatar>
-
-            <v-list-item-content>
-              <v-list-item-title
-                class="text-subtitle-2"
-                v-text="user.username"
-              ></v-list-item-title>
-              <v-list-item-subtitle
-                v-text="user.nickname"
-              ></v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-
           <v-list-item v-else>
             <v-list-item-content class="text-center">
-              <v-list-item-subtitle>No search results.</v-list-item-subtitle>
+              <v-list-item-subtitle class="mt-10">
+                <v-icon>mdi-magnify</v-icon>
+                <span
+                  v-text="
+                    search
+                      ? 'No search result.'
+                      : 'No recent search histories. '
+                  "
+                ></span>
+              </v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -138,20 +108,34 @@ export default Vue.extend({
       usersHistory: [] as User[],
     };
   },
+  computed: {
+    currentUsers(): [] {
+      return this.search ? this.users : this.usersHistory;
+    },
+  },
   methods: {
-    openDialog() {
+    openDialog(): void {
       this.getHistory();
       this.dialog = true;
     },
     // Get histories
-    async getHistory() {
+    async getHistory(): Promise<void> {
+      if (this.search) {
+        return;
+      }
       try {
+        this.loading = true;
         const res = await this.$axios.$get("/users/search/history");
         this.usersHistory = res;
-      } catch (error) {}
+      } catch (error) {
+      } finally {
+        setTimeout(() => {
+          this.loading = false;
+        }, 250);
+      }
     },
     // Create History
-    async goProfile(user_id: number) {
+    async goProfile(user_id: number): Promise<void> {
       try {
         const res = await this.$axios.$post("/users/search/history", {
           user_id: user_id,
@@ -162,7 +146,7 @@ export default Vue.extend({
       } catch (error) {}
     },
     // Delete all histories
-    async deleteAll() {
+    async deleteAll(): Promise<void> {
       try {
         const res = await this.$axios.$delete("users/search/history");
         this.usersHistory = [];

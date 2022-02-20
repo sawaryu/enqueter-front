@@ -16,110 +16,69 @@
 
     <!-- menu card -->
     <v-card light class="search-card" v-if="menu" width="300" elevation="10">
-      <!-- history -->
-      <template v-if="!search">
-        <v-card-title class="pb-1">
-          <div class="text-subtitle-1 font-weight-light">History</div>
-          <v-spacer></v-spacer>
-          <v-btn
-            rounded
-            small
-            v-if="usersHistory.length"
-            text
-            class="text-caption blue--text"
-            :ripple="false"
-            @click="deleteAll"
-            >delete all</v-btn
-          >
-        </v-card-title>
-        <v-divider></v-divider>
+      <v-card-title class="pb-1">
+        <div
+          class="text-subtitle-1 font-weight-light"
+          v-text="search ? `Result` : `History`"
+        ></div>
+        <v-spacer></v-spacer>
+        <v-btn
+          rounded
+          small
+          v-if="usersHistory.length && !search"
+          text
+          class="text-caption blue--text"
+          :ripple="false"
+          @click="deleteAll"
+          >delete all</v-btn
+        >
+      </v-card-title>
 
-        <v-list height="250" class="overflow-y-auto">
-          <v-card-text class="mt-15" v-if="loading">
-            <Loading />
-          </v-card-text>
+      <v-divider></v-divider>
 
-          <v-list-item
-            v-else-if="usersHistory.length"
-            v-for="user in usersHistory"
-            :key="user.id"
-            @click.stop="goProfile(user.id)"
-            :ripple="false"
-          >
-            <v-list-item-avatar class="pointer" size="30">
-              <v-img :src="$avatar(user.avatar)"></v-img>
-            </v-list-item-avatar>
+      <v-list height="250" class="overflow-y-auto">
+        <v-card-text class="mt-15" v-if="loading">
+          <Loading />
+        </v-card-text>
 
-            <v-list-item-content>
-              <v-list-item-title
-                class="text-subtitle-2"
-                v-text="user.username"
-              ></v-list-item-title>
-              <v-list-item-subtitle
-                v-text="user.nickname"
-              ></v-list-item-subtitle>
-            </v-list-item-content>
+        <v-list-item
+          v-else-if="currentUsers.length"
+          v-for="user in currentUsers"
+          :key="user.id"
+          @click.stop="goProfile(user.id)"
+          :ripple="false"
+        >
+          <v-list-item-avatar class="pointer" size="30">
+            <v-img :src="$avatar(user.avatar)"></v-img>
+          </v-list-item-avatar>
 
-            <v-list-item-action>
-              <v-btn icon @click.stop="deleteOne(user.id)">
-                <v-icon>mdi-close</v-icon>
-              </v-btn>
-            </v-list-item-action>
-          </v-list-item>
+          <v-list-item-content>
+            <v-list-item-title
+              class="text-subtitle-2"
+              v-text="user.username"
+            ></v-list-item-title>
+            <v-list-item-subtitle v-text="user.nickname"></v-list-item-subtitle>
+          </v-list-item-content>
 
-          <v-card-text
-            v-else
-            class="text--secondary text-center text-subtitle-2 mt-15"
-          >
-            No recent search histories.
-          </v-card-text>
-        </v-list>
-      </template>
+          <v-list-item-action v-if="!search">
+            <v-btn icon @click.stop="deleteOne(user.id)">
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+          </v-list-item-action>
+        </v-list-item>
 
-      <!-- searching -->
-      <template v-else>
-        <v-card-title class="pb-1">
-          <div class="text-subtitle-1 font-weight-light">Result</div>
-          <v-spacer></v-spacer>
-        </v-card-title>
-
-        <v-divider></v-divider>
-
-        <v-list height="250" class="overflow-y-auto">
-          <v-card-text class="mt-15" v-if="loading">
-            <Loading />
-          </v-card-text>
-
-          <v-list-item
-            v-else-if="users.length"
-            v-for="user in users"
-            :key="user.id"
-            @click.stop="goProfile(user.id)"
-            :ripple="false"
-          >
-            <v-list-item-avatar class="pointer" size="30">
-              <v-img :src="$avatar(user.avatar)"></v-img>
-            </v-list-item-avatar>
-
-            <v-list-item-content>
-              <v-list-item-title
-                class="text-subtitle-2"
-                v-text="user.username"
-              ></v-list-item-title>
-              <v-list-item-subtitle
-                v-text="user.nickname"
-              ></v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-
-          <v-card-text
-            v-else
-            class="text--secondary text-center text-subtitle-2 mt-15"
-          >
-            No search results.
-          </v-card-text>
-        </v-list>
-      </template>
+        <v-card-text
+          v-else
+          class="text--secondary text-center text-subtitle-2 mt-15"
+        >
+          <v-icon>mdi-magnify</v-icon>
+          <span
+            v-text="
+              search ? `No search result.` : `No recent search histories.`
+            "
+          ></span>
+        </v-card-text>
+      </v-list>
     </v-card>
   </span>
 </template>
@@ -137,16 +96,21 @@ export default Vue.extend({
       users: [] as User[],
     };
   },
+  computed: {
+    currentUsers(): [] {
+      return this.search ? this.users : this.usersHistory;
+    },
+  },
   methods: {
-    openMenu() {
+    openMenu(): void {
       this.menu = true;
       this.getHistory();
     },
-    closeMenu() {
+    closeMenu(): void {
       this.menu = false;
     },
     // Get histories
-    async getHistory() {
+    async getHistory(): Promise<void> {
       if (this.search) {
         return;
       }
@@ -162,14 +126,14 @@ export default Vue.extend({
       }
     },
     // Delete all histories
-    async deleteAll() {
+    async deleteAll(): Promise<void> {
       try {
         const res = await this.$axios.$delete("users/search/history");
         this.usersHistory = [];
       } catch (error) {}
     },
     // Delete one history
-    async deleteOne(user_id: number) {
+    async deleteOne(user_id: number): Promise<void> {
       try {
         const res = await this.$axios.$delete(
           `/users/${user_id}/search/history`
@@ -182,7 +146,7 @@ export default Vue.extend({
       } catch (error) {}
     },
     // Go to profile and save new history.
-    async goProfile(user_id: number) {
+    async goProfile(user_id: number): Promise<void> {
       try {
         const res = await this.$axios.$post("/users/search/history", {
           user_id: user_id,
