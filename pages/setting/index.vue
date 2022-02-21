@@ -28,7 +28,7 @@
       light
     ></v-textarea>
 
-    <v-btn @click="update" :disabled="isDisable">update</v-btn>
+    <submit @click="update" :disabled="isDisable">update</submit>
   </v-form>
 </template>
 

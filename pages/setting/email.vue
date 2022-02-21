@@ -21,7 +21,7 @@
       ※ Confirmation email are sent to your new E-mail.
     </div>
 
-    <v-btn tabindex="1" @click="submit">submit</v-btn>
+    <submit tabindex="1" @click="submit">submit</submit>
   </v-form>
 
   <!------------------->

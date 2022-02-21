@@ -1,10 +1,10 @@
 <template>
   <v-form ref="form" class="text-center" style="width: 300px">
     <div class="text-center">
-      <v-icon class="mx-auto" size="48" color="grey darken-4">
+      <v-icon class="mb-3" size="48" color="grey darken-4">
         mdi-lock
       </v-icon>
-      <span class="font-weight-bold text-h6 text--primary">Reset</span>
+      <span class="font-weight-bold text-h6 text--primary">Reset password</span>
     </div>
 
     <v-text-field
@@ -17,9 +17,7 @@
       persistent-hint
     ></v-text-field>
 
-    <v-btn class="mt-5" tabindex="1" color="grey darken-3" dark @click="submit">
-      send
-    </v-btn>
+    <submit class="mt-5" @click="submit"> send </submit>
 
     <v-divider class="my-5"></v-divider>
 

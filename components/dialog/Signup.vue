@@ -76,9 +76,7 @@
             counter="72"
           ></v-text-field>
 
-          <v-btn tabindex="1" color="grey darken-3" dark @click="signup">
-            signup
-          </v-btn>
+          <submit @click="signup"> signup </submit>
           <v-divider class="my-5"></v-divider>
           <div class="text-primary mb-1">
             In case of already having the account.

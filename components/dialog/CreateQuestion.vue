@@ -5,7 +5,7 @@
     transition="fade-transition"
     width="500"
   >
-    <v-card class="rounded-lg">
+    <v-card class="rounded-lg pa-2">
       <v-card-title class="font-weight-light">
         <v-icon size="30">mdi-pencil</v-icon>Create Question.
         <v-spacer></v-spacer>
@@ -61,7 +61,7 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="grey darken-3" dark @click="create">create</v-btn>
+        <submit @click="create"></submit>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -90,7 +90,9 @@ export default Vue.extend({
   },
   methods: {
     async create(): Promise<void> {
-      if (!(this.$refs.form as any).validate()) { return; }
+      if (!(this.$refs.form as any).validate()) {
+        return;
+      }
 
       try {
         const res = await this.$axios.$post("/questions", this.questionModel);

@@ -30,13 +30,7 @@
       v-on:change="fileSelected"
     ></v-file-input>
 
-    <v-btn
-      class="white--text"
-      :disabled="isDisabled"
-      @click="update"
-      color="grey darken-2"
-      >update</v-btn
-    >
+    <submit :disabled="isDisabled" @click="update">update</submit>
   </v-form>
 </template>
 

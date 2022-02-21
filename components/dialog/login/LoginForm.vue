@@ -44,9 +44,7 @@
       >
     </div>
 
-    <v-btn @click="login" tabindex="1" color="grey darken-3" dark>
-      login
-    </v-btn>
+    <submit @click="login"> login </submit>
 
     <v-divider class="my-5"></v-divider>
     <div class="text-primary mb-1">In case of not having the account.</div>

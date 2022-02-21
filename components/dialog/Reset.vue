@@ -41,15 +41,7 @@
           >
           </v-text-field>
 
-          <v-btn
-            class="mt-3"
-            @click="submit"
-            tabindex="1"
-            color="grey darken-3"
-            dark
-          >
-            submit
-          </v-btn>
+          <submit class="mt-3" @click="submit"></submit>
 
           <v-divider class="my-5"></v-divider>
 

@@ -12,7 +12,7 @@
       color="grey darken-3"
       style="width: 100px"
     ></v-checkbox>
-    <v-btn :disabled="!checkbox" @click="destroy">delete</v-btn>
+    <submit :disabled="!checkbox" @click="destroy">delete</submit>
   </div>
 </template>
 

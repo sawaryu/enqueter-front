@@ -32,7 +32,7 @@
       tabindex="1"
     >
     </v-text-field>
-    <v-btn tabindex="1" @click="change">update</v-btn>
+    <submit tabindex="1" @click="change">update</submit>
   </v-form>
 </template>
 
