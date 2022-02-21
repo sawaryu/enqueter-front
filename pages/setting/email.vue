@@ -12,7 +12,7 @@
       tabindex="1"
       v-model="emailModel.email"
       :rules="emailRules"
-      label="E-mail"
+      label="New E-mail"
       counter="255"
       max-length="255"
     ></v-text-field>
@@ -28,24 +28,33 @@
 
   <!-- after sent email. -->
   <v-form v-else>
-    <v-alert type="info">
-      Please check your E-mail and enter the <strong>token</strong> to the
-      field.
+    <v-alert color="info" outlined class="d-flex justify-start">
+      Please check your E-mail and enter the <strong>code</strong> in the field.
       <div>
-        <small>* A token is expired within 30 minutes after mailed.</small>
+        <small>* The code is expired within 30 minutes after mailed.</small>
       </div>
     </v-alert>
 
-    <v-text-field
+    <v-otp-input
+      class="mb-5"
+      type="number"
       tabindex="1"
-      v-model="tokenModel.token"
-      label="Token"
-      counter="50"
-      max-length="50"
-    ></v-text-field>
+      length="6"
+      v-model="codeModel.code"
+      label="Code"
+      :disabled="$accessor.overlay.getOverlay"
+    ></v-otp-input>
 
-    <v-btn dark color="grey darken-2" class="mr-4" @click="reset">cancel</v-btn>
-    <v-btn class="ml-4" tabindex="1" @click="update">update</v-btn>
+    <v-btn dark color="grey darken-2" class="mr-4" @click="reset" outlined
+      >cancel</v-btn
+    >
+    <v-btn
+      class="ml-4"
+      :disabled="!(codeModel.code.length === codeLength)"
+      tabindex="1"
+      @click="update"
+      >update</v-btn
+    >
   </v-form>
 </template>
 
@@ -59,9 +68,6 @@ export default Vue.extend({
       emailModel: {
         email: "" as string,
       },
-      tokenModel: {
-        token: "" as string,
-      },
       emailRules: [
         (v: string) => (!!v && /\S/.test(v)) || "Must be required.",
         (v: string) =>
@@ -72,6 +78,10 @@ export default Vue.extend({
           "Incorrect email format.",
         (v: string) => v.length <= 255 || "Must be less than 255 characters.",
       ],
+      codeModel: {
+        code: "" as string,
+      },
+      codeLength: 6,
     };
   },
   methods: {
@@ -100,12 +110,12 @@ export default Vue.extend({
         this.$accessor.overlay.setOverlay(false);
       }
     },
-    // update with token.
+    // update with code.
     async update(): Promise<void> {
       try {
         const res = await this.$axios.$put(
           "/auth/update_email",
-          this.tokenModel
+          this.codeModel
         );
         this.sent = false;
         this.reset();
