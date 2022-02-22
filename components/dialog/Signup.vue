@@ -66,7 +66,7 @@
             counter="72"
           ></v-text-field>
 
-          <submit @click="signup"> signup </submit>
+          <submit class="mt-2" @click="signup"> signup </submit>
           <v-divider class="my-5"></v-divider>
           <div class="text-primary mb-1">
             In case of already having the account.

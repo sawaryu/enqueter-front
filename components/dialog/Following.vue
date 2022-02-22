@@ -32,23 +32,18 @@
         </v-card-text>
 
         <template v-else>
-          <v-list-item v-for="user in users" :key="user.id">
-            <v-list-item-avatar
-              class="pointer"
-              size="37"
-              @click="goProfile(user.id)"
-            >
+          <v-list-item
+            v-for="user in users"
+            :key="user.id"
+            @click="goProfile(user.id)"
+            :ripple="false"
+          >
+            <v-list-item-avatar size="37">
               <v-img :src="$avatar(user.avatar)"></v-img>
             </v-list-item-avatar>
 
             <v-list-item-content>
-              <v-list-item-title>
-                <span
-                  class="underline pointer"
-                  @click="goProfile(user.id)"
-                  v-text="user.username"
-                ></span>
-              </v-list-item-title>
+              <v-list-item-title v-text="user.username"></v-list-item-title>
               <v-list-item-subtitle
                 v-text="user.nickname"
               ></v-list-item-subtitle>

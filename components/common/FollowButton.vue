@@ -8,7 +8,7 @@
     :loading="loading"
     v-if="user.id !== $auth.user.id"
     :outlined="relationshipBtn.outlined"
-    @click="follow"
+    @click.stop="follow"
     >{{ relationshipBtn.text }}</v-btn
   >
 </template>

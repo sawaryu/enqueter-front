@@ -8,6 +8,7 @@
         rounded
         outlined
         @click="changeCategory"
+        :ripple="false"
         v-text="category"
       ></v-btn>
     </v-card-title>
@@ -28,6 +29,7 @@
         v-else-if="users.length"
         v-for="(user, index) in users"
         :key="user.id"
+        :class="{'current-user' : user.id === $auth.user.id}"
       >
         <div v-text="ordinal(index + 1)"></div>
         <v-badge
@@ -150,5 +152,9 @@ export default Vue.extend({
 });
 </script>
 
-<style>
+<style scoped>
+.current-user {
+  background-color:rgba(192, 192, 192, 0.34);
+  border-radius: 1%;
+}
 </style>
