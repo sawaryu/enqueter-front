@@ -12,6 +12,7 @@
       style="height: 40px"
       prepend-inner-icon="mdi-magnify"
       @focus="openMenu"
+      maxlength="35"
     ></v-text-field>
 
     <!-- menu card -->

@@ -59,6 +59,7 @@
 
 <script lang="ts">
 import Vue from "vue";
+import { emailRules } from "@/common/validators/validator";
 export default Vue.extend({
   data() {
     return {
@@ -67,16 +68,7 @@ export default Vue.extend({
       emailModel: {
         email: "" as string,
       },
-      emailRules: [
-        (v: string) => (!!v && /\S/.test(v)) || "Must be required.",
-        (v: string) =>
-          (!!v &&
-            /^(?!.*…)[a-zA-Z0-9_+-]+(.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/.test(
-              v
-            )) ||
-          "Incorrect email format.",
-        (v: string) => v.length <= 255 || "Must be less than 255 characters.",
-      ],
+      emailRules: emailRules,
       codeModel: {
         code: "" as string,
       },

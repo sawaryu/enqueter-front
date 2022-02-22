@@ -47,16 +47,6 @@
             max-length="255"
           ></v-text-field>
 
-          <!-- <v-text-field
-            tabindex="1"
-            v-model="signupModel.nickname"
-            :rules="nicknameRules"
-            label="Nickname"
-            color="grey darken-3"
-            maxlength="20"
-            counter="20"
-          ></v-text-field> -->
-
           <v-text-field
             tabindex="1"
             type="password"
@@ -99,6 +89,11 @@
 </template>
 
 <script lang="ts">
+import {
+  usernameRules,
+  emailRules,
+  passwordRules,
+} from "@/common/validators/validator";
 import Vue from "vue";
 export default Vue.extend({
   data: () => ({
@@ -106,39 +101,12 @@ export default Vue.extend({
     signupModel: {
       username: "",
       email: "",
-      // nickname: "",
       password: "",
       password_confirmation: "",
     },
-    usernameRules: [
-      (v: string) => (!!v && /\S/.test(v)) || "Must be required.",
-      (v: string) =>
-        /^[A-Za-z0-9]*$/.test(v) ||
-        "Must be using half-width alphanumeric characters.",
-      (v: string) => v.length <= 15 || "Must be less than 15 characters.",
-    ],
-    emailRules: [
-      (v: string) => (!!v && /\S/.test(v)) || "Must be required.",
-      (v: string) =>
-        (!!v &&
-          /^(?!.*…)[a-zA-Z0-9_+-]+(.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/.test(
-            v
-          )) ||
-        "Incorrect email format.",
-      (v: string) => v.length <= 255 || "Must be less than 255 characters.",
-    ],
-    // nicknameRules: [
-    //   (v: string) => (!!v && /\S/.test(v)) || "Must be required.",
-    //   (v: string) => v.length <= 20 || "Must be less than 20 characters.",
-    // ],
-    passwordRules: [
-      (v: string) => (!!v && /\S/.test(v)) || "Must be required.",
-      (v: string) =>
-        /^[A-Za-z0-9]*$/.test(v) ||
-        "Must be using half-width alphanumeric characters.",
-      (v: string) => v.length >= 8 || "Must be more than 8 characters.",
-      (v: string) => v.length <= 72 || "Must be less than 72 characters.",
-    ],
+    usernameRules: usernameRules,
+    emailRules: emailRules,
+    passwordRules: passwordRules
   }),
   methods: {
     async signup(): Promise<any> {

@@ -68,6 +68,7 @@
 </template>
 
 <script lang="ts">
+import { questionRules, optionRules } from "@/common/validators/validator";
 import Vue from "vue";
 export default Vue.extend({
   data() {
@@ -78,14 +79,8 @@ export default Vue.extend({
         option_first: "",
         option_second: "",
       },
-      questionRules: [
-        (v: string) => (!!v && /\S/.test(v)) || "Must be required",
-        (v: string) => v.length <= 140 || "Must be less than 255 characters",
-      ],
-      optionRules: [
-        (v: string) => (!!v && /\S/.test(v)) || "Must be required",
-        (v: string) => v.length <= 15 || "Must be less than 15 characters",
-      ],
+      questionRules: questionRules,
+      optionRules: optionRules,
     };
   },
   methods: {

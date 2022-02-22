@@ -17,6 +17,7 @@
             clearable
             style="height: 40px"
             prepend-inner-icon="mdi-magnify"
+            maxlength="35"
           ></v-text-field>
         </v-card-title>
         <v-divider></v-divider>

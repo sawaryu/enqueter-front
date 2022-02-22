@@ -20,6 +20,7 @@
     <v-textarea
       label="Introduce"
       v-model="profileModel.introduce"
+      :rules="introduceRules"
       placeholder="Hi, my name is john."
       maxlength="140"
       counter="140"
@@ -33,7 +34,11 @@
 </template>
 
 <script lang="ts">
-// TODO: validation
+import {
+  usernameRules,
+  nicknameRules,
+  introduceRules,
+} from "@/common/validators/validator";
 import Vue from "vue";
 export default Vue.extend({
   data() {
@@ -44,17 +49,9 @@ export default Vue.extend({
         nickname: "",
         introduce: "",
       },
-      usernameRules: [
-        (v: string) => (!!v && /\S/.test(v)) || "Must be required",
-        (v: string) => v.length <= 15 || "Must be less than 15 characters",
-        (v: string) =>
-          /^[A-Za-z0-9]*$/.test(v) ||
-          "Must be using half-width alphanumeric characters.",
-      ],
-      nicknameRules: [
-        (v: string) => (!!v && /\S/.test(v)) || "Must be required",
-        (v: string) => v.length <= 20 || "Must be less than 20 characters",
-      ],
+      usernameRules: usernameRules,
+      nicknameRules: nicknameRules,
+      introduceRules: introduceRules,
     };
   },
   computed: {
@@ -64,8 +61,6 @@ export default Vue.extend({
         nickname: this.$auth.user.nickname,
         introduce: this.$auth.user.introduce,
       };
-
-      // 'Json.stringify()' make another instances of Object to be able to compare.
       return JSON.stringify(profileModel) === JSON.stringify(this.profileModel);
     },
   },
