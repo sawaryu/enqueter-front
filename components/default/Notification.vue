@@ -87,7 +87,7 @@
 
         <v-list-item class="mt-16" v-if="!notifications.length">
           <v-list-item-content>
-            <v-list-item-subtitle class="text-center">
+            <v-list-item-subtitle class="text-center font-weight-light">
               <v-icon class="mb-2">mdi-bell-outline</v-icon>
               There are no notifications.
             </v-list-item-subtitle>

@@ -61,7 +61,7 @@
 
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn @click="e1 = 3">Confirm</v-btn>
+                <submit @click="e1 = 3">Confirm</submit>
               </v-card-actions>
             </v-card>
           </v-stepper-content>
@@ -86,7 +86,7 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn @click="submit">submit</v-btn>
+                <submit @click="submit"></submit>
               </v-card-actions>
             </v-card>
           </v-stepper-content>

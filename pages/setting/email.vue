@@ -21,7 +21,7 @@
       ※ Confirmation email are sent to your new E-mail.
     </div>
 
-    <submit tabindex="1" @click="submit">submit</submit>
+    <submit @click="submit">submit</submit>
   </v-form>
 
   <!------------------->
@@ -48,12 +48,11 @@
     <v-btn dark color="grey darken-2" class="mr-4" @click="reset" outlined
       >cancel</v-btn
     >
-    <v-btn
+    <submit
       class="ml-4"
       :disabled="!(codeModel.code.length === codeLength)"
-      tabindex="1"
       @click="update"
-      >update</v-btn
+      >update</submit
     >
   </v-form>
 </template>

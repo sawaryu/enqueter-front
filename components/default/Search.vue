@@ -69,7 +69,7 @@
 
         <v-card-text
           v-else
-          class="text--secondary text-center text-subtitle-2 mt-15"
+          class="text--secondary font-weight-light text-center text-subtitle-2 mt-15"
         >
           <v-icon>mdi-magnify</v-icon>
           <span
