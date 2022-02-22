@@ -29,7 +29,8 @@
         v-else-if="users.length"
         v-for="(user, index) in users"
         :key="user.id"
-        :class="{'current-user' : user.id === $auth.user.id}"
+        :class="{ 'current-user': user.id === $auth.user.id }"
+        @click="$router.push(`/users/${user.id}`)"
       >
         <div v-text="ordinal(index + 1)"></div>
         <v-badge
@@ -40,21 +41,14 @@
           offset-y="23"
           overlap
         >
-          <v-list-item-avatar
-            class="pointer"
-            :size="sizeAndColorByRank(index).size"
-            @click="$router.push(`/users/${user.id}`)"
-          >
+          <v-list-item-avatar :size="sizeAndColorByRank(index).size">
             <v-img :src="$avatar(user.avatar)"></v-img>
           </v-list-item-avatar>
         </v-badge>
         <v-list-item-content>
-          <v-list-item-title class="text-subtitle-2"
-            ><span
-              class="pointer underline"
-              v-text="user.username"
-              @click="$router.push(`/users/${user.id}`)"
-            ></span
+          <v-list-item-title
+            class="text-subtitle-2"
+            v-text="user.username"
           ></v-list-item-title>
           <v-list-item-subtitle v-text="user.nickname"></v-list-item-subtitle>
         </v-list-item-content>
@@ -154,7 +148,7 @@ export default Vue.extend({
 
 <style scoped>
 .current-user {
-  background-color:rgba(192, 192, 192, 0.34);
+  background-color: rgba(192, 192, 192, 0.34);
   border-radius: 1%;
 }
 </style>
