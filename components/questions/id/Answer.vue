@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import { Question } from "@/common/entity/Question";
+import { Question } from "@/common/types/models";
 import Vue, { PropOptions } from "vue";
 export default Vue.extend({
   props: {
@@ -60,20 +60,19 @@ export default Vue.extend({
     async answer(option: string): Promise<void> {
       if (
         this.question.user_id == this.$auth.user.id ||
-        this.question.is_answered ||
-        !this.question.is_open
+        this.question.is_answered
       ) {
         return;
       }
-        try {
-          const question_id: number = Number(this.$route.params.id);
-          const res = await this.$axios.$post("/questions/answer", {
-            question_id: question_id,
-            option: option,
-          });
-          this.$accessor.timeline.answeredQuestion(question_id);
-          this.$emit("answer", res);
-        } catch (error) {}
+      try {
+        const question_id: number = Number(this.$route.params.id);
+        const res = await this.$axios.$post("/questions/answer", {
+          question_id: question_id,
+          option: option,
+        });
+        this.$accessor.timeline.answeredQuestion(question_id);
+        this.$emit("answer", res);
+      } catch (error) {}
     },
   },
 });

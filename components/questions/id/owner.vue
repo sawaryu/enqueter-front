@@ -92,8 +92,7 @@
 </template>
 
 <script lang="ts">
-import { User } from "@/common/entity/User";
-import { Question } from "@/common/entity/Question";
+import { User, Question } from "@/common/types/models";
 import PieChart from "~/chart/PieChart";
 import Vue, { PropOptions } from "vue";
 export default Vue.extend({

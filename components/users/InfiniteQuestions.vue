@@ -1,5 +1,5 @@
 <template>
-  <div style="min-height: 30vh">
+  <div style="min-height: 530px">
     <v-row class="pa-3 mt-2">
       <Loading v-if="loading" />
 
@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts">
-import { Question } from "@/common/entity/Question";
+import { Question } from "@/common/types/models";
 import InfiniteLoading from "vue-infinite-loading";
 import Vue from "vue";
 export default Vue.extend({

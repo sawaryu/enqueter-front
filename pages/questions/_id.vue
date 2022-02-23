@@ -18,7 +18,8 @@
       @close="snackbar = false"
     />
     <FloatAnswer @close="snackbar = false" />
-    <Dial @close="snackbar = false" />
+    <FloatBack />
+    <!-- <Dial @close="snackbar = false" /> -->
   </div>
 </template>
 
@@ -33,7 +34,7 @@ const RESULT = {
   even: 0,
   first: 1,
 };
-import { Question } from "@/common/entity/Question";
+import { Question } from "@/common/types/models";
 import Vue from "vue";
 export default Vue.extend({
   async asyncData({ params, $axios }): Promise<any> {
@@ -54,11 +55,7 @@ export default Vue.extend({
   computed: {
     currentComponent() {
       const question: Question = (this as any).question;
-      if (
-        question.user_id == this.$auth.user.id ||
-        question.is_answered ||
-        !question.is_open
-      ) {
+      if (question.user_id == this.$auth.user.id || question.is_answered) {
         return COMPONENT.owner;
       } else if (!question.is_answered) {
         return COMPONENT.unanswered;

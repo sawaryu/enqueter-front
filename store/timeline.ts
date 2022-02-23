@@ -1,5 +1,5 @@
 import { getterTree, mutationTree } from 'typed-vuex'
-import { Question } from "@/common/entity/Question";
+import { Question } from "~/common/types/models";
 
 /*
   * Use in timeline.

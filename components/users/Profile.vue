@@ -101,7 +101,7 @@
 
 <script lang="ts">
 import {autoLink} from "vue-highlights";
-import { User } from "@/common/entity/User";
+import { User } from "@/common/types/models";
 import Vue, { PropOptions } from "vue";
 export default Vue.extend({
   props: {

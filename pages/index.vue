@@ -16,7 +16,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { User } from "@/common/entity/User";
+import { User } from "@/common/types/models";
 export default Vue.extend({
   async asyncData({ $axios, app }): Promise<any> {
     const url = `/users/${app.$accessor.ranking.getCurrentCategory}_ranking`;

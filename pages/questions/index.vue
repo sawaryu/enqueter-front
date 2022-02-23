@@ -53,7 +53,7 @@
 </template>
 
 <script lang="ts">
-import { Question } from "@/common/entity/Question";
+import { Question } from "@/common/types/models";
 import Vue from "vue";
 export default Vue.extend({
   data() {
