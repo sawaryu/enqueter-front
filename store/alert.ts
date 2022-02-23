@@ -1,6 +1,6 @@
 import { getterTree, mutationTree } from 'typed-vuex'
 
-interface Alert {
+type Alert = {
   type: string,
   message: string
 }
