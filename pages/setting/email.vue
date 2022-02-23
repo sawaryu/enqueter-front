@@ -114,7 +114,7 @@ export default Vue.extend({
         this.$accessor.flash.showMessage(
           {
             message: "E-mail has been successfully updated.",
-            type: "info",
+            type: "success",
             status: true,
           },
           { root: true }

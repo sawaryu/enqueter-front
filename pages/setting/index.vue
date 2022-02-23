@@ -80,7 +80,7 @@ export default Vue.extend({
         this.$auth.fetchUser();
         this.$accessor.flash.showMessage(
           {
-            message: `updated completely your profile.`,
+            message: `Updated completely your profile.`,
             type: "success",
             status: true,
           },

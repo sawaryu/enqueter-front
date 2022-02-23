@@ -20,32 +20,32 @@
     <v-divider class="mb-4"></v-divider>
 
     <!-- questions -->
-    <transition name="fade" mode="out-in">
-      <Loading v-if="loading" key="loading" />
+    <!-- <transition name="fade" mode="out-in"> -->
+    <Loading v-if="loading" key="loading" />
 
-      <v-row v-else key="questions">
-        <template v-if="questions.length">
-          <v-col v-for="q in questions" :key="q.id" cols="12" sm="6" md="4">
-            <Question :question="q" />
-          </v-col>
-
-          <v-col cols="12" class="text-center mb-10 mt-5">
-            <v-pagination
-              :value="$accessor.questions.getCurrentPage"
-              @input="changePage"
-              :length="totalPages"
-              :total-visible="5"
-              color="grey darken-3"
-              circle
-            ></v-pagination>
-          </v-col>
-        </template>
-
-        <v-col class="text-center" v-else>
-          <div class="text--secondary">There are no questions.</div>
+    <v-row v-else key="questions">
+      <template v-if="questions.length">
+        <v-col v-for="q in questions" :key="q.id" cols="12" sm="6" md="4">
+          <Question :question="q" />
         </v-col>
-      </v-row>
-    </transition>
+
+        <v-col cols="12" class="text-center mb-10 mt-5">
+          <v-pagination
+            :value="$accessor.questions.getCurrentPage"
+            @input="changePage"
+            :length="totalPages"
+            :total-visible="5"
+            color="grey darken-3"
+            circle
+          ></v-pagination>
+        </v-col>
+      </template>
+
+      <v-col class="text-center" v-else>
+        <div class="text--secondary">There are no questions.</div>
+      </v-col>
+    </v-row>
+    <!-- </transition> -->
 
     <!-- modal -->
     <CreateQuestion />
@@ -84,16 +84,13 @@ export default Vue.extend({
         });
         this.questions = res.data.questions;
         this.totalPages = res.data.total_pages;
+        this.loading = false;
       } catch (error) {
       } finally {
-        setTimeout(() => {
-          this.loading = false;
-        }, 50);
-
         if (isInit) {
           setTimeout(() => {
             this.$vuetify.goTo(this.$accessor.questions.getScrollY);
-          }, 290);
+          }, 250);
         }
       }
     },
