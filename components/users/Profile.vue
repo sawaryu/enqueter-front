@@ -88,7 +88,11 @@
         </v-card-actions>
         <v-card-text class="pt-1">
           <v-divider></v-divider>
-          <div class="mt-2" v-html="introduceLinked" style="white-space: pre-wrap"></div>
+          <div
+            class="mt-2"
+            v-html="introduceLinked"
+            style="white-space: pre-wrap"
+          ></div>
         </v-card-text>
       </v-card>
     </v-card>
@@ -96,8 +100,8 @@
 </template>
 
 <script lang="ts">
-import { autoLink } from "vue-highlights";
-import { User } from "@/common/entity/User";
+import {autoLink} from "vue-highlights";
+import { User } from "@/common/types/models";
 import Vue, { PropOptions } from "vue";
 export default Vue.extend({
   props: {

@@ -1,4 +1,8 @@
-export default ({ app: { $config, $accessor } }, inject: any) => {
+import { Context } from "@nuxt/types";
+export default (context: Context, inject: any) => {
+  const { $accessor } = context.app
+  const { $config } = context
+
   const avatar = (src: string) => {
     return $config.avatarUrl + src
   }
@@ -12,7 +16,6 @@ export default ({ app: { $config, $accessor } }, inject: any) => {
     $accessor.dialog.reset();
     $accessor.error.reset();
     $accessor.ranking.reset();
-    $accessor.sort.reset();
   }
   inject('resetStore', resetStore);
 };

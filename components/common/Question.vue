@@ -1,11 +1,6 @@
 <template>
   <v-card elevation="8" min-width="300px" max-width="700px" rounded="xl">
     <v-card-title class="font-weight-bold">
-      <!-- closed -->
-      <div v-if="!question.is_open" class="text-caption text--secondary">
-        <span> <v-icon>mdi-close-octagon-outline</v-icon>closed</span>
-      </div>
-
       <!-- is_answered -->
       <template v-if="question.user_id !== this.$auth.user.id">
         <span
@@ -13,9 +8,7 @@
           class="text-caption text--secondary ml-2"
           ><v-icon>mdi-checkbox-marked-circle</v-icon>answered</span
         >
-        <span
-          v-else-if="question.is_open"
-          class="text-caption ml-2 success--text"
+        <span v-else class="text-caption ml-2 success--text"
           ><v-icon color="success">mdi-checkbox-marked-circle-outline</v-icon
           >answerable</span
         >
@@ -39,22 +32,6 @@
           "
         ></v-icon>
       </v-btn>
-
-      <!-- menu -->
-      <!-- <v-menu v-if="question.user_id !== $auth.user.id" offset-y>
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn icon v-bind="attrs" v-on="on">
-            <v-icon>mdi-dots-vertical</v-icon>
-          </v-btn>
-        </template>
-        <v-list>
-          <v-list-item link>
-            <v-list-item-title
-              ><v-icon>mdi-flag</v-icon> report</v-list-item-title
-            >
-          </v-list-item>
-        </v-list>
-      </v-menu> -->
 
       <!-- slot -->
       <slot> </slot>
@@ -91,7 +68,6 @@
       </div>
       <v-spacer></v-spacer>
 
-      <!-- before time -->
       <div class="text--secondary text-caption">{{ beforeTime }}</div>
     </v-card-actions>
   </v-card>
@@ -99,7 +75,7 @@
 
 <script lang="ts">
 import moment from "moment";
-import { Question } from "@/common/entity/Question";
+import { Question } from "@/common/types/models";
 import Vue, { PropOptions } from "vue";
 export default Vue.extend({
   props: {
@@ -108,11 +84,7 @@ export default Vue.extend({
   },
   computed: {
     beforeTime(): string {
-      if (!this.question.is_open) {
-        return "";
-      }
-      moment.locale("en");
-      return "closed " + moment.unix(this.question.closed_at).fromNow();
+      return moment(this.question.created_at).fromNow();
     },
   },
   methods: {

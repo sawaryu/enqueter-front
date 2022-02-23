@@ -8,7 +8,7 @@
         label="See preview"
       ></v-checkbox>
     </div>
-    
+
     <v-row v-if="!preview" justify="center">
       <!-- Ratio -->
       <v-card class="col" width="450" color="rgb(0, 0, 0, 0)" flat>
@@ -92,8 +92,7 @@
 </template>
 
 <script lang="ts">
-import { User } from "@/common/entity/User";
-import { Question } from "@/common/entity/Question";
+import { User, Question } from "@/common/types/models";
 import PieChart from "~/chart/PieChart";
 import Vue, { PropOptions } from "vue";
 export default Vue.extend({
@@ -119,8 +118,8 @@ export default Vue.extend({
       // *reversed for chart.
       return [this.question.option_second, this.question.option_first];
     },
-    isExistCountData(): boolean {
-      return this.count_data[0] || this.count_data[1];
+    isExistCountData(): Boolean {
+      return this.count_data[0] > 0 || this.count_data[1] > 0;
     },
   },
   created() {

@@ -54,8 +54,7 @@
         </v-form>
 
         <div class="text-caption mt-3 mb-0">
-          * A question will be closed after a week. <br />
-          * Please create the question that divide people's answers.
+          ※ Please create the question that will divide people's answers.
         </div>
       </v-card-text>
 
@@ -70,6 +69,11 @@
 <script lang="ts">
 import { questionRules, optionRules } from "@/common/validators/validator";
 import Vue from "vue";
+type QuestionModel = {
+  content: string;
+  option_first: string;
+  option_second: string;
+};
 export default Vue.extend({
   data() {
     return {
@@ -78,7 +82,7 @@ export default Vue.extend({
         content: "",
         option_first: "",
         option_second: "",
-      },
+      } as QuestionModel,
       questionRules: questionRules,
       optionRules: optionRules,
     };

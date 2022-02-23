@@ -15,7 +15,7 @@
           <v-icon v-text="n.icon"></v-icon>
         </v-btn>
       </v-bottom-navigation>
-      <NuxtChild keep-alive />
+      <NuxtChild />
     </v-col>
     <Following v-if="$accessor.dialog.getFollowingDialog" />
     <Follower v-if="$accessor.dialog.getFollowerDialog" />
@@ -31,6 +31,9 @@ export default Vue.extend({
       const res = await $axios.$get(`/users/${params.id}`);
       return { user: res };
     } catch (error) {}
+  },
+  mounted() {
+    window.scrollTo(0, 0);
   },
   computed: {
     navigations(): Object[] {

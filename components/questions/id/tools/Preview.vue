@@ -26,7 +26,7 @@
 
 <script lang="ts">
 import Vue, { PropOptions } from "vue";
-import { Question } from "@/common/entity/Question";
+import { Question } from "@/common/types/models";
 export default Vue.extend({
   props: {
     question: {

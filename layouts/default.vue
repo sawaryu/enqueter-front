@@ -90,7 +90,7 @@ export default Vue.extend({
       drawer: null as null | boolean,
     };
   },
-  mounted() {
+  mounted(): void {
     this.checkMaintenance();
     setTimeout(() => {
       this.loading = false;
@@ -108,7 +108,7 @@ export default Vue.extend({
       return this.$route.path.includes("/welcome");
     },
     isLarge(): boolean {
-      return this.$vuetify.breakpoint.name.includes(["md", "lg", "xl"]);
+      return ["md", "lg", "xl"].includes(this.$vuetify.breakpoint.name);
     },
   },
 });

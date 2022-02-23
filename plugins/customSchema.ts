@@ -42,7 +42,7 @@ export default class CustomScheme extends RefreshScheme {
         .request({}, this.options.endpoints.refresh)
       // Update tokens
       this.updateTokens(response, { isRefreshing: true })
-    } catch (error) {
+    } catch (error: any) {
       this.$auth.callOnError(error, { method: 'refreshToken' })
       return await Promise.reject(error)
     }
@@ -67,7 +67,7 @@ export default class CustomScheme extends RefreshScheme {
       ? propName
       : (propName + '').split('.')
 
-    let result: unknown = holder
+    let result: any = holder
     while (propParts.length && result) {
       result = result[propParts.shift()]
     }
@@ -75,7 +75,7 @@ export default class CustomScheme extends RefreshScheme {
     return result
   }
 
-  async fetchUser(endpoint?: HTTPRequest): Promise<HTTPResponse | void> {
+  async fetchUser(endpoint?: any): Promise<HTTPResponse | void> {
     // Token is required but not available
     if (!this.check().valid) {
       return Promise.resolve()

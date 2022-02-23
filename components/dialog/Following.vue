@@ -60,7 +60,7 @@
 </template>
 
 <script lang="ts">
-import { User } from "@/common/entity/User";
+import { User } from "@/common/types/models";
 import Vue from "vue";
 export default Vue.extend({
   data() {

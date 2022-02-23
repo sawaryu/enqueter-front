@@ -1,5 +1,5 @@
 <template>
-  <div style="min-height: 30vh">
+  <div style="min-height: 530px">
     <v-row class="pa-3 mt-2">
       <Loading v-if="loading" />
 
@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts">
-import { Question } from "@/common/entity/Question";
+import { Question } from "@/common/types/models";
 import InfiniteLoading from "vue-infinite-loading";
 import Vue from "vue";
 export default Vue.extend({
@@ -49,9 +49,9 @@ export default Vue.extend({
   },
   data() {
     return {
-      loading: true,
-      questions: [],
-      page: 1,
+      loading: true as boolean,
+      questions: [] as Question[],
+      page: 1 as number,
     };
   },
   async created(): Promise<void> {

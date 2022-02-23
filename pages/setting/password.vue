@@ -37,25 +37,23 @@
 </template>
 
 <script lang="ts">
-// TODO: validation
+import { passwordRules } from "@/common/validators/validator";
+type passwordModel = {
+  current_password: string;
+  new_password: string;
+  password_confirmation: string;
+};
 import Vue from "vue";
 export default Vue.extend({
   data() {
     return {
       valid: true,
       passwordModel: {
-        current_password: "" as string,
-        new_password: "" as string,
-        password_confirmation: "" as string,
-      },
-      passwordRules: [
-        (v: string) => (!!v && /\S/.test(v)) || "Must be required",
-        (v: string) =>
-          /^[A-Za-z0-9]*$/.test(v) ||
-          "Must be using half-width alphanumeric characters.",
-        (v: string) => v.length >= 8 || "Must be more than 8 characters",
-        (v: string) => v.length <= 72 || "Must be less than 72 characters",
-      ],
+        current_password: "",
+        new_password: "",
+        password_confirmation: "",
+      } as passwordModel,
+      passwordRules: passwordRules,
     };
   },
   methods: {
