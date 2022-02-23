@@ -37,7 +37,6 @@
 </template>
 
 <script lang="ts">
-// TODO: validation
 import { passwordRules } from "@/common/validators/validator";
 type passwordModel = {
   current_password: string;

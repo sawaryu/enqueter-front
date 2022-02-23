@@ -59,7 +59,7 @@ export default Vue.extend({
     } catch (error) {}
   },
   data() {
-    return { sorts: ["all", "closed"] };
+    return { sorts: ["all", "closed"], questions: [] as Question[] };
   },
   computed: {
     questionsSorted(): Question[] {

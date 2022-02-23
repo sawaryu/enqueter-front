@@ -8,7 +8,7 @@
         label="See preview"
       ></v-checkbox>
     </div>
-    
+
     <v-row v-if="!preview" justify="center">
       <!-- Ratio -->
       <v-card class="col" width="450" color="rgb(0, 0, 0, 0)" flat>
@@ -119,8 +119,8 @@ export default Vue.extend({
       // *reversed for chart.
       return [this.question.option_second, this.question.option_first];
     },
-    isExistCountData(): boolean {
-      return this.count_data[0] || this.count_data[1];
+    isExistCountData(): Boolean {
+      return this.count_data[0] > 0 || this.count_data[1] > 0;
     },
   },
   created() {

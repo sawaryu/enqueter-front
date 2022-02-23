@@ -30,7 +30,7 @@ export default Vue.extend({
       try {
         const res = await this.$axios.$delete("/auth");
         await this.$auth.logout();
-        await this.$resetStore();
+        await (this as any).$resetStore();
         this.$accessor.flash.showMessage(
           {
             message: `Deleted your account.`,

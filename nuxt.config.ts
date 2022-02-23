@@ -111,7 +111,7 @@ export default {
     transpile: [
       /typed-vuex/,
     ],
-    extend(config, ctx) {
+    extend(config: any, ctx: any) {
     }
   },
 

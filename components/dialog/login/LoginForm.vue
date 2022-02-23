@@ -68,7 +68,7 @@ export default Vue.extend({
   data() {
     return {
       valid: true as boolean,
-      user_id_not_confirmed: null as number,
+      user_id_not_confirmed: null as number | null,
       loginModel: {
         username_or_email: "" as string,
         password: "" as string,
@@ -91,8 +91,8 @@ export default Vue.extend({
           },
           { root: true }
         );
-      } catch (e) {
-        this.user_id_not_confirmed = e.response.data.user_id_not_confirmed;
+      } catch (error: any) {
+        this.user_id_not_confirmed = error.response.data.user_id_not_confirmed;
       }
     },
     async resend(): Promise<any> {
@@ -102,7 +102,7 @@ export default Vue.extend({
           `/auth/${this.user_id_not_confirmed}/confirm/resend`
         );
         this.$accessor.dialog.setLoginDialog(false);
-        Object.assign(this.$data, this.$options.data());
+        Object.assign(this.$data, (this.$options as any).data());
         this.$accessor.alert.setAlert({
           type: "info",
           message: "Please check your email to activate the account.",

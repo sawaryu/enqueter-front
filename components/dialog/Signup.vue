@@ -106,17 +106,18 @@ export default Vue.extend({
     },
     usernameRules: usernameRules,
     emailRules: emailRules,
-    passwordRules: passwordRules
+    passwordRules: passwordRules,
   }),
   methods: {
     async signup(): Promise<any> {
-      if (this.$refs.form.validate()) {
+      const ref: any = this.$refs.form;
+      if (ref.validate()) {
         this.$accessor.overlay.setOverlay(true);
         try {
           const res = await this.$axios.$post("/auth", this.signupModel);
           this.$accessor.dialog.setSignupDialog(false);
-          this.$refs.form.resetValidation();
-          Object.assign(this.$data, this.$options.data());
+          ref.resetValidation();
+          Object.assign(this.$data, (this.$options as any).data());
           this.$accessor.alert.setAlert({
             type: "info",
             message: "Please check your email to activate the account.",

@@ -1,9 +1,7 @@
 <template>
   <v-form ref="form" class="text-center" style="width: 300px">
     <div class="text-center">
-      <v-icon class="mb-3" size="48" color="grey darken-4">
-        mdi-lock
-      </v-icon>
+      <v-icon class="mb-3" size="48" color="grey darken-4"> mdi-lock </v-icon>
       <span class="font-weight-bold text-h6 text--primary">Reset password</span>
     </div>
 
@@ -37,22 +35,17 @@
 
 <script lang="ts">
 import Vue from "vue";
+import { emailRules } from "@/common/validators/validator";
+type EmailModel = {
+  email: string;
+};
 export default Vue.extend({
   data() {
     return {
       emailModel: {
         email: "",
-      } as object,
-      emailRules: [
-        (v: string) => (!!v && /\S/.test(v)) || "Must be required.",
-        (v: string) =>
-          (!!v &&
-            /^(?!.*…)[a-zA-Z0-9_+-]+(.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/.test(
-              v
-            )) ||
-          "Incorrect email format.",
-        (v: string) => v.length <= 255 || "Must be less than 255 characters.",
-      ],
+      } as EmailModel,
+      emailRules: emailRules as any[],
     };
   },
   methods: {

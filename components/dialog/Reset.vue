@@ -65,16 +65,20 @@
 <script lang="ts">
 import { passwordRules } from "@/common/validators/validator";
 import Vue, { PropOptions } from "vue";
-interface resetInfo {
+type ResetInfo = {
   token: string;
   email: string;
-}
+};
+type PasswordModel = {
+  password: string;
+  password_confirmation: string;
+};
 export default Vue.extend({
   props: {
     resetInfo: {
       default: null,
       type: Object,
-    } as PropOptions<resetInfo>,
+    } as PropOptions<ResetInfo>,
   },
   data() {
     return {
@@ -82,7 +86,7 @@ export default Vue.extend({
       passwordModel: {
         password: "",
         password_confirmation: "",
-      } as object,
+      } as PasswordModel,
       passwordRules: passwordRules,
     };
   },
@@ -101,7 +105,7 @@ export default Vue.extend({
           type: "success",
           message: "Your password has been successfully reset. please login.",
         });
-      } catch (error) {
+      } catch (error: any) {
         this.$emit("close");
         if (error.response.data.message === "expired") {
           this.$accessor.alert.setAlert({

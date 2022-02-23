@@ -37,7 +37,7 @@
         <div v-else>
           <div class="subheading font-weight-medium text--secondary mt-3">
             <!-- Point -->
-            <div class="">
+            <div>
               <!-- <v-icon class="mb-2">mdi-crown</v-icon> -->
               <span v-if="point_stats"
                 >Point: {{ ordinalPointRank }} / {{ point_stats[1] }} pt</span
@@ -46,7 +46,7 @@
             </div>
 
             <!-- Response -->
-            <div class="">
+            <div>
               <!-- <v-icon class="mb-2">mdi-crown</v-icon> -->
               <span v-if="response_stats"
                 >Response: {{ ordinalResponseRank }} /
@@ -68,37 +68,45 @@
 import ordinal from "ordinal";
 import RadarChart from "~/chart/RadarChart";
 import Vue from "vue";
+type Period = {
+  id: string;
+  text: string;
+};
 export default Vue.extend({
   components: {
     RadarChart,
   },
   data() {
     return {
-      loading: true,
+      loading: true as boolean,
       periods: [
         { id: "week", text: "week" },
         { id: "month", text: "month" },
         { id: "total", text: "total" },
-      ],
-      radar_data: [0, 0, 0],
-      point_stats: null,
-      response_stats: null,
+      ] as Period[],
+      radar_data: [0, 0, 0] as number[],
+      point_stats: null as number[] | null,
+      response_stats: null as number[] | null,
     };
   },
   computed: {
-    ordinalPointRank(): string {
-      return ordinal(this.point_stats[0]);
+    ordinalPointRank(): string | void {
+      if (this.point_stats) {
+        return ordinal(this.point_stats[0]);
+      }
     },
-    ordinalResponseRank(): string {
-      return ordinal(this.response_stats[0]);
+    ordinalResponseRank(): string | void {
+      if (this.response_stats) {
+        return ordinal(this.response_stats[0]);
+      }
     },
-    currentPeriod() {
+    currentPeriod(): string {
       return this.$accessor.analytics.getCurrentPeriod;
     },
   },
   watch: {
     currentPeriod: {
-      handler() {
+      handler(): void {
         this.getStats();
       },
       immediate: true,

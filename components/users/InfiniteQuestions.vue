@@ -49,9 +49,9 @@ export default Vue.extend({
   },
   data() {
     return {
-      loading: true,
-      questions: [],
-      page: 1,
+      loading: true as boolean,
+      questions: [] as Question[],
+      page: 1 as number,
     };
   },
   async created(): Promise<void> {

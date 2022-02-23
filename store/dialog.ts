@@ -8,7 +8,7 @@ function initialState() {
     loginDialog: false as Boolean,
     signupDialog: false as Boolean,
     reportDialog: false as Boolean,
-    reportTargetId: null as number
+    reportTargetId: null as number | null
   }
 }
 
@@ -21,7 +21,7 @@ export const state = () => ({
   reportDialog: false as Boolean,
 
   // used in report dialog, subtly special.
-  reportTargetId: null as number
+  reportTargetId: null as number | null
 })
 
 export const getters = getterTree(state, {
@@ -55,7 +55,7 @@ export const mutations = mutationTree(state, {
 
   // when opening dialog, set the targetId.
   // when closing, set null.
-  setReportDialog(state, { value, id = null }: { value: boolean, id: number }) {
+  setReportDialog(state, { value, id = null }: { value: boolean, id: number | null }) {
     state.reportDialog = value
     state.reportTargetId = id
   },

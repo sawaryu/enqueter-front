@@ -46,7 +46,7 @@ import Vue from "vue";
 export default Vue.extend({
   auth: false,
   data: () => ({
-    resetInfo: null as object,
+    resetInfo: null as object | null,
   }),
   created() {
     this.$accessor.alert.setAlert(null);
@@ -55,14 +55,14 @@ export default Vue.extend({
   methods: {
     async init(): Promise<void> {
       // confirmation
-      const confirmId = this.$route.query.confirm;
+      const confirmId: string | null = (this.$route.query.confirm as string | null);
       if (confirmId) {
         this.authConfirm(confirmId);
       }
 
       // password reset
-      const token = this.$route.query.token;
-      const email = this.$route.query.email;
+      const token: string | null = (this.$route.query.token as string | null);
+      const email: string | null = (this.$route.query.email as string | null);
       if (token && email) {
         this.authResetPassword(token, email);
       }

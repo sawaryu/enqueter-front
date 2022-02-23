@@ -55,7 +55,7 @@ export default Vue.extend({
     };
   },
   computed: {
-    isDisable() {
+    isDisable(): boolean {
       const profileModel = {
         username: this.$auth.user.username,
         nickname: this.$auth.user.nickname,
@@ -71,7 +71,7 @@ export default Vue.extend({
   },
   methods: {
     async update(): Promise<void> {
-      if (!this.$refs.form.validate()) {
+      if (!(this.$refs.form as any).validate()) {
         return;
       }
 

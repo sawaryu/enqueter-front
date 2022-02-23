@@ -99,7 +99,7 @@ export default Vue.extend({
       );
       this.$emit("logout");
       setTimeout(() => {
-        this.$resetStore();
+        (this as any).$resetStore();
       }, 300);
     },
   },

@@ -1,4 +1,5 @@
-export default ({ app: { $config, $accessor } }, inject: any) => {
+import { NuxtAppOptions } from "@nuxt/types";
+export default ({ app: { $config, $accessor } } : NuxtAppOptions, inject: any) => {
   const avatar = (src: string) => {
     return $config.avatarUrl + src
   }

@@ -103,7 +103,7 @@ export default Vue.extend({
     };
   },
   computed: {
-    currentUsers(): [] {
+    currentUsers(): User[] {
       return this.search ? this.users : this.usersHistory;
     },
   },

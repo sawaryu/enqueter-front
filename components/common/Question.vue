@@ -112,7 +112,7 @@ export default Vue.extend({
         return "";
       }
       moment.locale("en");
-      return "closed " + moment.unix(this.question.closed_at).fromNow();
+      return "closed " + moment.unix(Number(this.question.closed_at)).fromNow();
     },
   },
   methods: {

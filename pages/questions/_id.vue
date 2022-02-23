@@ -33,6 +33,7 @@ const RESULT = {
   even: 0,
   first: 1,
 };
+import { Question } from "@/common/entity/Question";
 import Vue from "vue";
 export default Vue.extend({
   async asyncData({ params, $axios }): Promise<any> {
@@ -52,13 +53,14 @@ export default Vue.extend({
   },
   computed: {
     currentComponent() {
+      const question: Question = (this as any).question;
       if (
-        this.question.user_id == this.$auth.user.id ||
-        this.question.is_answered ||
-        !this.question.is_open
+        question.user_id == this.$auth.user.id ||
+        question.is_answered ||
+        !question.is_open
       ) {
         return COMPONENT.owner;
-      } else if (!this.question.is_answered) {
+      } else if (!question.is_answered) {
         return COMPONENT.unanswered;
       }
     },
@@ -87,7 +89,7 @@ export default Vue.extend({
         };
       }
       this.snackbar = true;
-      this.question.is_answered = true;
+      (this as any).question.is_answered = true;
     },
   },
 });

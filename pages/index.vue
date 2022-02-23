@@ -16,11 +16,12 @@
 
 <script lang="ts">
 import Vue from "vue";
+import { User } from "@/common/entity/User";
 export default Vue.extend({
   async asyncData({ $axios, app }): Promise<any> {
     const url = `/users/${app.$accessor.ranking.getCurrentCategory}_ranking`;
     try {
-      const res = await $axios.$get(url, {
+      const res: User[] = await $axios.$get(url, {
         params: {
           period: app.$accessor.ranking.getCurrentPeriod,
         },
@@ -34,14 +35,14 @@ export default Vue.extend({
     };
   },
   methods: {
-    getRanking(res: any) {
-      this.users = res;
+    getRanking(res: any): void {
+      (this as any).users = res;
     },
   },
-  created() {
+  created(): void {
     this.$vuetify.goTo(this.$accessor.timeline.getScrollY);
   },
-  destroyed() {
+  destroyed(): void {
     this.$accessor.timeline.saveScroll(window.scrollY);
   },
 });

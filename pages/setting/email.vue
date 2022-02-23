@@ -78,7 +78,7 @@ export default Vue.extend({
   methods: {
     // submit new email.
     async submit(): Promise<void> {
-      if (!this.$refs.form.validate()) {
+      if (!(this.$refs as any).form.validate()) {
         return;
       }
       this.$accessor.overlay.setOverlay(true);
@@ -122,7 +122,7 @@ export default Vue.extend({
       } catch (error) {}
     },
     reset(): void {
-      Object.assign(this.$data, this.$options.data());
+      Object.assign(this.$data, (this.$options as any).data());
     },
   },
 });

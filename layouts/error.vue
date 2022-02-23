@@ -11,12 +11,6 @@
         >{{ error.statusCode }} error</v-card-text
       >
       <v-card-text class="text-h4 text-center">{{ error.message }}</v-card-text>
-
-      <!-- <v-card-text class="text-center" v-if="error.statusCode != 503">
-        <v-btn large dark color="grey darken-3" @click="goHome"
-          >Back <v-icon right dark> mdi-home </v-icon></v-btn
-        >
-      </v-card-text> -->
     </div>
   </v-card>
 </template>
@@ -30,17 +24,21 @@ export default Vue.extend({
       default: null,
     },
   },
-  created() { this.$accessor.error.setIsError(true)},
-  destroyed() { this.$accessor.error.setIsError(false) },
+  created() {
+    this.$accessor.error.setIsError(true);
+  },
+  destroyed() {
+    this.$accessor.error.setIsError(false);
+  },
   methods: {
     goHome(): void {
       if (this.$auth.loggedIn) {
-        this.$router.push("/")
+        this.$router.push("/");
       } else {
-        this.$router.push("/welcome")
+        this.$router.push("/welcome");
       }
-    }
-  }
+    },
+  },
 });
 </script>
 

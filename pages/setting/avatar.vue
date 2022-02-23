@@ -45,12 +45,12 @@ export default Vue.extend({
       ],
       valid: true as boolean,
       loading: false as boolean,
-      avatar: "" as string,
+      avatar: "" as any,
     };
   },
   methods: {
     async update(): Promise<void> {
-      if (!this.$refs.form.validate() || this.avatar == "") {
+      if (!(this.$refs as any).form.validate() || this.avatar == "") {
         return;
       }
 
@@ -60,7 +60,7 @@ export default Vue.extend({
       try {
         const res = await this.$axios.$post("/upload", formData, {});
         this.avatar = "";
-        this.$refs.inputFile.reset();
+        (this.$refs as any).inputFile.reset();
         this.$auth.fetchUser();
         this.$accessor.flash.showMessage(
           {

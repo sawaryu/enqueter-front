@@ -49,7 +49,7 @@ export default Vue.extend({
   computed: {
     size() {
       const breakpointName = this.$vuetify.breakpoint.name;
-      if (breakpointName == "xs") {
+      if (breakpointName === "xs") {
         return 130;
       } else {
         return 250;
