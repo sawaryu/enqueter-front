@@ -2,7 +2,6 @@ version: 2.1
 orbs:
   aws-s3: circleci/aws-s3@1.0.15
 
-# TODO: yarn
 jobs:
   build:
     docker:
@@ -22,10 +21,11 @@ jobs:
           name: Setup Step
           command: yarn install
       - save_cache:
-          name: Save Cache of npm dependencies
+          name: Save Cache of yarn dependencies
           key: v1-yarn-packages-{{ checksum "yarn.lock" }}
           paths:
-            - ~/node_modules
+            - ~/.cache/yarn
+            # - ~/node_modules
       - run:
           name: Build Step
           command: NODE_ENV=production yarn generate
@@ -43,7 +43,7 @@ jobs:
           from: dist
           to: 's3://ichimonittou-front'
           overwrite: true
-        #　ttlよりも早くキャッシュを無効化して削除する。
+        # Disable cache before ttl, and delete the cache.
       - run: aws cloudfront create-invalidation --distribution-id $CF_DISTRIBUTION_ID --paths '/*'
 
 workflows:
@@ -53,10 +53,10 @@ workflows:
       - build:
           filters:
             branches:
-              only: develop
+              only: master
       - deploy:
           requires:
             - build
           filters:
             branches:
-              only: develop
+              only: master
