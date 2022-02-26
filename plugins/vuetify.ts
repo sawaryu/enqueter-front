@@ -6,6 +6,7 @@ export default new Vuetify({
     themes: {
       light: {
         primary: colors.grey.darken4,
+        error: colors.amber.darken4
       }
     },
   },
