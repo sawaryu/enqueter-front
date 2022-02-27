@@ -40,6 +40,7 @@
 
           <v-text-field
             tabindex="1"
+            type="email"
             v-model="signupModel.email"
             :rules="emailRules"
             label="E-mail"

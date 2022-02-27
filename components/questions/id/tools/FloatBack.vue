@@ -1,7 +1,7 @@
 <template>
   <v-fab-transition>
     <v-btn
-      class="mb-10"
+      class="mb-4"
       large
       bottom
       left

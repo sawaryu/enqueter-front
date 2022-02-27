@@ -7,6 +7,7 @@
 
     <v-text-field
       tabindex="1"
+      type="email"
       v-model="emailModel.email"
       :rules="emailRules"
       label="E-mail"

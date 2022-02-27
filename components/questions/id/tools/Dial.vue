@@ -8,7 +8,7 @@
     :transition="transition"
   >
     <template v-slot:activator>
-      <v-btn class="mb-10" v-model="fab" dark fab large>
+      <v-btn class="mb-4" v-model="fab" dark fab large>
         <v-icon v-if="fab"> mdi-close </v-icon>
         <v-icon v-else> mdi-chevron-left </v-icon>
       </v-btn>

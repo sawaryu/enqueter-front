@@ -3,6 +3,7 @@
   <v-form v-if="!sent" ref="form" v-model="valid" lazy-validation>
     <v-text-field
       tabindex="1"
+      type="email"
       :value="$auth.user.email"
       label="Current E-mail"
       disabled
@@ -10,6 +11,7 @@
 
     <v-text-field
       tabindex="1"
+      type="email"
       v-model="emailModel.email"
       :rules="emailRules"
       label="New E-mail"
