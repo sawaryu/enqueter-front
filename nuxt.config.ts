@@ -29,7 +29,7 @@ export default {
   plugins: [
     '@/plugins/axios',
     '@/plugins/common.ts',
-    '@/plugins/vuetify.ts',
+    '@/plugins/vuetify.ts'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
