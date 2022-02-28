@@ -37,7 +37,7 @@
       </template>
     </v-app-bar>
 
-    <v-app-bar hide-on-scroll v-else app color="grey darken-3" dark>
+    <v-app-bar v-else app color="grey darken-3" dark>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title
         @click="$router.push('/')"
