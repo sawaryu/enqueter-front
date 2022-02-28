@@ -1,3 +1,4 @@
+import colors from 'vuetify/lib/util/colors'
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
@@ -38,7 +39,7 @@ export default {
   plugins: [
     '@/plugins/axios',
     '@/plugins/common.ts',
-    '@/plugins/vuetify.ts'
+    // '@/plugins/vuetify.ts'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -57,6 +58,16 @@ export default {
     '@nuxtjs/vuetify',
     'nuxt-typed-vuex'
   ],
+  vuetify: {
+    theme: {
+      themes: {
+        light: {
+          primary: colors.grey.darken4,
+          error: colors.amber.darken4
+        }
+      },
+    },
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
