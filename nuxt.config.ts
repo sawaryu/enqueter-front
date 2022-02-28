@@ -117,7 +117,6 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    vendor: ['vuetify'],
     transpile: [
       /typed-vuex/,
     ],
