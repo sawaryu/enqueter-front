@@ -43,7 +43,7 @@ export default {
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
-  // 階層下されている場合でも自動でimport可能、ただし同名のコンポーネントを共存させることはできない。
+  // Ignore path. You can't create components with same name.
   components: [
     {
       path: '@/components/',
@@ -137,12 +137,5 @@ export default {
 
   // progress bar loading
   loading: false
-
-  // first loading (only SPA?)
-  // loadingIndicator: {
-  //   name: 'three-bounce',
-  //   color: '#000000',
-  //   background: 'white'
-  // }
 
 }

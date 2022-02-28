@@ -1,23 +1,21 @@
 <template>
   <v-form class="mb-15" ref="form" v-model="valid" lazy-validation>
     <!-- loading -->
-    <v-overlay :value="loading">
-      <v-progress-circular
-        color="black"
-        indeterminate
-        size="64"
-      ></v-progress-circular>
-    </v-overlay>
+    <v-overlay :value="loading"> </v-overlay>
 
-    <!-- current avatar -->
-    <v-avatar v-if="!avatar" size="110">
-      <v-img :src="$avatar($auth.user.avatar)"></v-img>
-    </v-avatar>
+    <template v-if="!loading">
+      <!-- current avatar -->
+      <v-avatar v-if="!avatar" size="110">
+        <v-img :src="$avatar($auth.user.avatar)"></v-img>
+      </v-avatar>
 
-    <!-- selected avatar -->
-    <v-avatar v-else size="110" class="mb-3">
-      <v-img :src="avatar"></v-img>
-    </v-avatar>
+      <!-- selected avatar -->
+      <v-avatar v-else size="110" class="mb-3">
+        <v-img :src="avatar"></v-img>
+      </v-avatar>
+    </template>
+
+    <v-progress-circular v-else size="110" indeterminate></v-progress-circular>
 
     <v-file-input
       ref="inputFile"
@@ -72,7 +70,9 @@ export default Vue.extend({
         );
       } catch (e) {
       } finally {
-        this.loading = false;
+        setTimeout(() => {
+          this.loading = false;
+        }, 300);
       }
     },
     fileSelected(event: any): void {
