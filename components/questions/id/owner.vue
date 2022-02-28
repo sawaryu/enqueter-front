@@ -19,7 +19,7 @@
         <div
           v-if="!loading && isExistCountData"
           class="mx-auto"
-          style="width: 300px; height: 300px"
+          :class="[$vuetify.breakpoint.name === 'xs' ? 'pie-size-xs' : 'pie-size']"
         >
           <PieChart :count_data="count_data" :options_data="options_data" />
         </div>
@@ -142,5 +142,14 @@ export default Vue.extend({
 });
 </script>
 
-<style>
+<style scoped>
+.pie-size {
+  width: 300px;
+  height: 300px;
+}
+
+.pie-size-xs {
+  width: 230px;
+  height: 230px;
+}
 </style>

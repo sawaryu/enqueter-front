@@ -19,7 +19,7 @@
       max-length="255"
     ></v-text-field>
 
-    <div class="text-caption mb-5">
+    <div class="text-caption text--secondary mb-5 mt-3">
       ※ Confirmation email are sent to your new E-mail.
     </div>
 
