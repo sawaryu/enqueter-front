@@ -91,17 +91,9 @@ export default Vue.extend({
     };
   },
   mounted(): void {
-    this.checkMaintenance();
     setTimeout(() => {
       this.loading = false;
     }, 500);
-  },
-  methods: {
-    async checkMaintenance(): Promise<void> {
-      try {
-        const res = await this.$axios.$get("/auth/maintenance");
-      } catch (error) {}
-    },
   },
   computed: {
     isWelcome(): boolean {
