@@ -42,7 +42,7 @@ jobs:
           at: ~/project
       - aws-s3/sync:
           from: dist
-          to: 's3://ichimonittou-front'
+          to: 's3://enqueter-front'
           overwrite: true
         # Disable cache before ttl, and delete the cache.
       - run: aws cloudfront create-invalidation --distribution-id $CF_DISTRIBUTION_ID --paths '/*'
