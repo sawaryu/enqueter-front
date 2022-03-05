@@ -98,6 +98,14 @@ export default Vue.extend({
       this.loading = false;
     }, 500);
   },
+  created() {
+    if (this.$config.maintenance) {
+      this.$nuxt.error({
+        statusCode: 503,
+        message: "Sorry, Enqueter is under maintenance now.",
+      });
+    }
+  },
   computed: {
     isWelcome(): boolean {
       return this.$route.path.includes("/welcome");

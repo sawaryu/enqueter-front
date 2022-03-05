@@ -13,6 +13,7 @@ jobs:
           command: |
             echo "BASE_URL=$BASE_URL" > .env
             echo "AVATAR_URL=$AVATAR_URL" >> .env
+            echo "MAINTENANCE=$MAINTENANCE" >> .env
       - restore_cache:
           name: Restore yarn dependencies
           keys:

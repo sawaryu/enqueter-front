@@ -123,7 +123,8 @@ export default {
 
   // avatar
   publicRuntimeConfig: {
-    avatarUrl: process.env.AVATAR_URL
+    avatarUrl: process.env.AVATAR_URL, // * Must need
+    maintenance: process.env.MAINTENANCE || false
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
