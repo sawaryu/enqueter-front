@@ -19,7 +19,9 @@
         <div
           v-if="!loading && isExistCountData"
           class="mx-auto"
-          :class="[$vuetify.breakpoint.name === 'xs' ? 'pie-size-xs' : 'pie-size']"
+          :class="[
+            $vuetify.breakpoint.name === 'xs' ? 'pie-size-xs' : 'pie-size',
+          ]"
         >
           <PieChart :count_data="count_data" :options_data="options_data" />
         </div>
@@ -34,19 +36,14 @@
           ><v-icon>mdi-account-multiple</v-icon>Users</v-card-title
         >
         <v-divider></v-divider>
-        <v-card-text class="text-center" v-if="!users.length">
-          Answered users is displayed here.
-        </v-card-text>
-        <v-list
-          v-else
-          height="350"
-          color="rgb(0, 0, 0, 0)"
-          class="overflow-y-auto"
-        >
-          <v-subheader>
+        <v-card-text class="text-center">
+          <span v-if="!users.length"> Answered users is displayed here. </span>
+          <span v-else>
             <v-icon>mdi-checkbox-marked-circle-outline</v-icon>
-            {{ users.length }} people answered</v-subheader
-          >
+            {{ users.length }} people answered
+          </span>
+        </v-card-text>
+        <v-list height="290" color="rgb(0, 0, 0, 0)" class="overflow-y-auto">
           <v-list-item v-for="user in users" :key="user.id">
             <v-list-item-avatar
               class="pointer"

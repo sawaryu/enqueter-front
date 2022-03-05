@@ -14,7 +14,6 @@ export default (context: Context, inject: any): void => {
     $accessor.questions.reset();
     $accessor.timeline.reset();
     $accessor.alert.reset();
-    $accessor.analytics.reset();
     $accessor.dialog.reset();
     $accessor.error.reset();
     $accessor.ranking.reset();

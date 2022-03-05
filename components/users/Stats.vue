@@ -15,10 +15,10 @@
         v-for="period in periods"
         color="grey darken-2"
         dark
-        :key="period.id"
-        v-text="period.text"
-        :text="period.id != $accessor.analytics.getCurrentPeriod"
-        @click="$accessor.analytics.setCurrentPeriod(period.id)"
+        :key="period"
+        v-text="period"
+        :text="period != currentPeriod"
+        @click="currentPeriod = period"
         x-small
       ></v-btn>
     </v-card-title>
@@ -36,18 +36,13 @@
 
         <div v-else>
           <div class="subheading font-weight-medium text--secondary mt-3">
-            <!-- Point -->
             <div>
-              <!-- <v-icon class="mb-2">mdi-crown</v-icon> -->
               <span v-if="point_stats"
                 >Point: {{ ordinalPointRank }} / {{ point_stats[1] }} pt</span
               >
               <span v-else>Point: N / A</span>
             </div>
-
-            <!-- Response -->
             <div>
-              <!-- <v-icon class="mb-2">mdi-crown</v-icon> -->
               <span v-if="response_stats"
                 >Response: {{ ordinalResponseRank }} /
                 {{ response_stats[1] }} res</span
@@ -68,10 +63,6 @@
 import ordinal from "ordinal";
 import RadarChart from "~/chart/RadarChart";
 import Vue from "vue";
-type Period = {
-  id: string;
-  text: string;
-};
 export default Vue.extend({
   components: {
     RadarChart,
@@ -79,11 +70,8 @@ export default Vue.extend({
   data() {
     return {
       loading: true as boolean,
-      periods: [
-        { id: "week", text: "week" },
-        { id: "month", text: "month" },
-        { id: "total", text: "total" },
-      ] as Period[],
+      currentPeriod: "week",
+      periods: ["week", "month", "total"],
       radar_data: [0, 0, 0] as number[],
       point_stats: null as number[] | null,
       response_stats: null as number[] | null,
@@ -100,9 +88,6 @@ export default Vue.extend({
         return ordinal(this.response_stats[0]);
       }
     },
-    currentPeriod(): string {
-      return this.$accessor.analytics.getCurrentPeriod;
-    },
   },
   watch: {
     currentPeriod: {
@@ -110,7 +95,6 @@ export default Vue.extend({
         this.getStats();
       },
       immediate: true,
-      deep: true,
     },
   },
   methods: {
