@@ -40,7 +40,7 @@ export default (context: Context) => {
     } else if (statusCode == 503) {
       errorHandler({
         statusCode: statusCode,
-        message: "Sorry, This service is under maintenance.",
+        message: "Sorry, Enqueter is under maintenance.",
       });
     }
     return;

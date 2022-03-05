@@ -82,7 +82,7 @@ export default Vue.extend({
           data: this.loginModel,
         });
         this.$accessor.dialog.setLoginDialog(false);
-        this.$router.push("/");
+        this.$router.replace("/");
         this.$accessor.flash.showMessage(
           {
             message: `Hello, ${this.$auth.user.nickname}.`,

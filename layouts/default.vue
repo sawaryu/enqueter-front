@@ -8,35 +8,40 @@
       />
     </v-overlay>
 
-    <v-app-bar v-if="isWelcome" color="rgb(0, 0, 0, 0)" app flat>
+    <!-- Error -->
+    <v-app-bar v-if="$accessor.error.getIsError" app color="grey darken-3" dark>
       <v-toolbar-title class="text-h5 font-weight-bold"
         >Enqueter</v-toolbar-title
       >
+    </v-app-bar>
+
+    <!-- Welcome -->
+    <v-app-bar v-else-if="isWelcome" color="rgb(0, 0, 0, 0)" app flat>
+      <v-toolbar-title class="font-weight-bold">Enqueter</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
-      <template v-if="!$accessor.error.getIsError">
-        <v-btn
-          :large="isLarge"
-          rounded
-          class="mr-3"
-          color="grey darken-2"
-          outlined
-          @click="$accessor.dialog.setLoginDialog(true)"
-          >Login</v-btn
-        >
-        <v-btn
-          elevation="0"
-          :large="isLarge"
-          rounded
-          color="grey darken-2"
-          dark
-          @click="$accessor.dialog.setSignupDialog(true)"
-          >SignUp</v-btn
-        >
-      </template>
+      <v-btn
+        :large="isLarge"
+        rounded
+        class="mr-3"
+        color="grey darken-2"
+        outlined
+        @click="$accessor.dialog.setLoginDialog(true)"
+        >Login</v-btn
+      >
+      <v-btn
+        elevation="0"
+        :large="isLarge"
+        rounded
+        color="grey darken-2"
+        dark
+        @click="$accessor.dialog.setSignupDialog(true)"
+        >SignUp</v-btn
+      >
     </v-app-bar>
 
+    <!-- LoggedIn -->
     <v-app-bar v-else app color="grey darken-3" dark>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title
@@ -47,11 +52,9 @@
 
       <v-spacer></v-spacer>
 
-      <template v-if="!$accessor.error.getIsError">
-        <SearchXs v-if="$vuetify.breakpoint.name === 'xs'" />
-        <Search v-else />
-        <Notification />
-      </template>
+      <SearchXs v-if="$vuetify.breakpoint.name === 'xs'" />
+      <Search v-else />
+      <Notification />
     </v-app-bar>
 
     <v-navigation-drawer
@@ -94,6 +97,27 @@ export default Vue.extend({
     setTimeout(() => {
       this.loading = false;
     }, 500);
+  },
+  created() {
+    this.healthCheck();
+  },
+  methods: {
+    async healthCheck(): Promise<void> {
+      try {
+        const api = this.$axios.create({
+          baseURL: this.$axios.defaults.baseURL?.replace("/api/v1", ""),
+        });
+        const res = await api.$get("/");
+        console.log(res);
+      } catch (error: any) {
+        if (error.response.status === 503) {
+          this.$nuxt.error({
+            statusCode: 503,
+            message: "Sorry, Enqueter is under maintenance.",
+          });
+        }
+      }
+    },
   },
   computed: {
     isWelcome(): boolean {
