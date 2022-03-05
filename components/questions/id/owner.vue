@@ -11,7 +11,7 @@
 
     <v-row v-if="!preview" justify="center">
       <!-- Ratio -->
-      <v-card class="col" width="450" color="rgb(0, 0, 0, 0)" flat>
+      <v-card class="col-12 col-sm-6" width="450" color="rgb(0, 0, 0, 0)" flat>
         <v-card-title class="justify-center">
           <v-icon>mdi-circle-slice-1</v-icon>Ratio
         </v-card-title>
@@ -29,7 +29,7 @@
       </v-card>
 
       <!-- Users -->
-      <v-card class="col" color="rgb(0, 0, 0, 0)" flat>
+      <v-card class="col-12 col-sm-6" color="rgb(0, 0, 0, 0)" flat>
         <v-card-title class="justify-center"
           ><v-icon>mdi-account-multiple</v-icon>Users</v-card-title
         >
