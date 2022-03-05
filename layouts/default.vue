@@ -98,27 +98,6 @@ export default Vue.extend({
       this.loading = false;
     }, 500);
   },
-  created() {
-    this.healthCheck();
-  },
-  methods: {
-    async healthCheck(): Promise<void> {
-      try {
-        const api = this.$axios.create({
-          baseURL: this.$axios.defaults.baseURL?.replace("/api/v1", ""),
-        });
-        const res = await api.$get("/");
-        console.log(res);
-      } catch (error: any) {
-        if (error.response.status === 503) {
-          this.$nuxt.error({
-            statusCode: 503,
-            message: "Sorry, Enqueter is under maintenance.",
-          });
-        }
-      }
-    },
-  },
   computed: {
     isWelcome(): boolean {
       return this.$route.path.includes("/welcome");
