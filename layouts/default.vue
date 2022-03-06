@@ -9,7 +9,7 @@
     </v-overlay>
 
     <!-- Error -->
-    <v-app-bar v-if="$accessor.error.getIsError" app color="grey darken-3" dark>
+    <v-app-bar v-if="$accessor.error.getIsError" color="rgb(0, 0, 0, 0)" app flat>
       <v-toolbar-title class="text-h5 font-weight-bold"
         >Enqueter</v-toolbar-title
       >
@@ -77,7 +77,7 @@
       </v-container>
     </v-main>
 
-    <Footer />
+    <Footer v-if="!$accessor.error.getIsError" />
   </v-app>
 </template>
 
