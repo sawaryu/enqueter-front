@@ -20,7 +20,7 @@
             Questions related to you will be displayed here
           </div>
           <div class="text-caption">
-            Let's try create questions or follow people.
+            Let's try follow people or create questions.
           </div>
         </v-card-text>
 

@@ -5,7 +5,7 @@
         v-model="preview"
         hide-details
         color="black"
-        label="See preview"
+        label="Preview"
       ></v-checkbox>
     </div>
 
@@ -44,22 +44,19 @@
           </span>
         </v-card-text>
         <v-list height="290" color="rgb(0, 0, 0, 0)" class="overflow-y-auto">
-          <v-list-item v-for="user in users" :key="user.id">
-            <v-list-item-avatar
-              class="pointer"
-              size="37"
-              @click="$router.push(`/users/${user.id}`)"
-            >
+          <v-list-item
+            v-for="user in users"
+            :key="user.id"
+            :class="{ 'current-user': user.id === $auth.user.id }"
+            @click="$router.push(`/users/${user.id}`)"
+          >
+            <v-list-item-avatar size="37">
               <v-img :src="$avatar(user.avatar)"></v-img>
             </v-list-item-avatar>
 
             <v-list-item-content>
               <v-list-item-title>
-                <span
-                  class="underline pointer"
-                  v-text="user.username"
-                  @click="$router.push(`/users/${user.id}`)"
-                ></span>
+                <span v-text="user.username"></span>
               </v-list-item-title>
               <v-list-item-subtitle
                 v-text="user.nickname"
@@ -144,9 +141,12 @@ export default Vue.extend({
   width: 300px;
   height: 300px;
 }
-
 .pie-size-xs {
   width: 230px;
   height: 230px;
+}
+.current-user {
+  background-color: rgba(192, 192, 192, 0.25);
+  border-radius: 1%;
 }
 </style>
