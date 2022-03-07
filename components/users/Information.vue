@@ -47,10 +47,11 @@
 
         <!-- Contents -->
         <template v-else>
+          <!-- Stats -->
           <div class="text-center" v-if="currentCategory === 'stats'">
-            <span class="font-weight-light">Answered</span>
             <span class="font-weight-bold" v-text="answeredCount"></span>
-            <span class="font-weight-light">questions</span>
+            <span class="font-weight-light">answered</span>
+            <!-- <span class="font-weight-light">questions</span> -->
             <div
               class="mx-auto text-center mt-3"
               style="width: 300px; height: 300px"
@@ -59,9 +60,12 @@
             </div>
           </div>
 
+          <!-- Rank -->
           <div class="text-center" v-else>
             <v-row class="my-auto">
-              <v-col class="font-weight-light" cols="12">Point</v-col>
+              <v-col class="font-weight-light" cols="12"
+                ><v-icon class="mb-1" small>mdi-crown</v-icon> Point</v-col
+              >
               <v-col cols="6">
                 <span class="font-weight-bold text-h5" v-text="point[0]"></span>
                 <br />
@@ -75,7 +79,9 @@
             </v-row>
             <v-divider class="my-5"></v-divider>
             <v-row class="my-auto">
-              <v-col class="font-weight-light" cols="12">Response</v-col>
+              <v-col class="font-weight-light" cols="12"
+                ><v-icon class="mb-1" small>mdi-crown</v-icon> Response</v-col
+              >
               <v-col cols="6">
                 <span
                   class="font-weight-bold text-h5"
@@ -143,12 +149,6 @@ export default Vue.extend({
   },
   watch: {
     currentPeriod: {
-      handler(): void {
-        this.getInformation();
-      },
-      immediate: true,
-    },
-    currentCategory: {
       handler(): void {
         this.getInformation();
       },

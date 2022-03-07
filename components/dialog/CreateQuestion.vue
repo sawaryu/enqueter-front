@@ -5,9 +5,9 @@
     transition="fade-transition"
     width="500"
   >
-    <v-card class="rounded-lg pa-2">
+    <v-card class="rounded-lg pa-2" color="grey lighten-3">
       <v-card-title class="font-weight-light">
-        <v-icon size="30">mdi-pencil</v-icon>Create Question.
+        <v-icon size="30">mdi-pencil</v-icon>Create Question
         <v-spacer></v-spacer>
         <v-btn icon @click="$accessor.dialog.setQuestionDialog(false)">
           <v-icon>mdi-close</v-icon>
@@ -16,9 +16,11 @@
 
       <v-card-text class="pb-2">
         <v-form ref="form" v-model="valid" lazy-validation>
-          <small>Question</small>
+          <small class="font-weight-bold ml-5">Question</small>
           <v-textarea
-            filled
+            class="px-5"
+            solo
+            style="font-size: 25px"
             v-model="questionModel.content"
             :rules="questionRules"
             maxlength="140"
@@ -27,11 +29,16 @@
           >
           </v-textarea>
 
+          <div class="text-caption ml-2">
+            ※ Please create the question that will divide people's answers.
+          </div>
+
           <div class="d-flex justify-center mt-5">
             <div class="mr-3">
-              <small>Option 1</small>
+              <small class="font-weight-bold">Option 1</small>
               <v-text-field
                 counter="15"
+                solo
                 v-model="questionModel.option_first"
                 :rules="optionRules"
                 maxlength="15"
@@ -40,9 +47,10 @@
               ></v-text-field>
             </div>
             <div class="ml-3">
-              <small>Option 1</small>
+              <small class="font-weight-bold">Option 2</small>
               <v-text-field
                 counter="15"
+                solo
                 v-model="questionModel.option_second"
                 :rules="optionRules"
                 maxlength="15"
@@ -52,10 +60,6 @@
             </div>
           </div>
         </v-form>
-
-        <div class="text-caption mt-3 mb-0">
-          ※ Please create the question that will divide people's answers.
-        </div>
       </v-card-text>
 
       <v-card-actions>
