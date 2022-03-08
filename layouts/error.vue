@@ -12,13 +12,7 @@
       >
       <v-card-text class="text-h4 text-center">{{ error.message }}</v-card-text>
       <div v-if="error.statusCode !== 503" class="text-center">
-        <v-btn
-          @click="$router.replace('/')"
-          large
-          rounded
-          color="grey darken-2"
-          dark
-        >
+        <v-btn href="/" large rounded color="grey darken-2" dark>
           <v-icon>mdi-home</v-icon>
           Home</v-btn
         >
