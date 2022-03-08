@@ -3,11 +3,16 @@
     <v-card-title class="pb-0 text--secondary">
       <v-btn
         rounded
-        outlined
-        @click="changeCategory"
+        @click="$accessor.information.changeCurrentCategory"
         :ripple="false"
-        v-text="currentCategory"
       >
+        <v-icon
+          v-if="$accessor.information.getCurrentCategory === 'stats'"
+          small
+          >mdi-poll</v-icon
+        >
+        <v-icon v-else small>mdi-crown</v-icon>
+        {{ $accessor.information.getCurrentCategory }}
       </v-btn>
       <v-spacer></v-spacer>
       <v-btn
@@ -26,7 +31,7 @@
       <div class="mt-2">
         <v-icon small> mdi-information </v-icon>
         <span
-          v-if="currentCategory === 'rank'"
+          v-if="$accessor.information.getCurrentCategory === 'rank'"
           class="text-caption text--secondary font-weight-light"
           >Ranking data are regularly aggregated.</span
         >
@@ -48,7 +53,10 @@
         <!-- Contents -->
         <template v-else>
           <!-- Stats -->
-          <div class="text-center" v-if="currentCategory === 'stats'">
+          <div
+            class="text-center"
+            v-if="$accessor.information.getCurrentCategory === 'stats'"
+          >
             <span class="font-weight-bold" v-text="answeredCount"></span>
             <span class="font-weight-light">answered</span>
             <!-- <span class="font-weight-light">questions</span> -->
@@ -118,7 +126,6 @@ export default Vue.extend({
     return {
       // Basic
       loading: true as boolean,
-      currentCategory: "rank",
       currentPeriod: "week",
       periods: ["week", "month", "total"],
 
@@ -181,13 +188,6 @@ export default Vue.extend({
         setTimeout(() => {
           this.loading = false;
         }, 300);
-      }
-    },
-    changeCategory(): void {
-      if (this.currentCategory === "stats") {
-        this.currentCategory = "rank";
-      } else {
-        this.currentCategory = "stats";
       }
     },
   },

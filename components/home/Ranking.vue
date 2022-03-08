@@ -4,7 +4,6 @@
       <v-icon>mdi-crown</v-icon>Ranking
       <v-spacer></v-spacer>
       <v-btn
-        small
         rounded
         outlined
         @click="changeCategory"
