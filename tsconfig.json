@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ES2018",
     "module": "ESNext",
-    // 相対パスとしてimportしない場合にnode_modulesを見に行くようになる。
+    // Go to see 'node_modules' if not relative path
     "moduleResolution": "Node",
     "lib": [
       "ESNext",
@@ -12,7 +12,6 @@
     "esModuleInterop": true,
     "allowJs": true,
     "sourceMap": true,
-    // TODO: temporarily false.
     "strict": true,
     "noEmit": true,
     "experimentalDecorators": true,
@@ -25,7 +24,7 @@
         "./*"
       ]
     },
-    // logic which you can use without import ing modules
+    // Types you can use without 'import' in script
     "types": [
       "@nuxt/types",
       "@nuxtjs/axios",
@@ -34,7 +33,7 @@
       "@nuxtjs/auth-next",
       "@types/nuxtjs__auth"
     ],
-    // important!! (make to be able to use vuex type modules)
+    // make to be able to use vuex type modules
     "typeRoots": [
       "types",
       "node_modules/@types"
