@@ -1,20 +1,12 @@
 <template>
-  <v-btn
-    v-if="disabled"
-    light
-    disabled
-    tabindex="1"
-    rounded
-    color="grey darken-2"
-  >
+  <v-btn v-if="disabled" disabled rounded>
     <slot>submit</slot>
   </v-btn>
   <v-btn
     v-else
-    dark
     tabindex="1"
     rounded
-    color="grey darken-2"
+    color="grey darken-2 white--text"
     @click="$emit('click')"
   >
     <slot>submit</slot>
