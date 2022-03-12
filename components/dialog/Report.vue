@@ -1,4 +1,5 @@
 <template>
+<!-- TODO: report -->
   <v-dialog
     :value="$accessor.dialog.getReportDialog"
     @input="$accessor.dialog.setReportDialog(false)"

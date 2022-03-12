@@ -3,6 +3,7 @@
     <v-card-title class="pb-0 text--secondary">
       <v-btn
         rounded
+        outlined
         @click="$accessor.information.changeCurrentCategory"
         :ripple="false"
       >

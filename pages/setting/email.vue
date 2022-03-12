@@ -20,7 +20,7 @@
     ></v-text-field>
 
     <div class="text-caption text--secondary mb-5 mt-3">
-      ※ Confirmation email are sent to your new E-mail.
+      * Confirmation email are sent to your new E-mail.
     </div>
 
     <submit @click="submit">submit</submit>

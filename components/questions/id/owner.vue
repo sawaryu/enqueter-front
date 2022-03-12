@@ -77,7 +77,10 @@
             </v-list-item-action>
           </v-list-item>
         </v-list>
-        <v-divider v-if="users.length"></v-divider>
+        <v-divider
+          :class="{ 'bottom-space-xs': $vuetify.breakpoint.name === 'xs' }"
+          v-if="users.length"
+        ></v-divider>
       </v-card>
     </v-row>
 
@@ -148,5 +151,9 @@ export default Vue.extend({
 .current-user {
   background-color: rgba(192, 192, 192, 0.25);
   border-radius: 1%;
+}
+
+.bottom-space-xs {
+  margin-bottom: 100px;
 }
 </style>

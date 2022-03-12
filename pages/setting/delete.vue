@@ -1,9 +1,13 @@
 <template>
   <div>
-    <div class="mb-3">Unsubscribe from this application and delete your account.</div>
-    <div class="text-caption text--secondary">※This operation can't be canceled.</div>
+    <div class="mb-3">
+      Unsubscribe from this application and delete your account.
+    </div>
     <div class="text-caption text--secondary">
-      ※It may take a while to deleted completely from the database.
+      * This operation cannot be undone.
+    </div>
+    <div class="text-caption text--secondary">
+      * It may take a while to deleted completely from the database.
     </div>
     <v-checkbox
       v-model="checkbox"

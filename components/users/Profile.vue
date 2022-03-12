@@ -1,5 +1,9 @@
 <template>
-  <v-card class="d-flex justify-center overflow-y-auto" height="200" rounded="lg">
+  <v-card
+    class="d-flex justify-center overflow-y-auto"
+    height="200"
+    rounded="lg"
+  >
     <v-card class="py-3" width="400" flat>
       <div class="d-flex justify-space-around">
         <v-avatar size="60">
@@ -70,6 +74,7 @@
                 </v-btn>
               </template>
               <v-list>
+                <!-- TODO: report -->
                 <v-list-item
                   @click="
                     $accessor.dialog.setReportDialog({
@@ -100,7 +105,7 @@
 </template>
 
 <script lang="ts">
-import {autoLink} from "vue-highlights";
+import { autoLink } from "vue-highlights";
 import { User } from "@/common/types/models";
 import Vue, { PropOptions } from "vue";
 export default Vue.extend({
