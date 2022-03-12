@@ -17,7 +17,6 @@
 </template>
 
 <script lang="ts">
-// TODO: validation
 import Vue from "vue";
 export default Vue.extend({
   data() {

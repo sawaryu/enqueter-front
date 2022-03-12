@@ -15,6 +15,3 @@ export default Vue.extend({
   components: {VueLoading}
 });
 </script>
-
-<style>
-</style>

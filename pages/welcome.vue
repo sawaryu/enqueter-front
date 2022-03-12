@@ -100,11 +100,3 @@ export default Vue.extend({
   },
 });
 </script>
-
-<style scoped>
-/* .top-alert {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 20px;
-} */
-</style>

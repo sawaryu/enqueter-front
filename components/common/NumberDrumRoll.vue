@@ -27,8 +27,6 @@ export default Vue.extend({
     performDrumRolling(): void {
       // Time length of finishing drumroll.
       const countInterval = Math.abs(Math.floor((this.count - this.startCount) / 100)) || 1;
-
-      // setInterval メソッドを使用して、0.01秒間隔で数値の変更処理を実行する
       this.intervalId = window.setInterval((): void => {
         this.countUp(countInterval);
       }, 10);

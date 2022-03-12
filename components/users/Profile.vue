@@ -79,7 +79,7 @@
                   "
                 >
                   <v-list-item-title
-                    ><v-icon>mdi-flag</v-icon> report</v-list-item-title
+                    ><v-icon>mdi-flag</v-icon>Report</v-list-item-title
                   >
                 </v-list-item>
               </v-list>

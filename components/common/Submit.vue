@@ -21,11 +21,5 @@ export default Vue.extend({
       default: false,
     },
   },
-  data() {
-    return {};
-  },
 });
 </script>
-
-<style>
-</style>
