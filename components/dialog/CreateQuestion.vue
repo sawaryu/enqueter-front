@@ -61,7 +61,7 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <submit @click="create"></submit>
+        <submit @click="create">create</submit>
       </v-card-actions>
     </v-card>
   </v-dialog>

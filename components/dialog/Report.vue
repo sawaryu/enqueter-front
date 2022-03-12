@@ -1,5 +1,5 @@
 <template>
-<!-- TODO: report -->
+  <!-- TODO: report -->
   <v-dialog
     :value="$accessor.dialog.getReportDialog"
     @input="$accessor.dialog.setReportDialog(false)"
@@ -70,7 +70,7 @@
           <!-- item3 -->
           <v-stepper-content class="pa-5" step="3">
             <v-subheader class="font-weight-light"
-              >On the below, you go to report.</v-subheader
+              >Please check the information below.</v-subheader
             >
             <v-divider></v-divider>
             <v-card class="overflow-y-auto" height="200" v-if="selected" flat>

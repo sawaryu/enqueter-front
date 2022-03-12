@@ -1,8 +1,17 @@
 <template>
   <v-btn
-    :dark="!disabled"
-    :light="disabled"
-    :disabled="disabled"
+    v-if="disabled"
+    light
+    disabled
+    tabindex="1"
+    rounded
+    color="grey darken-2"
+  >
+    <slot>submit</slot>
+  </v-btn>
+  <v-btn
+    v-else
+    dark
     tabindex="1"
     rounded
     color="grey darken-2"
