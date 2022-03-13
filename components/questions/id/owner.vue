@@ -37,8 +37,7 @@
         >
         <v-divider></v-divider>
         <v-card-text class="text-center">
-          <span v-if="!users.length"> Answered users is displayed here. </span>
-          <span v-else>
+          <span>
             <v-icon>mdi-checkbox-marked-circle-outline</v-icon>
             {{ users.length }} people answered
           </span>
