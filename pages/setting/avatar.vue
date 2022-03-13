@@ -1,9 +1,12 @@
 <template>
-  <v-form class="mb-15" ref="form" v-model="valid" lazy-validation>
+  <div class="mb-15">
     <!-- loading -->
-    <v-overlay :value="loading"> </v-overlay>
+    <template v-if="loading">
+      <v-overlay></v-overlay>
+      <v-progress-circular size="110" indeterminate></v-progress-circular>
+    </template>
 
-    <template v-if="!loading">
+    <template v-else>
       <!-- current avatar -->
       <v-avatar v-if="!avatar" size="110">
         <v-img :src="$avatar($auth.user.avatar)"></v-img>
@@ -15,11 +18,10 @@
       </v-avatar>
     </template>
 
-    <v-progress-circular v-else size="110" indeterminate></v-progress-circular>
-
     <v-file-input
       ref="inputFile"
       counter
+      small-chips
       show-size
       :rules="rules"
       accept="image/png, image/jpeg, image/jpg"
@@ -28,8 +30,13 @@
       v-on:change="fileSelected"
     ></v-file-input>
 
-    <submit :disabled="isDisabled" @click="update">update</submit>
-  </v-form>
+    <div class="mt-5">
+      <v-btn small class="mr-5" outlined @click="resetRandom">reset at random</v-btn>
+      <submit class="ml-5" :disabled="isDisabled" @click="update"
+        >update</submit
+      >
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -41,14 +48,13 @@ export default Vue.extend({
         (value: any) =>
           !value || value.size < 2000000 || "File size must be less than 2MB.",
       ],
-      valid: true as boolean,
       loading: false as boolean,
       avatar: "" as any,
     };
   },
   methods: {
     async update(): Promise<void> {
-      if (!(this.$refs as any).form.validate() || this.avatar == "") {
+      if (!(this.$refs as any).inputFile.validate() || this.avatar == "") {
         return;
       }
 
@@ -69,6 +75,28 @@ export default Vue.extend({
           { root: true }
         );
       } catch (e) {
+      } finally {
+        setTimeout(() => {
+          this.loading = false;
+        }, 300);
+      }
+    },
+    async resetRandom(): Promise<void> {
+      try {
+        this.loading = true;
+        await this.$axios.$put("/upload");
+        this.avatar = "";
+        (this.$refs as any).inputFile.reset();
+        this.$auth.fetchUser();
+        this.$accessor.flash.showMessage(
+          {
+            message: `Reset completely your avatar.`,
+            type: "success",
+            status: true,
+          },
+          { root: true }
+        );
+      } catch (error) {
       } finally {
         setTimeout(() => {
           this.loading = false;

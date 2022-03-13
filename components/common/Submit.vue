@@ -1,5 +1,5 @@
 <template>
-  <v-btn v-if="disabled" disabled rounded color="grey darken-2 white--text">
+  <v-btn v-if="disabled" disabled rounded style="color: white">
     <slot>submit</slot>
   </v-btn>
   <v-btn
@@ -8,6 +8,7 @@
     dark
     rounded
     color="grey darken-2 white--text"
+    style="color: white"
     @click="$emit('click')"
   >
     <slot>submit</slot>

@@ -29,7 +29,9 @@
       light
     ></v-textarea>
 
-    <v-btn class="mr-5" outlined @click="reset">reset</v-btn>
+    <v-btn class="mr-5" outlined @click="reset" :disabled="isDisable"
+      >reset</v-btn
+    >
     <submit class="ml-5" @click="submit" :disabled="isDisable">update</submit>
   </v-form>
 </template>
@@ -95,8 +97,8 @@ export default Vue.extend({
       } catch (e) {}
     },
     // reset
-    reset() {
-      Object.assign(this.$data, (this.$options as any).data());
+    async reset(): Promise<void> {
+      await Object.assign(this.$data, (this.$options as any).data());
       this.profileModel.username = this.$auth.user.username;
       this.profileModel.nickname = this.$auth.user.nickname;
       this.profileModel.introduce = this.$auth.user.introduce;
