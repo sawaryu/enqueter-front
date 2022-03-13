@@ -14,13 +14,7 @@
       </v-card-title>
 
       <v-card-text class="d-flex justify-center pb-15">
-        <v-form
-          ref="form"
-          v-model="valid"
-          lazy-validation
-          class="text-center"
-          style="width: 300px"
-        >
+        <v-form ref="form" class="text-center" style="width: 300px">
           <div class="text-center">
             <v-icon class="mx-auto" size="48" color="grey darken-4">
               mdi-account-plus
@@ -31,7 +25,7 @@
           <v-text-field
             tabindex="1"
             v-model="signupModel.username"
-            :rules="usernameRules"
+            :rules="rules.usernameRules"
             label="Username"
             counter="15"
             maxlength="15"
@@ -42,7 +36,7 @@
             tabindex="1"
             type="email"
             v-model="signupModel.email"
-            :rules="emailRules"
+            :rules="rules.emailRules"
             label="E-mail"
             counter="255"
             max-length="255"
@@ -52,7 +46,7 @@
             tabindex="1"
             type="password"
             v-model="signupModel.password"
-            :rules="passwordRules"
+            :rules="rules.passwordRules"
             label="password"
             counter="72"
             persistent-hint
@@ -62,12 +56,12 @@
             tabindex="1"
             type="password"
             v-model="signupModel.password_confirmation"
-            :rules="passwordConfirmationRules"
+            :rules="rules.passwordConfirmationRules"
             label="password (confirmation)"
             counter="72"
           ></v-text-field>
 
-          <submit class="mt-2" @click="signup"> signup </submit>
+          <submit class="mt-2" @click="submit"> signup </submit>
           <v-divider class="my-5"></v-divider>
           <div class="text-primary mb-1">
             In case of already having the account.
@@ -98,35 +92,42 @@ import {
 import Vue from "vue";
 export default Vue.extend({
   data: () => ({
-    valid: true,
     signupModel: {
       username: "",
       email: "",
       password: "",
       password_confirmation: "",
     },
-    usernameRules: usernameRules,
-    emailRules: emailRules,
-    passwordRules: passwordRules,
+    rules: {},
   }),
   methods: {
-    async signup(): Promise<any> {
-      const ref: any = this.$refs.form;
-      if (ref.validate()) {
-        this.$accessor.overlay.setOverlay(true);
-        try {
-          const res = await this.$axios.$post("/auth", this.signupModel);
-          this.$accessor.dialog.setSignupDialog(false);
-          ref.resetValidation();
-          Object.assign(this.$data, (this.$options as any).data());
-          this.$accessor.alert.setAlert({
-            type: "info",
-            message: "Please check your email to activate the account.",
-          });
-        } catch (e) {
-        } finally {
-          this.$accessor.overlay.setOverlay(false);
+    submit(): void {
+      this.rules = {
+        usernameRules: usernameRules,
+        emailRules: emailRules,
+        passwordRules: passwordRules,
+        passwordConfirmationRules: this.passwordConfirmationRules,
+      };
+
+      this.$nextTick(() => {
+        if ((this.$refs.form as any).validate()) {
+          this.signUp();
         }
+      });
+    },
+    async signUp(): Promise<void> {
+      try {
+        this.$accessor.overlay.setOverlay(true);
+        const res = await this.$axios.$post("/auth", this.signupModel);
+        this.$accessor.dialog.setSignupDialog(false);
+        Object.assign(this.$data, (this.$options as any).data());
+        this.$accessor.alert.setAlert({
+          type: "info",
+          message: "Please check your email to activate the account.",
+        });
+      } catch (e) {
+      } finally {
+        this.$accessor.overlay.setOverlay(false);
       }
     },
     closeOpen() {

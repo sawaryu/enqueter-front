@@ -8,7 +8,7 @@
         </v-btn>
       </v-card-title>
 
-      <v-card-title class="justify-center pt-0">
+      <v-card-title class="justify-center pt-0 text-subtitle-1">
         Do you really want to delete?
       </v-card-title>
       <v-card-text class="text-caption"
