@@ -1,5 +1,5 @@
 <template>
-  <v-btn v-if="disabled" disabled rounded style="color: white">
+  <v-btn v-if="disabled" light disabled rounded style="color: white">
     <slot>submit</slot>
   </v-btn>
   <v-btn
