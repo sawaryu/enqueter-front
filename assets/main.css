@@ -27,3 +27,9 @@
 .underline:hover {
   text-decoration: underline;
 }
+
+/* For the bug with using Safari */
+.v-btn--disabled {
+  pointer-events: unset !important;
+  cursor: default;
+}
