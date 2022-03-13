@@ -15,13 +15,13 @@
       </v-card-title>
 
       <v-card-text class="pb-2">
-        <v-form ref="form" v-model="valid" lazy-validation>
+        <v-form ref="form">
           <small class="font-weight-bold">Question</small>
           <v-textarea
             outlined
             style="font-size: 25px"
             v-model="questionModel.content"
-            :rules="questionRules"
+            :rules="rules.questionRules"
             maxlength="140"
             counter="140"
             dense
@@ -35,7 +35,7 @@
                 counter="15"
                 outlined
                 v-model="questionModel.option_first"
-                :rules="optionRules"
+                :rules="rules.optionRules"
                 maxlength="15"
                 rounded
               ></v-text-field>
@@ -46,7 +46,7 @@
                 counter="15"
                 outlined
                 v-model="questionModel.option_second"
-                :rules="optionRules"
+                :rules="rules.optionRules"
                 maxlength="15"
                 rounded
               ></v-text-field>
@@ -61,7 +61,7 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <submit @click="create">create</submit>
+        <submit @click="submit">create</submit>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -70,30 +70,30 @@
 <script lang="ts">
 import { questionRules, optionRules } from "@/common/validators/validator";
 import Vue from "vue";
-type QuestionModel = {
-  content: string;
-  option_first: string;
-  option_second: string;
-};
 export default Vue.extend({
   data() {
     return {
-      valid: true,
       questionModel: {
         content: "",
         option_first: "",
         option_second: "",
-      } as QuestionModel,
-      questionRules: questionRules,
-      optionRules: optionRules,
+      },
+      rules: {},
     };
   },
   methods: {
+    submit(): void {
+      this.rules = {
+        questionRules: questionRules,
+        optionRules: optionRules,
+      };
+      this.$nextTick(() => {
+        if ((this.$refs.form as any).validate()) {
+          this.create();
+        }
+      });
+    },
     async create(): Promise<void> {
-      if (!(this.$refs.form as any).validate()) {
-        return;
-      }
-
       try {
         const res = await this.$axios.$post("/questions", this.questionModel);
         this.$accessor.flash.showMessage(

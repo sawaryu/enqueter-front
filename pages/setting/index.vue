@@ -1,8 +1,8 @@
 <template>
-  <v-form ref="form" v-model="valid" lazy-validation>
+  <v-form ref="form">
     <v-text-field
       v-model="profileModel.username"
-      :rules="usernameRules"
+      :rules="rules.usernameRules"
       label="Username"
       maxlength="15"
       counter="15"
@@ -11,7 +11,7 @@
 
     <v-text-field
       v-model="profileModel.nickname"
-      :rules="nicknameRules"
+      :rules="rules.nicknameRules"
       label="Nickname"
       maxlength="20"
       counter="20"
@@ -20,7 +20,7 @@
     <v-textarea
       label="Introduce"
       v-model="profileModel.introduce"
-      :rules="introduceRules"
+      :rules="rules.introduceRules"
       placeholder="Hi, my name is john."
       maxlength="140"
       counter="140"
@@ -29,7 +29,8 @@
       light
     ></v-textarea>
 
-    <submit @click="update" :disabled="isDisable">update</submit>
+    <v-btn class="mr-5" outlined @click="reset">reset</v-btn>
+    <submit class="ml-5" @click="submit" :disabled="isDisable">update</submit>
   </v-form>
 </template>
 
@@ -43,15 +44,12 @@ import Vue from "vue";
 export default Vue.extend({
   data() {
     return {
-      valid: true,
       profileModel: {
         username: "",
         nickname: "",
         introduce: "",
       },
-      usernameRules: usernameRules,
-      nicknameRules: nicknameRules,
-      introduceRules: introduceRules,
+      rules: {},
     };
   },
   computed: {
@@ -65,19 +63,27 @@ export default Vue.extend({
     },
   },
   created() {
-    this.profileModel.username = this.$auth.user.username;
-    this.profileModel.nickname = this.$auth.user.nickname;
-    this.profileModel.introduce = this.$auth.user.introduce;
+    this.reset();
   },
   methods: {
+    // submit
+    submit(): void {
+      this.rules = {
+        usernameRules: usernameRules,
+        nicknameRules: nicknameRules,
+        introduceRules: introduceRules,
+      };
+      this.$nextTick(() => {
+        if ((this.$refs.form as any).validate()) {
+          this.update();
+        }
+      });
+    },
     async update(): Promise<void> {
-      if (!(this.$refs.form as any).validate()) {
-        return;
-      }
-
       try {
         const res = await this.$axios.$put("/auth", this.profileModel);
-        this.$auth.fetchUser();
+        await this.$auth.fetchUser();
+        this.reset();
         this.$accessor.flash.showMessage(
           {
             message: `Updated completely your profile.`,
@@ -87,6 +93,13 @@ export default Vue.extend({
           { root: true }
         );
       } catch (e) {}
+    },
+    // reset
+    reset() {
+      Object.assign(this.$data, (this.$options as any).data());
+      this.profileModel.username = this.$auth.user.username;
+      this.profileModel.nickname = this.$auth.user.nickname;
+      this.profileModel.introduce = this.$auth.user.introduce;
     },
   },
 });

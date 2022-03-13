@@ -12,17 +12,11 @@
       </v-card-title>
 
       <v-card-text class="d-flex justify-center pb-15">
-        <v-form
-          class="text-center"
-          ref="form"
-          v-model="valid"
-          lazy-validation
-          style="width: 300px"
-        >
+        <v-form class="text-center" ref="form" style="width: 300px">
           <v-text-field
             type="password"
             v-model="passwordModel.password"
-            :rules="passwordRules"
+            :rules="rules.passwordRules"
             maxlength="72"
             counter="72"
             label="New password"
@@ -33,7 +27,7 @@
           <v-text-field
             type="password"
             v-model="passwordModel.password_confirmation"
-            :rules="passwordConfirmationRules"
+            :rules="rules.passwordConfirmationRules"
             maxlength="72"
             counter="72"
             label="New password (confirmation)"
@@ -82,19 +76,26 @@ export default Vue.extend({
   },
   data() {
     return {
-      valid: true as boolean,
       passwordModel: {
         password: "",
         password_confirmation: "",
       } as PasswordModel,
-      passwordRules: passwordRules,
+      rules: {},
     };
   },
   methods: {
-    async submit(): Promise<void> {
-      if (!(this.$refs.form as any).validate()) {
-        return;
-      }
+    submit(): void {
+      this.rules = {
+        passwordRules: passwordRules,
+        passwordConfirmationRules: this.passwordConfirmationRules,
+      };
+      this.$nextTick(() => {
+        if ((this.$refs.form as any).validate()) {
+          this.authResetPassword();
+        }
+      });
+    },
+    async authResetPassword(): Promise<void> {
       try {
         const res = await this.$axios.$put(
           "/auth/password_reset",
@@ -106,11 +107,20 @@ export default Vue.extend({
           message: "Your password has been successfully reset. please login.",
         });
       } catch (error: any) {
-        this.$emit("close");
+        // Expired
         if (error.response.data.message === "expired") {
+          this.$emit("close");
           this.$accessor.alert.setAlert({
             type: "warning",
             message: "The link is expired. please start over.",
+          });
+        }
+        // Illegal
+        else if (error.response.data.message === "illegal") {
+          this.$emit("close");
+          this.$accessor.alert.setAlert({
+            type: "warning",
+            message: "Illegal operation was found.",
           });
         }
       }

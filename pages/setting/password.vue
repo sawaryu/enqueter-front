@@ -1,9 +1,9 @@
 <template>
-  <v-form ref="form" v-model="valid" lazy-validation>
+  <v-form ref="form">
     <v-text-field
       type="password"
       v-model="passwordModel.current_password"
-      :rules="passwordRules"
+      :rules="rules.passwordRules"
       maxlength="72"
       counter="72"
       label="Current password"
@@ -14,7 +14,7 @@
     <v-text-field
       type="password"
       v-model="passwordModel.new_password"
-      :rules="passwordRules"
+      :rules="rules.passwordRules"
       maxlength="72"
       counter="72"
       label="New password"
@@ -25,54 +25,50 @@
     <v-text-field
       type="password"
       v-model="passwordModel.password_confirmation"
-      :rules="passwordConfirmationRules"
+      :rules="rules.passwordConfirmationRules"
       maxlength="72"
       counter="72"
       label="New password (confirmation)"
       tabindex="1"
     >
     </v-text-field>
-    <submit tabindex="1" @click="change">update</submit>
+    <submit class="mt-3" @click="submit">update</submit>
   </v-form>
 </template>
 
 <script lang="ts">
 import { passwordRules } from "@/common/validators/validator";
-type passwordModel = {
-  current_password: string;
-  new_password: string;
-  password_confirmation: string;
-};
 import Vue from "vue";
 export default Vue.extend({
   data() {
     return {
-      valid: true,
       passwordModel: {
         current_password: "",
         new_password: "",
         password_confirmation: "",
-      } as passwordModel,
-      passwordRules: passwordRules,
+      },
+      rules: {},
     };
   },
   methods: {
-    async change(): Promise<void> {
-      if (!(this.$refs.form as any).validate()) {
-        return;
-      }
-
+    submit(): void {
+      this.rules = {
+        passwordRules: passwordRules,
+        passwordConfirmationRules: this.passwordConfirmationRules,
+      };
+      this.$nextTick(() => {
+        if ((this.$refs.form as any).validate()) {
+          this.update();
+        }
+      });
+    },
+    async update(): Promise<void> {
       try {
         const res = await this.$axios.$put(
           "/auth/password",
           this.passwordModel
         );
-        this.passwordModel = {
-          current_password: "",
-          new_password: "",
-          password_confirmation: "",
-        };
-        (this.$refs.form as any).resetValidation();
+        Object.assign(this.$data, (this.$options as any).data());
         this.$accessor.flash.showMessage(
           {
             message: `Updated completely your password.`,
@@ -89,7 +85,7 @@ export default Vue.extend({
       return [
         (v: string) =>
           this.passwordModel.new_password == v ||
-          `not match with the new password.`,
+          `Not match with the new password.`,
       ];
     },
   },

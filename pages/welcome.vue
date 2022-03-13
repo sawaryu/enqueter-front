@@ -56,27 +56,52 @@ export default Vue.extend({
       const confirmId: string | null = this.$route.query.confirm as
         | string
         | null;
-      if (confirmId) {
-        this.authConfirm(confirmId);
-      }
 
       // password reset
       const token: string | null = this.$route.query.token as string | null;
       const email: string | null = this.$route.query.email as string | null;
-      if (token && email) {
-        this.authResetPassword(token, email);
+
+      if (confirmId) {
+        this.authConfirm(confirmId);
+      } else if (token && email) {
+        this.openResetModal(token, email);
       }
     },
+    // ---Judge whether confirmId is valid or not.---
     async authConfirm(confirmId: string): Promise<void> {
       try {
         const res = await this.$axios.$get(`/auth/${confirmId}/confirm`);
         this.$accessor.alert.setAlert({
-          type: res.type,
-          message: res.message,
+          type: "success",
+          message: "You are confirmed now. please login. ",
         });
-      } catch (error) {}
+      } catch (error: any) {
+        // Expired
+        if (error.response.data.message === "expired") {
+          this.$accessor.alert.setAlert({
+            type: "error",
+            message:
+              "That link is expired. If you need to resend E-mail, please login firstly.",
+          });
+        }
+        // Illegal
+        else if (error.response.data.message === "illegal") {
+          this.$accessor.alert.setAlert({
+            type: "error",
+            message: "Illegal operation was found.",
+          });
+        }
+        // Already
+        else if (error.response.data.message === "already") {
+          this.$accessor.alert.setAlert({
+            type: "info",
+            message: "You are already confirmed.",
+          });
+        }
+      }
     },
-    async authResetPassword(token: string, email: string): Promise<void> {
+    // ---Judge whether token and email are valid or not. ---
+    async openResetModal(token: string, email: string): Promise<void> {
       try {
         const res = await this.$axios.$get(`/auth/password_reset`, {
           params: {
@@ -84,18 +109,26 @@ export default Vue.extend({
             email: email,
           },
         });
-        if (res.message === "expired") {
-          this.$accessor.alert.setAlert({
-            type: "warning",
-            message: "The link is expired. please start over.",
-          });
-          return;
-        }
         this.resetInfo = {
           token: token,
           email: email,
         };
-      } catch (error) {}
+      } catch (error: any) {
+        // Expired
+        if (error.response.data.message === "expired") {
+          this.$accessor.alert.setAlert({
+            type: "error",
+            message: "The link is expired. please start over.",
+          });
+        }
+        // Illegal
+        else if (error.response.data.message === "illegal") {
+          this.$accessor.alert.setAlert({
+            type: "error",
+            message: "The link is not correct or expired.",
+          });
+        }
+      }
     },
   },
 });

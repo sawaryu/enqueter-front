@@ -9,7 +9,7 @@
       tabindex="1"
       type="email"
       v-model="emailModel.email"
-      :rules="emailRules"
+      :rules="rules.emailRules"
       label="E-mail"
       required
       hint="Send email to your registered E-mail."
@@ -46,15 +46,21 @@ export default Vue.extend({
       emailModel: {
         email: "",
       } as EmailModel,
-      emailRules: emailRules as any[],
+      rules: {},
     };
   },
   methods: {
-    async submit(): Promise<void> {
-      if (!(this.$refs.form as any).validate()) {
-        return;
-      }
-
+    submit(): void {
+      this.rules = {
+        emailRules: emailRules,
+      };
+      this.$nextTick(() => {
+        if ((this.$refs.form as any).validate()) {
+          this.sendEmail();
+        }
+      });
+    },
+    async sendEmail(): Promise<void> {
       this.$accessor.overlay.setOverlay(true);
       try {
         const res = await this.$axios.$post(

@@ -1,6 +1,6 @@
 <template>
   <!-- before sent email. -->
-  <v-form v-if="!sent" ref="form" v-model="valid" lazy-validation>
+  <v-form v-if="!sent" ref="form">
     <v-text-field
       tabindex="1"
       type="email"
@@ -13,7 +13,7 @@
       tabindex="1"
       type="email"
       v-model="emailModel.email"
-      :rules="emailRules"
+      :rules="rules.emailRules"
       label="New E-mail"
       counter="255"
       max-length="255"
@@ -65,12 +65,14 @@ import { emailRules } from "@/common/validators/validator";
 export default Vue.extend({
   data() {
     return {
-      valid: true as boolean,
+      // component status
       sent: false as boolean,
+      // email
       emailModel: {
         email: "" as string,
       },
-      emailRules: emailRules,
+      rules: {},
+      // code
       codeModel: {
         code: "" as string,
       },
@@ -79,10 +81,17 @@ export default Vue.extend({
   },
   methods: {
     // submit new email.
-    async submit(): Promise<void> {
-      if (!(this.$refs as any).form.validate()) {
-        return;
-      }
+    submit(): void {
+      this.rules = {
+        emailRules: emailRules,
+      };
+      this.$nextTick(() => {
+        if ((this.$refs.form as any).validate()) {
+          this.sendEmail();
+        }
+      });
+    },
+    async sendEmail(): Promise<void> {
       this.$accessor.overlay.setOverlay(true);
       try {
         const res = await this.$axios.$post(

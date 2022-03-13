@@ -105,7 +105,7 @@ export default Vue.extend({
         Object.assign(this.$data, (this.$options as any).data());
         this.$accessor.alert.setAlert({
           type: "info",
-          message: "Please check your email to activate the account.",
+          message: "Please check your email to confirm the account.",
         });
       } catch (error) {
       } finally {
