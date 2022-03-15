@@ -31,7 +31,7 @@
       </v-card>
 
       <!-- Users -->
-      <v-card class="col-12 col-sm-6" color="rgb(0, 0, 0, 0)" flat>
+      <v-card :class="{'up-space-xs': $vuetify.breakpoint.name === 'xs' && loading}" class="col-12 col-sm-6" color="rgb(0, 0, 0, 0)" flat>
         <v-card-title class="justify-center"
           ><v-icon>mdi-account-multiple</v-icon>Users</v-card-title
         >
@@ -154,5 +154,8 @@ export default Vue.extend({
 
 .bottom-space-xs {
   margin-bottom: 100px;
+}
+.up-space-xs {
+  margin-top: 230px;
 }
 </style>
