@@ -18,6 +18,7 @@ export type Question = {
   option_second: string,
   created_at: string;
   updated_at: string;
+  answered_count: number;
   is_answered: boolean;
   is_bookmarked: boolean;
   user: User;

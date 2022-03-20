@@ -1,5 +1,5 @@
 <template>
-  <v-card elevation="8" min-width="300px" max-width="700px" rounded="xl">
+  <v-card elevation="8" min-width="300px" max-width="700px" rounded="lg">
     <v-card-title class="font-weight-bold">
       <!-- is_answered -->
       <template v-if="question.user_id !== this.$auth.user.id">
@@ -67,7 +67,12 @@
         ></div>
       </div>
       <v-spacer></v-spacer>
-
+      <span
+        v-if="question.is_answered || question.user_id === this.$auth.user.id"
+        class="text-caption text--secondary mr-3"
+      >
+        {{question.answered_count}}<v-icon class="mb-1">mdi-account</v-icon>
+      </span>
       <div class="text--secondary text-caption">{{ beforeTime }}</div>
     </v-card-actions>
   </v-card>

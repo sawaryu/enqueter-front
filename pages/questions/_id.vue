@@ -87,6 +87,7 @@ export default Vue.extend({
       }
       this.snackbar = true;
       (this as any).question.is_answered = true;
+      (this as any).question.answered_count += 1;
     },
   },
 });
