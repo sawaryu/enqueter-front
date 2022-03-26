@@ -61,7 +61,19 @@
             counter="72"
           ></v-text-field>
 
-          <submit class="mt-2" @click="submit"> signup </submit>
+          <div class="d-flex justify-center mb-5">
+            <v-checkbox v-model="agree" hide-details color="black"></v-checkbox>
+            <span class="mt-5"
+              >I agree with the
+              <span class="pointer underline blue--text" @click="term = true"
+                >Terms.</span
+              ></span
+            >
+          </div>
+
+          <submit class="mt-2" @click="submit" :disabled="!agree">
+            signup
+          </submit>
           <v-divider class="my-5"></v-divider>
           <div class="text-primary mb-1">
             In case of already having the account.
@@ -80,6 +92,7 @@
         </v-form>
       </v-card-text>
     </v-card>
+    <Term :term="term" @close="term = false" />
   </v-dialog>
 </template>
 
@@ -92,6 +105,8 @@ import {
 import Vue from "vue";
 export default Vue.extend({
   data: () => ({
+    term: false,
+    agree: false,
     signupModel: {
       username: "",
       email: "",
